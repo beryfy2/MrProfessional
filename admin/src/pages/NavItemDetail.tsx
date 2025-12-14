@@ -6,6 +6,10 @@ export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string;
   const [item, setItem] = useState<NavItem | null>(null);
   const [titles, setTitles] = useState<Title[]>([]);
   const [mainTitle, setMainTitle] = useState('');
+  const [showAdd, setShowAdd] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newOrder, setNewOrder] = useState<number | ''>('');
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     getJSON<NavItem>(`/nav-items/${id}`).then((i) => {
@@ -22,11 +26,30 @@ export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string;
     alert('Main title saved');
   }
 
-  async function addTitle() {
-    const t = prompt('Title');
-    if (!t) return;
-    const created = await sendJSON<Title>(`/nav-items/${id}/titles`, { title: t }, 'POST');
-    setTitles((prev) => [created, ...prev]);
+  function addTitle() {
+    setShowAdd(true);
+    setNewTitle('');
+    setNewOrder((titles?.length || 0) + 1);
+  }
+
+  async function saveNewTitle() {
+    const title = newTitle.trim();
+    if (!title) {
+      alert('Please enter a title');
+      return;
+    }
+    const order = typeof newOrder === 'number' && !Number.isNaN(newOrder) ? newOrder : (titles?.length || 0) + 1;
+    try {
+      setSaving(true);
+      await sendJSON<Title>(`/nav-items/${id}/titles`, { title, order }, 'POST');
+      const refreshed = await getJSON<Title[]>(`/nav-items/${id}/titles`);
+      setTitles(refreshed);
+      setShowAdd(false);
+    } catch {
+      alert('Failed to add title. Please ensure you are logged in.');
+    } finally {
+      setSaving(false);
+    }
   }
 
   async function removeTitle(tid: string) {
@@ -49,7 +72,16 @@ export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string;
       <div className="card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Titles</div>
-          <button className="btn primary" onClick={addTitle}>Add Title</button>
+          {!showAdd ? (
+            <button className="btn primary" onClick={addTitle}>Add Title</button>
+          ) : (
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <input className="input" placeholder="Title name" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} style={{ width: 260 }} />
+              <input className="input" placeholder="Order" type="number" value={newOrder} onChange={(e) => setNewOrder(e.target.value === '' ? '' : Number(e.target.value))} style={{ width: 110 }} />
+              <button className="btn success" onClick={saveNewTitle} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
+              <button className="btn" onClick={() => setShowAdd(false)}>Cancel</button>
+            </div>
+          )}
         </div>
         {titles.length === 0 ? (
           <div style={{ color: '#6B7280', marginTop: 12 }}>No titles yet</div>
