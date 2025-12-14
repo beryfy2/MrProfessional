@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { FileMeta, QA, Subtitle } from '../../../common/types';
 import { getJSON, sendJSON, sendForm, delJSON } from '../lib/api';
 
-export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (navItemId: string) => void }) {
+export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (titleId: string) => void }) {
   const [sub, setSub] = useState<Subtitle | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -54,7 +54,7 @@ export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (na
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={() => sub && onBack(String(sub.navItem))}>← Back</button>
+      <button className="btn" onClick={() => sub && onBack(String(sub.parentTitleId))}>← Back</button>
 
       <div className="card" style={{ display: 'grid', gap: 12 }}>
         <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitle Information</div>
@@ -117,7 +117,7 @@ export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (na
 
       <div style={{ display: 'flex', gap: 12 }}>
         <button className="btn primary" onClick={saveAll}>Save All Changes</button>
-        <button className="btn" onClick={() => sub && onBack(String(sub.navItem))}>Cancel</button>
+        <button className="btn" onClick={() => sub && onBack(String(sub.parentTitleId))}>Cancel</button>
       </div>
     </div>
   );

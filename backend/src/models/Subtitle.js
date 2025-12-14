@@ -20,7 +20,7 @@ const QASchema = new mongoose.Schema(
 
 const SubtitleSchema = new mongoose.Schema(
   {
-    navItem: { type: mongoose.Schema.Types.ObjectId, ref: 'NavItem', required: true },
+    parentTitleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Title', required: true },
     title: { type: String, required: true },
     content: { type: String },
     files: [FileSchema],
@@ -30,4 +30,3 @@ const SubtitleSchema = new mongoose.Schema(
 );
 
 export default mongoose.model('Subtitle', SubtitleSchema);
-

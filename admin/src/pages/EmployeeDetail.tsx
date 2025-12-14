@@ -4,7 +4,7 @@ import { getJSON, sendForm } from '../lib/api';
 
 export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () => void }) {
   const isNew = id === 'new';
-  const [emp, setEmp] = useState<Employee | null>(() => (isNew ? ({ name: '', email: '', position: '', department: '', phone: '' } as Employee) : null));
+  const [emp, setEmp] = useState<Employee | null>(() => (isNew ? ({ firstName: '', lastName: '', name: '', email: '', position: '', designation: '', department: '', phone: '', address: '', street: '', city: '', state: '', zip: '', country: '', gender: '', bloodGroup: '', maritalStatus: '', bio: '', dob: '', joinDate: '', manager: '', salary: '', employeeId: '', employmentType: '', workLocation: '' } as Employee) : null));
   const [preview, setPreview] = useState<string | undefined>();
 
   useEffect(() => {
@@ -29,6 +29,8 @@ export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () 
     Object.entries(emp).forEach(([k, v]) => {
       if (v !== undefined && v !== null && k !== '_id') form.append(k, String(v));
     });
+    const combinedName = `${emp.firstName || ''}${emp.firstName && emp.lastName ? ' ' : ''}${emp.lastName || ''}`.trim();
+    if (combinedName) form.set('name', combinedName);
     const input = document.getElementById('photoInput') as HTMLInputElement | null;
     const file = input?.files?.[0];
     if (file) form.append('photo', file);
@@ -48,52 +50,92 @@ export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
       <button className="btn" onClick={onBack}>← Back to Employees</button>
-      <div className="grid-2">
-        <div className="card">
-          <div style={{ width: 96, height: 96, borderRadius: 999, background: '#EEF2FF', color: '#4F46E5', display: 'grid', placeItems: 'center', overflow: 'hidden', fontSize: 24 }}>
-            {preview ? <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : (emp.name?.[0] || 'A')}
+      <div className="grid-1-2">
+        <div className="card" style={{ display: 'grid', gap: 12 }}>
+          <div style={{ width: 120, height: 120, borderRadius: 16, background: '#EEF2FF', color: '#4F46E5', display: 'grid', placeItems: 'center', overflow: 'hidden', fontSize: 28 }}>
+            {preview ? <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : (emp.firstName?.[0] || emp.name?.[0] || 'A')}
           </div>
-          <div style={{ marginTop: 12 }}>
-            <label>
-              <input id="photoInput" type="file" accept="image/*" onChange={handlePhotoChange} hidden />
-              <span className="btn">Upload Photo</span>
-            </label>
+          <label>
+            <input id="photoInput" type="file" accept="image/*" onChange={handlePhotoChange} hidden />
+            <span className="btn">Upload Photo</span>
+          </label>
+          <div style={{ color: '#6B7280', fontSize: 12 }}>Square image, at least 400x400px</div>
+        </div>
+        <div className="card" style={{ display: 'grid', gap: 12 }}>
+          <div style={{ fontSize: 16, fontWeight: 600 }}>Personal Information</div>
+          <div className="grid-2">
+            <input className="input" placeholder="First Name" value={emp.firstName || ''} onChange={(e) => setEmp({ ...emp!, firstName: e.target.value })} />
+            <input className="input" placeholder="Last Name" value={emp.lastName || ''} onChange={(e) => setEmp({ ...emp!, lastName: e.target.value })} />
           </div>
-          <div style={{ marginTop: 16, display: 'grid', gap: 8 }}>
-            <input className="input" value={emp.name} onChange={(e) => setEmp({ ...emp!, name: e.target.value })} />
-            <input className="input" value={emp.email} onChange={(e) => setEmp({ ...emp!, email: e.target.value })} />
-            <input className="input" value={emp.position} onChange={(e) => setEmp({ ...emp!, position: e.target.value })} />
-            <input className="input" value={emp.department} onChange={(e) => setEmp({ ...emp!, department: e.target.value })} />
-            <input className="input" value={emp.phone || ''} onChange={(e) => setEmp({ ...emp!, phone: e.target.value })} />
+          <div className="grid-2">
+            <input className="input" type="date" value={(emp.dob ? new Date(emp.dob).toISOString().slice(0,10) : '')} onChange={(e) => setEmp({ ...emp!, dob: e.target.value })} />
+            <select className="input" value={emp.gender || ''} onChange={(e) => setEmp({ ...emp!, gender: e.target.value })}>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
-          <div style={{ marginTop: 16 }}>
-            <button className="btn primary" onClick={handleSave}>Save</button>
+          <div className="grid-2">
+            <select className="input" value={emp.bloodGroup || ''} onChange={(e) => setEmp({ ...emp!, bloodGroup: e.target.value })}>
+              <option value="">Select Blood Group</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+            <select className="input" value={emp.maritalStatus || ''} onChange={(e) => setEmp({ ...emp!, maritalStatus: e.target.value })}>
+              <option value="">Select Status</option>
+              <option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option>
+            </select>
           </div>
         </div>
-        <div className="card">
-          <div className="grid-2" style={{ fontSize: 14 }}>
-            <div>
-              <div style={{ color: '#6B7280' }}>Join Date</div>
-              <div>{emp.joinDate ? new Date(emp.joinDate).toLocaleDateString() : '-'}</div>
-            </div>
-            <div>
-              <div style={{ color: '#6B7280' }}>Department</div>
-              <div>{emp.department}</div>
-            </div>
-            <div>
-              <div style={{ color: '#6B7280' }}>Manager</div>
-              <div>{emp.manager || '—'}</div>
-            </div>
-            <div>
-              <div style={{ color: '#6B7280' }}>Salary</div>
-              <div>{emp.salary || '—'}</div>
-            </div>
-          </div>
-          <div style={{ marginTop: 16 }}>
-            <div style={{ color: '#6B7280', fontSize: 14, marginBottom: 4 }}>Bio</div>
-            <textarea className="input" rows={4} value={emp.bio || ''} onChange={(e) => setEmp({ ...emp!, bio: e.target.value })} />
-          </div>
+      </div>
+
+      <div className="card" style={{ display: 'grid', gap: 12 }}>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>Contact Information</div>
+        <div className="grid-2">
+          <input className="input" placeholder="Email Address" value={emp.email || ''} onChange={(e) => setEmp({ ...emp!, email: e.target.value })} />
+          <input className="input" placeholder="Phone Number" value={emp.phone || ''} onChange={(e) => setEmp({ ...emp!, phone: e.target.value })} />
         </div>
+        <div className="grid-2">
+          <input className="input" placeholder="Street Address" value={emp.street || ''} onChange={(e) => setEmp({ ...emp!, street: e.target.value })} />
+          <input className="input" placeholder="City" value={emp.city || ''} onChange={(e) => setEmp({ ...emp!, city: e.target.value })} />
+        </div>
+        <div className="grid-2">
+          <input className="input" placeholder="State/Province" value={emp.state || ''} onChange={(e) => setEmp({ ...emp!, state: e.target.value })} />
+          <input className="input" placeholder="ZIP/Postal Code" value={emp.zip || ''} onChange={(e) => setEmp({ ...emp!, zip: e.target.value })} />
+        </div>
+        <input className="input" placeholder="Country" value={emp.country || ''} onChange={(e) => setEmp({ ...emp!, country: e.target.value })} />
+      </div>
+
+      <div className="card" style={{ display: 'grid', gap: 12 }}>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>Employment Details</div>
+        <div className="grid-2">
+          <input className="input" placeholder="Employee ID" value={emp.employeeId || ''} onChange={(e) => setEmp({ ...emp!, employeeId: e.target.value })} />
+          <input className="input" type="date" value={(emp.joinDate ? new Date(emp.joinDate).toISOString().slice(0,10) : '')} onChange={(e) => setEmp({ ...emp!, joinDate: e.target.value })} />
+        </div>
+        <div className="grid-2">
+          <input className="input" placeholder="Designation" value={emp.designation || ''} onChange={(e) => setEmp({ ...emp!, designation: e.target.value })} />
+          <input className="input" placeholder="Department" value={emp.department || ''} onChange={(e) => setEmp({ ...emp!, department: e.target.value })} />
+        </div>
+        <div className="grid-2">
+          <select className="input" value={emp.employmentType || ''} onChange={(e) => setEmp({ ...emp!, employmentType: e.target.value })}>
+            <option value="">Employment Type</option>
+            <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Intern</option>
+          </select>
+          <input className="input" placeholder="Work Location" value={emp.workLocation || ''} onChange={(e) => setEmp({ ...emp!, workLocation: e.target.value })} />
+        </div>
+        <div className="grid-2">
+          <input className="input" placeholder="Reporting Manager" value={emp.manager || ''} onChange={(e) => setEmp({ ...emp!, manager: e.target.value })} />
+          <input className="input" placeholder="Salary" value={emp.salary || ''} onChange={(e) => setEmp({ ...emp!, salary: e.target.value })} />
+        </div>
+        <div>
+          <div style={{ color: '#6B7280', fontSize: 14, marginBottom: 4 }}>Bio</div>
+          <textarea className="input" rows={4} value={emp.bio || ''} onChange={(e) => setEmp({ ...emp!, bio: e.target.value })} />
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: 12 }}>
+        <button className="btn primary" onClick={handleSave}>Save Employee</button>
+        <button className="btn" onClick={onBack}>Cancel</button>
       </div>
     </div>
   );

@@ -1,46 +1,94 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faFire } from "@fortawesome/free-solid-svg-icons";
 
-const links = [
-    "Business Setup",
-    "Registrations",
-    "Import Export",
-    "Compliance",
-    "BIS",
-    "IPR",
-    "Tax",
-    "Legal",
-    "Tender",
-    "Blogs",
-    "More",
-];
+const API_BASE = "http://localhost:5000/api";
 
 export default function NavItems({ transparent = false }) {
     const solidBg = "bg-[#0f4260]";
     const glassBg = "bg-[#0f4260]/40";
     const finalBg = transparent ? glassBg : solidBg;
 
-    const [openMenu, setOpenMenu] = useState(null);
+    const [navItems, setNavItems] = useState([]);
+    const [openMenu, setOpenMenu] = useState(null); // nav item id
     const closeTimer = useRef(null);
+    const openTimer = useRef(null);
+    const [titlesByNav, setTitlesByNav] = useState({}); // { navId: Title[] }
+    const [hoverTitleId, setHoverTitleId] = useState(null);
+    const [subtitlesByTitle, setSubtitlesByTitle] = useState({}); // { titleId: Subtitle[] }
+    const itemRefs = useRef({}); // map navId -> li element
+    const [menuHovering, setMenuHovering] = useState(false);
+    const [headHovering, setHeadHovering] = useState(false);
 
-    const open = (label) => {
+    useEffect(() => {
+        function handleWindowMouseOut(e) {
+            if (!e.relatedTarget) {
+                setOpenMenu(null);
+                setHoverTitleId(null);
+                setMenuHovering(false);
+                setHeadHovering(false);
+            }
+        }
+        window.addEventListener('mouseout', handleWindowMouseOut);
+        return () => window.removeEventListener('mouseout', handleWindowMouseOut);
+    }, []);
+
+    useEffect(() => {
+        fetch(`${API_BASE}/nav-items`).then((r) => r.json()).then((items) => setNavItems(items || []));
+    }, []);
+
+    const open = (navId) => {
         if (closeTimer.current) {
             clearTimeout(closeTimer.current);
             closeTimer.current = null;
         }
-        setOpenMenu(label);
+        setOpenMenu(navId);
+        setHoverTitleId(null); // reset hovered title when switching head item
+        if (!titlesByNav[navId]) {
+            fetch(`${API_BASE}/nav-items/${navId}/titles`).then((r) => r.json()).then((titles) => {
+                setTitlesByNav((prev) => ({ ...prev, [navId]: titles || [] }));
+            });
+        }
     };
 
-    const scheduleClose = () => {
+    const scheduleClose = (delay = 200) => {
+        if (closeTimer.current) clearTimeout(closeTimer.current);
         closeTimer.current = setTimeout(() => {
-            setOpenMenu(null);
-        }, 150); // small delay for smoothness
+            if (!headHovering && !menuHovering) {
+                setOpenMenu(null);
+                setHoverTitleId(null);
+            }
+        }, delay);
     };
 
-    const toggleClick = (label) => {
+    const handleItemEnter = (navId) => {
+        setHeadHovering(true);
+        if (openTimer.current) clearTimeout(openTimer.current);
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+            closeTimer.current = null;
+        }
+        openTimer.current = setTimeout(() => open(navId), 80);
+    };
+    const handleItemLeave = () => {
+        setHeadHovering(false);
+        scheduleClose(220);
+    };
+    const handleMenuEnter = () => {
+        setMenuHovering(true);
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+            closeTimer.current = null;
+        }
+    };
+    const handleMenuLeave = () => {
+        setMenuHovering(false);
+        scheduleClose(220);
+    };
+
+    const toggleClick = (navId) => {
         // optional click toggle
-        setOpenMenu((prev) => (prev === label ? null : label));
+        setOpenMenu((prev) => (prev === navId ? null : navId));
     };
 
     return (
@@ -57,25 +105,27 @@ export default function NavItems({ transparent = false }) {
                 </div>
 
                 {/* Nav links */}
-                <ul className="hidden lg:flex items-center gap-6 text-white text-[15px] font-medium">
-                    {links.map((label) => {
-                        const isOpen = openMenu === label;
+                <ul className="hidden lg:flex items-center gap-6 text-white text-[15px] font-medium" onMouseLeave={() => { setHeadHovering(false); setMenuHovering(false); scheduleClose(100); }}>
+                    {navItems.map((nav) => {
+                        const isOpen = openMenu === nav._id;
+                        const titles = titlesByNav[nav._id] || [];
 
                         return (
                             // wrapper includes both button + dropdown
                             <li
-                                key={label}
+                                key={nav._id}
                                 className="relative"
-                                onMouseEnter={() => open(label)}
-                                onMouseLeave={scheduleClose}
+                                onMouseEnter={() => handleItemEnter(nav._id)}
+                                onMouseLeave={handleItemLeave}
+                                ref={(el) => { if (el) itemRefs.current[nav._id] = el; }}
                             >
                                 <button
                                     type="button"
                                     className={`flex items-center gap-1 cursor-pointer transition px-2 py-1 ${isOpen ? "text-green-400" : "hover:text-green-400"
                                         }`}
-                                    onClick={() => toggleClick(label)}
+                                    onClick={() => toggleClick(nav._id)}
                                 >
-                                    <span>{label}</span>
+                                    <span>{nav.name}</span>
                                     <FontAwesomeIcon
                                         icon={faChevronDown}
                                         className={`text-green-400 text-xs transition-transform ${isOpen ? "rotate-180" : ""
@@ -84,12 +134,25 @@ export default function NavItems({ transparent = false }) {
                                 </button>
 
                                 {/* dropdowns */}
-                                {isOpen &&
-                                    (label === "Business Setup" ? (
-                                        <BusinessSetupMenu />
-                                    ) : (
-                                        <SimpleMenu title={label} />
-                                    ))}
+                                {isOpen && (
+                                    <DynamicMenu
+                                        title={nav.name}
+                                        titles={titles}
+                                        hoverTitleId={hoverTitleId}
+                                        onHoverTitle={(tid) => {
+                                            setHoverTitleId(tid);
+                                            if (!subtitlesByTitle[tid]) {
+                                                fetch(`${API_BASE}/titles/${tid}/subtitles`).then((r) => r.json()).then((subs) => {
+                                                    setSubtitlesByTitle((prev) => ({ ...prev, [tid]: subs || [] }));
+                                                });
+                                            }
+                                        }}
+                                        subtitles={hoverTitleId ? (subtitlesByTitle[hoverTitleId] || []) : []}
+                                        anchorEl={itemRefs.current[nav._id]}
+                                        onMouseEnter={handleMenuEnter}
+                                        onMouseLeave={handleMenuLeave}
+                                    />
+                                )}
                             </li>
                         );
                     })}
@@ -234,30 +297,85 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
 
 
 
-function SimpleMenu({ title, onMouseEnter, onMouseLeave }) {
+function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anchorEl, onMouseEnter, onMouseLeave }) {
+    const [pos, setPos] = useState({ left: 8, top: 0, width: Math.min(720, typeof window !== 'undefined' ? window.innerWidth - 16 : 720) });
+    const activeTitle = titles.find((t) => t._id === hoverTitleId);
+
+    useEffect(() => {
+        function compute() {
+            const vw = window.innerWidth;
+            const desired = Math.min(720, vw - 16);
+            const margin = 8;
+            if (!anchorEl) {
+                const left = Math.max(margin, (vw - desired) / 2);
+                setPos({ left, top: 100, width: desired });
+                return;
+            }
+            const rect = anchorEl.getBoundingClientRect();
+            const center = rect.left + rect.width / 2;
+            let left = center - desired / 2;
+            left = Math.max(margin, Math.min(left, vw - desired - margin));
+            const top = rect.bottom + 12;
+            setPos({ left, top, width: desired });
+        }
+        compute();
+        window.addEventListener('resize', compute);
+        return () => window.removeEventListener('resize', compute);
+    }, [anchorEl]);
+
     return (
         <div
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[420px] max-w-[92vw] z-50"
+            className="fixed z-50"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            style={{ left: pos.left, top: pos.top, width: pos.width, maxWidth: '92vw' }}
         >
             <div className="bg-white rounded-2xl shadow-2xl border-t-4 border-green-400">
-                <div className="px-6 py-5">
-                    <h4 className="text-sky-900 font-semibold mb-3">{title}</h4>
-
-                    <ul className="space-y-2 text-sm text-gray-800">
-                        {["Option 1", "Option 2", "Option 3"].map((item) => (
-                            <li key={item}>
-                                <button
-                                    type="button"
-                                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-sky-50 cursor-pointer transition"
-                                    onClick={() => console.log(`${title} -> ${item}`)}
-                                >
-                                    {item}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                <div className="px-6 py-5 grid grid-cols-2 gap-6">
+                    <div>
+                        <h4 className="text-green-600 font-semibold mb-2">Titles</h4>
+                        <div className="text-sky-900 font-semibold mb-3">{title}</div>
+                        <ul className="space-y-2 text-sm text-gray-800">
+                            {titles.length === 0 ? (
+                                <li className="text-gray-500">No titles yet</li>
+                            ) : (
+                                titles.map((t) => (
+                                    <li key={t._id}>
+                                        <button
+                                            type="button"
+                                            className={`w-full text-left px-3 py-2 rounded-lg cursor-pointer transition ${hoverTitleId === t._id ? "bg-sky-50" : "hover:bg-sky-50"}`}
+                                            onMouseEnter={() => onHoverTitle(t._id)}
+                                        >
+                                            {t.title}
+                                        </button>
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="text-green-600 font-semibold mb-3">Subtitles{activeTitle ? ` — ${activeTitle.title}` : ''}</h4>
+                        <ul className="space-y-1 text-sm text-gray-900">
+                            {subtitles.length === 0 ? (
+                                <li className="text-gray-500">Hover a title to see subtitles</li>
+                            ) : (
+                                subtitles.map((s, idx) => (
+                                    <li key={s._id}>
+                                        <button
+                                            type="button"
+                                            className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
+                                            onClick={() => console.log("Clicked:", title, "->", s.title)}
+                                        >
+                                            <span>{s.title}</span>
+                                            {idx < 2 && (
+                                                <FontAwesomeIcon icon={faFire} className="text-orange-500 text-xs" />
+                                            )}
+                                        </button>
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

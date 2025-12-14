@@ -9,6 +9,7 @@ import EmployeeDetail from './pages/EmployeeDetail';
 import Enquiries from './pages/Enquiries';
 import NavItems from './pages/NavItems';
 import NavItemDetail from './pages/NavItemDetail';
+import TitleDetail from './pages/TitleDetail';
 import SubtitleDetail from './pages/SubtitleDetail';
 import AdminSettings from './pages/AdminSettings';
 import Login from './pages/Login';
@@ -21,6 +22,7 @@ type Page =
   | { key: 'enquiries' }
   | { key: 'navItems' }
   | { key: 'navItemDetail'; id: string }
+  | { key: 'titleDetail'; id: string }
   | { key: 'subtitleDetail'; id: string }
   | { key: 'settings' };
 
@@ -42,6 +44,8 @@ function App() {
         return 'Nav Items';
       case 'navItemDetail':
         return 'Nav Item Detail';
+      case 'titleDetail':
+        return 'Title Detail';
       case 'subtitleDetail':
         return 'Subtitle Detail';
       case 'settings':
@@ -87,14 +91,13 @@ function App() {
             <NavItems onEdit={(id) => setPage({ key: 'navItemDetail', id })} />
           )}
           {page.key === 'navItemDetail' && (
-            <NavItemDetail
-              id={page.id}
-              onBack={() => setPage({ key: 'navItems' })}
-              onEditSubtitle={(sid) => setPage({ key: 'subtitleDetail', id: sid })}
-            />
+            <NavItemDetail id={page.id} onBack={() => setPage({ key: 'navItems' })} onEditTitle={(tid) => setPage({ key: 'titleDetail', id: tid })} />
+          )}
+          {page.key === 'titleDetail' && (
+            <TitleDetail id={page.id} onBack={(navItemId) => setPage({ key: 'navItemDetail', id: navItemId })} onEditSubtitle={(sid) => setPage({ key: 'subtitleDetail', id: sid })} />
           )}
           {page.key === 'subtitleDetail' && (
-            <SubtitleDetail id={page.id} onBack={(navItemId) => setPage({ key: 'navItemDetail', id: navItemId })} />
+            <SubtitleDetail id={page.id} onBack={(titleId) => setPage({ key: 'titleDetail', id: titleId })} />
           )}
           {page.key === 'settings' && <AdminSettings />}
         </main>

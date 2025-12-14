@@ -33,6 +33,7 @@ mongoose
 import Employee from './models/Employee.js';
 import Enquiry from './models/Enquiry.js';
 import NavItem from './models/NavItem.js';
+import Title from './models/Title.js';
 import Subtitle from './models/Subtitle.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -148,7 +149,7 @@ app.get('/api/nav-items', async (req, res) => {
 });
 
 app.get('/api/nav-items/:id', async (req, res) => {
-  const item = await NavItem.findById(req.params.id).populate('subtitles');
+  const item = await NavItem.findById(req.params.id).populate('titles');
   if (!item) return res.status(404).json({ error: 'Not found' });
   res.json(item);
 });
@@ -171,16 +172,59 @@ app.put('/api/nav-items/:id', auth, async (req, res) => {
   }
 });
 
+// Titles CRUD
+app.get('/api/nav-items/:id/titles', async (req, res) => {
+  const titles = await Title.find({ navItem: req.params.id }).sort({ order: 1, createdAt: -1 });
+  res.json(titles);
+});
+
+app.post('/api/nav-items/:id/titles', auth, async (req, res) => {
+  try {
+    const t = await Title.create({ ...req.body, navItem: req.params.id });
+    await NavItem.findByIdAndUpdate(req.params.id, { $addToSet: { titles: t._id } });
+    res.status(201).json(t);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to create title' });
+  }
+});
+
+app.put('/api/titles/:tid', auth, async (req, res) => {
+  try {
+    const t = await Title.findByIdAndUpdate(req.params.tid, req.body, { new: true });
+    res.json(t);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to update title' });
+  }
+});
+
+app.get('/api/titles/:tid', async (req, res) => {
+  const t = await Title.findById(req.params.tid);
+  if (!t) return res.status(404).json({ error: 'Not found' });
+  res.json(t);
+});
+
+app.delete('/api/titles/:tid', auth, async (req, res) => {
+  try {
+    const t = await Title.findByIdAndDelete(req.params.tid);
+    if (t) {
+      await NavItem.findByIdAndUpdate(t.navItem, { $pull: { titles: t._id } });
+      await Subtitle.deleteMany({ parentTitleId: t._id });
+    }
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete title' });
+  }
+});
+
 // Subtitles CRUD
-app.get('/api/nav-items/:id/subtitles', async (req, res) => {
-  const subs = await Subtitle.find({ navItem: req.params.id }).sort({ createdAt: -1 });
+app.get('/api/titles/:tid/subtitles', async (req, res) => {
+  const subs = await Subtitle.find({ parentTitleId: req.params.tid }).sort({ createdAt: -1 });
   res.json(subs);
 });
 
-app.post('/api/nav-items/:id/subtitles', auth, async (req, res) => {
+app.post('/api/titles/:tid/subtitles', auth, async (req, res) => {
   try {
-    const sub = await Subtitle.create({ ...req.body, navItem: req.params.id });
-    await NavItem.findByIdAndUpdate(req.params.id, { $addToSet: { subtitles: sub._id } });
+    const sub = await Subtitle.create({ ...req.body, parentTitleId: req.params.tid });
     res.status(201).json(sub);
   } catch (e) {
     res.status(400).json({ error: 'Failed to create subtitle' });
@@ -204,10 +248,7 @@ app.put('/api/subtitles/:sid', auth, async (req, res) => {
 
 app.delete('/api/subtitles/:sid', auth, async (req, res) => {
   try {
-    const sub = await Subtitle.findByIdAndDelete(req.params.sid);
-    if (sub) {
-      await NavItem.findByIdAndUpdate(sub.navItem, { $pull: { subtitles: sub._id } });
-    }
+    await Subtitle.findByIdAndDelete(req.params.sid);
     res.json({ ok: true });
   } catch (e) {
     res.status(400).json({ error: 'Failed to delete subtitle' });

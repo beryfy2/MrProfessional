@@ -13,7 +13,7 @@ export type QA = {
 
 export type Subtitle = {
   _id?: string;
-  navItem: string;
+  parentTitleId: string;
   title: string;
   content?: string;
   files: FileMeta[];
@@ -25,22 +25,45 @@ export type NavItem = {
   name: string;
   slug: string;
   order: number;
-  subtitles?: string[];
+  titles?: string[];
+};
+
+export type Title = {
+  _id?: string;
+  navItem: string;
+  title: string;
+  content?: string;
+  order?: number;
 };
 
 export type Employee = {
   _id?: string;
+  firstName?: string;
+  lastName?: string;
   name: string;
   email: string;
   position: string;
+  designation?: string;
   department: string;
   phone?: string;
   photoUrl?: string;
   address?: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
+  gender?: string;
+  bloodGroup?: string;
+  maritalStatus?: string;
   bio?: string;
+  dob?: string;
   joinDate?: string;
   manager?: string;
   salary?: string;
+  employeeId?: string;
+  employmentType?: string;
+  workLocation?: string;
 };
 
 export type Enquiry = {
@@ -52,4 +75,3 @@ export type Enquiry = {
   message: string;
   date?: string;
 };
-
