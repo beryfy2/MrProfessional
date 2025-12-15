@@ -60,7 +60,22 @@ export default function SubtitleDetail() {
       <button className="btn" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>← Back</button>
 
       <div className="card" style={{ display: 'grid', gap: 12 }}>
-        <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitle Information</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitle Information</div>
+          {sub && (
+            <button
+              className="btn"
+              onClick={async () => {
+                if (!confirm('Delete this subtitle?')) return;
+                await delJSON(`/subtitles/${id}`);
+                navigate(`/admin/titles/${sub.parentTitleId}`);
+              }}
+              style={{ color: '#DC2626' }}
+            >
+              Delete
+            </button>
+          )}
+        </div>
         <input className="input" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <textarea className="input" rows={4} placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
         <div>

@@ -65,7 +65,22 @@ export default function NavItemDetail() {
     <div style={{ display: 'grid', gap: 16 }}>
       <button className="btn" onClick={() => navigate('/admin/nav-items')}>← Back to Nav Items</button>
       <div className="card" style={{ display: 'grid', gap: 12 }}>
-        <div style={{ fontSize: 18, fontWeight: 600 }}>Main Title</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontSize: 18, fontWeight: 600 }}>Main Title</div>
+          {item && (
+            <button
+              className="btn"
+              onClick={async () => {
+                if (!confirm('Delete this head title and all its titles/subtitles?')) return;
+                await delJSON(`/nav-items/${id}`);
+                navigate('/admin/nav-items');
+              }}
+              style={{ color: '#DC2626' }}
+            >
+              Delete
+            </button>
+          )}
+        </div>
         <div style={{ display: 'flex', gap: 12 }}>
           <input className="input" style={{ flex: 1 }} value={mainTitle} onChange={(e) => setMainTitle(e.target.value)} />
           <button className="btn primary" onClick={saveMainTitle}>Save</button>

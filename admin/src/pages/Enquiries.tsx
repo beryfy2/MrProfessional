@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Enquiry } from '../../../common/types';
-import { getJSON } from '../lib/api';
+import { getJSON, delJSON } from '../lib/api';
 
 export default function Enquiries() {
   const [list, setList] = useState<Enquiry[]>([]);
@@ -36,6 +36,18 @@ export default function Enquiries() {
               <a className="btn primary" href={`mailto:${e.email}?subject=Re: ${encodeURIComponent(e.subject)}`}>Respond</a>
               <button className="btn" onClick={() => setOpenId(openId === e._id ? null : e._id!)}>
                 {openId === e._id ? 'Hide Details' : 'View Details'}
+              </button>
+              <button
+                className="btn"
+                onClick={async () => {
+                  if (!confirm('Delete this enquiry?')) return;
+                  await delJSON(`/enquiries/${e._id}`);
+                  const refreshed = await getJSON<Enquiry[]>('/enquiries');
+                  setList(refreshed);
+                }}
+                style={{ color: '#DC2626' }}
+              >
+                Delete
               </button>
             </div>
           </div>

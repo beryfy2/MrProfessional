@@ -136,10 +136,28 @@ app.put('/api/employees/:id', auth, upload.single('photo'), async (req, res) => 
   }
 });
 
+app.delete('/api/employees/:id', auth, async (req, res) => {
+  try {
+    await Employee.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete employee' });
+  }
+});
+
 // Enquiries
 app.get('/api/enquiries', async (req, res) => {
   const list = await Enquiry.find().sort({ createdAt: -1 });
   res.json(list);
+});
+
+app.delete('/api/enquiries/:id', auth, async (req, res) => {
+  try {
+    await Enquiry.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete enquiry' });
+  }
 });
 
 // Nav Items
@@ -172,6 +190,21 @@ app.put('/api/nav-items/:id', auth, async (req, res) => {
   }
 });
 
+app.delete('/api/nav-items/:id', auth, async (req, res) => {
+  try {
+    const navId = req.params.id;
+    const titles = await Title.find({ navItem: navId }).select('_id');
+    const titleIds = titles.map((t) => t._id);
+    if (titleIds.length > 0) {
+      await Subtitle.deleteMany({ parentTitleId: { $in: titleIds } });
+      await Title.deleteMany({ _id: { $in: titleIds } });
+    }
+    await NavItem.findByIdAndDelete(navId);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete nav item' });
+  }
+});
 // Titles CRUD
 app.get('/api/nav-items/:id/titles', async (req, res) => {
   const titles = await Title.find({ navItem: req.params.id }).sort({ order: 1, createdAt: -1 });

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { NavItem } from '../../../common/types';
-import { getJSON, sendJSON } from '../lib/api';
+import { getJSON, sendJSON, delJSON } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 
 export default function NavItems() {
@@ -94,7 +94,21 @@ export default function NavItems() {
                 <td className="td"><div className="pill">{i.order}</div></td>
                 <td className="td">{i.name}</td>
                 <td className="td">{i.slug}</td>
-                <td className="td"><button className="btn" onClick={() => navigate(`/admin/nav-items/${i._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button></td>
+                <td className="td" style={{ display: 'flex', gap: 8 }}>
+                  <button className="btn" onClick={() => navigate(`/admin/nav-items/${i._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
+                  <button
+                    className="btn"
+                    onClick={async () => {
+                      if (!confirm('Delete this head title and all its titles/subtitles?')) return;
+                      await delJSON(`/nav-items/${i._id}`);
+                      const refreshed = await getJSON<NavItem[]>('/nav-items');
+                      setItems(refreshed);
+                    }}
+                    style={{ color: '#DC2626' }}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -44,7 +44,22 @@ export default function TitleDetail() {
     <div style={{ display: 'grid', gap: 16 }}>
       <button className="btn" onClick={() => t && navigate(`/admin/nav-items/${t.navItem}`)}>← Back to Nav Item</button>
       <div className="card" style={{ display: 'grid', gap: 12 }}>
-        <div style={{ fontSize: 18, fontWeight: 600 }}>Title</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontSize: 18, fontWeight: 600 }}>Title</div>
+          {t && (
+            <button
+              className="btn"
+              onClick={async () => {
+                if (!confirm('Delete this title and all its subtitles?')) return;
+                await delJSON(`/titles/${id}`);
+                navigate(`/admin/nav-items/${t.navItem}`);
+              }}
+              style={{ color: '#DC2626' }}
+            >
+              Delete
+            </button>
+          )}
+        </div>
         <input className="input" value={name} onChange={(e) => setName(e.target.value)} />
         <textarea className="input" rows={4} value={content} onChange={(e) => setContent(e.target.value)} />
         <div>

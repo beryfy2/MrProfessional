@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getJSON } from '../lib/api';
+import { getJSON, delJSON } from '../lib/api';
 import type { Employee } from '../../../common/types';
 
 export default function Employees() {
@@ -49,8 +49,20 @@ export default function Employees() {
                   <div style={{ fontSize: 14 }}>{e.email}</div>
                   <div style={{ fontSize: 14, color: '#6B7280' }}>{e.phone}</div>
                 </td>
-                <td className="td">
+                <td className="td" style={{ display: 'flex', gap: 8 }}>
                   <button className="btn" onClick={() => navigate(`/admin/employees/${e._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>View Details</button>
+                  <button
+                    className="btn"
+                    onClick={async () => {
+                      if (!confirm('Delete this employee?')) return;
+                      await delJSON(`/employees/${e._id}`);
+                      const refreshed = await getJSON<Employee[]>('/employees');
+                      setList(refreshed);
+                    }}
+                    style={{ color: '#DC2626' }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
