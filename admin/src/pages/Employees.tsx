@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getJSON } from '../lib/api';
 import type { Employee } from '../../../common/types';
 
-export default function Employees({ onView, onAdd }: { onView: (id: string) => void; onAdd: () => void }) {
+export default function Employees() {
+  const navigate = useNavigate();
   const [list, setList] = useState<Employee[]>([]);
   const [q, setQ] = useState('');
 
@@ -17,7 +19,7 @@ export default function Employees({ onView, onAdd }: { onView: (id: string) => v
       <div className="page-header">
         <h1>Employees</h1>
         <p className="page-subtitle">Manage your team members</p>
-        <button className="btn primary" onClick={onAdd}>+ Add Employee</button>
+        <button className="btn primary" onClick={() => navigate('/admin/employees/new')}>+ Add Employee</button>
       </div>
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search employees..." className="input" />
       <div className="card">
@@ -48,7 +50,7 @@ export default function Employees({ onView, onAdd }: { onView: (id: string) => v
                   <div style={{ fontSize: 14, color: '#6B7280' }}>{e.phone}</div>
                 </td>
                 <td className="td">
-                  <button className="btn" onClick={() => onView(e._id!)} style={{ color: '#0f4260', fontWeight: 500 }}>View Details</button>
+                  <button className="btn" onClick={() => navigate(`/admin/employees/${e._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>View Details</button>
                 </td>
               </tr>
             ))}

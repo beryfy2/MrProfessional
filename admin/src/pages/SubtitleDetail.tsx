@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FileMeta, QA, Subtitle } from '../../../common/types';
 import { getJSON, sendJSON, sendForm, delJSON } from '../lib/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (titleId: string) => void }) {
+export default function SubtitleDetail() {
+  const navigate = useNavigate();
+  const { id = '' } = useParams();
   const [sub, setSub] = useState<Subtitle | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -54,7 +57,7 @@ export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (ti
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={() => sub && onBack(String(sub.parentTitleId))}>← Back</button>
+      <button className="btn" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>← Back</button>
 
       <div className="card" style={{ display: 'grid', gap: 12 }}>
         <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitle Information</div>
@@ -117,7 +120,7 @@ export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (ti
 
       <div style={{ display: 'flex', gap: 12 }}>
         <button className="btn primary" onClick={saveAll}>Save All Changes</button>
-        <button className="btn" onClick={() => sub && onBack(String(sub.parentTitleId))}>Cancel</button>
+        <button className="btn" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>Cancel</button>
       </div>
     </div>
   );

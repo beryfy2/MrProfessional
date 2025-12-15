@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { NavItem, Title } from '../../../common/types';
 import { getJSON, sendJSON, delJSON } from '../lib/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string; onBack: () => void; onEditTitle: (tid: string) => void }) {
+export default function NavItemDetail() {
+  const navigate = useNavigate();
+  const { id = '' } = useParams();
   const [item, setItem] = useState<NavItem | null>(null);
   const [titles, setTitles] = useState<Title[]>([]);
   const [mainTitle, setMainTitle] = useState('');
@@ -60,7 +63,7 @@ export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string;
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={onBack}>← Back to Nav Items</button>
+      <button className="btn" onClick={() => navigate('/admin/nav-items')}>← Back to Nav Items</button>
       <div className="card" style={{ display: 'grid', gap: 12 }}>
         <div style={{ fontSize: 18, fontWeight: 600 }}>Main Title</div>
         <div style={{ display: 'flex', gap: 12 }}>
@@ -94,7 +97,7 @@ export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string;
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(t.content || '').slice(0, 80)}</div>
                 </div>
                 <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn" onClick={() => onEditTitle(t._id!)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
+                  <button className="btn" onClick={() => navigate(`/admin/titles/${t._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
                   <button className="btn" onClick={() => removeTitle(t._id!)} style={{ color: '#DC2626' }}>Delete</button>
                 </div>
               </div>

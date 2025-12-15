@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { Employee } from '../../../common/types';
 import { getJSON, sendForm } from '../lib/api';
 
-export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () => void }) {
+export default function EmployeeDetail() {
+  const navigate = useNavigate();
+  const { id = '' } = useParams();
   const isNew = id === 'new';
   const [emp, setEmp] = useState<Employee | null>(() => (isNew ? ({ firstName: '', lastName: '', name: '', email: '', position: '', designation: '', department: '', phone: '', address: '', street: '', city: '', state: '', zip: '', country: '', gender: '', bloodGroup: '', maritalStatus: '', bio: '', dob: '', joinDate: '', manager: '', salary: '', employeeId: '', employmentType: '', workLocation: '' } as Employee) : null));
   const [preview, setPreview] = useState<string | undefined>();
@@ -37,7 +40,7 @@ export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () 
     if (id === 'new') {
       await sendForm<Employee>(`/employees`, form, 'POST');
       alert('Employee created');
-      onBack();
+      navigate('/admin/employees');
       return;
     }
     const updated = await sendForm<Employee>(`/employees/${id}`, form, 'PUT');
@@ -49,7 +52,7 @@ export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () 
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={onBack}>← Back to Employees</button>
+      <button className="btn" onClick={() => navigate('/admin/employees')}>← Back to Employees</button>
       <div className="grid-1-2">
         <div className="card" style={{ display: 'grid', gap: 12 }}>
           <div style={{ width: 120, height: 120, borderRadius: 16, background: '#EEF2FF', color: '#4F46E5', display: 'grid', placeItems: 'center', overflow: 'hidden', fontSize: 28 }}>
@@ -135,7 +138,7 @@ export default function EmployeeDetail({ id, onBack }: { id: string; onBack: () 
 
       <div style={{ display: 'flex', gap: 12 }}>
         <button className="btn primary" onClick={handleSave}>Save Employee</button>
-        <button className="btn" onClick={onBack}>Cancel</button>
+        <button className="btn" onClick={() => navigate('/admin/employees')}>Cancel</button>
       </div>
     </div>
   );

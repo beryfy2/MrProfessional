@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { Title, Subtitle } from '../../../common/types';
 import { getJSON, sendJSON, delJSON } from '../lib/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function TitleDetail({ id, onBack, onEditSubtitle }: { id: string; onBack: (navItemId: string) => void; onEditSubtitle: (sid: string) => void }) {
+export default function TitleDetail() {
+  const navigate = useNavigate();
+  const { id = '' } = useParams();
   const [t, setT] = useState<Title | null>(null);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
@@ -39,7 +42,7 @@ export default function TitleDetail({ id, onBack, onEditSubtitle }: { id: string
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={() => t && onBack(String(t.navItem))}>← Back to Nav Item</button>
+      <button className="btn" onClick={() => t && navigate(`/admin/nav-items/${t.navItem}`)}>← Back to Nav Item</button>
       <div className="card" style={{ display: 'grid', gap: 12 }}>
         <div style={{ fontSize: 18, fontWeight: 600 }}>Title</div>
         <input className="input" value={name} onChange={(e) => setName(e.target.value)} />
@@ -64,7 +67,7 @@ export default function TitleDetail({ id, onBack, onEditSubtitle }: { id: string
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(s.content || '').slice(0, 80)}</div>
                 </div>
                 <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn" onClick={() => onEditSubtitle(s._id!)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
+                  <button className="btn" onClick={() => navigate(`/admin/subtitles/${s._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
                   <button className="btn" onClick={() => removeSubtitle(s._id!)} style={{ color: '#DC2626' }}>Delete</button>
                 </div>
               </div>
