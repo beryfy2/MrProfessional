@@ -11,9 +11,10 @@ export default function Enquiries() {
   }, []);
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 22, fontWeight: 600 }}>Enquiries</div>
+    <div className="page">
+      <div className="page-header">
+        <h1>Enquiries</h1>
+        <p className="page-subtitle">View and manage customer enquiries</p>
         <button className="btn">Filter</button>
       </div>
       <div style={{ display: 'grid', gap: 12 }}>

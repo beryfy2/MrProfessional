@@ -13,9 +13,10 @@ export default function Employees({ onView, onAdd }: { onView: (id: string) => v
   const filtered = useMemo(() => list.filter((e) => e.name.toLowerCase().includes(q.toLowerCase())), [list, q]);
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 22, fontWeight: 600 }}>Employees</div>
+    <div className="page">
+      <div className="page-header">
+        <h1>Employees</h1>
+        <p className="page-subtitle">Manage your team members</p>
         <button className="btn primary" onClick={onAdd}>+ Add Employee</button>
       </div>
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search employees..." className="input" />

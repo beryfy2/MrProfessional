@@ -58,7 +58,7 @@ export default function TitleDetail({ id, onBack, onEditSubtitle }: { id: string
         ) : (
           <div style={{ marginTop: 12, display: 'grid', gap: 12 }}>
             {subs.map((s) => (
-              <div key={s._id} style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div key={s._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ fontWeight: 600 }}>{s.title}</div>
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(s.content || '').slice(0, 80)}</div>

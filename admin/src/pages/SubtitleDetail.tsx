@@ -67,7 +67,7 @@ export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (ti
         {files.length > 0 && (
           <div className="grid-2">
             {files.map((f) => (
-              <div key={f._id} style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 8 }}>
+              <div key={f._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 8 }}>
                 {f.mimetype?.includes('image') ? (
                   <img src={f.url} alt={f.filename} style={{ width: '100%', height: 96, objectFit: 'cover', borderRadius: 8 }} />
                 ) : (
@@ -90,7 +90,7 @@ export default function SubtitleDetail({ id, onBack }: { id: string; onBack: (ti
         </div>
         <div style={{ display: 'grid', gap: 12 }}>
           {questions.map((qa, idx) => (
-            <div key={idx} style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 12 }}>
+            <div key={idx} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12 }}>
               <div style={{ fontSize: 13, color: '#6B7280', marginBottom: 8 }}>Question {idx + 1}</div>
               <textarea className="input" rows={3} value={qa.question} onChange={(e) => {
                 const next = [...questions];

@@ -25,9 +25,10 @@ export default function NavItems({ onEdit }: { onEdit: (id: string) => void }) {
   }
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 22, fontWeight: 600 }}>Navigation Items</div>
+    <div className="page">
+      <div className="page-header">
+        <h1>Navigation Items</h1>
+        <p className="page-subtitle">Manage website navigation structure</p>
         <button className="btn primary" onClick={handleAdd}>+ Add Nav Item</button>
       </div>
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search navigation items..." className="input" />
