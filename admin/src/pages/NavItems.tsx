@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { NavItem } from '../../../common/types';
 import { getJSON, sendJSON } from '../lib/api';
+import { useNavigate } from 'react-router-dom';
 
-export default function NavItems({ onEdit }: { onEdit: (id: string) => void }) {
+export default function NavItems() {
+  const navigate = useNavigate();
   const [items, setItems] = useState<NavItem[]>([]);
   const [q, setQ] = useState('');
   const [showAdd, setShowAdd] = useState(false);
@@ -92,7 +94,7 @@ export default function NavItems({ onEdit }: { onEdit: (id: string) => void }) {
                 <td className="td"><div className="pill">{i.order}</div></td>
                 <td className="td">{i.name}</td>
                 <td className="td">{i.slug}</td>
-                <td className="td"><button className="btn" onClick={() => onEdit(i._id!)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button></td>
+                <td className="td"><button className="btn" onClick={() => navigate(`/admin/nav-items/${i._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button></td>
               </tr>
             ))}
           </tbody>

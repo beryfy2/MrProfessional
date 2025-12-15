@@ -1,19 +1,14 @@
-import type { ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
 
-type Item = { label: string; icon: ReactNode; active?: boolean; onClick?: () => void };
-
-export default function Sidebar({ width = 270, items }: { width?: number; items: Item[] }) {
+export default function Sidebar() {
   return (
-    <aside className="sidebar" style={{ width }}>
-      <div className="sidebar-header">MR PRO + Admin</div>
-      <nav style={{ padding: 8 }}>
-        {items.map((it) => (
-          <button key={it.label} onClick={it.onClick} className={`nav-btn ${it.active ? 'active' : ''}`}>
-            <span style={{ color: '#0f4260' }}>{it.icon}</span>
-            <span style={{ fontWeight: 500 }}>{it.label}</span>
-          </button>
-        ))}
-      </nav>
-    </aside>
+    <nav className="sidebar">
+      <h2>MR PRO + Admin</h2>
+      <NavLink to="/admin/dashboard">Dashboard</NavLink>
+      <NavLink to="/admin/employees">Employees</NavLink>
+      <NavLink to="/admin/nav-items">Nav Items</NavLink>
+      <NavLink to="/admin/enquiries">Enquiries</NavLink>
+      <NavLink to="/admin/admin-settings">Admin Settings</NavLink>
+    </nav>
   );
 }

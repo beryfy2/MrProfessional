@@ -1,10 +1,20 @@
-export default function AdminSettings() {
+const AdminSettings = () => {
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ fontSize: 22, fontWeight: 600 }}>Admin Settings</div>
-      <div className="card">
-        <div style={{ color: '#374151' }}>Basic settings placeholder</div>
+    <div className="page">
+
+      <div className="page-header">
+        <h1>Admin Settings</h1>
+        <p className="page-subtitle">
+          Manage application configuration
+        </p>
       </div>
+
+      <div className="card">
+        Basic settings placeholder
+      </div>
+
     </div>
   );
-}
+};
+
+export default AdminSettings;

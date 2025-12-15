@@ -1,15 +1,27 @@
-export default function Topbar({ title, onLogout }: { title: string; onLogout?: () => void }) {
+import { useNavigate } from "react-router-dom";
+import { logout } from "../lib/api";
+
+const Topbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
-    <header className="topbar">
-      <div className="topbar-title">{title}</div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <input className="topbar-search" placeholder="Search..." />
+    <div className="topbar">
+      <input className="search" placeholder="Search..." />
+
+      <div className="topbar-right">
+        <span className="icon">🔔</span>
+
         <div className="avatar">A</div>
-        <div style={{ fontSize: 14, color: '#374151' }}>Admin</div>
-        {onLogout && (
-          <button className="logout" onClick={onLogout}>Logout</button>
-        )}
+
+        <span className="icon logout" onClick={handleLogout}>⎋</span>
       </div>
-    </header>
+    </div>
   );
-}
+};
+
+export default Topbar;

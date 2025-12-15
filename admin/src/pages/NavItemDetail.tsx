@@ -88,7 +88,7 @@ export default function NavItemDetail({ id, onBack, onEditTitle }: { id: string;
         ) : (
           <div style={{ marginTop: 12, display: 'grid', gap: 12 }}>
             {titles.map((t) => (
-              <div key={t._id} style={{ border: '1px solid var(--border)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div key={t._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ fontWeight: 600 }}>{t.title}</div>
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(t.content || '').slice(0, 80)}</div>

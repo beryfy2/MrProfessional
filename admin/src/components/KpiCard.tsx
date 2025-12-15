@@ -14,7 +14,7 @@ export default function KpiCard({
   color?: 'indigo' | 'violet';
 }) {
   return (
-    <div className="card">
+    <div className="kpi-card">
       <div className="kpi-header">
         <div>
           <div className="kpi-title">{title}</div>
