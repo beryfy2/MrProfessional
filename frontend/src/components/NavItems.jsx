@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faFire } from "@fortawesome/free-solid-svg-icons";
 
 const API_BASE = "http://localhost:5000/api";
 
 export default function NavItems({ transparent = false }) {
+    const navigate = useNavigate();
     const solidBg = "bg-[#0f4260]";
     const glassBg = "bg-[#0f4260]/40";
     const finalBg = transparent ? glassBg : solidBg;
@@ -91,6 +93,22 @@ export default function NavItems({ transparent = false }) {
         setOpenMenu((prev) => (prev === navId ? null : navId));
     };
 
+    const slugify = (text) => {
+        return text
+            .toLowerCase()
+            .replace(/\.(php|html)$/,'')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/-+/, '-');
+    };
+
+    const navigateToService = (name) => {
+        const base = slugify(name);
+        // Try base slug first; ServicePage will attempt common variants
+        navigate(`/services/${base}`);
+    };
+
     return (
         <div
             className={`${finalBg} transition-all duration-300 ${transparent ? "backdrop--md" : "shadow-lg"
@@ -151,6 +169,7 @@ export default function NavItems({ transparent = false }) {
                                         anchorEl={itemRefs.current[nav._id]}
                                         onMouseEnter={handleMenuEnter}
                                         onMouseLeave={handleMenuLeave}
+                                        onSelectService={navigateToService}
                                     />
                                 )}
                             </li>
@@ -200,7 +219,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
                                     <button
                                         type="button"
                                         className="w-full text-left px-4 py-2 hover:bg-sky-50 cursor-pointer"
-                                        onClick={() => console.log("Clicked:", item)}
+                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }}
                                     >
                                         {item}
                                     </button>
@@ -234,7 +253,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
                                     <button
                                         type="button"
                                         className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
-                                        onClick={() => console.log("Clicked:", item)}
+                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }}
                                     >
                                         {["Limited Liability Partnership", "Producer Company"].includes(
                                             item
@@ -275,7 +294,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
                                     <button
                                         type="button"
                                         className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
-                                        onClick={() => console.log("Clicked:", item)}
+                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }}
                                     >
                                         <span>{item}</span>
                                         {idx < 2 && (
@@ -297,7 +316,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
 
 
 
-function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anchorEl, onMouseEnter, onMouseLeave }) {
+function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anchorEl, onMouseEnter, onMouseLeave, onSelectService }) {
     const [pos, setPos] = useState({ left: 8, top: 0, width: Math.min(720, typeof window !== 'undefined' ? window.innerWidth - 16 : 720) });
     const activeTitle = titles.find((t) => t._id === hoverTitleId);
 
@@ -364,7 +383,10 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
                                         <button
                                             type="button"
                                             className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
-                                            onClick={() => console.log("Clicked:", title, "->", s.title)}
+                                            onClick={() => {
+                                                if (typeof onSelectService === 'function') onSelectService(s.title);
+                                                else { const slug = s.title.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }
+                                            }}
                                         >
                                             <span>{s.title}</span>
                                             {idx < 2 && (
