@@ -103,7 +103,14 @@ export default function NavItems({ transparent = false }) {
             .replace(/-+/, '-');
     };
 
-    const navigateToService = (name) => {
+    const navigateToService = (name, navName) => {
+        // Handle Tools section differently
+        if (navName === 'Tools') {
+            const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/calculator$/, '-calculator');
+            navigate(`/tools/${slug}`);
+            return;
+        }
+
         const base = slugify(name);
         // Try base slug first; ServicePage will attempt common variants
         navigate(`/services/${base}`);
@@ -169,7 +176,7 @@ export default function NavItems({ transparent = false }) {
                                         anchorEl={itemRefs.current[nav._id]}
                                         onMouseEnter={handleMenuEnter}
                                         onMouseLeave={handleMenuLeave}
-                                        onSelectService={navigateToService}
+                                        onSelectService={(serviceName) => navigateToService(serviceName, nav.name)}
                                     />
                                 )}
                             </li>

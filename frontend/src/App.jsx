@@ -14,6 +14,8 @@ import IndustriesSection from './components/IndustriesSection'
 import TrustedBy from './components/TrustBy'
 import MediaCoverage from './components/MediaCoverage'
 import EmiCalculator from './pages/tools/EmiCalculator'
+import PpfCalculator from './pages/tools/PpfCalculator'
+import DepreciationCalculator from './pages/tools/DepreciationCalculator'
 import ServicePage from './pages/ServicePage'
 
 const Home = () => (
@@ -55,6 +57,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
       <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/tools/emi-calculator" element={<ToolPage><EmiCalculator /></ToolPage>} />
+        <Route path="/tools/ppf-calculator" element={<ToolPage><PpfCalculator /></ToolPage>} />
+        <Route path="/tools/depreciation-calculator" element={<ToolPage><DepreciationCalculator /></ToolPage>} />
       </Routes>
   )
 }
