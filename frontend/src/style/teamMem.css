@@ -1,0 +1,198 @@
+/* HERO SECTION */
+.team-hero {
+  background-color: #0b3a5e;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.team-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+/* LEFT TEXT */
+.team-hero-left h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.team-hero-left p {
+  font-size: 18px;
+  color: #cfe3f3;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+/* RIGHT CARD */
+.team-hero-card {
+  background: #c7d2db;
+  border-radius: 14px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* CARD TEXT */
+.team-card-text h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0b3a5e;
+  margin-bottom: 10px;
+}
+
+.team-card-text p {
+  font-size: 16px;
+  color: #1f2d3a;
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+/* ICON CIRCLE */
+.team-card-icon {
+  width: 64px;
+  height: 64px;
+  background: #2bdc2b;
+  color: white;
+  border-radius: 50%;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .team-hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .team-hero {
+    padding: 60px 0;
+  }
+
+  .team-hero-left h1 {
+    font-size: 34px;
+  }
+}
+
+
+/* SECTION */
+.leaders-section {
+  padding: 80px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.leaders-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #0b3a5e;
+  margin-bottom: 70px;
+}
+
+/* GRID */
+.leaders-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: start;
+}
+
+/* CARD */
+.leader-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 520px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #0a2d44, #0f4d6d);
+}
+
+.leader-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAY (LEFT CARD ONLY) */
+.leader-overlay {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  color: white;
+  text-align: left;
+}
+
+.leader-overlay h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.leader-overlay p {
+  font-size: 16px;
+  color: #2cff2c;
+  font-weight: 600;
+}
+
+/* SOCIAL ICONS */
+.leader-socials {
+  display: flex;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.leader-socials i {
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.leader-socials i:hover {
+  transform: translateY(-2px);
+}
+
+/* INFO BELOW CARD */
+.leader-info {
+  margin-top: 24px;
+}
+
+.leader-info h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0b3a5e;
+}
+
+.leader-info span {
+  display: block;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #22d622;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .leaders-container {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+}
