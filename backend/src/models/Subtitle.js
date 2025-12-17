@@ -13,7 +13,13 @@ const FileSchema = new mongoose.Schema(
 const QASchema = new mongoose.Schema(
   {
     question: String,
-    answer: String
+    answer: String,
+    format: { type: String, enum: ['table', 'written', 'both'], default: 'written' },
+    table: {
+      headers: [String],
+      rows: [[String]]
+    },
+    files: [FileSchema]
   },
   { _id: false }
 );

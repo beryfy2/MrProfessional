@@ -270,6 +270,36 @@ app.get('/api/subtitles/:sid', async (req, res) => {
   res.json(sub);
 });
 
+function slugifyTitle(text = '') {
+  return String(text)
+    .toLowerCase()
+    .replace(/\.(php|html)$/,'')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/, '-');
+}
+
+function slugVariants(slug) {
+  const base = slug;
+  const reg = `${slug}-registration`;
+  const alt = `${slug.replace(/-company$/, '')}-registration`;
+  return [base, reg, alt];
+}
+
+app.get('/api/subtitles/by-slug/:slug', async (req, res) => {
+  const slug = req.params.slug;
+  const variants = slugVariants(slug);
+  const subs = await Subtitle.find({}).sort({ createdAt: -1 });
+  for (const s of subs) {
+    const st = slugifyTitle(s.title || '');
+    if (variants.includes(st)) {
+      return res.json(s);
+    }
+  }
+  res.status(404).json({ error: 'Not found' });
+});
+
 app.put('/api/subtitles/:sid', auth, async (req, res) => {
   try {
     const sub = await Subtitle.findByIdAndUpdate(req.params.sid, req.body, { new: true });
@@ -288,6 +318,42 @@ app.delete('/api/subtitles/:sid', auth, async (req, res) => {
   }
 });
 
+// Per-question files
+app.post('/api/subtitles/:sid/questions/:idx/files', auth, upload.array('files'), async (req, res) => {
+  try {
+    const idx = Number(req.params.idx);
+    const files = (req.files || []).map((f) => ({
+      filename: f.filename,
+      url: `/uploads/${f.filename}`,
+      mimetype: f.mimetype,
+      size: f.size
+    }));
+    const path = `questions.${idx}.files`;
+    const sub = await Subtitle.findByIdAndUpdate(
+      req.params.sid,
+      { $push: { [path]: { $each: files } } },
+      { new: true }
+    );
+    res.json(sub);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to upload question files' });
+  }
+});
+
+app.delete('/api/subtitles/:sid/questions/:idx/files/:fileId', auth, async (req, res) => {
+  try {
+    const idx = Number(req.params.idx);
+    const path = `questions.${idx}.files`;
+    const sub = await Subtitle.findByIdAndUpdate(
+      req.params.sid,
+      { $pull: { [path]: { _id: req.params.fileId } } },
+      { new: true }
+    );
+    res.json(sub);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to remove question file' });
+  }
+});
 app.post('/api/subtitles/:sid/files', auth, upload.array('files', 8), async (req, res) => {
   try {
     const files = (req.files || []).map((f) => ({

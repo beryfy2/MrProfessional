@@ -9,6 +9,12 @@ export type FileMeta = {
 export type QA = {
   question: string;
   answer: string;
+  format?: 'table' | 'written' | 'both';
+  table?: {
+    headers: string[];
+    rows: string[][];
+  };
+  files: FileMeta[];
 };
 
 export type Subtitle = {

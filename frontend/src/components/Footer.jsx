@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLocationDot,
@@ -30,11 +31,11 @@ const POPULAR_SERVICES = [
 ];
 
 const USEFUL_TOOLS = [
-    "Check FSSAI License Number Status",
-    "TDS Interest Calculator",
-    "Depreciation Calculator",
-    "PPF Calculator",
-    "EMI Calculator",
+    { label: "Check FSSAI License Number Status", path: "/tools/fssai-status" },
+    { label: "TDS Interest Calculator", path: "/tools/tds-calculator" },
+    { label: "Depreciation Calculator", path: "/tools/depreciation-calculator" },
+    { label: "PPF Calculator", path: "/tools/ppf-calculator" },
+    { label: "EMI Calculator", path: "/tools/emi-calculator" },
 ];
 
 // TESTIMONIAL SLIDES
@@ -102,7 +103,7 @@ const Footer = () => {
                         {/* Useful Tools */}
                         <FooterColumn title="Useful Tools">
                             {USEFUL_TOOLS.map((item) => (
-                                <FooterItem key={item}>{item}</FooterItem>
+                                <FooterItem key={item.label} to={item.path}>{item.label}</FooterItem>
                             ))}
                         </FooterColumn>
 
@@ -266,6 +267,8 @@ const Footer = () => {
                             <Divider />
                             <FooterLink>Refund Policy</FooterLink>
                             <Divider />
+                            <FooterLink to="/tools/emi-calculator">EMI Calculator</FooterLink>
+                            <Divider />
                             <FooterLink>Contact Us</FooterLink>
                         </div>
                     </div>
@@ -282,8 +285,12 @@ const FooterColumn = ({ title, children }) => (
     </div>
 );
 
-const FooterItem = ({ children }) => (
-    <li className="hover:text-green-300 cursor-pointer">{children}</li>
+const FooterItem = ({ to, children }) => (
+    <li>
+        <Link to={to} className="block text-sm text-white/85 hover:text-green-300 transition">
+            {children}
+        </Link>
+    </li>
 );
 
 const IconBubble = ({ icon }) => (
@@ -301,9 +308,17 @@ const TrustBadge = ({ icon, label }) => (
     </div>
 );
 
-const FooterLink = ({ children }) => (
-    <button className="hover:text-green-300">{children}</button>
-);
+const FooterLink = ({ children, to }) => {
+    if (to) {
+        return (
+            <Link to={to} className="hover:text-green-300">
+                {children}
+            </Link>
+        );
+    }
+
+    return <button className="hover:text-green-300">{children}</button>;
+};
 
 const Divider = () => <span className="hidden md:inline text-white/40">|</span>;
 
