@@ -35,8 +35,11 @@ import Enquiry from './models/Enquiry.js';
 import NavItem from './models/NavItem.js';
 import Title from './models/Title.js';
 import Subtitle from './models/Subtitle.js';
+import AdminConfig from './models/AdminConfig.js';
+import ResetToken from './models/ResetToken.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import nodemailer from 'nodemailer';
 
 // Multer for uploads
 import multer from 'multer';
@@ -72,6 +75,50 @@ function signToken(payload) {
   return jwt.sign(payload, secret, { expiresIn: '2h' });
 }
 
+async function getAdminPasswordOk(email, plain) {
+  const cfg = await AdminConfig.findOne({ email });
+  if (cfg) return bcrypt.compare(plain || '', cfg.passwordHash);
+  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+  if (adminPasswordHash) return bcrypt.compare(plain || '', adminPasswordHash);
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (adminPassword) return plain === adminPassword;
+  return plain === 'admin123';
+}
+
+async function setAdminPassword(email, plain) {
+  const hash = await bcrypt.hash(plain || '', 10);
+  const existing = await AdminConfig.findOne({ email });
+  if (existing) {
+    existing.passwordHash = hash;
+    await existing.save();
+    return existing;
+  }
+  return AdminConfig.create({ email, passwordHash: hash });
+}
+
+function createTransporter() {
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT || 0);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (host && port && user && pass) {
+    return nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
+  }
+  return nodemailer.createTransport({ jsonTransport: true });
+}
+
+async function sendOtpEmail(to, otp) {
+  const from = process.env.FROM_EMAIL || 'no-reply@mrpro.local';
+  const transporter = createTransporter();
+  await transporter.sendMail({
+    from,
+    to,
+    subject: 'Admin Password Reset OTP',
+    text: `Your OTP is ${otp}. It expires in 10 minutes.`,
+    html: `<p>Your OTP is <strong>${otp}</strong>. It expires in 10 minutes.</p>`
+  });
+}
+
 function auth(req, res, next) {
   try {
     const authz = req.headers.authorization || '';
@@ -88,20 +135,46 @@ function auth(req, res, next) {
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body || {};
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
-  const adminPassword = process.env.ADMIN_PASSWORD; // optional plain
-  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH; // preferred
-
   if (email !== adminEmail) return res.status(401).json({ error: 'Invalid credentials' });
-  let ok = false;
-  if (adminPasswordHash) ok = await bcrypt.compare(password || '', adminPasswordHash);
-  else if (adminPassword) ok = password === adminPassword;
-  else ok = password === 'admin123';
+  const ok = await getAdminPasswordOk(adminEmail, password || '');
 
   if (!ok) return res.status(401).json({ error: 'Invalid credentials' });
   const token = signToken({ role: 'admin', email });
   res.json({ token });
 });
 
+app.post('/api/auth/forgot', async (req, res) => {
+  const { email } = req.body || {};
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
+  if (email !== adminEmail) return res.status(400).json({ error: 'Email not found' });
+  const otp = String(Math.floor(100000 + Math.random() * 900000));
+  const otpHash = await bcrypt.hash(otp, 10);
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+  await ResetToken.create({ email, otpHash, expiresAt });
+  try {
+    await sendOtpEmail(email, otp);
+  } catch (e) {
+    console.log('OTP email send skipped');
+  }
+  res.json({ ok: true });
+});
+
+app.post('/api/auth/reset', async (req, res) => {
+  const { email, otp, newPassword } = req.body || {};
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
+  if (email !== adminEmail) return res.status(400).json({ error: 'Invalid email' });
+  const token = await ResetToken.findOne({ email }).sort({ createdAt: -1 });
+  if (!token) return res.status(400).json({ error: 'OTP not found' });
+  if (token.expiresAt.getTime() < Date.now()) return res.status(400).json({ error: 'OTP expired' });
+  const ok = await bcrypt.compare(otp || '', token.otpHash);
+  if (!ok) {
+    token.attempts += 1;
+    await token.save();
+    return res.status(400).json({ error: 'Invalid OTP' });
+  }
+  await setAdminPassword(adminEmail, newPassword || '');
+  res.json({ ok: true });
+});
 // Employees
 app.get('/api/employees', async (req, res) => {
   const list = await Employee.find().sort({ name: 1 });

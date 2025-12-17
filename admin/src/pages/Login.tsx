@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../lib/api';
+import { login, API_BASE } from '../lib/api';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -8,6 +8,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [mode, setMode] = useState<'login' | 'forgot' | 'reset'>('login');
+  const [otp, setOtp] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -18,6 +21,49 @@ export default function Login() {
       navigate('/admin/dashboard');
     } catch {
       setError('Invalid email or password');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function sendOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/auth/forgot`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (!res.ok) throw new Error('Failed to send OTP');
+      setMode('reset');
+      alert('OTP sent to registered email');
+    } catch {
+      setError('Failed to send OTP');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function resetPassword(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/auth/reset`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp, newPassword })
+      });
+      if (!res.ok) throw new Error('Failed to reset password');
+      alert('Password updated. Please login.');
+      setMode('login');
+      setPassword('');
+      setOtp('');
+      setNewPassword('');
+    } catch {
+      setError('Invalid OTP or request failed');
     } finally {
       setLoading(false);
     }
@@ -40,32 +86,90 @@ export default function Login() {
         {/* Card */}
         <div className="login-card">
 
-          <h2>Welcome Back</h2>
-          <p className="login-helper">
-            Enter your credentials to access the dashboard
-          </p>
+          {mode === 'login' && (
+            <>
+              <h2>Welcome Back</h2>
+              <p className="login-helper">
+                Enter your credentials to access the dashboard
+              </p>
+            </>
+          )}
+          {mode === 'forgot' && (
+            <>
+              <h2>Forgot Password</h2>
+              <p className="login-helper">
+                Enter your registered email to receive OTP
+              </p>
+            </>
+          )}
+          {mode === 'reset' && (
+            <>
+              <h2>Reset Password</h2>
+              <p className="login-helper">
+                Enter the OTP received and your new password
+              </p>
+            </>
+          )}
 
-          <form onSubmit={submit}>
-            <label>Email Address</label>
-            <div className="input-box">
-              <input type="email" placeholder="admin@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </div>
+          {mode === 'login' && (
+            <form onSubmit={submit}>
+              <label>Email Address</label>
+              <div className="input-box">
+                <input type="email" placeholder="admin@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
 
-            <div className="password-row">
-              <label>Password</label>
-              <span className="forgot">Forgot?</span>
-            </div>
+              <div className="password-row">
+                <label>Password</label>
+                <button type="button" className="forgot" onClick={() => setMode('forgot')}>Forgot?</button>
+              </div>
 
-            <div className="input-box">
-              <input type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </div>
+              <div className="input-box">
+                <input type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              </div>
 
-            {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
 
-            <button type="submit" className="btn-login" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
+              <button type="submit" className="btn-login" disabled={loading}>
+                {loading ? 'Signing in...' : 'Sign In'}
+              </button>
+            </form>
+          )}
+
+          {mode === 'forgot' && (
+            <form onSubmit={sendOtp}>
+              <label>Registered Email</label>
+              <div className="input-box">
+                <input type="email" placeholder="admin@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              </div>
+              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button type="submit" className="btn-login" disabled={loading}>
+                  {loading ? 'Sending...' : 'Send OTP'}
+                </button>
+                <button type="button" className="btn-login" onClick={() => setMode('login')} disabled={loading}>Back</button>
+              </div>
+            </form>
+          )}
+
+          {mode === 'reset' && (
+            <form onSubmit={resetPassword}>
+              <label>OTP</label>
+              <div className="input-box">
+                <input type="text" placeholder="6-digit OTP" value={otp} onChange={(e) => setOtp(e.target.value)} required />
+              </div>
+              <label>New Password</label>
+              <div className="input-box">
+                <input type="password" placeholder="New password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+              </div>
+              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button type="submit" className="btn-login" disabled={loading}>
+                  {loading ? 'Updating...' : 'Update Password'}
+                </button>
+                <button type="button" className="btn-login" onClick={() => setMode('login')} disabled={loading}>Back to Login</button>
+              </div>
+            </form>
+          )}
 
           <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '16px', textAlign: 'center' }}>
             Demo: admin@example.com / admin123
