@@ -35,6 +35,7 @@ import Enquiry from './models/Enquiry.js';
 import NavItem from './models/NavItem.js';
 import Title from './models/Title.js';
 import Subtitle from './models/Subtitle.js';
+import Job from './models/Job.js';
 import AdminConfig from './models/AdminConfig.js';
 import ResetToken from './models/ResetToken.js';
 import jwt from 'jsonwebtoken';
@@ -224,6 +225,23 @@ app.get('/api/enquiries', async (req, res) => {
   res.json(list);
 });
 
+app.post('/api/enquiries', async (req, res) => {
+  try {
+    const { companyName, contactPerson, email, subject, message } = req.body || {};
+    if (!email || !subject || !message) return res.status(400).json({ error: 'Missing fields' });
+    const doc = await Enquiry.create({
+      companyName: companyName || 'Careers',
+      contactPerson: contactPerson || 'Candidate',
+      email,
+      subject,
+      message
+    });
+    res.status(201).json(doc);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to create enquiry' });
+  }
+});
+
 app.delete('/api/enquiries/:id', auth, async (req, res) => {
   try {
     await Enquiry.findByIdAndDelete(req.params.id);
@@ -233,6 +251,38 @@ app.delete('/api/enquiries/:id', auth, async (req, res) => {
   }
 });
 
+// Jobs CRUD
+app.get('/api/jobs', async (req, res) => {
+  const jobs = await Job.find().sort({ createdAt: -1 });
+  res.json(jobs);
+});
+
+app.post('/api/jobs', auth, async (req, res) => {
+  try {
+    const j = await Job.create(req.body);
+    res.status(201).json(j);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to create job' });
+  }
+});
+
+app.put('/api/jobs/:id', auth, async (req, res) => {
+  try {
+    const j = await Job.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(j);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to update job' });
+  }
+});
+
+app.delete('/api/jobs/:id', auth, async (req, res) => {
+  try {
+    await Job.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete job' });
+  }
+});
 // Nav Items
 app.get('/api/nav-items', async (req, res) => {
   const items = await NavItem.find().sort({ order: 1 });

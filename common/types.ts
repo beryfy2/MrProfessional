@@ -81,3 +81,17 @@ export type Enquiry = {
   message: string;
   date?: string;
 };
+
+export type Job = {
+  _id?: string;
+  title: string;
+  description: string;
+  type?: string;
+  experience?: string;
+  urgent?: boolean;
+  experienceLevel?: string;
+  location?: string;
+  responsibilities?: string[];
+  qualifications?: string[];
+  createdAt?: string;
+};

@@ -10,6 +10,7 @@ import NavItemDetail from "./pages/NavItemDetail";
 import TitleDetail from "./pages/TitleDetail";
 import SubtitleDetail from "./pages/SubtitleDetail";
 import AdminLayout from "./layouts/AdminLayout";
+import Careers from "./pages/Careers";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="employees" element={<Employees />} />
           <Route path="employees/:id" element={<EmployeeDetail />} />
           <Route path="enquiries" element={<Enquiries />} />
+          <Route path="careers" element={<Careers />} />
           <Route path="nav-items" element={<NavItems />} />
           <Route path="nav-items/:id" element={<NavItemDetail />} />
           <Route path="titles/:id" element={<TitleDetail />} />

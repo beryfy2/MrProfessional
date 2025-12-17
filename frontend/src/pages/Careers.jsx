@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WhyCompanySection from "./WhyUs";
 import TestimonialsSection from "./TestimonialsSection";
 import TrustedBy from "../components/TrustBy";
+const API_BASE = "http://localhost:5000/api";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const Careers = () => {
   const [submitMessage, setSubmitMessage] = useState('');
   const [expandedJob, setExpandedJob] = useState(null);
 
-  const jobOpenings = [
+  const [jobOpenings, setJobOpenings] = useState([
     {
       title: 'Social Media Manager',
       urgent: true,
@@ -388,7 +389,23 @@ const Careers = () => {
         'Proficiency in CRM software and MS Office'
       ]
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/jobs`).then((r) => r.json()).then((jobs) => {
+      if (Array.isArray(jobs) && jobs.length > 0) {
+        setJobOpenings(jobs.map((j) => ({
+          title: j.title,
+          urgent: j.urgent || false,
+          type: j.type || 'Full-time',
+          experience: j.experience || '',
+          description: j.description || '',
+          responsibilities: [],
+          qualifications: []
+        })));
+      }
+    }).catch(() => {});
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -398,14 +415,26 @@ const Careers = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const subject = `Job Application: ${formData.jobType}`;
+      const message = `Name: ${formData.name}\nPhone: ${formData.phone}\nQualification: ${formData.qualification}\nExpected Salary: ${formData.expectedSalary}\nLinkedIn: ${formData.linkedin}\nMessage: ${formData.message}`;
+      const res = await fetch(`${API_BASE}/enquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          companyName: 'Careers',
+          contactPerson: formData.name,
+          email: formData.email,
+          subject,
+          message
+        })
+      });
+      if (!res.ok) throw new Error('Failed');
       setSubmitMessage('Thank you for your application! We will review your submission and get back to you soon.');
-      setIsSubmitting(false);
       setFormData({
         jobType: '',
         name: '',
@@ -417,7 +446,11 @@ const Careers = () => {
         expectedSalary: '',
         resume: null
       });
-    }, 2000);
+    } catch {
+      setSubmitMessage('Failed to submit application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
