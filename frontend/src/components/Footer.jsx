@@ -20,7 +20,13 @@ import googleImg from '../assets/images/google.svg'
 import footerBg from '../assets/footer-bg.jpg'
 
 
-const ORG_LINKS = ["About Us", "Careers", "The Team", "Contact Us", "Blogs"];
+const ORG_LINKS = [
+    { label: "About Us", path: "/about-us" },
+    { label: "Careers", path: "/careers" },
+    { label: "The Team", path: "/team" },
+    { label: "Contact Us", path: "/contact" },
+    { label: "Blogs", path: "/blogs" }
+];
 
 const POPULAR_SERVICES = [
     "GeM Registration",
@@ -32,7 +38,7 @@ const POPULAR_SERVICES = [
 
 const USEFUL_TOOLS = [
     { label: "Check FSSAI License Number Status", path: "/tools/fssai-status" },
-    { label: "TDS Interest Calculator", path: "/tools/tds-calculator" },
+    { label: "TDS Interest Calculator", path: "/tools/tds-interest-calculator" },
     { label: "Depreciation Calculator", path: "/tools/depreciation-calculator" },
     { label: "PPF Calculator", path: "/tools/ppf-calculator" },
     { label: "EMI Calculator", path: "/tools/emi-calculator" },
@@ -89,7 +95,7 @@ const Footer = () => {
                         {/* Organization */}
                         <FooterColumn title="Organization">
                             {ORG_LINKS.map((item) => (
-                                <FooterItem key={item}>{item}</FooterItem>
+                                <FooterItem key={item.label} to={item.path}>{item.label}</FooterItem>
                             ))}
                         </FooterColumn>
 
