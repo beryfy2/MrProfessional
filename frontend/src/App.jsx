@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
+import ScrollToTop from './components/ScrollToTop'
 import HeroPage from './pages/HeroPage'
 import SolutionSection from './pages/SolutionSection'
 import TestimonialsSection from './pages/TestimonialsSection'
@@ -60,6 +61,8 @@ const ToolPage = ({ children }) => (
 
 const App = () => {
   return (
+    <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
       <Route path="/services/:slug" element={<ServicePage />} />
@@ -72,6 +75,7 @@ const App = () => {
          <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
       </Routes>
+    </>
   )
 }
 

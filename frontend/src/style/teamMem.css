@@ -4,6 +4,7 @@
   min-height: 420px;
   display: flex;
   align-items: center;
+  padding-top: var(--navbar-height);
 }
 
 .team-hero-container {

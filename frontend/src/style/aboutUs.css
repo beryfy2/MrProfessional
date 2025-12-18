@@ -18,7 +18,7 @@
   overflow: hidden;
 
   min-height: 640px;
-  padding-top: 120px;
+  padding-top: var(--navbar-height);
   padding-bottom: 140px;
 }
 

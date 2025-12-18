@@ -31,42 +31,12 @@ async function run() {
     'Tax',
     'Legal',
     'Tender',
-    'Tools',
     'Blogs'
   ];
 
   const navItems = await NavItem.insertMany(
     navNames.map((name, i) => ({ name, slug: name.toLowerCase().replace(/\s+/g, '-'), order: i + 1 }))
   );
-
-  // Create Tools section with calculators
-  const toolsNavItem = navItems.find(nav => nav.name === 'Tools');
-  if (toolsNavItem) {
-    const calculatorsTitle = await Title.create({
-      navItem: toolsNavItem._id,
-      title: 'Financial Calculators',
-      content: 'Use our advanced financial calculators to plan your investments and loans effectively.',
-      order: 1
-    });
-
-    await Subtitle.create({
-      parentTitleId: calculatorsTitle._id,
-      title: 'EMI Calculator',
-      content: 'Calculate your Equated Monthly Installment (EMI) for loans with our advanced EMI calculator. Plan your loan repayments effectively.'
-    });
-
-    await Subtitle.create({
-      parentTitleId: calculatorsTitle._id,
-      title: 'PPF Calculator',
-      content: 'Calculate returns on your Public Provident Fund (PPF) investment with our PPF calculator. Plan your long-term tax-free savings.'
-    });
-
-    await Subtitle.create({
-      parentTitleId: calculatorsTitle._id,
-      title: 'Depreciation Calculator',
-      content: 'Calculate depreciation for your assets using Straight Line Method (SLM) or Written Down Value (WDV) as per Income Tax Act and Companies Act.'
-    });
-  }
 
   const employees = [
     { name: 'Sarah Johnson', email: 'sarah.j@company.com', position: 'Senior Developer', department: 'Engineering', phone: '+1 234-567-8901' },

@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Navbar height variable for consistent spacing */
+:root {
+  --navbar-height: 80px;
+}

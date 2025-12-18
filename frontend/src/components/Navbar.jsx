@@ -8,11 +8,8 @@ const NavBar = () => {
 
     return (
         <>
-            <NavProfile hidden={hideUpper} />
-            <div
-                className={`w-full transition-all duration-300 ${lowerSticky ? "fixed top-0 left-0 right-0 z-60" : "absolute top-14 left-0 right-0 z-40"
-                    }`}
-            >
+            <div className="fixed top-0 left-0 right-0 z-60 w-full">
+                <NavProfile hidden={hideUpper} transparent={!lowerSticky} />
                 <NavItems
                     sticky={lowerSticky}
                     adoptUpperColor={lowerSticky}
@@ -20,7 +17,8 @@ const NavBar = () => {
                 />
             </div>
 
-            {lowerSticky && <div style={{ height: "72px" }} />}
+            {/* Always include spacer to ensure navbar takes up space */}
+            <div style={{ height: "var(--navbar-height)" }} />
         </>
     );
 };
