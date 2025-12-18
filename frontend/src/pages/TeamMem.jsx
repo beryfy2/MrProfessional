@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import '../style/teamMem.css';
 
+const API_BASE = 'http://localhost:5000/api';
+
 export default function TeamMem() {
+  const [employees, setEmployees] = useState([]);
+  const [selected, setSelected] = useState(null);
+  useEffect(() => {
+    fetch(`${API_BASE}/employees`)
+      .then((res) => res.json())
+      .then(setEmployees)
+      .catch(() => setEmployees([]));
+  }, []);
+  function displayPhoto(emp) {
+    const url = emp.photoUrl ? `http://localhost:5000${emp.photoUrl}` : `https://i.pravatar.cc/400?u=${encodeURIComponent(emp.email || emp.name)}`;
+    return url;
+  }
+  function displayRole(emp) {
+    return emp.designation || emp.position || '';
+  }
+  function openDetails(emp) {
+    setSelected(emp);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
   return (
     <div>
       <NavBar />
@@ -40,55 +61,48 @@ export default function TeamMem() {
         </div>
       </section>
 
+      <section className="leaders-section">
+        <h2 className="leaders-title">Our Team</h2>
+        <div className="leaders-container">
+          {employees.map((emp) => (
+            <div key={emp._id} className="leader-block" onClick={() => openDetails(emp)} style={{ cursor: 'pointer' }}>
+              <div className="leader-card">
+                <img
+                  src={displayPhoto(emp)}
+                  alt={emp.name}
+                  className="leader-img"
+                />
+              </div>
+              <div className="leader-info">
+                <h4>{emp.name}</h4>
+                <span>{displayRole(emp)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      {selected && (
         <section className="leaders-section">
-      <h2 className="leaders-title">Our Leaders</h2>
-
-      <div className="leaders-container">
-        {/* LEFT LEADER */}
-        <div className="leader-block">
-          <div className="leader-card">
-            <img
-              src="/assets/leaders/sahil.png"
-              alt="Sahil Singh"
-              className="leader-img"
-            />
-
-            <div className="leader-overlay">
-              <h3>SAHIL SINGH</h3>
-              <p>Tax Consultant</p>
-
-              <div className="leader-socials">
-                <i className="fab fa-facebook-f"></i>
-                <i className="fab fa-instagram"></i>
-                <i className="fab fa-twitter"></i>
-                <i className="fab fa-linkedin-in"></i>
+          <div className="leaders-container" style={{ gridTemplateColumns: '1fr' }}>
+            <div className="card" style={{ margin: '0 auto', maxWidth: 900, display: 'grid', gap: 16 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ fontSize: 22, fontWeight: 700, color: '#0b3a5e' }}>{selected.name}</div>
+                <button className="btn" onClick={() => setSelected(null)}>Close</button>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: 16, alignItems: 'start' }}>
+                <img src={displayPhoto(selected)} alt={selected.name} style={{ width: 160, height: 160, borderRadius: 12, objectFit: 'cover' }} />
+                <div style={{ display: 'grid', gap: 8 }}>
+                  <div style={{ fontSize: 16, fontWeight: 600 }}>{displayRole(selected)}</div>
+                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.department}</div>
+                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.email}</div>
+                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.phone}</div>
+                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.workLocation}</div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="leader-info">
-            <h4>Sahil Singh</h4>
-            <span>Tax Consultant</span>
-          </div>
-        </div>
-
-        {/* RIGHT LEADER */}
-        <div className="leader-block">
-          <div className="leader-card">
-            <img
-              src="/assets/leaders/abhishek.png"
-              alt="Abhishek Yadav"
-              className="leader-img"
-            />
-          </div>
-
-          <div className="leader-info">
-            <h4>Abhishek Yadav</h4>
-            <span>Senior Business Consultant</span>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
 
       
       <Footer />
