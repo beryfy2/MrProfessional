@@ -29,6 +29,7 @@ const SubtitleSchema = new mongoose.Schema(
     parentTitleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Title', required: true },
     title: { type: String, required: true },
     content: { type: String },
+    price: { type: String },
     files: [FileSchema],
     questions: [QASchema]
   },

@@ -22,6 +22,7 @@ export type Subtitle = {
   parentTitleId: string;
   title: string;
   content?: string;
+  price?: string;
   files: FileMeta[];
   questions: QA[];
 };

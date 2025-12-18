@@ -12,6 +12,7 @@ export default function TitleDetail() {
   const [subs, setSubs] = useState<Subtitle[]>([]);
   const [showAdd, setShowAdd] = useState(false);
   const [newSubtitleTitle, setNewSubtitleTitle] = useState('');
+  const [newSubtitlePrice, setNewSubtitlePrice] = useState('');
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function TitleDetail() {
   function addSubtitle() {
     setShowAdd(true);
     setNewSubtitleTitle('');
+    setNewSubtitlePrice('');
   }
 
   async function saveNewSubtitle() {
@@ -40,11 +42,11 @@ export default function TitleDetail() {
     if (!s) return;
     try {
       setSaving(true);
-      const created = await sendJSON<Subtitle>(`/titles/${id}/subtitles`, { title: s }, 'POST');
+      const created = await sendJSON<Subtitle>(`/titles/${id}/subtitles`, { title: s, price: newSubtitlePrice.trim() || undefined }, 'POST');
       setSubs((prev) => [created, ...prev]);
       setShowAdd(false);
       navigate(`/admin/subtitles/${created._id}`);
-    } catch (e) {
+    } catch {
       alert('Failed to add subtitle');
     } finally {
       setSaving(false);
@@ -91,6 +93,7 @@ export default function TitleDetail() {
           ) : (
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <input className="input" placeholder="Subtitle title" value={newSubtitleTitle} onChange={(e) => setNewSubtitleTitle(e.target.value)} style={{ width: 260 }} />
+              <input className="input" placeholder="Price (e.g., ₹499)" value={newSubtitlePrice} onChange={(e) => setNewSubtitlePrice(e.target.value)} style={{ width: 160 }} />
               <button className="btn success" onClick={saveNewSubtitle} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
               <button className="btn" onClick={() => setShowAdd(false)}>Cancel</button>
             </div>
@@ -118,4 +121,3 @@ export default function TitleDetail() {
     </div>
   );
 }
-

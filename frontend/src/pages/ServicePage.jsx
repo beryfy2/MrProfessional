@@ -94,7 +94,7 @@ const ServicePage = () => {
           </div>
           <div className="bg-gray-100 rounded p-4">
             <div className="text-sm text-gray-600">Starting from</div>
-            <div className="text-2xl font-semibold">Varies by entity</div>
+            <div className="text-2xl font-semibold">{sub.price || 'Varies by entity'}</div>
             <button className="mt-3 bg-blue-600 text-white px-4 py-2 rounded">Get Free Consultation</button>
           </div>
         </header>

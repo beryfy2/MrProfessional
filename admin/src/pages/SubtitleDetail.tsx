@@ -9,6 +9,7 @@ export default function SubtitleDetail() {
   const [sub, setSub] = useState<Subtitle | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [price, setPrice] = useState('');
   const [files, setFiles] = useState<FileMeta[]>([]);
   const [questions, setQuestions] = useState<QA[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -19,6 +20,7 @@ export default function SubtitleDetail() {
       setSub(s);
       setTitle(s.title);
       setContent(s.content || '');
+      setPrice(s.price || '');
       setFiles(s.files || []);
       setQuestions(normalizeQuestions(s.questions || []));
       setCount((s.questions || []).length);
@@ -75,7 +77,7 @@ export default function SubtitleDetail() {
   }
 
   async function saveAll() {
-    const updated = await sendJSON<Subtitle>(`/subtitles/${id}`, { title, content, questions }, 'PUT');
+    const updated = await sendJSON<Subtitle>(`/subtitles/${id}`, { title, content, price, questions }, 'PUT');
     setSub(updated);
     alert('Saved');
   }
@@ -102,7 +104,10 @@ export default function SubtitleDetail() {
           )}
         </div>
         <input className="input" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <textarea className="input" rows={4} placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 240px', gap: 12 }}>
+          <textarea className="input" rows={4} placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
+          <input className="input" placeholder="Price (e.g., ₹499)" value={price} onChange={(e) => setPrice(e.target.value)} />
+        </div>
         <div>
           <input ref={uploadRef} type="file" multiple accept="image/*,application/pdf" hidden onChange={(e) => uploadFiles(e.target.files)} />
           <button className="btn" onClick={() => uploadRef.current?.click()}>Upload Files</button>
