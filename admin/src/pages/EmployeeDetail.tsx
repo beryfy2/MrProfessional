@@ -9,6 +9,7 @@ export default function EmployeeDetail() {
   const isNew = id === 'new';
   const [emp, setEmp] = useState<Employee | null>(() => (isNew ? ({ firstName: '', lastName: '', name: '', email: '', position: '', designation: '', department: '', phone: '', address: '', street: '', city: '', state: '', zip: '', country: '', gender: '', bloodGroup: '', maritalStatus: '', bio: '', dob: '', joinDate: '', manager: '', salary: '', employeeId: '', employmentType: '', workLocation: '' } as Employee) : null));
   const [preview, setPreview] = useState<string | undefined>();
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (isNew) return;
@@ -28,6 +29,18 @@ export default function EmployeeDetail() {
 
   async function handleSave() {
     if (!emp) return;
+    const required = [
+      ['Email', emp.email],
+      ['Position', emp.position],
+      ['Department', emp.department]
+    ];
+    const missing = required.filter(([, v]) => !String(v || '').trim()).map(([k]) => k);
+    const nameCandidate = `${(emp.firstName || '').trim()} ${(emp.lastName || '').trim()}`.trim() || (emp.name || '').trim();
+    if (!nameCandidate) missing.unshift('Name');
+    if (missing.length > 0) {
+      alert(`Please fill required fields: ${missing.join(', ')}`);
+      return;
+    }
     const form = new FormData();
     Object.entries(emp).forEach(([k, v]) => {
       if (v !== undefined && v !== null && k !== '_id') form.append(k, String(v));
@@ -37,15 +50,22 @@ export default function EmployeeDetail() {
     const input = document.getElementById('photoInput') as HTMLInputElement | null;
     const file = input?.files?.[0];
     if (file) form.append('photo', file);
-    if (id === 'new') {
-      await sendForm<Employee>(`/employees`, form, 'POST');
-      alert('Employee created');
-      navigate('/admin/employees');
-      return;
+    try {
+      setSaving(true);
+      if (id === 'new') {
+        await sendForm<Employee>(`/employees`, form, 'POST');
+        alert('Employee created');
+        navigate('/admin/employees');
+        return;
+      }
+      const updated = await sendForm<Employee>(`/employees/${id}`, form, 'PUT');
+      setEmp(updated);
+      alert('Employee saved');
+    } catch {
+      alert('Failed to save employee. Ensure you are logged in and required fields are filled.');
+    } finally {
+      setSaving(false);
     }
-    const updated = await sendForm<Employee>(`/employees/${id}`, form, 'PUT');
-    setEmp(updated);
-    alert('Employee saved');
   }
 
   if (!emp) return <div>Loading...</div>;
@@ -70,6 +90,7 @@ export default function EmployeeDetail() {
             <input className="input" placeholder="First Name" value={emp.firstName || ''} onChange={(e) => setEmp({ ...emp!, firstName: e.target.value })} />
             <input className="input" placeholder="Last Name" value={emp.lastName || ''} onChange={(e) => setEmp({ ...emp!, lastName: e.target.value })} />
           </div>
+          <div style={{ color: '#6B7280', fontSize: 12 }}>Enter first and last name</div>
           <div className="grid-2">
             <input className="input" type="date" value={(emp.dob ? new Date(emp.dob).toISOString().slice(0,10) : '')} onChange={(e) => setEmp({ ...emp!, dob: e.target.value })} />
             <select className="input" value={emp.gender || ''} onChange={(e) => setEmp({ ...emp!, gender: e.target.value })}>
@@ -98,6 +119,7 @@ export default function EmployeeDetail() {
           <input className="input" placeholder="Email Address" value={emp.email || ''} onChange={(e) => setEmp({ ...emp!, email: e.target.value })} />
           <input className="input" placeholder="Phone Number" value={emp.phone || ''} onChange={(e) => setEmp({ ...emp!, phone: e.target.value })} />
         </div>
+        <div style={{ color: '#6B7280', fontSize: 12 }}>Use a valid work email and phone</div>
         <div className="grid-2">
           <input className="input" placeholder="Street Address" value={emp.street || ''} onChange={(e) => setEmp({ ...emp!, street: e.target.value })} />
           <input className="input" placeholder="City" value={emp.city || ''} onChange={(e) => setEmp({ ...emp!, city: e.target.value })} />
@@ -112,23 +134,27 @@ export default function EmployeeDetail() {
       <div className="card" style={{ display: 'grid', gap: 12 }}>
         <div style={{ fontSize: 16, fontWeight: 600 }}>Employment Details</div>
         <div className="grid-2">
+          <input className="input" placeholder="Position" value={emp.position || ''} onChange={(e) => setEmp({ ...emp!, position: e.target.value })} />
+          <input className="input" placeholder="Department" value={emp.department || ''} onChange={(e) => setEmp({ ...emp!, department: e.target.value })} />
+        </div>
+        <div className="grid-2">
           <input className="input" placeholder="Employee ID" value={emp.employeeId || ''} onChange={(e) => setEmp({ ...emp!, employeeId: e.target.value })} />
           <input className="input" type="date" value={(emp.joinDate ? new Date(emp.joinDate).toISOString().slice(0,10) : '')} onChange={(e) => setEmp({ ...emp!, joinDate: e.target.value })} />
         </div>
         <div className="grid-2">
           <input className="input" placeholder="Designation" value={emp.designation || ''} onChange={(e) => setEmp({ ...emp!, designation: e.target.value })} />
-          <input className="input" placeholder="Department" value={emp.department || ''} onChange={(e) => setEmp({ ...emp!, department: e.target.value })} />
+          <input className="input" placeholder="Work Location" value={emp.workLocation || ''} onChange={(e) => setEmp({ ...emp!, workLocation: e.target.value })} />
         </div>
         <div className="grid-2">
           <select className="input" value={emp.employmentType || ''} onChange={(e) => setEmp({ ...emp!, employmentType: e.target.value })}>
             <option value="">Employment Type</option>
             <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Intern</option>
           </select>
-          <input className="input" placeholder="Work Location" value={emp.workLocation || ''} onChange={(e) => setEmp({ ...emp!, workLocation: e.target.value })} />
+          <input className="input" placeholder="Reporting Manager" value={emp.manager || ''} onChange={(e) => setEmp({ ...emp!, manager: e.target.value })} />
         </div>
         <div className="grid-2">
-          <input className="input" placeholder="Reporting Manager" value={emp.manager || ''} onChange={(e) => setEmp({ ...emp!, manager: e.target.value })} />
           <input className="input" placeholder="Salary" value={emp.salary || ''} onChange={(e) => setEmp({ ...emp!, salary: e.target.value })} />
+          <input className="input" placeholder="Address (optional)" value={emp.address || ''} onChange={(e) => setEmp({ ...emp!, address: e.target.value })} />
         </div>
         <div>
           <div style={{ color: '#6B7280', fontSize: 14, marginBottom: 4 }}>Bio</div>
@@ -137,7 +163,7 @@ export default function EmployeeDetail() {
       </div>
 
       <div style={{ display: 'flex', gap: 12 }}>
-        <button className="btn primary" onClick={handleSave}>Save Employee</button>
+        <button className="btn primary" onClick={handleSave} disabled={saving}>{saving ? 'Saving...' : 'Save Employee'}</button>
         <button className="btn" onClick={() => navigate('/admin/employees')}>Cancel</button>
       </div>
     </div>
