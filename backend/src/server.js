@@ -225,16 +225,23 @@ app.get('/api/enquiries', async (req, res) => {
   res.json(list);
 });
 
-app.post('/api/enquiries', async (req, res) => {
+app.post('/api/enquiries', upload.single('file'), async (req, res) => {
   try {
     const { companyName, contactPerson, email, subject, message } = req.body || {};
     if (!email || !subject || !message) return res.status(400).json({ error: 'Missing fields' });
+    
+    let filePath = null;
+    if (req.file) {
+      filePath = '/uploads/' + req.file.filename;
+    }
+
     const doc = await Enquiry.create({
       companyName: companyName || 'Careers',
       contactPerson: contactPerson || 'Candidate',
       email,
       subject,
-      message
+      message,
+      file: filePath
     });
     res.status(201).json(doc);
   } catch (e) {

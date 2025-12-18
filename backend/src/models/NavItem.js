@@ -11,3 +11,4 @@ const NavItemSchema = new mongoose.Schema(
 );
 
 export default mongoose.model('NavItem', NavItemSchema);
+

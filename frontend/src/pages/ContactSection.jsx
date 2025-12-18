@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -6,10 +6,52 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fas);
 
 const ContactSection = () => {
-    const handleSubmit = (e) => {
+    const [formData, setFormData] = useState({
+        name: "",
+        mobile: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
+    const [file, setFile] = useState(null);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: send data to backend or email service
-        alert("Form submitted (hook this to your backend later)!");
+        
+        const data = new FormData();
+        data.append("contactPerson", formData.name);
+        data.append("email", formData.email);
+        data.append("subject", formData.subject);
+        data.append("message", `${formData.message}\n\nMobile: ${formData.mobile}`);
+        data.append("companyName", "Website Visitor");
+        if (file) {
+            data.append("file", file);
+        }
+
+        try {
+            const res = await fetch("http://localhost:5000/api/enquiries", {
+                method: "POST",
+                body: data
+            });
+            if (res.ok) {
+                alert("Enquiry sent successfully!");
+                setFormData({ name: "", mobile: "", email: "", subject: "", message: "" });
+                setFile(null);
+            } else {
+                alert("Failed to send enquiry.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Error sending enquiry.");
+        }
     };
 
     return (
@@ -71,13 +113,19 @@ const ContactSection = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                     type="text"
+                                    name="name"
                                     placeholder="Name"
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     className="border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
                                     required
                                 />
                                 <input
                                     type="tel"
+                                    name="mobile"
                                     placeholder="Mobile No."
+                                    value={formData.mobile}
+                                    onChange={handleChange}
                                     className="border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
                                     required
                                 />
@@ -86,7 +134,21 @@ const ContactSection = () => {
                             {/* Email */}
                             <input
                                 type="email"
+                                name="email"
                                 placeholder="Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                                required
+                            />
+
+                            {/* Subject */}
+                            <input
+                                type="text"
+                                name="subject"
+                                placeholder="Subject"
+                                value={formData.subject}
+                                onChange={handleChange}
                                 className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
                                 required
                             />
@@ -94,9 +156,22 @@ const ContactSection = () => {
                             {/* Message */}
                             <textarea
                                 rows={4}
+                                name="message"
                                 placeholder="Message"
+                                value={formData.message}
+                                onChange={handleChange}
                                 className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
                             />
+                            
+                            {/* File Upload */}
+                             <div className="space-y-1">
+                                <label className="text-sm font-medium text-gray-700">Resume / Document (PDF, Docx)</label>
+                                <input 
+                                    type="file" 
+                                    onChange={handleFileChange}
+                                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100"
+                                />
+                            </div>
 
                             {/* Submit button */}
                             <button

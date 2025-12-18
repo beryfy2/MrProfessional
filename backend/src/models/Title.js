@@ -11,4 +11,3 @@ const TitleSchema = new mongoose.Schema(
 );
 
 export default mongoose.model('Title', TitleSchema);
-

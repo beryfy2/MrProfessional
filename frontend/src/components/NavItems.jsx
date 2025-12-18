@@ -371,6 +371,7 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
                                             type="button"
                                             className={`w-full text-left px-3 py-2 rounded-lg cursor-pointer transition ${hoverTitleId === t._id ? "bg-sky-50" : "hover:bg-sky-50"}`}
                                             onMouseEnter={() => onHoverTitle(t._id)}
+                                            onClick={() => onHoverTitle(t._id)}
                                         >
                                             {t.title}
                                         </button>

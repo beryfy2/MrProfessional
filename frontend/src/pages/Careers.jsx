@@ -422,16 +422,20 @@ const Careers = () => {
     try {
       const subject = `Job Application: ${formData.jobType}`;
       const message = `Name: ${formData.name}\nPhone: ${formData.phone}\nQualification: ${formData.qualification}\nExpected Salary: ${formData.expectedSalary}\nLinkedIn: ${formData.linkedin}\nMessage: ${formData.message}`;
+      
+      const data = new FormData();
+      data.append('companyName', 'Careers');
+      data.append('contactPerson', formData.name);
+      data.append('email', formData.email);
+      data.append('subject', subject);
+      data.append('message', message);
+      if (formData.resume) {
+        data.append('file', formData.resume);
+      }
+
       const res = await fetch(`${API_BASE}/enquiries`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          companyName: 'Careers',
-          contactPerson: formData.name,
-          email: formData.email,
-          subject,
-          message
-        })
+        body: data
       });
       if (!res.ok) throw new Error('Failed');
       setSubmitMessage('Thank you for your application! We will review your submission and get back to you soon.');

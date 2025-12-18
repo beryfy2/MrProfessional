@@ -11,7 +11,7 @@ const servicesData = {
       ]
     },
     sections: [
-      { id: "what-is", heading: "What is a Pvt. Ltd. Company?", content: "Pvt. Ltd. Company is a separate legal entity governed by the Companies Act, 2013. It provides limited liability and facilitates investment." },
+      { id: "what", heading: "What is a Pvt. Ltd. Company?", content: "Pvt. Ltd. Company is a separate legal entity governed by the Companies Act, 2013. It provides limited liability and facilitates investment." },
       { id: "process", heading: "Registration Process", content: "Step-by-step: DSC -> Name approval -> SPICe filing -> MoA/AoA -> Certificate of Incorporation." },
       { id: "fees", heading: "Fees", content: "Indicative fees: DSC ₹3,000, Govt fee ₹2,500, Professional fee ₹3,999 (total ₹9,499)." },
       { id: "documents", heading: "Documents Required", content: "Identity & address proof for directors, registered office proof, photographs, PAN/Aadhaar etc." }
@@ -37,8 +37,8 @@ const servicesData = {
     ],
     pricing: { packages: [{ name: "Standard", price: "₹3,999" }] },
     faqs: [{ q: "Is registration mandatory?", a: "Registration is optional but recommended for legal benefits." }]
-  }
-  ,
+  },
+
   "company-registration": {
     title: "Company Registration – Types, Process & Fees",
     hero: { price: "Varies by entity", bullets: ["Private Limited, Public Limited, OPC, LLP options", "DSC, DIN, SPICe filings", "Expert assistance available"] },
@@ -98,49 +98,16 @@ const servicesData = {
     title: "Society Registration in India – Process & Fees",
     hero: { price: "Varies by state", bullets: ["Registered under Societies Registration Act, 1860","Ideal for NGOs and associations"] },
     sections: [
-      { id: "what", heading: "What is a Society?", content: "A society is a group formed for non-profit objectives; registration grants separate legal identity." },
-      { id: "process", heading: "Registration Process", content: "Select name -> Draft MOA & Rules -> File with Registrar -> Receive certificate." }
+      { id: "what", heading: "What is a Society?", content: "A society is an association of persons united by mutual consent to deliberate, determine and act jointly for some common purpose." },
+      { id: "process", heading: "Process", content: "Draft Memorandum -> Rules & Regulations -> File with Registrar of Societies." }
     ],
-    pricing: { packages: [{ name: "Standard", price: "₹9,999" }] },
-    faqs: [{ q: "Minimum members?", a: "Usually minimum 7 members required for society registration." }]
-  },
-
-  "nidhi-company-registration": {
-    title: "Nidhi Company Registration – Requirements & Fees",
-    hero: { price: "Varies", bullets: ["Member-based NBFC","MCA regulated","Minimum members required"] },
-    sections: [
-      { id: "what", heading: "What is a Nidhi Company?", content: "Member-based non-banking financial company for thrift and mutual benefit; regulated by MCA." },
-      { id: "requirements", heading: "Requirements", content: "Minimum members, adherence to Nidhi Rules, restrictions on outside borrowing." }
-    ],
-    pricing: { packages: [{ name: "Standard", price: "Contact for quote" }] },
-    faqs: [{ q: "RBI approval required?", a: "No, Nidhi companies are regulated by MCA and generally don't need RBI registration." }]
-  },
-
-  "section-8-microfinance-company-registration": {
-    title: "Section 8 Microfinance Company Registration – Process & Fees",
-    hero: { price: "₹49,999 (indicative)", bullets: ["Non-profit micro-lending model","MCA compliant","Special objectives and restrictions"] },
-    sections: [
-      { id: "what", heading: "What is Section 8 Microfinance Company?", content: "A Section 8 company focusing on microfinance activities; MCA approvals and specific objectives required." },
-      { id: "process", heading: "Process", content: "DSC -> Name approval -> SPICe filing -> Section 8 license -> Certificate of incorporation." }
-    ],
-    pricing: { packages: [{ name: "Microfinance", price: "₹49,999" }] },
-    faqs: [{ q: "Is RBI permission needed?", a: "Microfinance activities may have regulatory considerations; legal counsel recommended." }]
-  },
-
-  "ngo-registration": {
-    title: "NGO Registration in India – Forms, Process & Fees",
-    hero: { price: "Varies by structure", bullets: ["Society / Trust / Section 8 options","12A & 80G assistance","End-to-end filing"] },
-    sections: [
-      { id: "types", heading: "Types of NGO structures", content: "Trust, Society, Section 8 Company — choose based on objectives, governance and funding needs." },
-      { id: "process", heading: "Registration Steps", content: "Decide structure -> Draft documents -> File -> Obtain registration; post-registration apply for 12A/80G if needed." }
-    ],
-    pricing: { packages: [{ name: "NGO Basic", price: "₹9,999" }] },
-    faqs: [{ q: "Can NGOs accept foreign funds?", a: "Yes — after complying with FCRA and related regulations." }]
+    pricing: { packages: [{ name: "Standard", price: "Varies" }] },
+    faqs: [{ q: "Minimum members?", a: "Minimum 7 members are required for registration." }]
   },
 
   "public-limited-company-registration": {
-    title: "Public Limited Company Registration – Process & Compliance",
-    hero: { price: "Varies", bullets: ["Ability to raise public funds","Higher compliance","Minimum members & directors"] },
+    title: "Public Limited Company Registration – Process & Fees",
+    hero: { price: "Varies", bullets: ["For large scale businesses", "Can list on stock exchange", "Strict compliance"] },
     sections: [
       { id: "what", heading: "What is a Public Limited Company?", content: "A company that can raise capital from the public, requires higher compliance and disclosure." },
       { id: "requirements", heading: "Minimum requirements", content: "Minimum 7 shareholders, 3 directors, registered office, compliance with SEBI when listing." }

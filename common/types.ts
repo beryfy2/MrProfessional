@@ -79,6 +79,7 @@ export type Enquiry = {
   email: string;
   subject: string;
   message: string;
+  file?: string;
   date?: string;
 };
 

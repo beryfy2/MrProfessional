@@ -30,9 +30,52 @@ export default function Enquiries() {
               <div style={{ fontSize: 13, color: '#6B7280' }}>{e.date ? new Date(e.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''}</div>
             </div>
             {openId === e._id && (
-              <div style={{ color: '#374151', fontSize: 14 }}>{e.message}</div>
+              <div style={{ marginTop: 8, padding: 12, backgroundColor: '#f9fafb', borderRadius: 6, fontSize: 14, color: '#374151' }}>
+                <div style={{ display: 'grid', gap: 8 }}>
+                  <div>
+                    <span style={{ fontWeight: 600 }}>Subject:</span> {e.subject}
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 600 }}>Company:</span> {e.companyName}
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 600 }}>Contact Person:</span> {e.contactPerson}
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 600 }}>Email:</span> {e.email}
+                  </div>
+                  {e.file && (
+                     <div>
+                       <span style={{ fontWeight: 600 }}>Attachment:</span>{' '}
+                       <a 
+                         href={`http://localhost:5000${e.file}`} 
+                         target="_blank" 
+                         rel="noopener noreferrer"
+                         style={{ color: '#2563EB', textDecoration: 'underline' }}
+                       >
+                         {e.file.split('/').pop() || 'View Resume / Document'}
+                       </a>
+                     </div>
+                   )}
+                  <div>
+                    <span style={{ fontWeight: 600 }}>Message:</span>
+                    <div style={{ marginTop: 4, whiteSpace: 'pre-wrap' }}>{e.message}</div>
+                  </div>
+                </div>
+              </div>
             )}
             <div style={{ display: 'flex', gap: 8 }}>
+              {e.file && (
+                <a 
+                  className="btn" 
+                  href={`http://localhost:5000${e.file}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none' }}
+                >
+                  View Attachment
+                </a>
+              )}
               <a className="btn primary" href={`mailto:${e.email}?subject=Re: ${encodeURIComponent(e.subject)}`}>Respond</a>
               <button className="btn" onClick={() => setOpenId(openId === e._id ? null : e._id!)}>
                 {openId === e._id ? 'Hide Details' : 'View Details'}

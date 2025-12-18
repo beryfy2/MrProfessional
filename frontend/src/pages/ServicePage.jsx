@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import servicesData from '../data/servicesData'
 
@@ -10,7 +10,7 @@ const API_BASE = 'http://localhost:5000/api';
 
 const ServicePage = () => {
   const { slug } = useParams();
-  const variants = slugVariants(slug || '');
+  const variants = useMemo(() => slugVariants(slug || ''), [slug]);
   const [sub, setSub] = useState(null);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
@@ -27,15 +27,38 @@ const ServicePage = () => {
         if (json && json._id) {
           setSub(json);
         } else {
+          // Fallback to local data
           let local = null;
-          for (const v of variants) {
-            if (servicesData[v]) {
-              local = servicesData[v];
-              break;
+          // Try exact match first
+          if (servicesData[slug]) {
+            local = servicesData[slug];
+          } else {
+            // Try variants
+            for (const v of variants) {
+              if (servicesData[v]) {
+                local = servicesData[v];
+                break;
+              }
             }
           }
           setData(local);
         }
+      })
+      .catch((e) => {
+        console.error("Failed to load service page", e);
+        // On error also try fallback
+        let local = null;
+        if (servicesData[slug]) {
+           local = servicesData[slug];
+        } else {
+           for (const v of variants) {
+             if (servicesData[v]) {
+               local = servicesData[v];
+               break;
+             }
+           }
+        }
+        setData(local);
       })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };

@@ -2,8 +2,6 @@ import mongoose from 'mongoose';
 
 const EmployeeSchema = new mongoose.Schema(
   {
-    firstName: { type: String },
-    lastName: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true },
     position: { type: String, required: true },
@@ -12,22 +10,11 @@ const EmployeeSchema = new mongoose.Schema(
     phone: { type: String },
     photoUrl: { type: String },
     address: { type: String },
-    street: { type: String },
-    city: { type: String },
-    state: { type: String },
-    zip: { type: String },
-    country: { type: String },
-    gender: { type: String },
-    bloodGroup: { type: String },
-    maritalStatus: { type: String },
     bio: { type: String },
     dob: { type: Date },
     joinDate: { type: Date },
     manager: { type: String },
-    salary: { type: String },
-    employeeId: { type: String },
-    employmentType: { type: String },
-    workLocation: { type: String }
+    salary: { type: String }
   },
   { timestamps: true }
 );

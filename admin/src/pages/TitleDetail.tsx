@@ -10,6 +10,9 @@ export default function TitleDetail() {
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [subs, setSubs] = useState<Subtitle[]>([]);
+  const [showAdd, setShowAdd] = useState(false);
+  const [newSubtitleTitle, setNewSubtitleTitle] = useState('');
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     getJSON<Title>(`/titles/${id}`).then((ti) => {
@@ -27,11 +30,25 @@ export default function TitleDetail() {
     alert('Title saved');
   }
 
-  async function addSubtitle() {
-    const s = prompt('Subtitle');
+  function addSubtitle() {
+    setShowAdd(true);
+    setNewSubtitleTitle('');
+  }
+
+  async function saveNewSubtitle() {
+    const s = newSubtitleTitle.trim();
     if (!s) return;
-    const created = await sendJSON<Subtitle>(`/titles/${id}/subtitles`, { title: s }, 'POST');
-    setSubs((prev) => [created, ...prev]);
+    try {
+      setSaving(true);
+      const created = await sendJSON<Subtitle>(`/titles/${id}/subtitles`, { title: s }, 'POST');
+      setSubs((prev) => [created, ...prev]);
+      setShowAdd(false);
+      navigate(`/admin/subtitles/${created._id}`);
+    } catch (e) {
+      alert('Failed to add subtitle');
+    } finally {
+      setSaving(false);
+    }
   }
 
   async function removeSubtitle(sid: string) {
@@ -69,7 +86,15 @@ export default function TitleDetail() {
       <div className="card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitles</div>
-          <button className="btn primary" onClick={addSubtitle}>Add Subtitle</button>
+          {!showAdd ? (
+            <button className="btn primary" onClick={addSubtitle}>Add Subtitle</button>
+          ) : (
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <input className="input" placeholder="Subtitle title" value={newSubtitleTitle} onChange={(e) => setNewSubtitleTitle(e.target.value)} style={{ width: 260 }} />
+              <button className="btn success" onClick={saveNewSubtitle} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
+              <button className="btn" onClick={() => setShowAdd(false)}>Cancel</button>
+            </div>
+          )}
         </div>
         {subs.length === 0 ? (
           <div style={{ color: '#6B7280', marginTop: 12 }}>No subtitles yet</div>
@@ -77,7 +102,7 @@ export default function TitleDetail() {
           <div style={{ marginTop: 12, display: 'grid', gap: 12 }}>
             {subs.map((s) => (
               <div key={s._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
+                <div style={{ cursor: 'pointer', flex: 1 }} onClick={() => navigate(`/admin/subtitles/${s._id}`)}>
                   <div style={{ fontWeight: 600 }}>{s.title}</div>
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(s.content || '').slice(0, 80)}</div>
                 </div>

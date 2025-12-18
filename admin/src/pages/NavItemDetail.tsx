@@ -13,9 +13,6 @@ export default function NavItemDetail() {
   const [newTitle, setNewTitle] = useState('');
   const [newOrder, setNewOrder] = useState<number | ''>('');
   const [saving, setSaving] = useState(false);
-  const [editingTitle, setEditingTitle] = useState<Title | null>(null);
-  const [editName, setEditName] = useState('');
-  const [editContent, setEditContent] = useState('');
 
   useEffect(() => {
     getJSON<NavItem>(`/nav-items/${id}`).then((i) => {
@@ -64,22 +61,6 @@ export default function NavItemDetail() {
     setTitles((prev) => prev.filter((t) => t._id !== tid));
   }
 
-  function startEditTitle(t: Title) {
-    setEditingTitle(t);
-    setEditName(t.title || '');
-    setEditContent(t.content || '');
-  }
-
-  async function saveEditTitle() {
-    if (!editingTitle || !editingTitle._id) return;
-    const updated = await sendJSON<Title>(`/titles/${editingTitle._id}`, { title: editName, content: editContent }, 'PUT');
-    setTitles((prev) => prev.map((x) => (x._id === updated._id ? updated : x)));
-    setEditingTitle(null);
-    setEditName('');
-    setEditContent('');
-    alert('Title saved');
-  }
-
   return (
     <div style={{ display: 'grid', gap: 16 }}>
       <button className="btn" onClick={() => navigate('/admin/nav-items')}>← Back to Nav Items</button>
@@ -106,29 +87,6 @@ export default function NavItemDetail() {
         </div>
       </div>
 
-      {editingTitle && (
-        <div className="card" style={{ display: 'grid', gap: 12 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 600 }}>Edit Title</div>
-            <button
-              className="btn"
-              onClick={() => {
-                setEditingTitle(null);
-                setEditName('');
-                setEditContent('');
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-          <input className="input" placeholder="Title" value={editName} onChange={(e) => setEditName(e.target.value)} />
-          <textarea className="input" rows={4} placeholder="Content" value={editContent} onChange={(e) => setEditContent(e.target.value)} />
-          <div>
-            <button className="btn primary" onClick={saveEditTitle}>Save Changes</button>
-          </div>
-        </div>
-      )}
-
       <div className="card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Titles</div>
@@ -149,12 +107,12 @@ export default function NavItemDetail() {
           <div style={{ marginTop: 12, display: 'grid', gap: 12 }}>
             {titles.map((t) => (
               <div key={t._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
+                <div style={{ cursor: 'pointer', flex: 1 }} onClick={() => navigate(`/admin/titles/${t._id}`)}>
                   <div style={{ fontWeight: 600 }}>{t.title}</div>
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(t.content || '').slice(0, 80)}</div>
                 </div>
                 <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn" onClick={() => startEditTitle(t)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
+                  <button className="btn" onClick={() => navigate(`/admin/titles/${t._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
                   <button className="btn" onClick={() => removeTitle(t._id!)} style={{ color: '#DC2626' }}>Delete</button>
                 </div>
               </div>
