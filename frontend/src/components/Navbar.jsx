@@ -3,22 +3,35 @@ import NavProfile from "./NavProfile";
 import NavItems from "./NavItems";
 import useScrollState from "../hooks/useScrollState";
 
+const NAVBAR_HEIGHT = 72; // single source of truth
+
 const NavBar = () => {
-    const { hideUpper, lowerSticky } = useScrollState({ lowerStickyThreshold: 260 });
+    const { hideUpper, lowerSticky } = useScrollState({
+        lowerStickyThreshold: 260,
+    });
 
     return (
         <>
-            <div className="fixed top-0 left-0 right-0 z-60 w-full">
-                <NavProfile hidden={hideUpper} transparent={!lowerSticky} />
+            {/* Upper profile bar */}
+            <NavProfile hidden={hideUpper} />
+
+            {/* Lower navigation */}
+            <div
+                className={`w-full transition-all duration-300 ease-in-out
+                    ${lowerSticky
+                        ? "fixed top-0 left-0 right-0 z-60"
+                        : "absolute top-14 left-0 right-0 z-40"
+                    }`}
+            >
                 <NavItems
                     sticky={lowerSticky}
                     adoptUpperColor={lowerSticky}
-                    transparent={!lowerSticky}  
+                    transparent={!lowerSticky}
                 />
             </div>
 
-            {/* Always include spacer to ensure navbar takes up space */}
-            <div style={{ height: "var(--navbar-height)" }} />
+            {/* Spacer only when navbar is fixed */}
+            {lowerSticky && <div style={{ height: NAVBAR_HEIGHT }} />}
         </>
     );
 };
