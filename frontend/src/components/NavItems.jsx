@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -53,15 +54,13 @@ export default function NavItems({ transparent = false }) {
         }
     };
 
-    const scheduleClose = (delay = 200) => {
-        if (closeTimer.current) clearTimeout(closeTimer.current);
+    const scheduleClose = () => {
+        clearTimeout(closeTimer.current);
         closeTimer.current = setTimeout(() => {
-            if (!headHovering && !menuHovering) {
-                setOpenMenu(null);
-                setHoverTitleId(null);
-            }
-        }, delay);
+            setOpenMenu(null);
+        }, 180);
     };
+
 
     const handleItemEnter = (navId) => {
         setHeadHovering(true);
@@ -96,7 +95,7 @@ export default function NavItems({ transparent = false }) {
     const slugify = (text) => {
         return text
             .toLowerCase()
-            .replace(/\.(php|html)$/,'')
+            .replace(/\.(php|html)$/, '')
             .replace(/[^a-z0-9\s-]/g, '')
             .trim()
             .replace(/\s+/g, '-')
@@ -121,7 +120,7 @@ export default function NavItems({ transparent = false }) {
             className={`${finalBg} transition-all duration-300 ${transparent ? "backdrop--md" : "shadow-lg"
                 }`}
         >
-            <div className="max-w-[1400px] h-15 mx-auto px-6 py-4 flex items-center justify-between relative">
+            <div className="max-w-[1500px] h-15 mx-auto px-6 py-4 flex items-center justify-between relative">
                 {/* Logo */}
                 <div className="flex items-center gap-3">
                     <span className="text-white font-semibold hidden sm:inline">
@@ -130,7 +129,7 @@ export default function NavItems({ transparent = false }) {
                 </div>
 
                 {/* Nav links */}
-                <ul className="hidden lg:flex items-center gap-6 text-white text-[15px] font-medium" onMouseLeave={() => { setHeadHovering(false); setMenuHovering(false); scheduleClose(100); }}>
+                <ul className="hidden lg:flex items-center gap-6 text-white text-[14px] font-medium" onMouseLeave={() => { setHeadHovering(false); setMenuHovering(false); scheduleClose(100); }}>
                     {navItems.map((nav) => {
                         const isOpen = openMenu === nav._id;
                         const titles = titlesByNav[nav._id] || [];
@@ -226,7 +225,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
                                     <button
                                         type="button"
                                         className="w-full text-left px-4 py-2 hover:bg-sky-50 cursor-pointer"
-                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }}
+                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); window.location.href = `/services/${slug}` }}
                                     >
                                         {item}
                                     </button>
@@ -260,7 +259,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
                                     <button
                                         type="button"
                                         className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
-                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }}
+                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); window.location.href = `/services/${slug}` }}
                                     >
                                         {["Limited Liability Partnership", "Producer Company"].includes(
                                             item
@@ -301,7 +300,7 @@ function BusinessSetupMenu({ onMouseEnter, onMouseLeave }) {
                                     <button
                                         type="button"
                                         className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
-                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }}
+                                        onClick={() => { const slug = item.toLowerCase().replace(/\.(php|html)$/, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); window.location.href = `/services/${slug}` }}
                                     >
                                         <span>{item}</span>
                                         {idx < 2 && (
@@ -393,7 +392,7 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
                                             className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
                                             onClick={() => {
                                                 if (typeof onSelectService === 'function') onSelectService(s.title);
-                                                else { const slug = s.title.toLowerCase().replace(/\.(php|html)$/,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); window.location.href = `/services/${slug}` }
+                                                else { const slug = s.title.toLowerCase().replace(/\.(php|html)$/, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); window.location.href = `/services/${slug}` }
                                             }}
                                         >
                                             <span>{s.title}</span>
