@@ -49,20 +49,20 @@ const ServicePage = () => {
         // On error also try fallback
         let local = null;
         if (servicesData[slug]) {
-           local = servicesData[slug];
+          local = servicesData[slug];
         } else {
-           for (const v of variants) {
-             if (servicesData[v]) {
-               local = servicesData[v];
-               break;
-             }
-           }
+          for (const v of variants) {
+            if (servicesData[v]) {
+              local = servicesData[v];
+              break;
+            }
+          }
         }
         setData(local);
       })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [slug]);
+  }, [slug, variants]);
 
   if (loading) {
     return (
@@ -190,7 +190,7 @@ const ServicePage = () => {
           {data.updated && <div className="text-sm text-gray-500 mt-1">{data.updated}</div>}
           {data.hero && (
             <ul className="mt-3 list-disc ml-5 text-sm">
-              {data.hero.bullets && data.hero.bullets.map((b,i) => <li key={i}>{b}</li>)}
+              {data.hero.bullets && data.hero.bullets.map((b, i) => <li key={i}>{b}</li>)}
             </ul>
           )}
         </div>
@@ -229,7 +229,7 @@ const ServicePage = () => {
                 <div key={idx} className="border rounded p-4">
                   <div className="font-semibold">{p.name}</div>
                   <div className="text-xl mt-1">{p.price}</div>
-                  {p.includes && <ul className="mt-2 list-disc ml-5 text-sm">{p.includes.map((inc,i)=> <li key={i}>{inc}</li>)}</ul>}
+                  {p.includes && <ul className="mt-2 list-disc ml-5 text-sm">{p.includes.map((inc, i) => <li key={i}>{inc}</li>)}</ul>}
                 </div>
               ))}
             </div>
@@ -241,7 +241,7 @@ const ServicePage = () => {
           <section id="faq">
             <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
             <div className="mt-3 space-y-2">
-              {data.faqs.map((f,i) => (
+              {data.faqs.map((f, i) => (
                 <details key={i} className="border rounded p-3">
                   <summary className="cursor-pointer font-medium">{f.q}</summary>
                   <div className="mt-2 text-sm">{f.a}</div>
