@@ -23,7 +23,7 @@ fs.mkdirSync(uploadsDir, { recursive: true });
 app.use('/uploads', express.static(uploadsDir));
 
 // Mongo setup
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mrpro';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://aditya_singh:Aditya$%40343@addi.0jj4bvg.mongodb.net/mrpro';
 mongoose
   .connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
   .then(() => console.log('MongoDB connected'))

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import servicesData from '../data/servicesData'
+import NavBar from '../components/Navbar'
 
 function slugVariants(slug) {
   return [slug, `${slug}-registration`, `${slug.replace(/-company$/, '')}-registration`];
@@ -182,76 +183,81 @@ const ServicePage = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      {/* Hero */}
-      <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">{data.title}</h1>
-          {data.updated && <div className="text-sm text-gray-500 mt-1">{data.updated}</div>}
-          {data.hero && (
-            <ul className="mt-3 list-disc ml-5 text-sm">
-              {data.hero.bullets && data.hero.bullets.map((b, i) => <li key={i}>{b}</li>)}
-            </ul>
-          )}
-        </div>
-        <div className="bg-gray-100 rounded p-4">
-          <div className="text-sm text-gray-600">Starting from</div>
-          <div className="text-2xl font-semibold">{data.hero?.price}</div>
-          <button className="mt-3 bg-blue-600 text-white px-4 py-2 rounded">Get Free Consultation</button>
-        </div>
-      </header>
+    <>
+      
+      <div className="max-w-5xl mx-auto p-6">
+        
+        {/* Hero */}
+        <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <NavBar />
+          <div>
+            <h1 className="text-3xl font-bold">{data.title}</h1>
+            {data.updated && <div className="text-sm text-gray-500 mt-1">{data.updated}</div>}
+            {data.hero && (
+              <ul className="mt-3 list-disc ml-5 text-sm">
+                {data.hero.bullets && data.hero.bullets.map((b, i) => <li key={i}>{b}</li>)}
+              </ul>
+            )}
+          </div>
+          <div className="bg-gray-100 rounded p-4">
+            <div className="text-sm text-gray-600">Starting from</div>
+            <div className="text-2xl font-semibold">{data.hero?.price}</div>
+            <button className="mt-3 bg-blue-600 text-white px-4 py-2 rounded">Get Free Consultation</button>
+          </div>
+        </header>
 
-      {/* TOC */}
-      <nav className="mt-8 p-4 bg-sky-50 rounded">
-        <h3 className="font-semibold">Table of Contents</h3>
-        <ul className="mt-2 space-y-1">
+        {/* TOC */}
+        <nav className="mt-8 p-4 bg-sky-50 rounded">
+          <h3 className="font-semibold">Table of Contents</h3>
+          <ul className="mt-2 space-y-1">
+            {data.sections && data.sections.map(s => (
+              <li key={s.id}><a className="text-sky-700 hover:underline" href={`#${s.id}`}>{s.heading}</a></li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Content Sections */}
+        <main className="mt-6 space-y-10">
           {data.sections && data.sections.map(s => (
-            <li key={s.id}><a className="text-sky-700 hover:underline" href={`#${s.id}`}>{s.heading}</a></li>
+            <section id={s.id} key={s.id} className="prose max-w-none">
+              <h2 className="text-2xl font-semibold">{s.heading}</h2>
+              <p className="mt-2">{s.content}</p>
+            </section>
           ))}
-        </ul>
-      </nav>
 
-      {/* Content Sections */}
-      <main className="mt-6 space-y-10">
-        {data.sections && data.sections.map(s => (
-          <section id={s.id} key={s.id} className="prose max-w-none">
-            <h2 className="text-2xl font-semibold">{s.heading}</h2>
-            <p className="mt-2">{s.content}</p>
-          </section>
-        ))}
+          {/* Pricing */}
+          {data.pricing && (
+            <section id="pricing" className="">
+              <h2 className="text-2xl font-semibold">Pricing</h2>
+              <div className="mt-3 grid gap-4 grid-cols-1 md:grid-cols-2">
+                {data.pricing.packages?.map((p, idx) => (
+                  <div key={idx} className="border rounded p-4">
+                    <div className="font-semibold">{p.name}</div>
+                    <div className="text-xl mt-1">{p.price}</div>
+                    {p.includes && <ul className="mt-2 list-disc ml-5 text-sm">{p.includes.map((inc, i) => <li key={i}>{inc}</li>)}</ul>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Pricing */}
-        {data.pricing && (
-          <section id="pricing" className="">
-            <h2 className="text-2xl font-semibold">Pricing</h2>
-            <div className="mt-3 grid gap-4 grid-cols-1 md:grid-cols-2">
-              {data.pricing.packages?.map((p, idx) => (
-                <div key={idx} className="border rounded p-4">
-                  <div className="font-semibold">{p.name}</div>
-                  <div className="text-xl mt-1">{p.price}</div>
-                  {p.includes && <ul className="mt-2 list-disc ml-5 text-sm">{p.includes.map((inc, i) => <li key={i}>{inc}</li>)}</ul>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* FAQ */}
-        {data.faqs && (
-          <section id="faq">
-            <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
-            <div className="mt-3 space-y-2">
-              {data.faqs.map((f, i) => (
-                <details key={i} className="border rounded p-3">
-                  <summary className="cursor-pointer font-medium">{f.q}</summary>
-                  <div className="mt-2 text-sm">{f.a}</div>
-                </details>
-              ))}
-            </div>
-          </section>
-        )}
-      </main>
-    </div>
+          {/* FAQ */}
+          {data.faqs && (
+            <section id="faq">
+              <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>
+              <div className="mt-3 space-y-2">
+                {data.faqs.map((f, i) => (
+                  <details key={i} className="border rounded p-3">
+                    <summary className="cursor-pointer font-medium">{f.q}</summary>
+                    <div className="mt-2 text-sm">{f.a}</div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+        </main>
+      </div>
+    </>
   )
 }
 
