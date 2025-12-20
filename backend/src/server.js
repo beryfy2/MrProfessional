@@ -77,7 +77,9 @@ function signToken(payload) {
 }
 
 async function getAdminPasswordOk(email, plain) {
-  const cfg = await AdminConfig.findOne({ email });
+  const allowed = process.env.ADMIN_EMAIL || 'beryfy2@gmail.com';
+  if (email !== allowed) return false;
+  const cfg = await AdminConfig.findOne({ email: allowed });
   if (cfg) return bcrypt.compare(plain || '', cfg.passwordHash);
   const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
   if (adminPasswordHash) return bcrypt.compare(plain || '', adminPasswordHash);
@@ -102,15 +104,17 @@ function createTransporter() {
   const port = Number(process.env.SMTP_PORT || 0);
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  if (host && port && user && pass) {
-    return nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
+  if (!host || !port || !user || !pass) {
+    throw new Error('SMTP configuration missing: set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS');
   }
-  return nodemailer.createTransport({ jsonTransport: true });
+  return nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
 }
 
 async function sendOtpEmail(to, otp) {
-  const from = process.env.FROM_EMAIL || 'no-reply@mrpro.local';
+  const from = process.env.FROM_EMAIL;
+  if (!from) throw new Error('SMTP configuration missing: set FROM_EMAIL');
   const transporter = createTransporter();
+  await transporter.verify();
   await transporter.sendMail({
     from,
     to,
@@ -136,8 +140,7 @@ function auth(req, res, next) {
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body || {};
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
-  if (email !== adminEmail) return res.status(401).json({ error: 'Invalid credentials' });
-  const ok = await getAdminPasswordOk(adminEmail, password || '');
+  const ok = await getAdminPasswordOk(email, password || '');
 
   if (!ok) return res.status(401).json({ error: 'Invalid credentials' });
   const token = signToken({ role: 'admin', email });
@@ -146,24 +149,28 @@ app.post('/api/auth/login', async (req, res) => {
 
 app.post('/api/auth/forgot', async (req, res) => {
   const { email } = req.body || {};
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
-  if (email !== adminEmail) return res.status(400).json({ error: 'Email not found' });
-  const otp = String(Math.floor(100000 + Math.random() * 900000));
-  const otpHash = await bcrypt.hash(otp, 10);
-  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
-  await ResetToken.create({ email, otpHash, expiresAt });
+  if (!email) return res.status(400).json({ error: 'Email required' });
   try {
+    const allowed = process.env.ADMIN_EMAIL || 'beryfy2@gmail.com';
+    if (email !== allowed) return res.status(400).json({ error: 'Email not found' });
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
     await sendOtpEmail(email, otp);
+    const otpHash = await bcrypt.hash(otp, 10);
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    await ResetToken.create({ email, otpHash, expiresAt });
+    return res.json({ ok: true });
   } catch (e) {
-    console.log('OTP email send skipped');
+    const msg = e?.message || 'Failed to send OTP email';
+    return res.status(500).json({ error: msg });
   }
-  res.json({ ok: true });
 });
+ 
 
 app.post('/api/auth/reset', async (req, res) => {
   const { email, otp, newPassword } = req.body || {};
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
-  if (email !== adminEmail) return res.status(400).json({ error: 'Invalid email' });
+  const adminEmail = process.env.ADMIN_EMAIL || 'beryfy2@gmail.com';
+  if (!email) return res.status(400).json({ error: 'Email required' });
+  if (email !== adminEmail) return res.status(400).json({ error: 'Email not found' });
   const token = await ResetToken.findOne({ email }).sort({ createdAt: -1 });
   if (!token) return res.status(400).json({ error: 'OTP not found' });
   if (token.expiresAt.getTime() < Date.now()) return res.status(400).json({ error: 'OTP expired' });
@@ -173,7 +180,7 @@ app.post('/api/auth/reset', async (req, res) => {
     await token.save();
     return res.status(400).json({ error: 'Invalid OTP' });
   }
-  await setAdminPassword(adminEmail, newPassword || '');
+  await setAdminPassword(email, newPassword || '');
   res.json({ ok: true });
 });
 // Employees

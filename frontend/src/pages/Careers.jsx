@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import WhyCompanySection from "./WhyUs";
 import TestimonialsSection from "./TestimonialsSection";
 import TrustedBy from "../components/TrustBy";
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
