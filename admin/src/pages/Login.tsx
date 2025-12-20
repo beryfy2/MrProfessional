@@ -36,11 +36,12 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       });
-      if (!res.ok) throw new Error('Failed to send OTP');
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error((data && (data.error || data.message)) || 'Failed to send OTP');
       setMode('reset');
-      alert('OTP sent to registered email');
-    } catch {
-      setError('Failed to send OTP');
+    } catch (e) {
+      const msg = typeof e === 'object' && e && 'message' in e ? String((e as Record<string, unknown>).message) : 'Failed to send OTP';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -56,14 +57,16 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp, newPassword })
       });
-      if (!res.ok) throw new Error('Failed to reset password');
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error((data && (data.error || data.message)) || 'Failed to reset password');
       alert('Password updated. Please login.');
       setMode('login');
       setPassword('');
       setOtp('');
       setNewPassword('');
-    } catch {
-      setError('Invalid OTP or request failed');
+    } catch (e) {
+      const msg = typeof e === 'object' && e && 'message' in e ? String((e as Record<string, unknown>).message) : 'Invalid OTP or request failed';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -115,7 +118,7 @@ export default function Login() {
             <form onSubmit={submit}>
               <label>Email Address</label>
               <div className="input-box">
-                <input type="email" placeholder="admin@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <input type="email" placeholder="beryfy2@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
 
               <div className="password-row">
@@ -139,7 +142,7 @@ export default function Login() {
             <form onSubmit={sendOtp}>
               <label>Registered Email</label>
               <div className="input-box">
-                <input type="email" placeholder="admin@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <input type="email" placeholder="beryfy2@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
               <div style={{ display: 'flex', gap: 8 }}>
@@ -172,7 +175,7 @@ export default function Login() {
           )}
 
           <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '16px', textAlign: 'center' }}>
-            Demo: admin@example.com / admin123
+           
           </p>
 
         </div>

@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import '../style/teamMem.css';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
 export default function TeamMem() {
   const [employees, setEmployees] = useState([]);
