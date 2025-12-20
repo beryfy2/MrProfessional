@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchBlogs, deleteBlog } from "../lib/blogApi";
 
 interface Blog {
-  id: number;
+  _id: string;
   title: string;
-  category: string;
+  category?: {
+    name: string;
+  };
+  status: "draft" | "published";
 }
 
 export default function Blogs() {
   const navigate = useNavigate();
-
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
-  const deleteBlog = (id: number) => {
-    setBlogs(blogs.filter((b) => b.id !== id));
+  const loadBlogs = async () => {
+    const data = await fetchBlogs();
+    setBlogs(data);
   };
+
+  const removeBlog = async (id: string) => {
+    if (!confirm("Delete this blog?")) return;
+    await deleteBlog(id);
+    loadBlogs();
+  };
+
+  useEffect(() => {
+    loadBlogs();
+  }, []);
 
   return (
     <div className="page">
@@ -33,19 +47,27 @@ export default function Blogs() {
             <tr>
               <th>Title</th>
               <th>Category</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {blogs.map((blog) => (
-              <tr key={blog.id}>
+              <tr key={blog._id}>
                 <td>{blog.title}</td>
-                <td>{blog.category}</td>
+                <td>{blog.category?.name || "-"}</td>
+                <td>{blog.status}</td>
                 <td>
-                  <button onClick={() => navigate(`/admin/blogs/${blog.id}`)}>
+                  <button
+                    onClick={() =>
+                      navigate(`/admin/blogs/${blog._id}`)
+                    }
+                  >
                     ✏️ Edit
                   </button>
-                  <button onClick={() => deleteBlog(blog.id)}>
+
+                  <button onClick={() => removeBlog(blog._id)}>
                     🗑 Delete
                   </button>
                 </td>

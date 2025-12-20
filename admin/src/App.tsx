@@ -39,6 +39,8 @@ function App() {
 <Route path="/admin/blogs" element={<Blogs />} />
 <Route path="/admin/blogs/new" element={<BlogForm />} />
 <Route path="/admin/blogs/:id" element={<BlogForm />} />
+<Route path="/admin/blog-categories" element={<BlogCategories />} />
+
 
         </Route>
 

@@ -1,18 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  fetchCategories,
+  createCategory,
+  deleteCategory,
+} from "../lib/blogApi";
+
+interface Category {
+  _id: string;
+  name: string;
+}
 
 export default function BlogCategories() {
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState("");
 
-  const addCategory = () => {
-    if (!newCategory.trim()) return;
-    setCategories([...categories, newCategory]);
-    setNewCategory("");
+  const loadCategories = async () => {
+    const data = await fetchCategories();
+    setCategories(data);
   };
 
-  const deleteCategory = (index: number) => {
-    setCategories(categories.filter((_, i) => i !== index));
+  const addCategory = async () => {
+    if (!newCategory.trim()) return;
+    await createCategory(newCategory);
+    setNewCategory("");
+    loadCategories();
   };
+
+  const removeCategory = async (id: string) => {
+    if (!confirm("Delete this category?")) return;
+    await deleteCategory(id);
+    loadCategories();
+  };
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   return (
     <div className="page">
@@ -29,10 +51,10 @@ export default function BlogCategories() {
 
       <ul className="list">
         {categories.length === 0 && <p>No categories yet</p>}
-        {categories.map((cat, i) => (
-          <li key={i}>
-            {cat}
-            <button onClick={() => deleteCategory(i)}>❌</button>
+        {categories.map((cat) => (
+          <li key={cat._id}>
+            {cat.name}
+            <button onClick={() => removeCategory(cat._id)}>❌</button>
           </li>
         ))}
       </ul>

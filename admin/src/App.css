@@ -9,3 +9,29 @@
   flex-direction: column;
   background: var(--bg-main);
 }
+
+.sidebar-group {
+  margin-top: 10px;
+}
+
+.sidebar-title {
+  display: block;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9fb3c8;
+  text-transform: uppercase;
+}
+
+.sidebar-sub {
+  display: block;
+  padding: 8px 30px;
+  font-size: 14px;
+  color: #dbe7f3;
+}
+
+.sidebar-sub.active {
+  background: #22c55e;
+  color: #fff;
+  border-radius: 6px;
+}
