@@ -32,6 +32,11 @@ function App() {
           <Route path="titles/:id" element={<TitleDetail />} />
           <Route path="subtitles/:id" element={<SubtitleDetail />} />
           <Route path="admin-settings" element={<AdminSettings />} />
+          <Route path="/admin/blog-categories" element={<BlogCategories />} />
+<Route path="/admin/blogs" element={<Blogs />} />
+<Route path="/admin/blogs/new" element={<BlogForm />} />
+<Route path="/admin/blogs/:id" element={<BlogForm />} />
+
         </Route>
 
       </Routes>

@@ -17,13 +17,16 @@ export default function Dashboard() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1>Dashboard</h1>
-        <p className="page-subtitle">Welcome back! Here's what's happening today.</p>
-      </div>
-      <div className="grid-2">
-        <KpiCard title="Total Employees" value={kpis?.totalEmployees.value ?? 0} changePct={kpis?.totalEmployees.changePct ?? 0} icon={<Users size={20} />} color="indigo" />
-        <KpiCard title="New Enquiries" value={kpis?.newEnquiries.value ?? 0} changePct={kpis?.newEnquiries.changePct ?? 0} icon={<Mail size={20} />} color="violet" />
+      <div className="card">
+        <div className="page-header">
+          <h1>Dashboard</h1>
+          <p className="page-subtitle">Welcome back! Here's what's happening today.</p>
+        </div>
+
+        <div className="grid-2">
+          <KpiCard title="Total Employees" value={kpis?.totalEmployees.value ?? 0} changePct={kpis?.totalEmployees.changePct ?? 0} icon={<Users size={20} />} color="indigo" />
+          <KpiCard title="New Enquiries" value={kpis?.newEnquiries.value ?? 0} changePct={kpis?.newEnquiries.changePct ?? 0} icon={<Mail size={20} />} color="violet" />
+        </div>
       </div>
     </div>
   );
