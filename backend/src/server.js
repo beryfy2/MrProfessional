@@ -139,7 +139,7 @@ function auth(req, res, next) {
 
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body || {};
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
+  const adminEmail = process.env.ADMIN_EMAIL || 'beryfy2@gmail.com';
   const ok = await getAdminPasswordOk(email, password || '');
 
   if (!ok) return res.status(401).json({ error: 'Invalid credentials' });
