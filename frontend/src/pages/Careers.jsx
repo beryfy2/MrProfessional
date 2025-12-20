@@ -460,7 +460,7 @@ const Careers = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-600 h-96 flex items-center">
+      <section className="bg-linear-to-r from-blue-900 to-blue-600 h-150 flex items-center">
         <div className="max-w-7xl mx-auto px-4 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left Side */}

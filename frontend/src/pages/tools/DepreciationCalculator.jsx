@@ -43,6 +43,7 @@ const DepreciationCalculator = () => {
   // Auto-calc on change
   useEffect(() => {
     calculateDepreciation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [purchaseAmount, depreciationRate, depreciationMethod, duration, additionalDepreciation]);
 
   const calculateDepreciation = () => {
@@ -111,7 +112,7 @@ const DepreciationCalculator = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-600 h-80 flex items-center">
+      <section className="bg-linear-to-r from-blue-900 to-blue-600 h-80 flex items-center">
         <div className="max-w-7xl mx-auto px-4 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Left Side - 60% */}
