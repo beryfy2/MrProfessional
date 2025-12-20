@@ -11,6 +11,9 @@ import TitleDetail from "./pages/TitleDetail";
 import SubtitleDetail from "./pages/SubtitleDetail";
 import AdminLayout from "./layouts/AdminLayout";
 import Careers from "./pages/Careers";
+import BlogCategories from "./pages/BlogCategories";
+import Blogs from "./pages/Blogs";
+import BlogForm from "./pages/BlogForm";
 
 function App() {
   return (
