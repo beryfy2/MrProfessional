@@ -19,9 +19,13 @@ export default function Employees() {
       <div className="page-header">
         <h1>Employees</h1>
         <p className="page-subtitle">Manage your team members</p>
-        <button className="btn primary" onClick={() => navigate('/admin/employees/new')}>+ Add Employee</button>
       </div>
-      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search employees..." className="input" />
+
+      <div className="page-actions">
+        <button className="btn primary" onClick={() => navigate('/admin/employees/new')}>+ Add Employee</button>
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search employees..." className="input" />
+      </div>
+
       <div className="card">
         <table className="table">
           <thead>

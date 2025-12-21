@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 export default function NavItemDetail() {
   const navigate = useNavigate();
   const { id = '' } = useParams();
+
   const [item, setItem] = useState<NavItem | null>(null);
   const [titles, setTitles] = useState<Title[]>([]);
   const [mainTitle, setMainTitle] = useState('');
@@ -24,7 +25,11 @@ export default function NavItemDetail() {
 
   async function saveMainTitle() {
     if (!item) return;
-    const updated = await sendJSON<NavItem>(`/nav-items/${id}`, { name: mainTitle, slug: mainTitle.toLowerCase().replace(/\s+/g, '-') }, 'PUT');
+    const updated = await sendJSON<NavItem>(
+      `/nav-items/${id}`,
+      { name: mainTitle, slug: mainTitle.toLowerCase().replace(/\s+/g, '-') },
+      'PUT'
+    );
     setItem(updated);
     alert('Main title saved');
   }
@@ -41,7 +46,11 @@ export default function NavItemDetail() {
       alert('Please enter a title');
       return;
     }
-    const order = typeof newOrder === 'number' && !Number.isNaN(newOrder) ? newOrder : (titles?.length || 0) + 1;
+    const order =
+      typeof newOrder === 'number' && !Number.isNaN(newOrder)
+        ? newOrder
+        : (titles?.length || 0) + 1;
+
     try {
       setSaving(true);
       await sendJSON<Title>(`/nav-items/${id}/titles`, { title, order }, 'POST');
@@ -63,33 +72,40 @@ export default function NavItemDetail() {
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={() => navigate('/admin/nav-items')}>← Back to Nav Items</button>
+      <button className="btn" onClick={() => navigate('/admin/nav-items')}>
+        ← Back to Nav Items
+      </button>
+
+      {/* MAIN TITLE CARD */}
       <div className="card" style={{ display: 'grid', gap: 12 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Main Title</div>
           {item && (
             <button
               className="btn"
+              style={{ color: '#DC2626' }}
               onClick={async () => {
                 if (!confirm('Delete this head title and all its titles/subtitles?')) return;
                 await delJSON(`/nav-items/${id}`);
                 navigate('/admin/nav-items');
               }}
-              style={{ color: '#DC2626' }}
             >
               Delete
             </button>
           )}
         </div>
+
         <div style={{ display: 'flex', gap: 12 }}>
           <input className="input" style={{ flex: 1 }} value={mainTitle} onChange={(e) => setMainTitle(e.target.value)} />
           <button className="btn primary" onClick={saveMainTitle}>Save</button>
         </div>
       </div>
 
+      {/* TITLES CARD */}
       <div className="card">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Titles</div>
+
           {!showAdd ? (
             <button className="btn primary" onClick={addTitle}>Add Title</button>
           ) : (
@@ -101,19 +117,20 @@ export default function NavItemDetail() {
             </div>
           )}
         </div>
+
         {titles.length === 0 ? (
           <div style={{ color: '#6B7280', marginTop: 12 }}>No titles yet</div>
         ) : (
           <div style={{ marginTop: 12, display: 'grid', gap: 12 }}>
             {titles.map((t) => (
-              <div key={t._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div key={t._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ cursor: 'pointer', flex: 1 }} onClick={() => navigate(`/admin/titles/${t._id}`)}>
                   <div style={{ fontWeight: 600 }}>{t.title}</div>
                   <div style={{ fontSize: 13, color: '#6B7280' }}>{(t.content || '').slice(0, 80)}</div>
                 </div>
                 <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn" onClick={() => navigate(`/admin/titles/${t._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
-                  <button className="btn" onClick={() => removeTitle(t._id!)} style={{ color: '#DC2626' }}>Delete</button>
+                  <button className="btn" style={{ color: '#0f4260' }} onClick={() => navigate(`/admin/titles/${t._id}`)}>Edit</button>
+                  <button className="btn" style={{ color: '#DC2626' }} onClick={() => removeTitle(t._id!)}>Delete</button>
                 </div>
               </div>
             ))}
@@ -123,3 +140,4 @@ export default function NavItemDetail() {
     </div>
   );
 }
+    

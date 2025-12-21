@@ -77,8 +77,8 @@ export default function NavItems() {
           </div>
         )}
       </div>
-      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search navigation items..." className="input" />
-      <div className="card">
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search navigation items..." className="input" />
+        <div className="card">
         <table className="table">
           <thead>
             <tr>
