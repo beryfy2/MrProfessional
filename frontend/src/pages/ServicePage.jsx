@@ -20,7 +20,44 @@ function slugVariants(slug) {
 
 /* -------------------------- components -------------------------- */
 
-const StickyConsultationCard = ({ price }) => {
+const StickyConsultationCard = ({ price, title }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState('');
+
+  async function submit() {
+    setNotice('');
+    if (!name || !email || !mobile) {
+      setNotice('Please fill all required fields');
+      return;
+    }
+    setLoading(true);
+    try {
+      const form = new FormData();
+      form.append('companyName', title || 'Website Visitor');
+      form.append('contactPerson', name);
+      form.append('email', email);
+      form.append('subject', `Request Callback: ${title || 'Service'}`);
+      form.append('message', `Callback requested for ${title || 'Service'}\nMobile: ${mobile}`);
+      const res = await fetch(`${API_BASE}/enquiries`, { method: 'POST', body: form });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error((data && (data.error || data.message)) || 'Failed to submit');
+      }
+      setNotice('Request submitted successfully');
+      setName('');
+      setEmail('');
+      setMobile('');
+    } catch (e) {
+      const msg = typeof e === 'object' && e && 'message' in e ? String(e.message) : 'Failed to submit';
+      setNotice(msg);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-[420px]">
 
@@ -34,6 +71,8 @@ const StickyConsultationCard = ({ price }) => {
         <input
           type="text"
           placeholder="Full Name *"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="
             w-full
             px-4 py-3
@@ -49,6 +88,8 @@ const StickyConsultationCard = ({ price }) => {
         <input
           type="email"
           placeholder="Email *"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="
             w-full
             px-4 py-3
@@ -64,6 +105,8 @@ const StickyConsultationCard = ({ price }) => {
         <input
           type="tel"
           placeholder="Mobile *"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
           className="
             w-full
             px-4 py-3
@@ -79,6 +122,8 @@ const StickyConsultationCard = ({ price }) => {
 
       {/* CTA Button */}
       <button
+        onClick={submit}
+        disabled={loading}
         className="
           w-full
           mt-6
@@ -93,8 +138,12 @@ const StickyConsultationCard = ({ price }) => {
           transition
         "
       >
-        REQUEST A CALLBACK
+        {loading ? 'Submitting...' : 'REQUEST A CALLBACK'}
       </button>
+
+      {notice && (
+        <p className="text-center text-sm mt-3">{notice}</p>
+      )}
 
       {/* Price */}
       {price && (
@@ -226,7 +275,7 @@ const ServicePage = () => {
 
             {/* RIGHT */}
             <div className="flex justify-center md:justify-end md:sticky md:top-28">
-              <StickyConsultationCard price={page.price || page.hero?.price} />
+              <StickyConsultationCard title={page.title} price={page.price || page.hero?.price} />
             </div>
 
           </div>

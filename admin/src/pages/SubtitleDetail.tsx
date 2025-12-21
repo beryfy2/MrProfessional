@@ -159,6 +159,10 @@ export default function SubtitleDetail() {
           {/* QUESTIONS */}
           <div className="card" style={{ display: 'grid', gap: 12 }}>
             <div style={{ fontSize: 18, fontWeight: 600 }}>Questions & Answers</div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button className="btn" onClick={() => setCount(count + 1)}>+ Add Question</button>
+              {count > 0 && <button className="btn" onClick={() => setCount(Math.max(0, count - 1))}>Remove Last</button>}
+            </div>
 
             {questions.map((qa, idx) => (
               <div key={idx} className="card">
@@ -172,6 +176,61 @@ export default function SubtitleDetail() {
                     setQuestions(next);
                   }}
                 />
+                <textarea
+                  className="input"
+                  rows={4}
+                  value={qa.answer}
+                  onChange={(e) => {
+                    const next = [...questions];
+                    next[idx] = { ...qa, answer: e.target.value };
+                    setQuestions(next);
+                  }}
+                />
+                <select
+                  className="input"
+                  value={qa.format || 'written'}
+                  onChange={(e) => {
+                    const next = [...questions];
+                    next[idx] = { ...qa, format: e.target.value as QA['format'] };
+                    setQuestions(next);
+                  }}
+                >
+                  <option value="written">Written</option>
+                  <option value="table">Table</option>
+                  <option value="both">Both</option>
+                </select>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*,application/pdf"
+                  onChange={(e) => uploadQuestionFiles(idx, e.target.files)}
+                />
+                {qa.files && qa.files.length > 0 && (
+                  <div className="grid-2">
+                    {qa.files.map((f) => (
+                      <div key={f._id} className="card">
+                        <div style={{ fontSize: 13 }}>{f.filename}</div>
+                        <button className="btn" style={{ color: '#DC2626' }} onClick={() => removeQuestionFile(idx, f._id!)}>
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      const next = [...questions];
+                      next.splice(idx, 1);
+                      setQuestions(next);
+                      setCount(next.length);
+                    }}
+                    style={{ color: '#DC2626' }}
+                  >
+                    Delete Question
+                  </button>
+                </div>
               </div>
             ))}
           </div>

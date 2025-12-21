@@ -40,7 +40,7 @@ export default function Blogs() {
 
         setCategories(cats);
         setBlogs(blgs);
-      } catch (e) {
+      } catch {
         setError("Failed to load blogs. Please try again later.");
       } finally {
         setLoading(false);
