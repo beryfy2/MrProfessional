@@ -180,6 +180,7 @@ export default function EmployeeDetail() {
             placeholder="Email Address"
             value={emp.email || ''}
             onChange={(e) => setEmp({ ...emp, email: e.target.value })}
+            required
           />
           <input
             className="input"
@@ -188,6 +189,184 @@ export default function EmployeeDetail() {
             onChange={(e) => setEmp({ ...emp, phone: e.target.value })}
           />
         </div>
+      </div>
+
+      {/* PERSONAL INFORMATION */}
+      <div className="card" style={{ display: 'grid', gap: 12 }}>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>
+          Personal Information
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="First Name"
+            value={emp.firstName || ''}
+            onChange={(e) => setEmp({ ...emp, firstName: e.target.value })}
+            required
+          />
+          <input
+            className="input"
+            placeholder="Last Name"
+            value={emp.lastName || ''}
+            onChange={(e) => setEmp({ ...emp, lastName: e.target.value })}
+            required
+          />
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Gender"
+            value={emp.gender || ''}
+            onChange={(e) => setEmp({ ...emp, gender: e.target.value })}
+          />
+          <input
+            className="input"
+            placeholder="Blood Group"
+            value={emp.bloodGroup || ''}
+            onChange={(e) => setEmp({ ...emp, bloodGroup: e.target.value })}
+          />
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Marital Status"
+            value={emp.maritalStatus || ''}
+            onChange={(e) => setEmp({ ...emp, maritalStatus: e.target.value })}
+          />
+          <input
+            className="input"
+            placeholder="Date of Birth"
+            type="date"
+            value={emp.dob || ''}
+            onChange={(e) => setEmp({ ...emp, dob: e.target.value })}
+          />
+        </div>
+        <textarea
+          className="input"
+          rows={3}
+          placeholder="Bio"
+          value={emp.bio || ''}
+          onChange={(e) => setEmp({ ...emp, bio: e.target.value })}
+        />
+      </div>
+
+      {/* JOB DETAILS */}
+      <div className="card" style={{ display: 'grid', gap: 12 }}>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>
+          Job Details
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Position"
+            value={emp.position || ''}
+            onChange={(e) => setEmp({ ...emp, position: e.target.value })}
+            required
+          />
+          <input
+            className="input"
+            placeholder="Designation"
+            value={emp.designation || ''}
+            onChange={(e) => setEmp({ ...emp, designation: e.target.value })}
+          />
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Department"
+            value={emp.department || ''}
+            onChange={(e) => setEmp({ ...emp, department: e.target.value })}
+            required
+          />
+          <input
+            className="input"
+            placeholder="Manager"
+            value={emp.manager || ''}
+            onChange={(e) => setEmp({ ...emp, manager: e.target.value })}
+          />
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Employment Type"
+            value={emp.employmentType || ''}
+            onChange={(e) => setEmp({ ...emp, employmentType: e.target.value })}
+          />
+          <input
+            className="input"
+            placeholder="Work Location"
+            value={emp.workLocation || ''}
+            onChange={(e) => setEmp({ ...emp, workLocation: e.target.value })}
+          />
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Employee ID"
+            value={emp.employeeId || ''}
+            onChange={(e) => setEmp({ ...emp, employeeId: e.target.value })}
+          />
+          <input
+            className="input"
+            placeholder="Join Date"
+            type="date"
+            value={emp.joinDate || ''}
+            onChange={(e) => setEmp({ ...emp, joinDate: e.target.value })}
+          />
+        </div>
+        <input
+          className="input"
+          placeholder="Salary"
+          value={emp.salary || ''}
+          onChange={(e) => setEmp({ ...emp, salary: e.target.value })}
+        />
+      </div>
+
+      {/* ADDRESS */}
+      <div className="card" style={{ display: 'grid', gap: 12 }}>
+        <div style={{ fontSize: 16, fontWeight: 600 }}>
+          Address
+        </div>
+        <input
+          className="input"
+          placeholder="Address Line"
+          value={emp.address || ''}
+          onChange={(e) => setEmp({ ...emp, address: e.target.value })}
+        />
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="Street"
+            value={emp.street || ''}
+            onChange={(e) => setEmp({ ...emp, street: e.target.value })}
+          />
+          <input
+            className="input"
+            placeholder="City"
+            value={emp.city || ''}
+            onChange={(e) => setEmp({ ...emp, city: e.target.value })}
+          />
+        </div>
+        <div className="grid-2">
+          <input
+            className="input"
+            placeholder="State"
+            value={emp.state || ''}
+            onChange={(e) => setEmp({ ...emp, state: e.target.value })}
+          />
+          <input
+            className="input"
+            placeholder="ZIP / Postal Code"
+            value={emp.zip || ''}
+            onChange={(e) => setEmp({ ...emp, zip: e.target.value })}
+          />
+        </div>
+        <input
+          className="input"
+          placeholder="Country"
+          value={emp.country || ''}
+          onChange={(e) => setEmp({ ...emp, country: e.target.value })}
+        />
       </div>
 
       {/* SAVE */}
