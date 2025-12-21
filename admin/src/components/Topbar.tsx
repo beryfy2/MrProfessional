@@ -9,14 +9,22 @@ const Topbar = () => {
     navigate('/');
   };
 
+  const handleEnquiries = () => {
+    navigate('/admin/enquiries');
+  };
+
+  const handleAdminSettings = () => {
+    navigate('/admin/admin-settings');
+  };
+
   return (
     <div className="topbar">
       <input className="search" placeholder="Search..." />
 
       <div className="topbar-right">
-        <span className="icon">🔔</span>
+        <span className="icon" onClick={handleEnquiries}>🔔</span>
 
-        <div className="avatar">A</div>
+        <div className="avatar" onClick={handleAdminSettings}>A</div>
 
         <span className="icon logout" onClick={handleLogout}>⎋</span>
       </div>

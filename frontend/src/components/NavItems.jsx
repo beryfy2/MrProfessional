@@ -9,8 +9,8 @@ const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 export default function NavItems({ transparent = false }) {
     const navigate = useNavigate();
     const solidBg = "bg-[#0f4260]";
-    const glassBg = "bg-[#0f4260]/40";
-    const finalBg = transparent ? glassBg : solidBg;
+    // Removed glass background and backdrop blur - always use solid background
+    const finalBg = solidBg;
 
     const [navItems, setNavItems] = useState([]);
     const [openMenu, setOpenMenu] = useState(null); // nav item id
@@ -117,8 +117,7 @@ export default function NavItems({ transparent = false }) {
 
     return (
         <div
-            className={`${finalBg} transition-all duration-300 ${transparent ? "backdrop--md" : "shadow-lg"
-                }`}
+            className={`${finalBg} transition-all duration-300 shadow-lg`}
         >
             <div className="max-w-[1500px] h-15 mx-auto px-6 py-4 flex items-center justify-between relative">
                 {/* Logo */}
