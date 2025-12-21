@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import NavBar from './components/NavBar'
+import NavBar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
 import HeroPage from './pages/HeroPage'
 import SolutionSection from './pages/SolutionSection'

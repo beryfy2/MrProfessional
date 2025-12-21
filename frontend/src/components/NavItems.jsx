@@ -123,9 +123,13 @@ export default function NavItems({ transparent = false }) {
             <div className="max-w-[1500px] h-15 mx-auto px-6 py-4 flex items-center justify-between relative">
                 {/* Logo */}
                 <div className="flex items-center gap-3">
-                    <span className="text-white font-semibold hidden sm:inline">
-                        Company
-                    </span>
+                    <a href="/">
+                        <div className="flex items-center gap-3">
+                            <span className="text-white font-semibold hidden sm:inline">
+                                Company
+                            </span>
+                        </div>
+                    </a>
                 </div>
 
                 {/* Nav links */}

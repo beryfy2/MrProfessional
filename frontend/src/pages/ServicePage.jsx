@@ -3,7 +3,11 @@ import { useParams, Link } from "react-router-dom";
 import servicesData from "../data/servicesData";
 import NavBar from "../components/Navbar";
 import FloatingContactButtons from "../components/FloatingContactButtons";
-import HeroBg from "../assets/hero-bg.jpeg";
+import HeroBg from "../assets/hero-bg.png";
+import WhyCompanySection from "./WhyUs";
+import TestimonialsSection from './TestimonialsSection'
+import TrustedBy from "../components/TrustBy";
+import Footer from "../components/Footer";
 
 const API_BASE =
   import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
@@ -234,18 +238,14 @@ const ServicePage = () => {
 
         {/* PARALLAX BACKGROUND IMAGE */}
         <div
-          className="
-      absolute inset-0
-      bg-cover bg-center bg-fixed
-      opacity-20
-    "
+          className="absolute inset-0 bg-cover bg-center bg-fixed z-0"
           style={{
             backgroundImage: `url(${HeroBg})`,
           }}
         />
 
         {/* DARK GRADIENT OVERLAY */}
-        <div className="absolute inset-0 bg-linear-to-r from-[#0f4260]/95 to-[#0b3550]/95" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#0f4260]/80 to-[#0b3550]/80 z-10" />
 
         {/* CONTENT */}
         <div className="relative z-10">
@@ -419,8 +419,14 @@ const ServicePage = () => {
           </section>
         )}
       </main>
-
       <FloatingContactButtons />
+
+      <WhyCompanySection />
+      <TestimonialsSection />
+      <TrustedBy />
+      <Footer />
+
+
     </>
   );
 };
