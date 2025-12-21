@@ -7,6 +7,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +24,7 @@ fs.mkdirSync(uploadsDir, { recursive: true });
 app.use('/uploads', express.static(uploadsDir));
 
 // Mongo setup
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mrpro';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://aditya_singh:Aditya$%40343@addi.0jj4bvg.mongodb.net/mrpro';
 mongoose
   .connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
   .then(() => console.log('MongoDB connected'))
@@ -38,6 +39,9 @@ import Subtitle from './models/Subtitle.js';
 import Job from './models/Job.js';
 import AdminConfig from './models/AdminConfig.js';
 import ResetToken from './models/ResetToken.js';
+import Category from "./models/Category.js";
+import Blog from "./models/Blog.js";
+
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
@@ -183,6 +187,197 @@ app.post('/api/auth/reset', async (req, res) => {
   await setAdminPassword(email, newPassword || '');
   res.json({ ok: true });
 });
+
+// ================= BLOG CATEGORIES =================
+
+// Utility
+function slugify(text = "") {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "");
+}
+
+// GET all categories
+app.get("/api/categories", async (req, res) => {
+  try {
+    const categories = await Category.find().sort({ createdAt: -1 });
+    res.json(categories);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load categories" });
+  }
+});
+
+// CREATE category (ADMIN)
+app.post("/api/categories", auth, async (req, res) => {
+  try {
+    const { name } = req.body || {};
+    if (!name) {
+      return res.status(400).json({ error: "Category name required" });
+    }
+
+    const exists = await Category.findOne({ name });
+    if (exists) {
+      return res.status(409).json({ error: "Category already exists" });
+    }
+
+    const category = await Category.create({
+      name,
+      slug: slugify(name),
+    });
+
+    res.status(201).json(category);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to create category" });
+  }
+});
+
+// DELETE category (ADMIN)
+app.delete("/api/categories/:id", auth, async (req, res) => {
+  try {
+    await Category.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: "Failed to delete category" });
+  }
+});
+
+function slugifyBlog(text = "") {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+app.get("/api/blogs", auth, async (req, res) => {
+  try {
+    const blogs = await Blog.find()
+      .populate("category", "name")
+      .sort({ createdAt: -1 });
+
+    res.json(blogs);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load blogs" });
+  }
+});
+app.get("/api/blogs/by-id/:id", auth, async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id).populate("category");
+    if (!blog) return res.status(404).json({ error: "Not found" });
+    res.json(blog);
+  } catch (e) {
+    res.status(404).json({ error: "Invalid blog ID" });
+  }
+});
+app.post("/api/blogs", auth, async (req, res) => {
+  try {
+    const { title, content, category, status } = req.body || {};
+
+    if (!title || !content || !category) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
+
+    const slugBase = slugifyBlog(title);
+    let slug = slugBase;
+    let count = 1;
+
+    while (await Blog.findOne({ slug })) {
+      slug = `${slugBase}-${count++}`;
+    }
+
+    const blog = await Blog.create({
+      title,
+      slug,
+      content,
+      category,
+      status: status || "draft",
+    });
+
+    res.status(201).json(blog);
+  } catch (e) {
+    res.status(400).json({ error: "Failed to create blog" });
+  }
+});
+app.put("/api/blogs/:id", auth, async (req, res) => {
+  try {
+    const { title, content, category, status } = req.body || {};
+
+    const update = { title, content, category, status };
+
+    if (title) {
+      const slugBase = slugifyBlog(title);
+      let slug = slugBase;
+      let count = 1;
+
+      while (
+        await Blog.findOne({
+          slug,
+          _id: { $ne: req.params.id },
+        })
+      ) {
+        slug = `${slugBase}-${count++}`;
+      }
+
+      update.slug = slug;
+    }
+
+    const blog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      update,
+      { new: true }
+    );
+
+    if (!blog) return res.status(404).json({ error: "Not found" });
+
+    res.json(blog);
+  } catch (e) {
+    res.status(400).json({ error: "Failed to update blog" });
+  }
+});
+app.delete("/api/blogs/:id", auth, async (req, res) => {
+  try {
+    await Blog.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: "Failed to delete blog" });
+  }
+});
+
+
+// ================= BLOG (PUBLIC) =================
+
+// Get all published blogs (for frontend)
+app.get("/api/public/blogs", async (req, res) => {
+  try {
+    const blogs = await Blog.find({ status: "published" })
+      .populate("category", "name slug")
+      .sort({ createdAt: -1 });
+
+    res.json(blogs);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load blogs" });
+  }
+});
+
+// Get single blog by slug (SEO page)
+app.get("/api/public/blogs/:slug", async (req, res) => {
+  try {
+    const blog = await Blog.findOne({
+      slug: req.params.slug,
+      status: "published",
+    }).populate("category", "name slug");
+
+    if (!blog) return res.status(404).json({ error: "Not found" });
+
+    res.json(blog);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load blog" });
+  }
+});
+
+
 // Employees
 app.get('/api/employees', async (req, res) => {
   const list = await Employee.find().sort({ name: 1 });

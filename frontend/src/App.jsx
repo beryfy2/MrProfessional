@@ -24,6 +24,7 @@ import Careers from './pages/Careers'
 import ServicePage from './pages/ServicePage'
 import AboutUs from './pages/AboutUs'
 import TeamMem from './pages/TeamMem'
+import Blogs from './pages/Blogs'
 
 
 const Home = () => (
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="/tools/fssai-status" element={<ToolPage><FssaiLicenseChecker /></ToolPage>} />
          <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
+        <Route path='/blogs' element={<Blogs/>} />
       </Routes>
     </>
   )

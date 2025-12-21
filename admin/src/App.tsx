@@ -11,6 +11,9 @@ import TitleDetail from "./pages/TitleDetail";
 import SubtitleDetail from "./pages/SubtitleDetail";
 import AdminLayout from "./layouts/AdminLayout";
 import Careers from "./pages/Careers";
+import BlogCategories from "./pages/BlogCategories";
+import Blogs from "./pages/Blogs";
+import BlogForm from "./pages/BlogForm";
 
 function App() {
   return (
@@ -32,6 +35,13 @@ function App() {
           <Route path="titles/:id" element={<TitleDetail />} />
           <Route path="subtitles/:id" element={<SubtitleDetail />} />
           <Route path="admin-settings" element={<AdminSettings />} />
+          <Route path="/admin/blog-categories" element={<BlogCategories />} />
+<Route path="/admin/blogs" element={<Blogs />} />
+<Route path="/admin/blogs/new" element={<BlogForm />} />
+<Route path="/admin/blogs/:id" element={<BlogForm />} />
+<Route path="/admin/blog-categories" element={<BlogCategories />} />
+
+
         </Route>
 
       </Routes>
