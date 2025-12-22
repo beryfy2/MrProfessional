@@ -257,9 +257,16 @@ const ServicePage = () => {
                 {page.title}
               </h1>
 
-              <p className="text-green-400 text-lg font-semibold mb-6">
+             {/* <p className="text-green-400 text-lg font-semibold mb-6">
                 Get your Company Registration starts @ ₹8,499 Only!
-              </p>
+              </p> */}
+              <div className="text-green-400 text-lg font-semibold mb-6">
+                <h1 >
+                   Get your Company Registration starts ₹{page.price} Only!
+                </h1>
+
+              </div>
+              
 
               <ul className="space-y-3 text-lg">
                 <li>✅ Lowest Price Guarantee</li>
@@ -275,7 +282,7 @@ const ServicePage = () => {
 
             {/* RIGHT */}
             <div className="flex justify-center md:justify-end md:sticky md:top-28">
-              <StickyConsultationCard title={page.title} price={page.price || page.hero?.price} />
+              <StickyConsultationCard title={page.title}/> 
             </div>
 
           </div>
