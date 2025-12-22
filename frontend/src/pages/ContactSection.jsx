@@ -19,10 +19,6 @@ const ContactSection = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -162,16 +158,6 @@ const ContactSection = () => {
                                 onChange={handleChange}
                                 className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
                             />
-                            
-                            {/* File Upload */}
-                             <div className="space-y-1">
-                                <label className="text-sm font-medium text-gray-700">Resume / Document (PDF, Docx)</label>
-                                <input 
-                                    type="file" 
-                                    onChange={handleFileChange}
-                                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100"
-                                />
-                            </div>
 
                             {/* Submit button */}
                             <button

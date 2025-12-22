@@ -18,11 +18,11 @@ const MEDIA_ITEMS = [
         outlet: "Press Trust Of India",
         logo: "/media/pti.png",
         heading:
-            "Why Comapany Is Your Best Choice for EPR Registration & Compliance",
+            "Why Company Is Your Best Choice for EPR Registration & Compliance",
         body: [
-            "Comapany is a reliable partner for EPR registration. If you import products in India, registering under the Extended Producer Responsibility (EPR) rules is now a mandatory requirement.",
+            "Company is a reliable partner for EPR registration. If you import products in India, registering under the Extended Producer Responsibility (EPR) rules is now a mandatory requirement.",
             "It is also a step toward reducing environmental impact and promoting sustainable business practices. EPR registration for importers can be confusing, especially with changing guidelines and documentation involved.",
-            "That is where we come in. At Comapany, we take care of the entire process from preparing documents and filing applications to regular follow-ups with the authorities."
+            "That is where we come in. At Company, we take care of the entire process from preparing documents and filing applications to regular follow-ups with the authorities."
         ],
         link: "#",
     },
@@ -31,9 +31,9 @@ const MEDIA_ITEMS = [
         outlet: "Hindustan Times",
         logo: "/media/hindustan-times.png",
         heading:
-            "Comapany is making professional services affordable and simple",
+            "Company is making professional services affordable and simple",
         body: [
-            "Comapany is a Delhi-based FinTech startup offering a wide range of professional services to thousands of businesses and individuals across Pan-India.",
+            "Company is a Delhi-based FinTech startup offering a wide range of professional services to thousands of businesses and individuals across Pan-India.",
             "It was founded by two friends – Abhishek Yadav and Sahil Singh – to bring all professional services onto a single platform. The duo focused on developing a service experience that allowed entrepreneurs to start and manage a business easily."
         ],
         link: "#",
@@ -43,10 +43,10 @@ const MEDIA_ITEMS = [
         outlet: "Influencive India",
         logo: "/media/influencive-india.png",
         heading:
-            "Comapany – Simplifying the complex Business Problems",
+            "Company – Simplifying the complex Business Problems",
         body: [
             "Did you know that 92% of startups fail within the first three years due to challenges with tax, accounting, and regulatory compliance?",
-            "At Comapany, we're determined to reverse this trend and empower businesses with simplified solutions. Dedicated to revolutionizing the professional services landscape, Comapany is a Delhi-based FinTech startup."
+            "At Company, we're determined to reverse this trend and empower businesses with simplified solutions. Dedicated to revolutionizing the professional services landscape, Company is a Delhi-based FinTech startup."
         ],
         link: "#",
     },
