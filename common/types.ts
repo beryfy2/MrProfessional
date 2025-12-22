@@ -25,6 +25,7 @@ export type Subtitle = {
   price?: string;
   files: FileMeta[];
   questions: QA[];
+  faqs?: QA[];
 };
 
 export type NavItem = {

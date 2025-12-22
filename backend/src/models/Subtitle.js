@@ -31,7 +31,8 @@ const SubtitleSchema = new mongoose.Schema(
     content: { type: String },
     price: { type: String },
     files: [FileSchema],
-    questions: [QASchema]
+    questions: [QASchema],
+    faqs: [QASchema]
   },
   { timestamps: true }
 );
