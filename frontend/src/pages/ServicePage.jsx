@@ -367,8 +367,8 @@ const ServicePage = () => {
               </h2>
 
               <ul className="space-y-3 text-slate-700">
-                {(page.faqs || page.questions).map((f, index) => {
-                  const question = f.q || f.question;
+                {( page.questions).map((f, index) => {
+                  const question =  f.question;
                   const id = `q-${question
                     .toLowerCase()
                     .replace(/[^\w\s-]/g, "")
@@ -403,12 +403,12 @@ const ServicePage = () => {
       )}
 
       {/* QUESTIONS AS NORMAL SECTIONS */}
-      {(page.faqs || page.questions)?.length > 0 && (
+      {( page.questions)?.length > 0 && (
         <main className="max-w-7xl mx-auto px-6 py-12 space-y-20">
 
-          {(page.faqs || page.questions).map((f, index, arr) => {
-            const question = f.q || f.question;
-            const answer = f.a || f.answer;
+          {(page.questions).map((f, index, arr) => {
+            const question = f.question;
+            const answer = f.answer;
 
             const id = `q-${question
               .toLowerCase()
