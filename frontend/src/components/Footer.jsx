@@ -21,7 +21,7 @@ import footerBg from '../assets/footer-bg.jpg'
 
 
 const ORG_LINKS = [
-    { label: "About Us", path: "/about-us" },
+    { label: "About Us", path: "/about" },
     { label: "Careers", path: "/careers" },
     { label: "The Team", path: "/team" },
     { label: "Contact Us", path: "/contact" },

@@ -40,7 +40,9 @@ export default function Login() {
       if (!res.ok) throw new Error((data && (data.error || data.message)) || 'Failed to send OTP');
       setMode('reset');
     } catch (e) {
-      const msg = typeof e === 'object' && e && 'message' in e ? String((e as Record<string, unknown>).message) : 'Failed to send OTP';
+      const msg = typeof e === 'object' && e && 'message' in e
+        ? String((e as Record<string, unknown>).message)
+        : 'Failed to send OTP';
       setError(msg);
     } finally {
       setLoading(false);
@@ -65,7 +67,9 @@ export default function Login() {
       setOtp('');
       setNewPassword('');
     } catch (e) {
-      const msg = typeof e === 'object' && e && 'message' in e ? String((e as Record<string, unknown>).message) : 'Invalid OTP or request failed';
+      const msg = typeof e === 'object' && e && 'message' in e
+        ? String((e as Record<string, unknown>).message)
+        : 'Invalid OTP or request failed';
       setError(msg);
     } finally {
       setLoading(false);
@@ -74,41 +78,37 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      <div className="login-wrapper">
+      <div className="login-container">
 
-        {/* Top Icon */}
-        <div className="login-icon">
-          🔒
-        </div>
+        <div className="login-icon">🔒</div>
 
         <h1 className="login-title">Admin Dashboard</h1>
-        <p className="login-subtitle">
-          Sign in to manage your business
-        </p>
+        <p className="login-subtitle">Sign in to manage your business</p>
 
-        {/* Card */}
         <div className="login-card">
 
           {mode === 'login' && (
             <>
               <h2>Welcome Back</h2>
-              <p className="login-helper">
+              <p className="login-text">
                 Enter your credentials to access the dashboard
               </p>
             </>
           )}
+
           {mode === 'forgot' && (
             <>
               <h2>Forgot Password</h2>
-              <p className="login-helper">
+              <p className="login-text">
                 Enter your registered email to receive OTP
               </p>
             </>
           )}
+
           {mode === 'reset' && (
             <>
               <h2>Reset Password</h2>
-              <p className="login-helper">
+              <p className="login-text">
                 Enter the OTP received and your new password
               </p>
             </>
@@ -117,22 +117,42 @@ export default function Login() {
           {mode === 'login' && (
             <form onSubmit={submit}>
               <label>Email Address</label>
-              <div className="input-box">
-                <input type="email" placeholder="beryfy2@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <div className="login-input">
+                <input
+                  type="email"
+                  placeholder="beryfy2@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
 
-              <div className="password-row">
+              <div className="login-row">
                 <label>Password</label>
-                <button type="button" className="forgot" onClick={() => setMode('forgot')}>Forgot?</button>
+                <a onClick={() => setMode('forgot')}>Forgot?</a>
               </div>
 
-              <div className="input-box">
-                <input type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <div className="login-input">
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
               </div>
 
-              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+              {error && (
+                <div style={{ color: 'red', marginBottom: 10 }}>
+                  {error}
+                </div>
+              )}
 
-              <button type="submit" className="btn-login" disabled={loading}>
+              <button
+                type="submit"
+                className="btn success login-btn"
+                disabled={loading}
+              >
                 {loading ? 'Signing in...' : 'Sign In'}
               </button>
             </form>
@@ -141,15 +161,34 @@ export default function Login() {
           {mode === 'forgot' && (
             <form onSubmit={sendOtp}>
               <label>Registered Email</label>
-              <div className="input-box">
-                <input type="email" placeholder="beryfy2@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <div className="login-input">
+                <input
+                  type="email"
+                  placeholder="beryfy2@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
-              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+
+              {error && (
+                <div style={{ color: 'red', marginBottom: 10 }}>
+                  {error}
+                </div>
+              )}
+
               <div style={{ display: 'flex', gap: 8 }}>
-                <button type="submit" className="btn-login" disabled={loading}>
+                <button className="btn success login-btn" disabled={loading}>
                   {loading ? 'Sending...' : 'Send OTP'}
                 </button>
-                <button type="button" className="btn-login" onClick={() => setMode('login')} disabled={loading}>Back</button>
+                <button
+                  type="button"
+                  className="btn login-btn"
+                  onClick={() => setMode('login')}
+                  disabled={loading}
+                >
+                  Back
+                </button>
               </div>
             </form>
           )}
@@ -157,26 +196,48 @@ export default function Login() {
           {mode === 'reset' && (
             <form onSubmit={resetPassword}>
               <label>OTP</label>
-              <div className="input-box">
-                <input type="text" placeholder="6-digit OTP" value={otp} onChange={(e) => setOtp(e.target.value)} required />
+              <div className="login-input">
+                <input
+                  type="text"
+                  placeholder="6-digit OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  required
+                />
               </div>
+
               <label>New Password</label>
-              <div className="input-box">
-                <input type="password" placeholder="New password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+              <div className="login-input">
+                <input
+                  type="password"
+                  placeholder="New password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
               </div>
-              {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+
+              {error && (
+                <div style={{ color: 'red', marginBottom: 10 }}>
+                  {error}
+                </div>
+              )}
+
               <div style={{ display: 'flex', gap: 8 }}>
-                <button type="submit" className="btn-login" disabled={loading}>
+                <button className="btn success login-btn" disabled={loading}>
                   {loading ? 'Updating...' : 'Update Password'}
                 </button>
-                <button type="button" className="btn-login" onClick={() => setMode('login')} disabled={loading}>Back to Login</button>
+                <button
+                  type="button"
+                  className="btn login-btn"
+                  onClick={() => setMode('login')}
+                  disabled={loading}
+                >
+                  Back to Login
+                </button>
               </div>
             </form>
           )}
-
-          <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '16px', textAlign: 'center' }}>
-           
-          </p>
 
         </div>
       </div>

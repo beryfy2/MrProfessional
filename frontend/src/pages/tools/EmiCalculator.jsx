@@ -21,32 +21,32 @@ const DonutChart = ({ principal, interest }) => {
   return (
     <div className="flex flex-col items-center space-y-4">
       <div className="text-center">
-        <div className="text-2xl font-bold text-white mb-2">Breakdown</div>
+        <div className="text-2xl font-bold text-gray-900 mb-2">Breakdown</div>
         <div className="space-y-3">
           <div className="flex items-center justify-between w-48">
             <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 bg-blue-500 rounded"></div>
-              <span className="text-white text-sm">Principal</span>
+              <div className="w-4 h-4 bg-blue-600 rounded"></div>
+              <span className="text-gray-900 text-sm">Principal</span>
             </div>
-            <span className="text-white font-semibold">{principalPercent}%</span>
+            <span className="text-gray-900 font-semibold">{principalPercent}%</span>
           </div>
           <div className="flex items-center justify-between w-48">
             <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 bg-green-500 rounded"></div>
-              <span className="text-white text-sm">Interest</span>
+              <div className="w-4 h-4 bg-green-600 rounded"></div>
+              <span className="text-gray-900 text-sm">Interest</span>
             </div>
-            <span className="text-white font-semibold">{interestPercent}%</span>
+            <span className="text-gray-900 font-semibold">{interestPercent}%</span>
           </div>
         </div>
       </div>
       {/* Simple visual representation */}
-      <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-600">
+      <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-300">
         <div
-          className="h-full bg-blue-500"
+          className="h-full bg-blue-600"
           style={{ width: `${principalPercent}%` }}
         ></div>
         <div
-          className="h-full bg-green-500"
+          className="h-full bg-green-600"
           style={{ width: `${interestPercent}%`, marginLeft: `${principalPercent}%` }}
         ></div>
       </div>
@@ -77,28 +77,28 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="bg-gray-900 py-16">
+    <section className="bg-gray-50 py-16">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* FAQ Accordion - Left Side */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-teal-400 mb-8 text-center">
+            <h2 className="text-2xl font-bold text-green-600 mb-8 text-center">
               Frequently Asked Questions (FAQs)
             </h2>
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-gray-800 border border-green-500 rounded-lg overflow-hidden">
+                <div key={index} className="bg-white border border-gray-300 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                    className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-700 transition-colors"
+                    className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 transition-colors"
                   >
-                    <span className="text-white font-medium">{faq.question}</span>
-                    <span className="text-green-400 text-xl">
+                    <span className="text-gray-900 font-medium">{faq.question}</span>
+                    <span className="text-green-600 text-xl">
                       {openFaq === index ? '−' : '+'}
                     </span>
                   </button>
                   {openFaq === index && (
-                    <div className="px-4 pb-4 text-gray-300">
+                    <div className="px-4 pb-4 text-gray-700">
                       {faq.answer}
                     </div>
                   )}
@@ -109,30 +109,30 @@ const FAQSection = () => {
 
           {/* Expert CTA Card - Right Side */}
           <div className="lg:col-span-1">
-            <div className="bg-gray-800 border-2 border-green-500 rounded-lg p-6 text-center">
+            <div className="bg-white border-2 border-green-500 rounded-lg p-6 text-center">
               <div className="mb-4">
                 <div className="w-16 h-16 mx-auto bg-green-500 rounded-full flex items-center justify-center">
                   <span className="text-2xl">👨‍💻</span>
                 </div>
               </div>
-              <h3 className="text-white text-lg font-semibold mb-4">
+              <h3 className="text-gray-900 text-lg font-semibold mb-4">
                 Speak Directly to our Expert Today
               </h3>
-              <button className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors mb-4">
+              <button className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors mb-4">
                 Get in Touch
               </button>
               <div className="space-y-2">
                 <div className="flex items-center justify-center space-x-2">
-                  <span className="text-green-400">✓</span>
-                  <span className="text-gray-300 text-sm">Reliable</span>
+                  <span className="text-green-600">✓</span>
+                  <span className="text-gray-600 text-sm">Reliable</span>
                 </div>
                 <div className="flex items-center justify-center space-x-2">
-                  <span className="text-green-400">✓</span>
-                  <span className="text-gray-300 text-sm">Affordable</span>
+                  <span className="text-green-600">✓</span>
+                  <span className="text-gray-600 text-sm">Affordable</span>
                 </div>
                 <div className="flex items-center justify-center space-x-2">
-                  <span className="text-green-400">✓</span>
-                  <span className="text-gray-300 text-sm">Assured</span>
+                  <span className="text-green-600">✓</span>
+                  <span className="text-gray-600 text-sm">Assured</span>
                 </div>
               </div>
             </div>
@@ -194,31 +194,31 @@ const EmiCalculator = () => {
   const tenureMax = 30;
 
   return (
-    <div>
+    <div className="has-fixed-navbar">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-blue-900 to-blue-600 h-80 flex items-center">
+      <section className="calculator-hero bg-gradient-to-r from-blue-900 to-blue-600 flex items-center">
         <div className="max-w-7xl mx-auto px-4 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Left Side - 60% */}
-            <div className="lg:col-span-3 text-white">
+            <div className="lg:col-span-3 text-gray-900">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 EMI Calculator Tool – Calculate Now
               </h1>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center">
-                  <span className="text-green-400 mr-3">✓</span>
+                  <span className="text-green-600 mr-3">✓</span>
                   Lowest Price Guarantee
                 </li>
                 <li className="flex items-center">
-                  <span className="text-green-400 mr-3">✓</span>
+                  <span className="text-green-600 mr-3">✓</span>
                   Free Expert Related Guidance
                 </li>
                 <li className="flex items-center">
-                  <span className="text-green-400 mr-3">✓</span>
+                  <span className="text-green-600 mr-3">✓</span>
                   Quick and Hassle-Free Process
                 </li>
                 <li className="flex items-center">
-                  <span className="text-green-400 mr-3">✓</span>
+                  <span className="text-green-600 mr-3">✓</span>
                   Expert Assistance Without the Hassle
                 </li>
               </ul>
@@ -230,30 +230,30 @@ const EmiCalculator = () => {
             </div>
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
-              <div className="bg-gray-900 border-2 border-green-600 rounded-lg p-6 w-full max-w-md shadow-2xl">
-                <h3 className="text-green-400 text-lg font-semibold mb-4 text-center">Get Expert Consultation</h3>
+              <div className="calculator-form-card">
+                <h3 className="text-green-600 text-lg font-semibold mb-4 text-center">Get Expert Consultation</h3>
                 <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-green-500 text-white py-3 rounded font-semibold hover:bg-green-600 transition-colors"
+                    className="w-full bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
@@ -265,17 +265,17 @@ const EmiCalculator = () => {
       </section>
 
       {/* EMI Calculator Section */}
-      <section className="py-16">
+      <section className="calculator-main">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="bg-gray-900 rounded-xl shadow-2xl p-8 border border-gray-700">
+          <div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left Side - Inputs + Results */}
               <div>
-                <h2 className="text-2xl font-bold text-teal-400 mb-6">EMI Calculator</h2>
+                <h2 className="text-2xl font-bold text-green-600 mb-6">EMI Calculator</h2>
                 <div className="space-y-6">
                   {/* Loan Amount */}
                   <div>
-                    <label className="block text-lg font-semibold text-white mb-3">
+                    <label className="block text-lg font-semibold text-gray-900 mb-3">
                       Loan Amount (₹)
                     </label>
                     <input
@@ -284,7 +284,7 @@ const EmiCalculator = () => {
                       max={loanMax}
                       value={loanAmount}
                       onChange={(e) => setLoanAmount(Number(e.target.value))}
-                      className="w-full border border-gray-600 rounded-lg p-3 mb-3 text-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full border border-gray-300 rounded-lg p-3 mb-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                     <input
                       type="range"
@@ -295,7 +295,7 @@ const EmiCalculator = () => {
                       onChange={(e) => setLoanAmount(Number(e.target.value))}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-sm text-gray-400 mt-2">
+                    <div className="flex justify-between text-sm text-gray-600 mt-2">
                       <span>₹{loanMin.toLocaleString('en-IN')}</span>
                       <span>₹{loanMax.toLocaleString('en-IN')}</span>
                     </div>
@@ -303,7 +303,7 @@ const EmiCalculator = () => {
 
                   {/* Rate of Interest */}
                   <div>
-                    <label className="block text-lg font-semibold text-white mb-3">
+                    <label className="block text-lg font-semibold text-gray-900 mb-3">
                       Rate of Interest (P.A.)
                     </label>
                     <div className="flex gap-3 items-center mb-3">
@@ -314,9 +314,9 @@ const EmiCalculator = () => {
                         max={interestMax}
                         value={interestRate}
                         onChange={(e) => setInterestRate(Number(e.target.value))}
-                        className="w-full border border-gray-600 rounded-lg p-3 text-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="w-full border border-gray-300 rounded-lg p-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                       />
-                      <span className="text-lg text-gray-400">%</span>
+                      <span className="text-lg text-gray-600">%</span>
                     </div>
                     <input
                       type="range"
@@ -327,7 +327,7 @@ const EmiCalculator = () => {
                       onChange={(e) => setInterestRate(Number(e.target.value))}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-sm text-gray-400 mt-2">
+                    <div className="flex justify-between text-sm text-gray-600 mt-2">
                       <span>{interestMin}%</span>
                       <span>{interestMax}%</span>
                     </div>
@@ -335,7 +335,7 @@ const EmiCalculator = () => {
 
                   {/* Loan Tenure */}
                   <div>
-                    <label className="block text-lg font-semibold text-white mb-3">
+                    <label className="block text-lg font-semibold text-gray-900 mb-3">
                       Loan Tenure
                     </label>
                     <div className="flex gap-3 items-center mb-3">
@@ -345,9 +345,9 @@ const EmiCalculator = () => {
                         max={tenureMax}
                         value={tenureYears}
                         onChange={(e) => setTenureYears(Number(e.target.value))}
-                        className="w-full border border-gray-600 rounded-lg p-3 text-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="w-full border border-gray-300 rounded-lg p-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
                       />
-                      <span className="text-lg text-gray-400">Years</span>
+                      <span className="text-lg text-gray-600">Years</span>
                     </div>
                     <input
                       type="range"
@@ -357,7 +357,7 @@ const EmiCalculator = () => {
                       onChange={(e) => setTenureYears(Number(e.target.value))}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-sm text-gray-400 mt-2">
+                    <div className="flex justify-between text-sm text-gray-600 mt-2">
                       <span>{tenureMin} Years</span>
                       <span>{tenureMax} Years</span>
                     </div>
@@ -367,21 +367,21 @@ const EmiCalculator = () => {
                 {/* Results */}
                 <div className="mt-8">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-gray-800 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">Monthly EMI</div>
-                      <div className="text-xl font-bold text-white">{formatINR(emi || 0)}</div>
+                    <div className="text-center p-4 bg-gray-100 rounded-lg">
+                      <div className="text-sm text-gray-600 mb-1">Monthly EMI</div>
+                      <div className="text-xl font-bold text-gray-900">{formatINR(emi || 0)}</div>
                     </div>
-                    <div className="text-center p-4 bg-gray-800 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">Principal Amount</div>
-                      <div className="text-xl font-bold text-white">{formatINR(loanAmount)}</div>
+                    <div className="text-center p-4 bg-gray-100 rounded-lg">
+                      <div className="text-sm text-gray-600 mb-1">Principal Amount</div>
+                      <div className="text-xl font-bold text-gray-900">{formatINR(loanAmount)}</div>
                     </div>
-                    <div className="text-center p-4 bg-gray-800 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">Total Interest</div>
-                      <div className="text-xl font-bold text-white">{formatINR(totalInterest || 0)}</div>
+                    <div className="text-center p-4 bg-gray-100 rounded-lg">
+                      <div className="text-sm text-gray-600 mb-1">Total Interest</div>
+                      <div className="text-xl font-bold text-gray-900">{formatINR(totalInterest || 0)}</div>
                     </div>
-                    <div className="text-center p-4 bg-gray-800 rounded-lg">
-                      <div className="text-sm text-gray-400 mb-1">Total Amount</div>
-                      <div className="text-xl font-bold text-white">{formatINR(totalPayment || 0)}</div>
+                    <div className="text-center p-4 bg-gray-100 rounded-lg">
+                      <div className="text-sm text-gray-600 mb-1">Total Amount</div>
+                      <div className="text-xl font-bold text-gray-900">{formatINR(totalPayment || 0)}</div>
                     </div>
                   </div>
                 </div>
@@ -398,12 +398,12 @@ const EmiCalculator = () => {
 
       {/* Informational Sections */}
       {/* Section 1: How can an online EMI calculator help you? */}
-      <section className="bg-gray-900 py-16">
+      <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-400 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
             How can an online EMI calculator help you?
           </h2>
-          <div className="text-white space-y-4">
+          <div className="text-gray-900 space-y-4">
             <p className="text-center mb-6">
               An online EMI calculator is an essential tool for anyone considering taking a loan. It provides quick and accurate calculations to help you understand your financial commitments.
             </p>
@@ -418,28 +418,28 @@ const EmiCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-gray-900">
-        <div className="border-t border-gray-600 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-gray-900 px-2 text-gray-400 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-gray-50">
+        <div className="border-t border-gray-300 w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-gray-50 px-2 text-gray-500 text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 2: The formula to determine loan EMI amount */}
-      <section className="bg-gray-900 py-16">
+      <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-400 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
             The formula to determine loan EMI amount
           </h2>
-          <div className="text-white space-y-6">
-            <div className="bg-gray-800 p-6 rounded-lg text-center max-w-md mx-auto">
-              <div className="text-2xl font-mono text-green-400">EMI = P × R × (1+R)^N / ((1+R)^N - 1)</div>
+          <div className="text-gray-900 space-y-6">
+            <div className="bg-gray-100 p-6 rounded-lg text-center max-w-md mx-auto">
+              <div className="text-2xl font-mono text-green-600">EMI = P × R × (1+R)^N / ((1+R)^N - 1)</div>
             </div>
             <div className="max-w-4xl mx-auto">
-              <h3 className="text-lg font-semibold text-green-400 mb-4">Where:</h3>
+              <h3 className="text-lg font-semibold text-green-600 mb-4">Where:</h3>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-green-400">P</strong> is the principal amount (loan amount)</li>
-                <li><strong className="text-green-400">R</strong> is the rate of interest per month (annual rate divided by 12)</li>
-                <li><strong className="text-green-400">N</strong> is the loan tenure in months</li>
+                <li><strong className="text-green-600">P</strong> is the principal amount (loan amount)</li>
+                <li><strong className="text-green-600">R</strong> is the rate of interest per month (annual rate divided by 12)</li>
+                <li><strong className="text-green-600">N</strong> is the loan tenure in months</li>
               </ul>
             </div>
             <p className="text-center max-w-4xl mx-auto">
@@ -450,19 +450,19 @@ const EmiCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-gray-900">
-        <div className="border-t border-gray-600 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-gray-900 px-2 text-gray-400 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-white">
+        <div className="border-t border-gray-300 w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 3: How to use Professional Utilities online EMI calculator? */}
-      <section className="bg-gray-900 py-16">
+      <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-400 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
             How to use Professional Utilities online EMI calculator?
           </h2>
-          <div className="text-white space-y-4">
+          <div className="text-gray-900 space-y-4">
             <p className="text-center mb-6">
               Using our EMI calculator is simple and takes just a few seconds to get accurate results.
             </p>
@@ -477,19 +477,19 @@ const EmiCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-gray-900">
-        <div className="border-t border-gray-600 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-gray-900 px-2 text-gray-400 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-gray-50">
+        <div className="border-t border-gray-300 w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-gray-50 px-2 text-gray-500 text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 4: Advantages of using Professional Utilities calculator */}
-      <section className="bg-gray-900 py-16">
+      <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-400 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
             Advantages of using Professional Utilities calculator
           </h2>
-          <div className="text-white">
+          <div className="text-gray-900">
             <ul className="list-disc list-inside space-y-2 max-w-4xl mx-auto">
               <li>Completely free to use with no hidden charges</li>
               <li>100% accurate calculations using standard financial formulas</li>
@@ -504,7 +504,7 @@ const EmiCalculator = () => {
       <FAQSection />
 
       {/* Section 2: Why Professional Utilities? */}
-      <div className="bg-gray-900">
+      <div className="bg-white">
         <WhyCompanySection />
       </div>
 
@@ -512,7 +512,7 @@ const EmiCalculator = () => {
       <TestimonialsSection />
 
       {/* Section 4: Trusted By */}
-      <div className="bg-gray-900">
+      <div className="bg-gray-50">
         <TrustedBy />
       </div>
     </div>

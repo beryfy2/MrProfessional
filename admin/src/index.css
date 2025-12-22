@@ -1,8 +1,12 @@
+/* ========= REPLACE :root ========= */
 :root {
   /* Brand (match frontend) */
   --navy: #0b3a66;
   --navy-dark: #082b4d;
-  --orange: #22c55e; /* use frontend green for CTAs */
+  --orange: #22c55e; /* primary success CTA */
+
+  /* Danger */
+  --danger: #ef4444;
 
   /* Backgrounds */
   --bg-main: #f6f9fc;
@@ -16,6 +20,28 @@
   --border-light: #e2e8f0;
   --radius-lg: 16px;
   --radius-md: 12px;
+}
+
+/* ========= REPLACE THESE RULES ========= */
+
+/* Table action delete button */
+.table td button:last-child {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* Category delete button */
+.list li button {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Status toggle accent */
+.status-toggle input {
+  accent-color: var(--danger);
 }
 
 html,
@@ -36,41 +62,95 @@ body {
 .layout {
   display: flex;
   height: 100vh;
+  gap: 24px;
 }
 
-/* Sidebar */
+/* ================= SIDEBAR REFINEMENT ================= */
+
+/* Sidebar container */
 .sidebar {
+  flex-shrink: 0;
   width: 260px;
-  background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+  background: linear-gradient(180deg, #0b3a66, #082b4d);
   color: white;
-  padding: 24px 16px;
+  padding: 28px 18px;
 }
 
+/* Brand title */
 .sidebar h2 {
-  margin-bottom: 28px;
-  font-size: 18px;
-  font-weight: 600;
+  margin-bottom: 36px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
+/* Section label (BLOGS) */
+.sidebar .section-label,
+.sidebar small {
+  display: block;
+  margin: 22px 12px 10px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Sidebar links (normal state) */
 .sidebar a {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  color: #cbd5e1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  background: transparent;
 }
 
+/* Hover effect */
 .sidebar a:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Active item (green pill like image) */
 .sidebar a.active {
   background: var(--orange);
   color: #ffffff;
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.45);
+}
+
+/* Icons inside sidebar */
+.sidebar a svg,
+.sidebar a .icon {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Push Admin Settings to bottom */
+.sidebar .bottom {
+  margin-top: auto;
+}
+
+/* Admin Settings button style */
+.sidebar .admin-settings {
+  margin-top: 30px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--orange);
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.45);
+}
+
+/* Hover for admin settings */
+.sidebar .admin-settings:hover {
+  filter: brightness(1.05);
 }
 /* Topbar */
 .content {
@@ -141,6 +221,7 @@ body {
 .main {
   padding: 32px 40px;
   max-width: 100%;
+  margin-left: 0 !important;
 }
 
 /* ================= Page ================= */
@@ -149,30 +230,97 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-top: 0;
+  margin-top: 0;
+  margin-left: 0;
 }
 
 .page-header {
-  margin-bottom: 0;
+  margin-bottom: 12px !important;
+  padding-bottom: 0;
+  align-items: center;
 }
 
 .page-header h1 {
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0 !important;
   font-size: 28px;
   font-weight: 700;
   color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.page h2 {
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+  line-height: 1.3;
 }
 
 .page-subtitle {
-  margin: 0;
+  margin: 0 0 14px 0 !important;
   font-size: 16px;
   color: var(--text-muted);
 }
 
+.page p {
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+}
+
 .page-actions {
-  margin: 16px 0 24px;
+  margin: 6px 0 12px 0 !important;
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+/* Fix Employees page extra gap */
+.page input[type="search"],
+.page input[placeholder*="Search"] {
+  margin-top: 0 !important;
+}
+
+/* Employees page specific fix */
+.page h2 + div {
+  margin-top: 6px !important;
+}
+
+/* =====================================================
+   FIX ALL BLOGS PAGE SPACING (FINAL POLISH)
+   ===================================================== */
+
+/* Reduce gap below "All Blogs" title */
+.page h1 + .page-subtitle,
+.page h2 + .page-subtitle {
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Remove extra gap before table card */
+.page-subtitle + .card,
+.page-subtitle + .table,
+.page-subtitle + .table-wrapper {
+  margin-top: 0 !important;
+}
+
+/* Ensure table starts close to subtitle */
+.table,
+.table-wrapper {
+  margin-top: 8px !important;
+}
+
+/* Fix page header overall spacing */
+.page-header {
+  margin-bottom: 10px !important;
+}
+
+/* Tighten "All Blogs" specific layout */
+.page h2 {
+  padding-top: 0 !important;
+}
+
+/* Remove any hidden spacer divs */
+.page > div:empty {
+  display: none !important;
 }
 
 /* ================= Cards ================= */
@@ -184,6 +332,7 @@ body {
   border: 1px solid var(--border-light);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
   max-width: 1000px;
+  margin-top: 0 !important;
 }
 
 /* KPI Cards */
@@ -239,6 +388,7 @@ body {
 .table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 0 !important;
 }
 
 .th {
@@ -318,6 +468,10 @@ body {
 /* ================= Responsive ================= */
 
 @media (max-width: 768px) {
+  .layout {
+    gap: 16px;
+  }
+
   .sidebar {
     width: 210px;
   }
@@ -333,4 +487,456 @@ body {
   .grid-2 {
     grid-template-columns: 1fr;
   }
+}
+/* ================= LOGIN PAGE ================= */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-main);
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.login-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.login-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.login-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  text-align: left;
+}
+
+.login-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.login-input {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin: 8px 0 16px;
+}
+
+.login-input input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.login-input:focus-within {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(11, 58, 102, 0.15);
+}
+
+/* Password row */
+.login-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-row a {
+  font-size: 13px;
+  color: var(--orange);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 22px;
+  }
+}
+/* ================= BLOG PAGES ================= */
+
+/* Page header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Primary action button */
+.page-header button {
+  background: #537ee1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ================= BLOG TABLE ================= */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  margin-top: 0 !important;
+}
+
+.table thead {
+  background: #f8fafc;
+}
+
+.table th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 16px 18px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Status badge */
+.table td:nth-child(3) {
+  font-weight: 600;
+}
+
+.table td:nth-child(3)::first-letter {
+  text-transform: uppercase;
+}
+
+.table td:nth-child(3)[data-status="published"] {
+  color: #16a34a;
+}
+
+/* Action buttons */
+.table td button {
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 8px;
+  border: 1px solid transparent;
+}
+
+.table td button:first-child {
+  border-color: #537ee1;
+  color: #537ee1;
+}
+
+.table td button:last-child {
+  border-color:#537ee1;
+  color: #537ee1;
+}
+
+/* ================= BLOG FORM ================= */
+
+.card input,
+.card select,
+.card textarea {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.card input:focus,
+.card select:focus,
+.card textarea:focus {
+  outline: none;
+  border-color: #0b3a66;
+  box-shadow: 0 0 0 3px rgba(11, 58, 102, 0.15);
+}
+
+/* Save button */
+.card button {
+  background: #0b3a66;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ================= STATUS TOGGLE ================= */
+
+.status-toggle {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.status-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.status-toggle input {
+  accent-color: #537ee1;
+}
+
+/* ================= BLOG EDITOR ================= */
+
+.blog-editor {
+  margin-bottom: 16px;
+}
+
+.blog-editor label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.blog-editor textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* ================= BLOG CATEGORIES ================= */
+
+.list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list li button {
+  background: transparent;
+  border: none;
+  color: #537ee1;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* =====================================================
+   ADMIN LAYOUT SPACING FIX (SIDEBAR ↔ MAIN CONTENT)
+   ===================================================== */
+
+/* Main app layout */
+.layout {
+  display: flex;
+  height: 100vh;
+  gap: 24px;                 /* ✅ 20–32px horizontal breathing space */
+  background: var(--bg-main);
+}
+
+/* Sidebar (fixed width) */
+.sidebar {
+  width: 260px;              /* ✅ fixed sidebar width */
+  flex-shrink: 0;
+}
+
+/* Main content wrapper */
+.content {
+  flex: 1;                   /* ✅ flexible main area */
+  display: flex;
+  flex-direction: column;
+  min-width: 0;              /* prevents overflow issues */
+}
+
+/* Topbar spacing */
+.topbar {
+  padding: 16px 32px;        /* ✅ internal padding */
+}
+
+/* Main page content area */
+.main {
+  flex: 1;
+  padding: 28px 32px;        /* ✅ top / right / bottom / left padding */
+  overflow-y: auto;
+}
+
+/* Page container alignment */
+.page {
+  margin: 0;
+  padding: 0;
+}
+
+/* Cards & tables align nicely inside content */
+.card,
+.table,
+.table-wrapper {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* =====================================================
+   RESPONSIVE REFINEMENT
+   ===================================================== */
+
+@media (max-width: 1024px) {
+  .layout {
+    gap: 20px;               /* slightly tighter on smaller screens */
+  }
+
+  .main {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    gap: 0;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .main {
+    padding: 20px;
+  }
+}
+/* ======== REAL LAYOUT FIX (MATCHES YOUR JSX) ======== */
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  gap: 24px;                /* ← THIS creates space */
+  background: var(--bg-main);
+}
+
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.main-content > .main {
+  padding: 28px 32px;       /* ← internal breathing space */
+}
+/* ================= ADMIN SETTINGS FONT FIX ================= */
+
+/* Page title (Admin Settings) */
+.page h2,
+.page-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* Section titles (Profile Settings, Security, Danger Zone) */
+.section-title,
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* Labels like Full Name, Email Address */
+.text-muted {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Values like Admin User, email, phone */
+.card div {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Paragraph text */
+.page-subtitle,
+.card p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+/* ===============================
+   GLOBAL BOX-SIZING FIX
+   =============================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

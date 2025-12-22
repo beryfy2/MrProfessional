@@ -4,3 +4,48 @@
 :root {
   --navbar-height: 80px;
 }
+/* ===============================
+   GLOBAL SOLID NAVBAR FIX
+   =============================== */
+
+header,
+.navbar,
+.site-header,
+.main-navbar {
+  background-color: #0b3a66 !important; /* brand blue */
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* If navbar is fixed or sticky */
+header,
+.navbar,
+.site-header,
+.main-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+/* ===============================
+   SOLID NAVBAR (SAFE & SCOPED)
+   =============================== */
+
+/* ONLY target the main website navbar */
+.site-nav,
+.site-nav header,
+.site-nav nav {
+  background-color: #0b3a66 !important; /* homepage blue */
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Ensure it stays solid on scroll */
+.site-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}

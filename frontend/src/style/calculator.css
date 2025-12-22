@@ -1,0 +1,130 @@
+/* =====================================================
+   FORCE CALCULATOR TO MATCH WEBSITE COLORS
+   (Overrides Tailwind safely)
+   ===================================================== */
+
+/* Page background */
+.calculator-page {
+  background: #f8fafc;
+}
+
+/* HERO SECTION */
+.calculator-page section:first-of-type {
+  background: linear-gradient(135deg, #2563eb, #1e40af) !important;
+}
+
+/* MAIN CALCULATOR CARD */
+.calculator-page .bg-gray-900 {
+  background: #0f172a !important;
+}
+
+/* Inner calculator card */
+.calculator-page .rounded-xl,
+.calculator-page .rounded-lg {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+/* TEXT COLORS */
+.calculator-page h1,
+.calculator-page h2,
+.calculator-page h3 {
+  color: #0f172a !important;
+}
+
+.calculator-page p,
+.calculator-page span,
+.calculator-page label {
+  color: #475569 !important;
+}
+
+/* INPUTS */
+.calculator-page input,
+.calculator-page select {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.calculator-page input:focus {
+  border-color: #14b8a6 !important;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+}
+
+/* BUTTONS */
+.calculator-page button {
+  background: #22c55e !important;
+  color: #ffffff !important;
+}
+
+.calculator-page button:hover {
+  background: #16a34a !important;
+}
+
+/* RESULT BOXES */
+.calculator-page .bg-gray-800 {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0;
+}
+
+/* INFO BOX */
+.calculator-page .bg-blue-900 {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+}
+
+/* FAQ HOVER FIX */
+.calculator-page .hover\:bg-gray-700:hover {
+  background: #f1f5f9 !important;
+}
+/* ===== FIX: Navbar overlapping hero ===== */
+.has-fixed-navbar {
+  padding-top: 80px; /* height of navbar */
+}
+
+@media (max-width: 768px) {
+  .has-fixed-navbar {
+    padding-top: 64px;
+  }
+}
+/* ===== FIX: Navbar overlapping calculator hero ===== */
+.calculator-hero {
+  padding-top: 96px; /* navbar height */
+  min-height: 320px;
+}
+
+@media (max-width: 768px) {
+  .calculator-hero {
+    padding-top: 72px;
+    min-height: 280px;
+  }
+}
+
+/* =====================================================
+   FORCE SOLID NAVBAR BACKGROUND
+   ===================================================== */
+
+/* Force solid navbar background - override transparent/glass effects */
+.calculator-page [class*="bg-"][class*="#0f4260"] {
+  background: rgb(11, 58, 102) !important;
+  backdrop-filter: none !important;
+}
+
+.calculator-page .backdrop--md {
+  backdrop-filter: none !important;
+}
+
+/* Additional navbar background override */
+.calculator-page nav,
+.calculator-page .navbar,
+.calculator-page header,
+.calculator-page .site-header {
+  background-color: rgb(11, 58, 102) !important;
+  backdrop-filter: none !important;
+  opacity: 100 !important;
+}
+
+/* =====================================================
+   END OF CALCULATOR STYLE OVERRIDES
+   ===================================================== */
