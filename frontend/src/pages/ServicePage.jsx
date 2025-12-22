@@ -4,6 +4,7 @@ import servicesData from "../data/servicesData";
 import NavBar from "../components/Navbar";
 import FloatingContactButtons from "../components/FloatingContactButtons";
 import HeroBg from "../assets/hero-bg.png";
+import TocImg from "../assets/toc-illustration.png";
 import WhyCompanySection from "./WhyUs";
 import TestimonialsSection from './TestimonialsSection'
 import TrustedBy from "../components/TrustBy";
@@ -257,16 +258,16 @@ const ServicePage = () => {
                 {page.title}
               </h1>
 
-             {/* <p className="text-green-400 text-lg font-semibold mb-6">
+              {/* <p className="text-green-400 text-lg font-semibold mb-6">
                 Get your Company Registration starts @ ₹8,499 Only!
               </p> */}
               <div className="text-green-400 text-lg font-semibold mb-6">
                 <h1 >
-                   Get your Company Registration starts ₹{page.price} Only!
+                  Get your Company Registration starts ₹{page.price} Only!
                 </h1>
 
               </div>
-              
+
 
               <ul className="space-y-3 text-lg">
                 <li>✅ Lowest Price Guarantee</li>
@@ -282,7 +283,7 @@ const ServicePage = () => {
 
             {/* RIGHT */}
             <div className="flex justify-center md:justify-end md:sticky md:top-28">
-              <StickyConsultationCard title={page.title}/> 
+              <StickyConsultationCard title={page.title} />
             </div>
 
           </div>
@@ -353,42 +354,106 @@ const ServicePage = () => {
         </div>
       </section>
 
-
       {/* TABLE OF CONTENT */}
-      {page.sections && (
+      {(page.faqs || page.questions)?.length > 0 && (
         <section className="max-w-7xl mx-auto px-6 py-12">
-          <div className="border rounded-2xl p-8 grid md:grid-cols-2 gap-10">
+          <div className="border rounded-2xl p-8 grid md:grid-cols-2 gap-10 bg-gray-100">
+
+            {/* LEFT */}
             <div>
-              <h2 className="text-2xl font-bold border-b-4 border-green-500 inline-block mb-4">
+              <h2 className="text-2xl font-bold mb-6 relative inline-block">
                 Table of Content
+                <span className="absolute left-0 -bottom-2 w-14 h-1 bg-green-500 rounded"></span>
               </h2>
 
-              <ul className="space-y-2 text-slate-700">
-                {page.sections.map((s) => (
-                  <li key={s.id}>
-                    •{" "}
-                    <a
-                      href={`#${s.id}`}
-                      className="hover:underline"
-                    >
-                      {s.heading}
-                    </a>
-                  </li>
-                ))}
-                <li>• FAQs</li>
+              <ul className="space-y-3 text-slate-700">
+                {(page.faqs || page.questions).map((f, index) => {
+                  const question = f.q || f.question;
+                  const id = `q-${question
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, "")
+                    .replace(/\s+/g, "-")}`;
+
+                  return (
+                    <li key={index} className="flex gap-2">
+                      <span className="text-green-500">•</span>
+                      <a
+                        href={`#${id}`}
+                        className="hover:underline hover:text-[#0f4260]"
+                      >
+                        {question}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
-            <div className="flex justify-center">
+            {/* RIGHT IMAGE */}
+            <div className="flex justify-center items-center">
               <img
-                src="/toc-illustration.png"
-                alt="Illustration"
-                className="max-w-sm"
+                src={TocImg}
+                alt="Table of content illustration"
+                className="max-w-sm w-full"
               />
             </div>
+
           </div>
         </section>
       )}
+
+      {/* QUESTIONS AS NORMAL SECTIONS */}
+      {(page.faqs || page.questions)?.length > 0 && (
+        <main className="max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+          {(page.faqs || page.questions).map((f, index, arr) => {
+            const question = f.q || f.question;
+            const answer = f.a || f.answer;
+
+            const id = `q-${question
+              .toLowerCase()
+              .replace(/[^\w\s-]/g, "")
+              .replace(/\s+/g, "-")}`;
+
+            return (
+              <section
+                key={index}
+                id={id}
+                className="scroll-mt-32"
+              >
+                {/* QUESTION HEADING */}
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-[#0f4260]">
+                  {question}
+                </h2>
+
+                {/* GREEN UNDERLINE */}
+                <div className="flex justify-center mt-3 mb-8">
+                  <span className="w-14 h-1 bg-green-500 rounded"></span>
+                </div>
+
+                {/* ANSWER */}
+                <div className="max-w-5xl mx-auto text-slate-700 leading-relaxed space-y-4 text-[17px]">
+                  {answer?.split("\n\n").map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+
+                {/* PRO DIVIDER */}
+                {index !== arr.length - 1 && (
+                  <div className="flex items-center gap-4 mt-14 opacity-40">
+                    <div className="flex-1 h-px bg-slate-300"></div>
+                    <span className="font-bold text-slate-300">PRO</span>
+                    <div className="flex-1 h-px bg-slate-300"></div>
+                  </div>
+                )}
+              </section>
+            );
+          })}
+
+        </main>
+      )}
+
+
 
       {/* CONTENT SECTIONS */}
       <main className="max-w-7xl mx-auto px-6 py-12 space-y-16">
