@@ -187,11 +187,14 @@ const Footer = () => {
 
                             <div className="flex items-center gap-4">
                                 {/* PhonePe logo */}
-                                <img
-                                    src={phonepeImg}
-                                    alt="PhonePe"
-                                    className="h-9 object-contain"
-                                />
+                                <Link to="/payment">
+  <img
+    src={phonepeImg}
+    alt="Pay via PhonePe"
+    className="h-9 object-contain cursor-pointer hover:scale-105 transition"
+  />
+</Link>
+
                             </div>
                         </div>
 

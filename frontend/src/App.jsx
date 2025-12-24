@@ -12,6 +12,7 @@ import Team from './components/Team'
 import VideoConsultBanner from './components/VideoConsultBanner'
 import WhyUs from './pages/WhyUs'
 import Footer from './components/Footer'
+import Payment from './pages/Payment';
 import IndustriesSection from './components/IndustriesSection'
 import TrustedBy from './components/TrustBy'
 import MediaCoverage from './components/MediaCoverage'
@@ -25,6 +26,7 @@ import ServicePage from './pages/ServicePage'
 import AboutUs from './pages/AboutUs'
 import TeamMem from './pages/TeamMem'
 import Blogs from './pages/Blogs'
+
 
 
 const Home = () => (
@@ -76,6 +78,8 @@ const App = () => {
          <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
         <Route path='/blogs' element={<Blogs/>} />
+        <Route path="/payment" element={<Payment/>} />
+      
       </Routes>
     </>
   )
