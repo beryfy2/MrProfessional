@@ -13,9 +13,10 @@ interface Category {
 export default function BlogCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const loadCategories = async () => {
-<<<<<<< HEAD
     setError("");
     try {
       const data = await fetchCategories();
@@ -44,22 +45,10 @@ export default function BlogCategories() {
     } finally {
       setLoading(false);
     }
-=======
-    const data = await fetchCategories();
-    setCategories(data);
-  };
-
-  const addCategory = async () => {
-    if (!newCategory.trim()) return;
-    await createCategory(newCategory);
-    setNewCategory("");
-    await loadCategories();
->>>>>>> a2d801196b98e5cf864996c37e5cd46e4ba29d2f
   };
 
   const removeCategory = async (id: string) => {
     if (!confirm("Delete this category?")) return;
-<<<<<<< HEAD
     setError("");
     setLoading(true);
     try {
@@ -71,10 +60,6 @@ export default function BlogCategories() {
     } finally {
       setLoading(false);
     }
-=======
-    await deleteCategory(id);
-    await loadCategories();
->>>>>>> a2d801196b98e5cf864996c37e5cd46e4ba29d2f
   };
 
   useEffect(() => {
