@@ -5,9 +5,7 @@ import { fetchBlogs, deleteBlog } from "../lib/blogApi";
 interface Blog {
   _id: string;
   title: string;
-  category?: {
-    name: string;
-  };
+  category?: { name: string } | string;
   status: "draft" | "published";
 }
 
@@ -15,7 +13,6 @@ export default function Blogs() {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
-<<<<<<< HEAD
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -37,22 +34,6 @@ export default function Blogs() {
     const data = await fetchBlogs();
     setBlogs(data);
   };
-=======
-  const removeBlog = async (id: string) => {
-    if (!confirm("Delete this blog?")) return;
-    await deleteBlog(id);
-    const data = await fetchBlogs();
-    setBlogs(data);
-  };
-
-  useEffect(() => {
-    const loadBlogs = async () => {
-      const data = await fetchBlogs();
-      setBlogs(data);
-    };
-    loadBlogs();
-  }, []);
->>>>>>> a2d801196b98e5cf864996c37e5cd46e4ba29d2f
 
   return (
     <div className="page">
@@ -101,7 +82,9 @@ export default function Blogs() {
                     </td>
                     <td className="td">
                       <span className="category-badge">
-                        {blog.category?.name || "Uncategorized"}
+                        {typeof blog.category === "object"
+                          ? blog.category?.name || "Uncategorized"
+                          : "Uncategorized"}
                       </span>
                     </td>
                     <td className="td">

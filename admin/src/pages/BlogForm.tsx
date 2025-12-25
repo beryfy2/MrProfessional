@@ -45,7 +45,12 @@ export default function BlogForm() {
           if (mounted) {
             setTitle(blog.title);
             setContent(blog.content);
-            setCategory(blog.category?._id);
+            const cat = blog.category as unknown;
+            const catId =
+              cat && typeof cat === "object" && "_id" in (cat as any)
+                ? String((cat as any)._id)
+                : String(cat || "");
+            setCategory(catId);
             setStatus(blog.status);
           }
         } catch {
@@ -80,15 +85,7 @@ export default function BlogForm() {
     navigate("/admin/blogs");
   };
 
-<<<<<<< HEAD
   
-=======
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadCategories();
-    loadBlog();
-  }, []);
->>>>>>> a2d801196b98e5cf864996c37e5cd46e4ba29d2f
 
   return (
     <div className="page">
