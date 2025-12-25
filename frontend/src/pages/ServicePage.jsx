@@ -13,6 +13,27 @@ import Footer from "../components/Footer";
 const API_BASE =
   import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
+// Get backend base URL (without /api)
+const getBackendBase = () => {
+  const apiBase = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+  // Remove /api from the end if present
+  if (apiBase.endsWith('/api')) {
+    return apiBase.slice(0, -4);
+  }
+  if (apiBase.endsWith('/api/')) {
+    return apiBase.slice(0, -5);
+  }
+  // If no /api found, assume it's already the base or extract protocol+host
+  try {
+    const url = new URL(apiBase);
+    return `${url.protocol}//${url.host}`;
+  } catch {
+    // Fallback: try to extract base manually
+    const match = apiBase.match(/^(https?:\/\/[^/]+)/);
+    return match ? match[1] : 'http://localhost:5000';
+  }
+};
+
 /* -------------------------- helpers -------------------------- */
 
 function slugVariants(slug) {
@@ -329,28 +350,60 @@ const ServicePage = () => {
           </div>
 
           {/* PDF PREVIEW */}
-          <div className="border rounded-lg overflow-hidden h-[420px] bg-slate-100">
-            <iframe
-              src={
-                page?.files?.[0]?.url ||
-                "/certificate-sample.pdf"
-              }
-              title="Company Registration Certificate"
-              className="w-full h-full"
-            />
-          </div>
+          {(() => {
+            // Find the first PDF file
+            const pdfFile = page?.files?.find(
+              (f) =>
+                f.mimetype === 'application/pdf' ||
+                f.filename?.toLowerCase().endsWith('.pdf') ||
+                f.url?.toLowerCase().endsWith('.pdf')
+            );
 
-          {/* Open in new tab */}
-          <div className="mt-3 text-center text-sm">
-            <a
-              href={page?.files?.[0]?.url || "/certificate-sample.pdf"}
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 underline"
-            >
-              View Certificate in New Tab
-            </a>
-          </div>
+            // Construct the PDF URL
+            let pdfUrl = null;
+            const backendBase = getBackendBase();
+            
+            if (pdfFile?.url) {
+              // If URL starts with /uploads, prepend the backend base URL
+              if (pdfFile.url.startsWith('/uploads')) {
+                pdfUrl = `${backendBase}${pdfFile.url}`;
+              } else if (pdfFile.url.startsWith('http://') || pdfFile.url.startsWith('https://')) {
+                // Already absolute URL
+                pdfUrl = pdfFile.url;
+              } else {
+                // Relative URL, prepend backend base
+                pdfUrl = `${backendBase}${pdfFile.url.startsWith('/') ? '' : '/'}${pdfFile.url}`;
+              }
+            } else {
+              // Fallback to default sample PDF
+              pdfUrl = "/certificate-sample.pdf";
+            }
+
+            return (
+              <>
+                <div className="border rounded-lg overflow-hidden h-[420px] bg-slate-100">
+                  <iframe
+                    src={pdfUrl}
+                    title="Company Registration Certificate"
+                    className="w-full h-full"
+                    type="application/pdf"
+                  />
+                </div>
+
+                {/* Open in new tab */}
+                <div className="mt-3 text-center text-sm">
+                  <a
+                    href={pdfUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-600 underline"
+                  >
+                    View Certificate in New Tab
+                  </a>
+                </div>
+              </>
+            );
+          })()}
         </div>
       </section>
 
