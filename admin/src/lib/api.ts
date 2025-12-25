@@ -11,13 +11,37 @@ function authHeaders(): Record<string, string> {
 
 export async function getJSON<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, { headers: { ...authHeaders() } });
-  if (!res.ok) throw new Error('Request failed');
+  if (!res.ok) {
+    let msg = `Request failed (${res.status})`;
+    try {
+      const data = await res.json();
+      msg = String((data && (data.error || data.message)) || msg);
+    } catch {
+      try {
+        const text = await res.text();
+        if (text) msg = text;
+      } catch {}
+    }
+    throw new Error(msg);
+  }
   return res.json();
 }
 
 export async function sendForm<T>(path: string, form: FormData, method: 'POST' | 'PUT' = 'POST') {
   const res = await fetch(`${API_BASE}${path}`, { method, headers: { ...authHeaders() }, body: form });
-  if (!res.ok) throw new Error('Request failed');
+  if (!res.ok) {
+    let msg = `Request failed (${res.status})`;
+    try {
+      const data = await res.json();
+      msg = String((data && (data.error || data.message)) || msg);
+    } catch {
+      try {
+        const text = await res.text();
+        if (text) msg = text;
+      } catch {}
+    }
+    throw new Error(msg);
+  }
   return res.json() as Promise<T>;
 }
 
@@ -27,13 +51,37 @@ export async function sendJSON<T>(path: string, body: unknown, method: 'POST' | 
     headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(body)
   });
-  if (!res.ok) throw new Error('Request failed');
+  if (!res.ok) {
+    let msg = `Request failed (${res.status})`;
+    try {
+      const data = await res.json();
+      msg = String((data && (data.error || data.message)) || msg);
+    } catch {
+      try {
+        const text = await res.text();
+        if (text) msg = text;
+      } catch {}
+    }
+    throw new Error(msg);
+  }
   return res.json() as Promise<T>;
 }
 
 export async function delJSON<T>(path: string) {
   const res = await fetch(`${API_BASE}${path}`, { method: 'DELETE', headers: { ...authHeaders() } });
-  if (!res.ok) throw new Error('Request failed');
+  if (!res.ok) {
+    let msg = `Request failed (${res.status})`;
+    try {
+      const data = await res.json();
+      msg = String((data && (data.error || data.message)) || msg);
+    } catch {
+      try {
+        const text = await res.text();
+        if (text) msg = text;
+      } catch {}
+    }
+    throw new Error(msg);
+  }
   return res.json() as Promise<T>;
 }
 

@@ -32,9 +32,9 @@ export default function Payment() {
           </h1>
 
           <div className="brand">
-            <img src={puLogo} alt="Professional Utilities" />
+            <img src={puLogo} alt="mrpro" />
             <h2>
-              Professional <br /> Utilities
+              mrpro <br /> Utilities
             </h2>
           </div>
 

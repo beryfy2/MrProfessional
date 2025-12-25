@@ -14,12 +14,12 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
         <div
             className="w-full text-white text-sm px-6 flex items-center justify-between"
             style={{
-                background: "#0f4260",
+                background: transparent ? "transparent" : "#0f4260",
                 height: "56px",
                 transform: hidden ? "translateY(-100%)" : "translateY(0)",
                 transition: "transform 300ms ease, background-color 300ms ease",
                 zIndex: 70,
-                backdropFilter: "none",
+                backdropFilter: transparent ? "saturate(180%) blur(6px)" : "none",
             }}
         >
             {/* Contact Details */}

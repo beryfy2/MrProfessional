@@ -62,12 +62,33 @@ export default function EmployeeDetail() {
   async function handleSave() {
     if (!emp) return;
 
+    const required = [
+      ['Email', emp.email],
+      ['Position', emp.position],
+      ['Department', emp.department]
+    ];
+    const nameCandidate =
+      `${(emp.firstName || '').trim()} ${(emp.lastName || '').trim()}`.trim() ||
+      (emp.name || '').trim();
+    const missing = required
+      .filter(([, v]) => !String(v || '').trim())
+      .map(([k]) => k);
+    if (!nameCandidate) missing.unshift('Name');
+    if (missing.length > 0) {
+      alert(`Please fill required fields: ${missing.join(', ')}`);
+      return;
+    }
+
     const form = new FormData();
     Object.entries(emp).forEach(([k, v]) => {
       if (v !== undefined && v !== null && k !== '_id') {
         form.append(k, String(v));
       }
     });
+    const combinedName = `${emp.firstName || ''}${
+      emp.firstName && emp.lastName ? ' ' : ''
+    }${emp.lastName || ''}`.trim();
+    if (combinedName) form.set('name', combinedName);
 
     const input = document.getElementById('photoInput') as HTMLInputElement | null;
     const file = input?.files?.[0];
@@ -77,10 +98,16 @@ export default function EmployeeDetail() {
       setSaving(true);
       if (id === 'new') {
         await sendForm<Employee>(`/employees`, form, 'POST');
+        alert('Employee created');
         navigate('/admin/employees');
         return;
       }
-      await sendForm<Employee>(`/employees/${id}`, form, 'PUT');
+      const updated = await sendForm<Employee>(`/employees/${id}`, form, 'PUT');
+      setEmp(updated);
+      alert('Employee saved');
+    } catch (e) {
+      const msg = typeof e === 'object' && e && 'message' in e ? String((e as Error).message) : 'Failed to save employee.';
+      alert(msg);
     } finally {
       setSaving(false);
     }

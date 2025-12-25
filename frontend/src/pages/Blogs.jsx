@@ -28,7 +28,7 @@ export default function Blogs() {
       try {
         const [catRes, blogRes] = await Promise.all([
           fetch(`${API_BASE}/categories`),
-          fetch(`${API_BASE}/public/blogs`),
+          fetch(`${API_BASE}/public/blogs?includeDrafts=1`),
         ]);
 
         if (!catRes.ok || !blogRes.ok) {
@@ -54,7 +54,9 @@ export default function Blogs() {
   const filteredBlogs = useMemo(() => {
     return blogs.filter((b) => {
       const matchCategory =
-        !activeCategory || b.category?._id === activeCategory;
+        !activeCategory ||
+        b.category?._id === activeCategory ||
+        b.category?.slug === activeCategory;
 
       const text = stripHtml(b.content || "").toLowerCase();
       const matchSearch =
@@ -169,6 +171,9 @@ export default function Blogs() {
                 <p className="blog-meta">
                   {blog.category?.name} •{" "}
                   {new Date(blog.createdAt).toDateString()}
+                  {blog.status === "draft" && (
+                    <> • <span className="draft-badge">Draft</span></>
+                  )}
                 </p>
 
                 <p className="blog-excerpt">
