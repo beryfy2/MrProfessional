@@ -56,57 +56,51 @@ const PpfCalculator = () => {
   return (
     <div className="has-fixed-navbar">
       {/* Hero Section */}
-      <section className="calculator-hero bg-linear-to-r from-blue-900 to-blue-600 flex items-center">
+      <section className="calculator-hero bg-gradient-to-r from-blue-900 to-blue-600 flex items-center pt-24">
         <div className="max-w-7xl mx-auto px-4 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Left Side - 60% */}
-            <div className="lg:col-span-3 text-gray-900">
+            <div className="lg:col-span-3 text-white">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                PPF Calculator - Public Provident Fund Calculator Online
+                PPF Calculator
               </h1>
               <p className="text-lg mb-4">
                 Use our advanced PPF calculator with the latest interest rate of 7.1% to estimate returns on your Public Provident Fund investment. Plan your long-term tax-free savings effectively.
               </p>
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-wrap gap-2">
                 <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Tax-Free Returns</span>
                 <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Section 80C Benefits</span>
-                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Long-Term Wealth Creation</span>
-                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Government Backed Security</span>
-              </div>
-              <div className="flex items-center mt-4">
-                <a href="#google-reviews" className="flex items-center text-white hover:text-green-300">
-                  <span className="text-yellow-400 mr-2">★★★★★</span>
-                  <span>Google Reviews</span>
-                  <span className="ml-2 font-bold">4.9</span>
-                </a>
+                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Long-Term Wealth</span>
+                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Govt. Backed</span>
               </div>
             </div>
+            
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
-              <div className="bg-white border-2 border-green-600 rounded-lg p-6 w-full max-w-md shadow-2xl">
-                <h3 className="text-green-600 text-lg font-semibold mb-4 text-center">Get Expert Consultation</h3>
-                <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
+              <div className="expert-consultation-form bg-white border-2 border-green-600 rounded-lg p-3 w-full max-w-xs shadow-2xl">
+                <h3 className="text-green-600 font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+                <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition-colors"
+                    className="w-full bg-green-600 text-white text-xs py-1.5 rounded font-medium hover:bg-green-700 transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>

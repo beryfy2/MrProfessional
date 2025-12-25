@@ -1,0 +1,267 @@
+/* =====================================================
+   PAGE BASE (MATCH EMI)
+===================================================== */
+
+.has-fixed-navbar {
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
+  color: #0f172a;
+}
+
+/* =====================================================
+   HERO (SAME AS EMI HERO)
+===================================================== */
+
+.calculator-hero {
+  position: relative;
+  height: 520px;
+  background: url("https://images.unsplash.com/photo-1521791136064-7986c2920216")
+    center / cover no-repeat;
+}
+
+.calculator-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 52, 88, 0.92);
+}
+
+.calculator-hero > div {
+  position: relative;
+  z-index: 2;
+}
+
+.calculator-hero h1 {
+  color: #ffffff;
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.calculator-hero p {
+  color: #e5e7eb;
+  font-size: 17px;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.calculator-hero span {
+  font-weight: 600;
+}
+
+/* =====================================================
+   HERO CONSULT CARD (EMI RIGHT CARD)
+===================================================== */
+
+.calculator-hero .bg-white {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 28px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.calculator-hero h3 {
+  color: #093458;
+  font-size: 22px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.calculator-hero input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0 12px;
+  margin-bottom: 12px;
+}
+
+.calculator-hero button {
+  width: 100%;
+  height: 46px;
+  background: #38e000;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+/* =====================================================
+   CALCULATOR MAIN SECTION (EMI LAYOUT)
+===================================================== */
+
+section.py-16 {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+section .rounded-xl {
+  border-radius: 14px;
+}
+
+section h2 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #0b3a66;
+  margin-bottom: 30px;
+}
+
+/* =====================================================
+   INPUT FIELDS (MATCH EMI FIELDS)
+===================================================== */
+
+label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+input[type="number"],
+input[type="date"] {
+  height: 44px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  font-size: 15px;
+}
+
+input[type="range"] {
+  accent-color: #0b3a66;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #22c55e;
+}
+
+/* =====================================================
+   COMMON RATE BUTTONS (EMI STYLE)
+===================================================== */
+
+button.bg-gray-100 {
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+button.bg-gray-100:hover {
+  background: #e2e8f0;
+}
+
+/* =====================================================
+   RESULT CARDS (EMI STATS STYLE)
+===================================================== */
+
+.text-teal-600 {
+  color: #0b3a66;
+}
+
+.text-green-600 {
+  color: #22c55e;
+}
+
+.text-red-500 {
+  color: #ef4444;
+}
+
+.bg-gray-50 {
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+/* =====================================================
+   TABLE (EMI CONSISTENT)
+===================================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f0fdf4;
+}
+
+th {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0b3a66;
+  padding: 12px;
+}
+
+td {
+  padding: 12px;
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* =====================================================
+   PU DIVIDER (SAME AS EMI)
+===================================================== */
+
+.border-t {
+  border-top: 1px solid #e2e8f0;
+}
+
+.border-t span {
+  font-weight: 700;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+/* =====================================================
+   CONTENT SECTIONS (MATCH EMI CONTENT BLOCKS)
+===================================================== */
+
+section.bg-white h2 {
+  font-size: 32px;
+  color: #0b3a66;
+}
+
+section.bg-white p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #0f172a;
+}
+
+/* =====================================================
+   FAQ (EMI STYLE)
+===================================================== */
+
+.bg-gray-50.border-green-200 {
+  background: #f9fbfd;
+  border-radius: 18px;
+}
+
+.bg-gray-50.border-green-200 button {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.bg-gray-50.border-green-200 button:hover {
+  background: #f1f5f9;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1024px) {
+  .calculator-hero {
+    height: auto;
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .calculator-hero h1 {
+    font-size: 28px;
+  }
+
+  section h2 {
+    font-size: 26px;
+  }
+}

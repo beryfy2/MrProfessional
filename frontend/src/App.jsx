@@ -1,13 +1,13 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import NavBar from './components/Navbar'
+ 
 import ScrollToTop from './components/ScrollToTop'
 import HeroPage from './pages/HeroPage'
 import SolutionSection from './pages/SolutionSection'
 import TestimonialsSection from './pages/TestimonialsSection'
 import TypingBanner from './components/TypingBanner'
-import ContactSection from './pages/ContactSection'
+import NavBar from './components/NavBar'
 import Team from './components/Team'
 import VideoConsultBanner from './components/VideoConsultBanner'
 import WhyUs from './pages/WhyUs'
@@ -26,7 +26,11 @@ import ServicePage from './pages/ServicePage'
 import AboutUs from './pages/AboutUs'
 import TeamMem from './pages/TeamMem'
 import Blogs from './pages/Blogs'
-
+import Contact from './pages/Contact'
+import PartnersSignup from './pages/PartnersSignup'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsAndConditions from './pages/TermsAndConditions'
+import RefundPolicy from './pages/RefundPolicy'
 
 
 const Home = () => (
@@ -43,12 +47,9 @@ const Home = () => (
     <IndustriesSection />
     <TrustedBy />
     <MediaCoverage />
-
-    <ContactSection />
+    
     <VideoConsultBanner />
-
     <WhyUs />
-
 
     <Footer />
   </div>
@@ -75,14 +76,20 @@ const App = () => {
         <Route path="/tools/depreciation-calculator" element={<ToolPage><DepreciationCalculator /></ToolPage>} />
         <Route path="/tools/tds-interest-calculator" element={<ToolPage><TdsInterestCalculator /></ToolPage>} />
         <Route path="/tools/fssai-status" element={<ToolPage><FssaiLicenseChecker /></ToolPage>} />
-         <Route path="/about" element={<AboutUs />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
         <Route path='/blogs' element={<Blogs/>} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/partners-signup" element={<PartnersSignup />} />
         <Route path="/payment" element={<Payment/>} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
       
       </Routes>
     </>
   )
 }
+
 
 export default App

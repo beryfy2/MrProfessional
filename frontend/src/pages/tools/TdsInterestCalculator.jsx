@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from "react";
+import { FaCalculator, FaCalendarAlt, FaMoneyBillWave, FaInfoCircle } from "react-icons/fa";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { BsQuestionCircle } from "react-icons/bs";
 import WhyCompanySection from "../WhyUs";
 import TestimonialsSection from "../TestimonialsSection";
 import TrustedBy from "../../components/TrustBy";
+import "../../style/tools.css";
 
+// Format currency in INR
 const formatINR = (value) => {
   try {
-    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(value);
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(value || 0);
   } catch {
-    return `₹${Math.round(value)}`;
+    return `₹${Math.round(value || 0)}`;
   }
 };
 
 const TdsInterestCalculator = () => {
-  // Inputs
-  const [tdsAmount, setTdsAmount] = useState(10000);
-  const [dueDeductionDate, setDueDeductionDate] = useState(new Date().toISOString().split('T')[0]);
-  const [actualDeductionDate, setActualDeductionDate] = useState(new Date().toISOString().split('T')[0]);
-  const [actualDepositDate, setActualDepositDate] = useState(new Date().toISOString().split('T')[0]);
+  // Input states
+  const [tdsAmount, setTdsAmount] = useState(100000);
+  const [dueDeductionDate, setDueDeductionDate] = useState(
+    new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split("T")[0]
+  );
+  const [actualDeductionDate, setActualDeductionDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const [actualDepositDate, setActualDepositDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [isPropertyTds, setIsPropertyTds] = useState(false);
 
   // Results
@@ -25,8 +40,6 @@ const TdsInterestCalculator = () => {
   const [totalInterest, setTotalInterest] = useState(0);
   const [deductionDelayMonths, setDeductionDelayMonths] = useState(0);
   const [depositDelayMonths, setDepositDelayMonths] = useState(0);
-
-  // FAQ state
   const [openFaq, setOpenFaq] = useState(null);
 
   // Auto-calc on change
@@ -100,7 +113,7 @@ const TdsInterestCalculator = () => {
   return (
     <div className="has-fixed-navbar">
       {/* Hero Section */}
-      <section className="calculator-hero bg-gradient-to-r from-blue-900 to-blue-600 flex items-center">
+      <section className="calculator-hero bg-gradient-to-r from-blue-900 to-blue-600 flex items-center pt-24">
         <div className="max-w-7xl mx-auto px-4 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Left Side - 60% */}
@@ -127,30 +140,30 @@ const TdsInterestCalculator = () => {
             </div>
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
-              <div className="bg-white border-2 border-green-600 rounded-lg p-6 w-full max-w-md shadow-2xl">
-                <h3 className="text-green-600 text-lg font-semibold mb-4 text-center">Get Expert Consultation</h3>
-                <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
+              <div className="expert-consultation-form bg-white border-2 border-green-600 rounded-lg p-3 w-full max-w-xs shadow-2xl">
+                <h3 className="text-green-600 font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+                <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition-colors"
+                    className="w-full bg-green-600 text-white text-xs py-1.5 rounded font-medium hover:bg-green-700 transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
