@@ -16,6 +16,9 @@ export default function SubtitleDetail() {
   const [count, setCount] = useState<number>(0);
   const [faqs, setFaqs] = useState<QA[]>([]);
   const [faqCount, setFaqCount] = useState<number>(0);
+  const [batchCount, setBatchCount] = useState<number>(0);
+  const [batchNames, setBatchNames] = useState<string[]>([]);
+  const [batchError, setBatchError] = useState<string>('');
 
   const uploadRef = useRef<HTMLInputElement | null>(null);
 
@@ -75,6 +78,33 @@ export default function SubtitleDetail() {
     Array.from(filesList).forEach((f) => form.append('files', f));
     const updated = await sendForm<Subtitle>(`/subtitles/${id}/files`, form, 'POST');
     setFiles(updated.files || []);
+  }
+  async function uploadBatch(filesList: FileList | null) {
+    setBatchError('');
+    if (!filesList || filesList.length === 0) return;
+    const count = Number(batchCount) || 0;
+    if (count <= 0) {
+      setBatchError('Enter number of files');
+      return;
+    }
+    if (filesList.length !== count) {
+      setBatchError('Selected files count does not match');
+      return;
+    }
+    const names = Array.from({ length: count }, (_, i) => String(batchNames[i] || '').trim());
+    if (names.some((n) => !n)) {
+      setBatchError('Enter name for each file');
+      return;
+    }
+    const form = new FormData();
+    Array.from(filesList).forEach((f, idx) => {
+      form.append('files', f);
+      form.append(`customName_${idx}`, names[idx]);
+    });
+    const updated = await sendForm<Subtitle>(`/subtitles/${id}/files`, form, 'POST');
+    setFiles(updated.files || []);
+    setBatchCount(0);
+    setBatchNames([]);
   }
 
   async function removeFile(fid: string) {
@@ -158,12 +188,45 @@ export default function SubtitleDetail() {
             <button className="btn" onClick={() => uploadRef.current?.click()}>
               Upload Files
             </button>
+            <div className="grid-1-2">
+              <div className="card" style={{ display: 'grid', gap: 8 }}>
+                <div style={{ fontWeight: 600 }}>Batch PDF Upload</div>
+                <input
+                  className="input"
+                  type="number"
+                  placeholder="Number of files"
+                  value={batchCount || ''}
+                  onChange={(e) => setBatchCount(Number(e.target.value || 0))}
+                />
+                {Array.from({ length: batchCount || 0 }).map((_, idx) => (
+                  <input
+                    key={idx}
+                    className="input"
+                    placeholder={`File ${idx + 1} name`}
+                    value={batchNames[idx] || ''}
+                    onChange={(e) => {
+                      const next = [...batchNames];
+                      next[idx] = e.target.value;
+                      setBatchNames(next);
+                    }}
+                  />
+                ))}
+                <input
+                  className="input"
+                  type="file"
+                  multiple
+                  accept="application/pdf"
+                  onChange={(e) => uploadBatch(e.target.files)}
+                />
+                {batchError && <div style={{ color: '#DC2626' }}>{batchError}</div>}
+              </div>
+            </div>
 
             {files.length > 0 && (
               <div className="grid-2">
                 {files.map((f) => (
                   <div key={f._id} className="card">
-                    <div style={{ fontSize: 13 }}>{f.filename}</div>
+                    <div style={{ fontSize: 13 }}>{f.customName || f.label || f.filename}</div>
                     <button className="btn" style={{ color: '#DC2626' }} onClick={() => removeFile(f._id!)}>
                       Remove
                     </button>

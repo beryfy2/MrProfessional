@@ -699,12 +699,19 @@ app.delete('/api/subtitles/:sid/questions/:idx/files/:fileId', auth, async (req,
 });
 app.post('/api/subtitles/:sid/files', auth, upload.array('files', 8), async (req, res) => {
   try {
-    const files = (req.files || []).map((f) => ({
-      filename: f.filename,
-      url: `/uploads/${f.filename}`,
-      mimetype: f.mimetype,
-      size: f.size
-    }));
+    const label = req.body?.label ? String(req.body.label) : undefined;
+    const files = (req.files || []).map((f, idx) => {
+      const key = `customName_${idx}`;
+      const cn = req.body && key in req.body ? String(req.body[key]) : undefined;
+      return {
+        filename: f.filename,
+        url: `/uploads/${f.filename}`,
+        mimetype: f.mimetype,
+        size: f.size,
+        label,
+        customName: cn || undefined
+      };
+    });
     const sub = await Subtitle.findByIdAndUpdate(
       req.params.sid,
       { $push: { files: { $each: files } } },

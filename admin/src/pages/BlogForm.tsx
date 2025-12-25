@@ -46,10 +46,13 @@ export default function BlogForm() {
             setTitle(blog.title);
             setContent(blog.content);
             const cat = blog.category as unknown;
-            const catId =
-              cat && typeof cat === "object" && "_id" in (cat as any)
-                ? String((cat as any)._id)
-                : String(cat || "");
+            let catId = "";
+            if (typeof cat === "string") {
+              catId = cat;
+            } else if (cat && typeof cat === "object" && "_id" in cat) {
+              const maybe = (cat as { _id?: unknown })._id;
+              catId = typeof maybe === "string" ? maybe : "";
+            }
             setCategory(catId);
             setStatus(blog.status);
           }

@@ -4,6 +4,8 @@ export type FileMeta = {
   url: string;
   mimetype: string;
   size: number;
+  label?: string;
+  customName?: string;
 };
 
 export type QA = {

@@ -9,7 +9,6 @@ import {
     faMapMarkerAlt, 
     faCheck,
     faUserTie,
-    faBuilding,
     faUpload,
     faFileAlt,
     faGlobe,
@@ -17,9 +16,10 @@ import {
     faStar
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 const PartnersSignup = () => {
-    const [activeTab, setActiveTab] = useState('individual');
+    const activeTab = 'individual';
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -34,7 +34,9 @@ const PartnersSignup = () => {
         message: '',
         document: null
     });
-    const [formErrors, setFormErrors] = useState({});
+    const [formErrors] = useState({});
+    const [sending, setSending] = useState(false);
+    const [notice, setNotice] = useState('');
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -44,9 +46,47 @@ const PartnersSignup = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
+        setNotice('');
+        if (!formData.name || !formData.email || !formData.phone) {
+            setNotice('Please fill required fields');
+            return;
+        }
+        const form = new FormData();
+        form.append('companyName', formData.companyName || 'Partnership Proposal');
+        form.append('contactPerson', formData.name);
+        form.append('email', formData.email);
+        form.append('subject', 'Get Proposal Request');
+        const msg = [
+            `Phone: ${formData.phone}`,
+            formData.city ? `City: ${formData.city}` : '',
+            formData.state ? `State: ${formData.state}` : '',
+            formData.profession ? `Profession: ${formData.profession}` : '',
+            formData.designation ? `Designation: ${formData.designation}` : '',
+            formData.experience ? `Experience: ${formData.experience}` : '',
+            formData.qualification ? `Qualification: ${formData.qualification}` : '',
+            formData.message ? `Message: ${formData.message}` : ''
+        ].filter(Boolean).join('\n');
+        form.append('message', msg || 'Partnership proposal enquiry');
+        if (formData.document) {
+            form.append('file', formData.document);
+        }
+        try {
+            setSending(true);
+            const res = await fetch(`${API_BASE}/enquiries`, { method: 'POST', body: form });
+            if (!res.ok) {
+                const data = await res.json().catch(() => null);
+                throw new Error((data && (data.error || data.message)) || 'Failed to submit');
+            }
+            setNotice('Proposal request submitted');
+            setFormData(prev => ({ ...prev, message: '', document: null }));
+        } catch (err) {
+            const msgText = typeof err === 'object' && err && 'message' in err ? String(err.message) : 'Failed to submit';
+            setNotice(msgText);
+        } finally {
+            setSending(false);
+        }
     };
 
     const renderFormField = (label, name, type = 'text', required = true, icon = null, options = []) => (
@@ -282,10 +322,13 @@ const PartnersSignup = () => {
                                         <div className="mt-8">
                                             <button
                                                 type="submit"
-                                                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-md text-lg transition duration-200 flex items-center justify-center"
+                                                onClick={handleSubmit}
+                                                disabled={sending}
+                                                className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-semibold py-4 px-6 rounded-md text-lg transition duration-200 flex items-center justify-center"
                                             >
-                                                GET PROPOSAL
+                                                {sending ? 'Submitting...' : 'GET PROPOSAL'}
                                             </button>
+                                            {notice && <div className="text-center text-sm mt-3">{notice}</div>}
                                         </div>
                                     </form>
                                 </div>

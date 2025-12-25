@@ -190,6 +190,19 @@ const ServicePage = () => {
   const [sub, setSub] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const pdfFiles = useMemo(() => {
+    const files = (sub || data)?.files || [];
+    return (files || []).filter(
+      (f) =>
+        f?.mimetype === "application/pdf" ||
+        String(f?.filename || "").toLowerCase().endsWith(".pdf") ||
+        String(f?.url || "").toLowerCase().endsWith(".pdf")
+    );
+  }, [sub, data]);
+  const [activePdfIndex, setActivePdfIndex] = useState(0);
+  useEffect(() => {
+    setActivePdfIndex(0);
+  }, [pdfFiles.length]);
 
   useEffect(() => {
     let cancelled = false;
@@ -346,25 +359,54 @@ const ServicePage = () => {
 
               {/* Tabs */}
               <div className="flex gap-2 mb-4 flex-wrap justify-center">
-                {["Pvt Ltd", "LLP", "OPC", "Public Ltd", "Section 8"].map((t) => (
-                  <button
-                    key={t}
-                    className="px-3 py-1 border text-sm
-                      hover:bg-[#0f4260] hover:text-white transition"
-                  >
-                    {t}
-                  </button>
-                ))}
+                {pdfFiles.length === 0 ? (
+                  ["Pvt Ltd", "LLP", "OPC", "Public Ltd", "Section 8"].map((t) => (
+                    <button
+                      key={t}
+                      className="px-3 py-1 border text-sm
+                        hover:bg-[#0f4260] hover:text-white transition"
+                    >
+                      {t}
+                    </button>
+                  ))
+                ) : (
+                  pdfFiles.map((f, idx) => {
+                    const name =
+                      f.customName ||
+                      f.label ||
+                      String(f.filename || "")
+                        .split("/")
+                        .pop()
+                        .replace(/\.[^/.]+$/, "") ||
+                      `Document ${idx + 1}`;
+                    const isActive = idx === activePdfIndex;
+                    const base =
+                      "px-3 py-1 border text-sm transition";
+                    const active = "bg-[#0f4260] text-white";
+                    const normal = "hover:bg-[#0f4260] hover:text-white";
+                    return (
+                      <button
+                        key={`${name}-${idx}`}
+                        className={`${base} ${isActive ? active : normal}`}
+                        onClick={() => setActivePdfIndex(idx)}
+                      >
+                        {name}
+                      </button>
+                    );
+                  })
+                )}
               </div>
 
               {/* PDF PREVIEW */}
               {(() => {
-                const pdfFile = page?.files?.find(
-                  (f) =>
-                    f.mimetype === "application/pdf" ||
-                    f.filename?.toLowerCase().endsWith(".pdf") ||
-                    f.url?.toLowerCase().endsWith(".pdf")
-                );
+                const pdfFile =
+                  pdfFiles[activePdfIndex] ||
+                  page?.files?.find(
+                    (f) =>
+                      f.mimetype === "application/pdf" ||
+                      f.filename?.toLowerCase().endsWith(".pdf") ||
+                      f.url?.toLowerCase().endsWith(".pdf")
+                  );
 
                 let pdfUrl = null;
                 const backendBase = getBackendBase();

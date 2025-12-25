@@ -5,7 +5,9 @@ const FileSchema = new mongoose.Schema(
     filename: String,
     url: String,
     mimetype: String,
-    size: Number
+    size: Number,
+    label: String,
+    customName: String
   },
   { timestamps: true }
 );
