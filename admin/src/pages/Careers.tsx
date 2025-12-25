@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { getJSON, sendJSON, delJSON } from '../lib/api';
 import type { Job } from '../../../common/types';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ export default function Careers() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [q, setQ] = useState('');
   const [editing, setEditing] = useState<Job | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -21,8 +23,23 @@ export default function Careers() {
   const [qualificationsText, setQualificationsText] = useState('');
 
   useEffect(() => {
-    getJSON<Job[]>('/jobs').then(setJobs);
+    loadJobs();
   }, []);
+
+  const loadJobs = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await getJSON<Job[]>('/jobs');
+      setJobs(data || []);
+    } catch (err) {
+      console.error('Failed to load jobs:', err);
+      setError('Failed to load jobs. Please try again.');
+      setJobs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   function resetForm() {
     setEditing(null);
@@ -55,9 +72,14 @@ export default function Careers() {
   }
 
   async function removeJob(id: string) {
-    if (!confirm('Delete this job?')) return;
-    await delJSON(`/jobs/${id}`);
-    setJobs((prev) => prev.filter((x) => x._id !== id));
+    if (!confirm('Are you sure you want to delete this job?')) return;
+    try {
+      await delJSON(`/jobs/${id}`);
+      await loadJobs(); // Reload to ensure data is fresh
+    } catch (err) {
+      console.error('Failed to delete job:', err);
+      alert('Failed to delete job. Please try again.');
+    }
   }
 
   async function saveJob() {
@@ -65,6 +87,8 @@ export default function Careers() {
       alert('Title and description are required');
       return;
     }
+
+    try {
 
     const responsibilities = responsibilitiesText
       .split('\n')
@@ -88,26 +112,65 @@ export default function Careers() {
       qualifications
     };
 
-    if (editing && editing._id) {
-      const updated = await sendJSON<Job>(
-        `/jobs/${editing._id}`,
-        payload,
-        'PUT'
-      );
-      setJobs((prev) =>
-        prev.map((x) => (x._id === updated._id ? updated : x))
-      );
-    } else {
-      const created = await sendJSON<Job>('/jobs', payload, 'POST');
-      setJobs((prev) => [created, ...prev]);
-    }
+      if (editing && editing._id) {
+        const updated = await sendJSON<Job>(
+          `/jobs/${editing._id}`,
+          payload,
+          'PUT'
+        );
+        setJobs((prev) =>
+          prev.map((x) => (x._id === updated._id ? updated : x))
+        );
+      } else {
+        const created = await sendJSON<Job>('/jobs', payload, 'POST');
+        setJobs((prev) => [created, ...prev]);
+      }
 
-    resetForm();
+      resetForm();
+      await loadJobs(); // Reload to ensure data is fresh
+    } catch (err) {
+      console.error('Failed to save job:', err);
+      alert('Failed to save job. Please try again.');
+    }
   }
 
-  const filtered = jobs.filter((j) =>
-    j.title.toLowerCase().includes(q.toLowerCase())
-  );
+  const filtered = useMemo(() => {
+    if (!q.trim()) return jobs;
+    const query = q.toLowerCase();
+    return jobs.filter((j) =>
+      j.title?.toLowerCase().includes(query) ||
+      j.description?.toLowerCase().includes(query) ||
+      j.type?.toLowerCase().includes(query) ||
+      j.location?.toLowerCase().includes(query)
+    );
+  }, [jobs, q]);
+
+  if (loading) {
+    return (
+      <div className="page">
+        <div className="loading-state">
+          <div className="spinner"></div>
+          <p>Loading jobs...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="page">
+        <div className="card">
+          <div className="empty-state">
+            <div className="empty-icon">⚠️</div>
+            <p className="empty-text">{error}</p>
+            <button className="btn primary" onClick={loadJobs}>
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page">
@@ -277,25 +340,51 @@ export default function Careers() {
       </div>
 
       {/* SEARCH */}
-      <div className="page-actions">
-        <div className="search-input-wrapper">
-          <span className="search-icon-small">🔍</span>
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search jobs by title..."
-            className="input search-input"
-          />
+      {jobs.length > 0 && (
+        <div className="page-actions">
+          <div className="search-input-wrapper">
+            <span className="search-icon-small">🔍</span>
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search jobs by title, description, type, or location..."
+              className="input search-input"
+            />
+            {q && (
+              <button
+                className="clear-search"
+                onClick={() => setQ('')}
+                title="Clear search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+          <div className="results-info">
+            <span className="results-count">
+              Showing {filtered.length} of {jobs.length} jobs
+              {q && ` matching "${q}"`}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* TABLE */}
       <div className="card table-card">
-        {filtered.length === 0 ? (
+        {jobs.length === 0 ? (
           <div className="empty-state">
             <div className="empty-icon">💼</div>
+            <p className="empty-text">No jobs posted yet</p>
+            <p className="empty-subtext">Create your first job posting using the form above</p>
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-icon">🔍</div>
             <p className="empty-text">No jobs found</p>
-            <p className="empty-subtext">{q ? 'Try a different search term' : 'Create your first job posting above'}</p>
+            <p className="empty-subtext">Try a different search term</p>
+            <button className="btn" onClick={() => setQ('')}>
+              Clear Search
+            </button>
           </div>
         ) : (
           <div className="table-wrapper">

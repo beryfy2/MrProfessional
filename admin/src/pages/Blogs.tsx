@@ -15,18 +15,18 @@ export default function Blogs() {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
-  const loadBlogs = async () => {
+  const removeBlog = async (id: string) => {
+    if (!confirm("Delete this blog?")) return;
+    await deleteBlog(id);
     const data = await fetchBlogs();
     setBlogs(data);
   };
 
-  const removeBlog = async (id: string) => {
-    if (!confirm("Delete this blog?")) return;
-    await deleteBlog(id);
-    loadBlogs();
-  };
-
   useEffect(() => {
+    const loadBlogs = async () => {
+      const data = await fetchBlogs();
+      setBlogs(data);
+    };
     loadBlogs();
   }, []);
 

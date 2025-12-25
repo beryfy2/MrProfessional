@@ -23,17 +23,37 @@ export default function BlogCategories() {
     if (!newCategory.trim()) return;
     await createCategory(newCategory);
     setNewCategory("");
-    loadCategories();
+    await loadCategories();
   };
 
   const removeCategory = async (id: string) => {
     if (!confirm("Delete this category?")) return;
     await deleteCategory(id);
-    loadCategories();
+    await loadCategories();
   };
 
   useEffect(() => {
-    loadCategories();
+    let isMounted = true;
+    
+    const fetchData = async () => {
+      try {
+        const data = await fetchCategories();
+        if (isMounted) {
+          setCategories(data);
+        }
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+        if (isMounted) {
+          setCategories([]);
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
