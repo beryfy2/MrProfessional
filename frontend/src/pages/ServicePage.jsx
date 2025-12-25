@@ -326,7 +326,7 @@ const ServicePage = () => {
             {page.title} – Process, Fees & Documents Required
           </h2>
 
-          <p className="text-slate-700 leading-relaxed">
+          <p className="text-slate-700 leading-relaxed text-justify">
             {page.content}
           </p>
         </div>
@@ -487,7 +487,7 @@ const ServicePage = () => {
                 {/* ANSWER */}
                 <div className="max-w-5xl mx-auto text-slate-700 leading-relaxed space-y-4 text-[17px]">
                   {answer?.split("\n\n").map((p, i) => (
-                    <p key={i}>{p}</p>
+                    <p key={i} className="text-justify">{p}</p>
                   ))}
                 </div>
 
@@ -515,7 +515,7 @@ const ServicePage = () => {
             <h2 className="text-3xl font-bold mb-4">
               {s.heading}
             </h2>
-            <p className="text-slate-700 max-w-4xl leading-relaxed">
+            <p className="text-slate-700 max-w-4xl leading-relaxed text-justify">
               {s.content}
             </p>
           </section>
@@ -535,7 +535,7 @@ const ServicePage = () => {
                   <summary className="font-medium cursor-pointer">
                     {f.q || f.question}
                   </summary>
-                  <p className="mt-2 text-slate-600">
+                  <p className="mt-2 text-slate-600 text-justify">
                     {f.a || f.answer}
                   </p>
                 </details>
