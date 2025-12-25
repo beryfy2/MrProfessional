@@ -2,32 +2,36 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faFire } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faFire, faNewspaper, faPenNib, faBlog } from "@fortawesome/free-solid-svg-icons";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 export default function NavItems({ transparent = false }) {
     const navigate = useNavigate();
     const solidBg = "bg-[#0f4260]";
-    // Removed glass background and backdrop blur - always use solid background
     const finalBg = solidBg;
 
     const [navItems, setNavItems] = useState([]);
-    const [openMenu, setOpenMenu] = useState(null); // nav item id
+    const [openMenu, setOpenMenu] = useState(null);
     const closeTimer = useRef(null);
     const openTimer = useRef(null);
-    const [titlesByNav, setTitlesByNav] = useState({}); // { navId: Title[] }
+    const [titlesByNav, setTitlesByNav] = useState({});
     const [hoverTitleId, setHoverTitleId] = useState(null);
-    const [subtitlesByTitle, setSubtitlesByTitle] = useState({}); // { titleId: Subtitle[] }
-    const itemRefs = useRef({}); // map navId -> li element
+    const [subtitlesByTitle, setSubtitlesByTitle] = useState({});
+    const itemRefs = useRef({});
     const [menuHovering, setMenuHovering] = useState(false);
     const [headHovering, setHeadHovering] = useState(false);
+    const leaveTimer = useRef(null);
+    const menuHoveringRef = useRef(false);
+    const headHoveringRef = useRef(false);
 
     useEffect(() => {
         function handleWindowMouseOut(e) {
             if (!e.relatedTarget) {
                 setOpenMenu(null);
                 setHoverTitleId(null);
+                menuHoveringRef.current = false;
+                headHoveringRef.current = false;
                 setMenuHovering(false);
                 setHeadHovering(false);
             }
@@ -35,6 +39,35 @@ export default function NavItems({ transparent = false }) {
         window.addEventListener('mouseout', handleWindowMouseOut);
         return () => window.removeEventListener('mouseout', handleWindowMouseOut);
     }, []);
+
+    // Close dropdown menus on scroll
+    useEffect(() => {
+        function handleScroll() {
+            if (openMenu !== null) {
+                setOpenMenu(null);
+                setHoverTitleId(null);
+                menuHoveringRef.current = false;
+                headHoveringRef.current = false;
+                setMenuHovering(false);
+                setHeadHovering(false);
+                // Clear all timers
+                if (closeTimer.current) {
+                    clearTimeout(closeTimer.current);
+                    closeTimer.current = null;
+                }
+                if (openTimer.current) {
+                    clearTimeout(openTimer.current);
+                    openTimer.current = null;
+                }
+                if (leaveTimer.current) {
+                    clearTimeout(leaveTimer.current);
+                    leaveTimer.current = null;
+                }
+            }
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [openMenu]);
 
     useEffect(() => {
         fetch(`${API_BASE}/nav-items`).then((r) => r.json()).then((items) => setNavItems(items || []));
@@ -54,15 +87,25 @@ export default function NavItems({ transparent = false }) {
         }
     };
 
-    const scheduleClose = () => {
+    const scheduleClose = (delay = 200) => {
         clearTimeout(closeTimer.current);
         closeTimer.current = setTimeout(() => {
-            setOpenMenu(null);
-        }, 180);
+            // Check current hover state using refs to avoid stale closures
+            if (!menuHoveringRef.current && !headHoveringRef.current) {
+                setOpenMenu(null);
+                setHoverTitleId(null);
+            }
+        }, delay);
     };
 
 
     const handleItemEnter = (navId) => {
+        // Clear any pending leave timer
+        if (leaveTimer.current) {
+            clearTimeout(leaveTimer.current);
+            leaveTimer.current = null;
+        }
+        headHoveringRef.current = true;
         setHeadHovering(true);
         if (openTimer.current) clearTimeout(openTimer.current);
         if (closeTimer.current) {
@@ -72,19 +115,44 @@ export default function NavItems({ transparent = false }) {
         openTimer.current = setTimeout(() => open(navId), 80);
     };
     const handleItemLeave = () => {
-        setHeadHovering(false);
-        scheduleClose(220);
+        // Don't immediately set headHovering to false - wait a bit
+        // This prevents flickering when moving to dropdown
+        if (leaveTimer.current) clearTimeout(leaveTimer.current);
+        leaveTimer.current = setTimeout(() => {
+            // Only close if not hovering over the menu (check ref for current value)
+            if (!menuHoveringRef.current) {
+                headHoveringRef.current = false;
+                setHeadHovering(false);
+                scheduleClose(200);
+            }
+            leaveTimer.current = null;
+        }, 50);
     };
     const handleMenuEnter = () => {
+        // Clear any pending leave timer
+        if (leaveTimer.current) {
+            clearTimeout(leaveTimer.current);
+            leaveTimer.current = null;
+        }
+        menuHoveringRef.current = true;
+        headHoveringRef.current = true;
         setMenuHovering(true);
+        setHeadHovering(true);
         if (closeTimer.current) {
             clearTimeout(closeTimer.current);
             closeTimer.current = null;
         }
+        if (openTimer.current) {
+            clearTimeout(openTimer.current);
+            openTimer.current = null;
+        }
     };
     const handleMenuLeave = () => {
+        menuHoveringRef.current = false;
+        headHoveringRef.current = false;
         setMenuHovering(false);
-        scheduleClose(220);
+        setHeadHovering(false);
+        scheduleClose(200);
     };
 
     const toggleClick = (navId) => {
@@ -132,7 +200,7 @@ export default function NavItems({ transparent = false }) {
                 </div>
 
                 {/* Nav links */}
-                <ul className="hidden lg:flex items-center gap-6 text-white text-[14px] font-medium" onMouseLeave={() => { setHeadHovering(false); setMenuHovering(false); scheduleClose(100); }}>
+                <ul className="hidden lg:flex items-center gap-6 text-white text-[14px] font-medium">
                     {navItems.map((nav) => {
                         const isOpen = openMenu === nav._id;
                         const titles = titlesByNav[nav._id] || [];
@@ -186,14 +254,21 @@ export default function NavItems({ transparent = false }) {
                     })}
                 </ul>
 
-                {/* Right icons */}
-                <div className="flex items-center gap-4 text-white">
-                    <i className="fa-brands fa-whatsapp cursor-pointer" />
-                    <i className="fa-brands fa-facebook-f cursor-pointer" />
-                    <i className="fa-brands fa-instagram cursor-pointer" />
-                </div>
+                {/* Blog */}
+                <button
+                    type="button"
+                    onClick={() => navigate("/blogs")}
+                    className="flex items-center gap-2 text-white font-medium px-3 py-1.5 rounded-lg
+                        hover:bg-white/10 hover:text-green-400 transition-all duration-200"
+                >
+                    <FontAwesomeIcon icon={faNewspaper} className="text-sm" />
+                    <span className="hidden sm:inline">Blog</span>
+                </button>
+
+
             </div>
         </div>
+
     );
 }
 
@@ -216,7 +291,7 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
             const center = rect.left + rect.width / 2;
             let left = center - desired / 2;
             left = Math.max(margin, Math.min(left, vw - desired - margin));
-            const top = rect.bottom + 12;
+            const top = rect.bottom + 14;
             setPos({ left, top, width: desired });
         }
         compute();
