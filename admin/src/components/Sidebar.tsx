@@ -3,21 +3,57 @@ import { NavLink } from 'react-router-dom';
 export default function Sidebar() {
   return (
     <nav className="sidebar">
-      <h2>MR PRO + Admin</h2>
+      <div className="sidebar-header">
+        <div className="sidebar-logo">
+          <span className="logo-icon">🚀</span>
+          <h2>MR PRO +</h2>
+        </div>
+        <p className="sidebar-subtitle">Admin Panel</p>
+      </div>
 
-      <NavLink to="/admin/dashboard">Dashboard</NavLink>
-      <NavLink to="/admin/employees">Employees</NavLink>
-      <NavLink to="/admin/nav-items">Nav Items</NavLink>
-      <NavLink to="/admin/enquiries">Enquiries</NavLink>
-      <NavLink to="/admin/careers">Careers</NavLink>
+      <div className="sidebar-content">
+        <div className="nav-section">
+          <NavLink to="/admin/dashboard" className="nav-item">
+            <span className="nav-icon">📊</span>
+            <span className="nav-text">Dashboard</span>
+          </NavLink>
+          <NavLink to="/admin/employees" className="nav-item">
+            <span className="nav-icon">👥</span>
+            <span className="nav-text">Employees</span>
+          </NavLink>
+          <NavLink to="/admin/nav-items" className="nav-item">
+            <span className="nav-icon">🔗</span>
+            <span className="nav-text">Nav Items</span>
+          </NavLink>
+          <NavLink to="/admin/enquiries" className="nav-item">
+            <span className="nav-icon">📧</span>
+            <span className="nav-text">Enquiries</span>
+          </NavLink>
+          <NavLink to="/admin/careers" className="nav-item">
+            <span className="nav-icon">💼</span>
+            <span className="nav-text">Careers</span>
+          </NavLink>
+        </div>
 
-      <small>BLOGS</small>
-      <NavLink to="/admin/blogs">All Blogs</NavLink>
-      <NavLink to="/admin/blog-categories">Blog Categories</NavLink>
+        <div className="nav-section">
+          <div className="section-label">
+            <span>BLOGS</span>
+          </div>
+          <NavLink to="/admin/blogs" className="nav-item">
+            <span className="nav-icon">📝</span>
+            <span className="nav-text">All Blogs</span>
+          </NavLink>
+          <NavLink to="/admin/blog-categories" className="nav-item">
+            <span className="nav-icon">📂</span>
+            <span className="nav-text">Categories</span>
+          </NavLink>
+        </div>
+      </div>
 
-      <div className="bottom">
-        <NavLink to="/admin/admin-settings" className="admin-settings">
-          ⚙️ Admin Settings
+      <div className="sidebar-footer">
+        <NavLink to="/admin/admin-settings" className="nav-item admin-settings">
+          <span className="nav-icon">⚙️</span>
+          <span className="nav-text">Admin Settings</span>
         </NavLink>
       </div>
     </nav>
