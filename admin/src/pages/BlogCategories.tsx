@@ -13,23 +13,62 @@ interface Category {
 export default function BlogCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const loadCategories = async () => {
-    const data = await fetchCategories();
-    setCategories(data);
+    setError("");
+    try {
+      const data = await fetchCategories();
+      setCategories(data);
+    } catch (e) {
+      const msg =
+        typeof e === "object" && e && "message" in e
+          ? String((e as any).message)
+          : "Failed to load categories";
+      setError(msg);
+    }
   };
 
   const addCategory = async () => {
-    if (!newCategory.trim()) return;
-    await createCategory(newCategory);
-    setNewCategory("");
-    loadCategories();
+    setError("");
+    const name = newCategory.trim();
+    if (!name) {
+      setError("Category name is required");
+      return;
+    }
+    setLoading(true);
+    try {
+      await createCategory(name);
+      setNewCategory("");
+      await loadCategories();
+    } catch (e) {
+      const msg =
+        typeof e === "object" && e && "message" in e
+          ? String((e as any).message)
+          : "Failed to add category";
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const removeCategory = async (id: string) => {
     if (!confirm("Delete this category?")) return;
-    await deleteCategory(id);
-    loadCategories();
+    setError("");
+    setLoading(true);
+    try {
+      await deleteCategory(id);
+      await loadCategories();
+    } catch (e) {
+      const msg =
+        typeof e === "object" && e && "message" in e
+          ? String((e as any).message)
+          : "Failed to delete category";
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -45,8 +84,16 @@ export default function BlogCategories() {
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
           placeholder="New Category Name"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") addCategory();
+          }}
         />
-        <button onClick={addCategory}>Add Category</button>
+        <button onClick={addCategory} disabled={loading}>
+          {loading ? "Adding..." : "Add Category"}
+        </button>
+        {error && (
+          <p style={{ color: "#b91c1c", marginTop: 10 }}>{error}</p>
+        )}
       </div>
 
       <ul className="list">
