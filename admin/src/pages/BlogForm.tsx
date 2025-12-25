@@ -80,7 +80,15 @@ export default function BlogForm() {
     navigate("/admin/blogs");
   };
 
+<<<<<<< HEAD
   
+=======
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadCategories();
+    loadBlog();
+  }, []);
+>>>>>>> a2d801196b98e5cf864996c37e5cd46e4ba29d2f
 
   return (
     <div className="page">

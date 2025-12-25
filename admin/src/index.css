@@ -258,35 +258,22 @@ body {
   flex-direction: column;
 }
 
-/* Topbar */
+/* Topbar - Consolidated Styles */
 .topbar {
   height: 68px;
+  min-height: 68px;
+  width: 100%;
   background: #ffffff;
   border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px;
-}
-
-.search {
-  width: 380px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--border-light);
-  background: #f8fafc;
-}
-
-.search:focus {
-  outline: none;
-  border-color: var(--navy);
-  box-shadow: 0 0 0 3px rgba(11, 58, 102, 0.15);
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* Icons */
@@ -322,7 +309,9 @@ body {
   padding: 32px 40px;
   max-width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   background: var(--bg-main);
+  width: 100%;
 }
 
 /* ================= Page ================= */
@@ -334,6 +323,9 @@ body {
   padding-top: 0;
   margin-top: 0;
   margin-left: 0;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
 }
 
 .page-header {
@@ -515,8 +507,11 @@ body {
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 10px 16px;
-  background: #ffffff;
+  background: #1203b6;
   cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
   font-size: 14px;
 }
 
@@ -590,6 +585,8 @@ body {
 @media (max-width: 768px) {
   .app-layout {
     flex-direction: column;
+    height: auto;
+    min-height: 100vh;
   }
 
   .sidebar {
@@ -597,7 +594,28 @@ body {
     height: auto;
     position: relative;
     max-height: 60vh;
+    flex-shrink: 0;
   }
+
+  .main-content {
+    width: 100%;
+    min-height: calc(100vh - 60vh);
+  }
+
+  .topbar {
+    padding: 0 16px;
+    height: 60px;
+    min-height: 60px;
+  }
+
+  .search-wrapper {
+    max-width: 200px;
+  }
+
+  .main-content > :not(.topbar) {
+    padding: 20px 16px;
+  }
+}
 
   .sidebar-header {
     padding: 20px 16px;
@@ -623,7 +641,7 @@ body {
   .grid-2 {
     grid-template-columns: 1fr;
   }
-}
+
 /* ================= LOGIN PAGE ================= */
 
 .login-page {
@@ -958,6 +976,8 @@ body {
 .page {
   margin: 0;
   padding: 0;
+  width: 100%;
+  min-height: 100%;
 }
 
 /* Cards & tables align nicely inside content */
@@ -987,7 +1007,8 @@ body {
 .app-layout {
   display: flex;
   height: 100vh;
-  gap: 24px;
+  width: 100%;
+  gap: 0;
   background: var(--bg-main);
   overflow: hidden;
 }
@@ -997,11 +1018,28 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
   overflow: hidden;
+  background: var(--bg-main);
 }
 
-.main-content > * {
+.main-content > .topbar {
+  flex-shrink: 0;
+}
+
+.main-content > :not(.topbar) {
+  flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure no horizontal scrollbar */
+body, html, #root {
+  overflow-x: hidden;
+  width: 100%;
 }
 /* ================= ADMIN SETTINGS FONT FIX ================= */
 
@@ -2334,4 +2372,172 @@ body {
   .meta-text {
     max-width: 100%;
   }
+}
+/* TOPBAR - Enhanced Styles */
+
+/* SEARCH */
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+  min-width: 200px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search {
+  width: 100%;
+  padding: 10px 16px 10px 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: #f8fafc;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search:focus {
+  border-color: var(--navy);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(11, 58, 102, 0.1);
+}
+
+/* RIGHT SIDE */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ICON BUTTON */
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+.icon-btn:hover {
+  background: #f1f5f9;
+  color: var(--text-dark);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+}
+
+/* PROFILE */
+.profile-wrapper {
+  position: relative;
+}
+
+/* AVATAR */
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--navy);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.avatar:hover {
+  border-color: var(--orange);
+  transform: scale(1.05);
+}
+
+/* PROFILE DROPDOWN */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  width: 200px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 9999;
+  padding: 8px;
+  border: 1px solid var(--border-light);
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-dropdown button {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.profile-dropdown button:hover {
+  background: #f1f5f9;
+  color: var(--navy);
+}
+
+.profile-dropdown .logout {
+  color: var(--danger);
+}
+
+.profile-dropdown .logout:hover {
+  background: #fee2e2;
+  color: var(--danger);
 }

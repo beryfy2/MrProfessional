@@ -332,84 +332,88 @@ const ServicePage = () => {
         </div>
 
         {/* RIGHT CERTIFICATE PDF */}
-        <div className="border rounded-xl p-4 bg-white shadow">
-          <h3 className="font-semibold mb-3">
-            Company Registration Certificate [Sample]
-          </h3>
+        <div className="bg-[#f5f5f5] p-4">
 
-          {/* Tabs */}
-          <div className="flex gap-2 mb-4 flex-wrap">
-            {["Pvt Ltd", "LLP", "OPC", "Public Ltd", "Section 8"].map((t) => (
-              <button
-                key={t}
-                className="px-3 py-1 border rounded text-sm hover:bg-[#0f4260] hover:text-white transition"
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+          {/* OUTER DOCUMENT FRAME */}
+          <div className="bg-white border border-gray-300">
 
-          {/* PDF PREVIEW */}
-          {(() => {
-            // Find the first PDF file
-            const pdfFile = page?.files?.find(
-              (f) =>
-                f.mimetype === 'application/pdf' ||
-                f.filename?.toLowerCase().endsWith('.pdf') ||
-                f.url?.toLowerCase().endsWith('.pdf')
-            );
+            {/* INNER CONTENT */}
+            <div className="px-4 py-3">
 
-            // Construct the PDF URL
-            let pdfUrl = null;
-            const backendBase = getBackendBase();
-            
-            if (pdfFile?.url) {
-              // If URL starts with /uploads, prepend the backend base URL
-              if (pdfFile.url.startsWith('/uploads')) {
-                pdfUrl = `${backendBase}${pdfFile.url}`;
-              } else if (pdfFile.url.startsWith('http://') || pdfFile.url.startsWith('https://')) {
-                // Already absolute URL
-                pdfUrl = pdfFile.url;
-              } else {
-                // Relative URL, prepend backend base
-                pdfUrl = `${backendBase}${pdfFile.url.startsWith('/') ? '' : '/'}${pdfFile.url}`;
-              }
-            } else {
-              // Fallback to default sample PDF
-              pdfUrl = "/certificate-sample.pdf";
-            }
+              <h3 className="font-semibold mb-3 text-lg text-center">
+                Partnership Deed [Sample]
+              </h3>
 
-            // Add toolbar=0 to hide PDF toolbar
-            const PdfUrlView = pdfUrl.includes('#') 
-              ? pdfUrl.split('#')[0] + '#toolbar=0' 
-              : pdfUrl + '#toolbar=0';
-
-            return (
-              <>
-                <div className="border rounded-lg overflow-hidden h-[420px] bg-slate-100">
-                  <iframe
-                    src={PdfUrlView}
-                    title="Company Registration Certificate"
-                    className="w-full h-full"
-                    type="application/pdf"
-                  />
-                </div>
-
-                {/* Open in new tab */}
-                <div className="mt-3 text-center text-sm">
-                  <a
-                    href={pdfUrl + "#toolbar=0"}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-600 underline"
+              {/* Tabs */}
+              <div className="flex gap-2 mb-4 flex-wrap justify-center">
+                {["Pvt Ltd", "LLP", "OPC", "Public Ltd", "Section 8"].map((t) => (
+                  <button
+                    key={t}
+                    className="px-3 py-1 border text-sm
+                      hover:bg-[#0f4260] hover:text-white transition"
                   >
-                    View Certificate in New Tab
-                  </a>
-                </div>
-              </>
-            );
-          })()}
+                    {t}
+                  </button>
+                ))}
+              </div>
+
+              {/* PDF PREVIEW */}
+              {(() => {
+                const pdfFile = page?.files?.find(
+                  (f) =>
+                    f.mimetype === "application/pdf" ||
+                    f.filename?.toLowerCase().endsWith(".pdf") ||
+                    f.url?.toLowerCase().endsWith(".pdf")
+                );
+
+                let pdfUrl = null;
+                const backendBase = getBackendBase();
+
+                if (pdfFile?.url) {
+                  if (pdfFile.url.startsWith("/uploads")) {
+                    pdfUrl = `${backendBase}${pdfFile.url}`;
+                  } else if (pdfFile.url.startsWith("http")) {
+                    pdfUrl = pdfFile.url;
+                  } else {
+                    pdfUrl = `${backendBase}/${pdfFile.url}`;
+                  }
+                } else {
+                  pdfUrl = "/certificate-sample.pdf";
+                }
+
+                const PdfUrlView = pdfUrl.includes("#")
+                  ? pdfUrl.split("#")[0] + "#toolbar=0"
+                  : pdfUrl + "#toolbar=0";
+
+                window.currentPdfUrl = pdfUrl;
+
+                return (
+                  <div className="border-t border-b border-black">
+                    <iframe
+                      src={PdfUrlView}
+                      title="Partnership Deed"
+                      className="w-full h-[520px] border-0"
+                    />
+                  </div>
+                );
+              })()}
+
+              {/* OPEN IN NEW TAB */}
+              <div className="mt-3 text-sm text-center">
+                <a
+                  href={window.currentPdfUrl || "/certificate-sample.pdf"}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Open Full Document
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+
+
       </section>
 
       {/* TABLE OF CONTENT */}
@@ -425,8 +429,8 @@ const ServicePage = () => {
               </h2>
 
               <ul className="space-y-3 text-slate-700">
-                {( page.questions).map((f, index) => {
-                  const question =  f.question;
+                {(page.questions).map((f, index) => {
+                  const question = f.question;
                   const id = `q-${question
                     .toLowerCase()
                     .replace(/[^\w\s-]/g, "")
@@ -461,7 +465,7 @@ const ServicePage = () => {
       )}
 
       {/* QUESTIONS AS NORMAL SECTIONS */}
-      {( page.questions)?.length > 0 && (
+      {(page.questions)?.length > 0 && (
         <main className="max-w-7xl mx-auto px-6 py-12 space-y-20">
 
           {(page.questions).map((f, index, arr) => {
