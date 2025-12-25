@@ -379,11 +379,16 @@ const ServicePage = () => {
               pdfUrl = "/certificate-sample.pdf";
             }
 
+            // Add toolbar=0 to hide PDF toolbar
+            const PdfUrlView = pdfUrl.includes('#') 
+              ? pdfUrl.split('#')[0] + '#toolbar=0' 
+              : pdfUrl + '#toolbar=0';
+
             return (
               <>
                 <div className="border rounded-lg overflow-hidden h-[420px] bg-slate-100">
                   <iframe
-                    src={pdfUrl}
+                    src={PdfUrlView}
                     title="Company Registration Certificate"
                     className="w-full h-full"
                     type="application/pdf"
@@ -393,7 +398,7 @@ const ServicePage = () => {
                 {/* Open in new tab */}
                 <div className="mt-3 text-center text-sm">
                   <a
-                    href={pdfUrl}
+                    href={pdfUrl + "#toolbar=0"}
                     target="_blank"
                     rel="noreferrer"
                     className="text-blue-600 underline"
