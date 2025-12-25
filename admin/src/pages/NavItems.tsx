@@ -50,69 +50,138 @@ export default function NavItems() {
   }
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 22, fontWeight: 600 }}>Navigation Items</div>
-        {!showAdd ? (
-          <button className="btn primary" onClick={handleAdd}>+ Add Nav Item</button>
-        ) : (
-          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <input
-              className="input"
-              placeholder="Item name"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-              style={{ width: 240 }}
-            />
-            <input
-              className="input"
-              placeholder="Order"
-              type="number"
-              value={newOrder}
-              onChange={(e) => setNewOrder(e.target.value === '' ? '' : Number(e.target.value))}
-              style={{ width: 110 }}
-            />
-            <button className="btn success" onClick={saveNewItem} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
-            <button className="btn" onClick={() => setShowAdd(false)}>Cancel</button>
-          </div>
+    <div className="page">
+      <div className="page-header">
+        <div>
+          <h1>Navigation Items</h1>
+          <p className="page-subtitle">Manage the main navigation menu items</p>
+        </div>
+        {!showAdd && (
+          <button className="btn primary" onClick={handleAdd}>
+            <span className="btn-icon">+</span>
+            Add Nav Item
+          </button>
         )}
       </div>
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search navigation items..." className="input" />
+
+      {showAdd && (
         <div className="card">
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Order</th>
-              <th className="th">Name</th>
-              <th className="th">ID</th>
-              <th className="th">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((i) => (
-              <tr key={i._id}>
-                <td className="td"><div className="pill">{i.order}</div></td>
-                <td className="td">{i.name}</td>
-                <td className="td">{i.slug}</td>
-                <td className="td" style={{ display: 'flex', gap: 8 }}>
-                  <button className="btn" onClick={() => navigate(`/admin/nav-items/${i._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
-                  <button
-                    className="btn"
-                    onClick={async () => {
-                      if (!confirm('Delete this head title and all its titles/subtitles?')) return;
-                      await delJSON(`/nav-items/${i._id}`);
-                      const refreshed = await getJSON<NavItem[]>('/nav-items');
-                      setItems(refreshed);
-                    }}
-                    style={{ color: '#DC2626' }}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <div className="form-header">
+            <h3 className="form-title">Add New Navigation Item</h3>
+            <p className="form-subtitle">Create a new item for the main navigation menu</p>
+          </div>
+          <div className="grid-2">
+            <div className="form-section">
+              <label className="form-label">
+                <span className="label-text">Item Name *</span>
+              </label>
+              <input
+                className="form-input"
+                placeholder="e.g., Services, About Us"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+              />
+            </div>
+            <div className="form-section">
+              <label className="form-label">
+                <span className="label-text">Display Order</span>
+              </label>
+              <input
+                className="form-input"
+                placeholder="Order number"
+                type="number"
+                value={newOrder}
+                onChange={(e) => setNewOrder(e.target.value === '' ? '' : Number(e.target.value))}
+              />
+            </div>
+          </div>
+          <div className="form-actions">
+            <button className="btn" onClick={() => setShowAdd(false)}>
+              Cancel
+            </button>
+            <button 
+              className="btn primary" 
+              onClick={saveNewItem} 
+              disabled={saving}
+            >
+              <span className="btn-icon">{saving ? '⏳' : '💾'}</span>
+              {saving ? 'Saving...' : 'Save Item'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="page-actions">
+        <div className="search-input-wrapper">
+          <span className="search-icon-small">🔍</span>
+          <input 
+            value={q} 
+            onChange={(e) => setQ(e.target.value)} 
+            placeholder="Search navigation items..." 
+            className="input search-input" 
+          />
+        </div>
+      </div>
+
+      <div className="card table-card">
+        {filtered.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-icon">🔗</div>
+            <p className="empty-text">No navigation items found</p>
+            <p className="empty-subtext">{q ? 'Try a different search term' : 'Add your first navigation item above'}</p>
+          </div>
+        ) : (
+          <div className="table-wrapper">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th className="th">Order</th>
+                  <th className="th">Name</th>
+                  <th className="th">Slug</th>
+                  <th className="th">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((i) => (
+                  <tr key={i._id}>
+                    <td className="td">
+                      <div className="order-badge">{i.order}</div>
+                    </td>
+                    <td className="td">
+                      <strong>{i.name}</strong>
+                    </td>
+                    <td className="td">
+                      <code className="slug-text">{i.slug}</code>
+                    </td>
+                    <td className="td">
+                      <div className="action-buttons">
+                        <button 
+                          className="btn btn-edit" 
+                          onClick={() => navigate(`/admin/nav-items/${i._id}`)}
+                        >
+                          <span>✏️</span>
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-delete"
+                          onClick={async () => {
+                            if (!confirm('Are you sure? This will delete this navigation item and all its titles/subtitles.')) return;
+                            await delJSON(`/nav-items/${i._id}`);
+                            const refreshed = await getJSON<NavItem[]>('/nav-items');
+                            setItems(refreshed);
+                          }}
+                        >
+                          <span>🗑️</span>
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

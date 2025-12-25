@@ -74,50 +74,98 @@ export default function BlogForm() {
 
   return (
     <div className="page">
-      <h2>{id ? "Edit Blog" : "Add Blog"}</h2>
+      <div className="page-header">
+        <div>
+          <h1>{id ? "Edit Blog" : "Create New Blog"}</h1>
+          <p className="page-subtitle">
+            {id ? "Update your blog post" : "Write and publish a new blog post"}
+          </p>
+        </div>
+        <button className="btn" onClick={() => navigate("/admin/blogs")}>
+          ← Back to Blogs
+        </button>
+      </div>
 
-      <div className="card">
-        <input
-          placeholder="Blog Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-
-        {/* STATUS TOGGLE */}
-        <div className="status-toggle">
-          <label>
-            <input
-              type="radio"
-              name="status"
-              checked={status === "draft"}
-              onChange={() => setStatus("draft")}
-            />
-            Draft
+      <div className="card blog-form-card">
+        <div className="form-section">
+          <label className="form-label">
+            <span className="label-text">Blog Title</span>
+            <span className="label-hint">Enter a compelling title for your blog post</span>
           </label>
-
-          <label>
-            <input
-              type="radio"
-              name="status"
-              checked={status === "published"}
-              onChange={() => setStatus("published")}
-            />
-            Published
-          </label>
+          <input
+            className="form-input"
+            placeholder="e.g., 10 Tips for Better Business Management"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
 
-        <BlogEditor value={content} onChange={setContent} />
+        <div className="form-section">
+          <label className="form-label">
+            <span className="label-text">Category</span>
+            <span className="label-hint">Select or create a category for this post</span>
+          </label>
+          <select 
+            className="form-select"
+            value={category} 
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <button onClick={saveBlog}>Save Blog</button>
+        <div className="form-section">
+          <label className="form-label">
+            <span className="label-text">Publication Status</span>
+            <span className="label-hint">Choose whether to publish now or save as draft</span>
+          </label>
+          <div className="status-toggle">
+            <label className={`status-option ${status === "draft" ? "active" : ""}`}>
+              <input
+                type="radio"
+                name="status"
+                checked={status === "draft"}
+                onChange={() => setStatus("draft")}
+              />
+              <span className="status-label">
+                <span className="status-icon">📝</span>
+                Draft
+              </span>
+            </label>
+
+            <label className={`status-option ${status === "published" ? "active" : ""}`}>
+              <input
+                type="radio"
+                name="status"
+                checked={status === "published"}
+                onChange={() => setStatus("published")}
+              />
+              <span className="status-label">
+                <span className="status-icon">✅</span>
+                Published
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div className="form-section">
+          <BlogEditor value={content} onChange={setContent} />
+        </div>
+
+        <div className="form-actions">
+          <button className="btn" onClick={() => navigate("/admin/blogs")}>
+            Cancel
+          </button>
+          <button className="btn primary" onClick={saveBlog}>
+            <span className="btn-icon">💾</span>
+            {id ? "Update Blog" : "Publish Blog"}
+          </button>
+        </div>
       </div>
     </div>
   );
