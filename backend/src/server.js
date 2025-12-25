@@ -351,8 +351,13 @@ app.delete("/api/blogs/:id", auth, async (req, res) => {
 // Get all published blogs (for frontend)
 app.get("/api/public/blogs", async (req, res) => {
   try {
-    const blogs = await Blog.find({ status: "published" })
-      .populate("category", "name slug")
+    const includeDrafts = ["1", "true", "yes"].includes(
+      String(req.query.includeDrafts || "").toLowerCase()
+    );
+    const filter = includeDrafts ? {} : { status: "published" };
+
+    const blogs = await Blog.find(filter)
+      .populate("category", "_id name slug")
       .sort({ createdAt: -1 });
 
     res.json(blogs);
@@ -364,10 +369,16 @@ app.get("/api/public/blogs", async (req, res) => {
 // Get single blog by slug (SEO page)
 app.get("/api/public/blogs/:slug", async (req, res) => {
   try {
-    const blog = await Blog.findOne({
-      slug: req.params.slug,
-      status: "published",
-    }).populate("category", "name slug");
+    const includeDrafts = ["1", "true", "yes"].includes(
+      String(req.query.includeDrafts || "").toLowerCase()
+    );
+    const match = includeDrafts
+      ? { slug: req.params.slug }
+      : { slug: req.params.slug, status: "published" };
+    const blog = await Blog.findOne(match).populate(
+      "category",
+      "_id name slug"
+    );
 
     if (!blog) return res.status(404).json({ error: "Not found" });
 
