@@ -13,14 +13,14 @@ export async function getJSON<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, { headers: { ...authHeaders() } });
   if (!res.ok) {
     let msg = `Request failed (${res.status})`;
-    try {
+  try {
       const data = await res.json();
       msg = String((data && (data.error || data.message)) || msg);
     } catch {
       try {
         const text = await res.text();
         if (text) msg = text;
-      } catch {}
+      } catch { void 0; }
     }
     throw new Error(msg);
   }
@@ -31,14 +31,14 @@ export async function sendForm<T>(path: string, form: FormData, method: 'POST' |
   const res = await fetch(`${API_BASE}${path}`, { method, headers: { ...authHeaders() }, body: form });
   if (!res.ok) {
     let msg = `Request failed (${res.status})`;
-    try {
+  try {
       const data = await res.json();
       msg = String((data && (data.error || data.message)) || msg);
     } catch {
       try {
         const text = await res.text();
         if (text) msg = text;
-      } catch {}
+      } catch { void 0; }
     }
     throw new Error(msg);
   }
@@ -53,14 +53,14 @@ export async function sendJSON<T>(path: string, body: unknown, method: 'POST' | 
   });
   if (!res.ok) {
     let msg = `Request failed (${res.status})`;
-    try {
+  try {
       const data = await res.json();
       msg = String((data && (data.error || data.message)) || msg);
     } catch {
       try {
         const text = await res.text();
         if (text) msg = text;
-      } catch {}
+      } catch { void 0; }
     }
     throw new Error(msg);
   }
@@ -71,14 +71,14 @@ export async function delJSON<T>(path: string) {
   const res = await fetch(`${API_BASE}${path}`, { method: 'DELETE', headers: { ...authHeaders() } });
   if (!res.ok) {
     let msg = `Request failed (${res.status})`;
-    try {
+  try {
       const data = await res.json();
       msg = String((data && (data.error || data.message)) || msg);
     } catch {
       try {
         const text = await res.text();
         if (text) msg = text;
-      } catch {}
+      } catch { void 0; }
     }
     throw new Error(msg);
   }

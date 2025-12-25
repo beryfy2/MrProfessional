@@ -25,6 +25,7 @@ function App() {
 
         {/* Admin */}
         <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="employees" element={<Employees />} />
           <Route path="employees/:id" element={<EmployeeDetail />} />
@@ -35,11 +36,10 @@ function App() {
           <Route path="titles/:id" element={<TitleDetail />} />
           <Route path="subtitles/:id" element={<SubtitleDetail />} />
           <Route path="admin-settings" element={<AdminSettings />} />
-          <Route path="/admin/blog-categories" element={<BlogCategories />} />
-<Route path="/admin/blogs" element={<Blogs />} />
-<Route path="/admin/blogs/new" element={<BlogForm />} />
-<Route path="/admin/blogs/:id" element={<BlogForm />} />
-<Route path="/admin/blog-categories" element={<BlogCategories />} />
+          <Route path="blog-categories" element={<BlogCategories />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/new" element={<BlogForm />} />
+          <Route path="blogs/:id" element={<BlogForm />} />
 
 
         </Route>

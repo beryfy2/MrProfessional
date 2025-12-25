@@ -22,10 +22,7 @@ export default function BlogCategories() {
       const data = await fetchCategories();
       setCategories(data);
     } catch (e) {
-      const msg =
-        typeof e === "object" && e && "message" in e
-          ? String((e as any).message)
-          : "Failed to load categories";
+      const msg = e instanceof Error ? e.message : "Failed to load categories";
       setError(msg);
     }
   };
@@ -43,10 +40,7 @@ export default function BlogCategories() {
       setNewCategory("");
       await loadCategories();
     } catch (e) {
-      const msg =
-        typeof e === "object" && e && "message" in e
-          ? String((e as any).message)
-          : "Failed to add category";
+      const msg = e instanceof Error ? e.message : "Failed to add category";
       setError(msg);
     } finally {
       setLoading(false);
@@ -61,10 +55,7 @@ export default function BlogCategories() {
       await deleteCategory(id);
       await loadCategories();
     } catch (e) {
-      const msg =
-        typeof e === "object" && e && "message" in e
-          ? String((e as any).message)
-          : "Failed to delete category";
+      const msg = e instanceof Error ? e.message : "Failed to delete category";
       setError(msg);
     } finally {
       setLoading(false);
@@ -77,31 +68,11 @@ export default function BlogCategories() {
 
   return (
     <div className="page">
-<<<<<<< HEAD
-      <h2>Blog Categories</h2>
-
-      <div className="card">
-        <input
-          value={newCategory}
-          onChange={(e) => setNewCategory(e.target.value)}
-          placeholder="New Category Name"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") addCategory();
-          }}
-        />
-        <button onClick={addCategory} disabled={loading}>
-          {loading ? "Adding..." : "Add Category"}
-        </button>
-        {error && (
-          <p style={{ color: "#b91c1c", marginTop: 10 }}>{error}</p>
-        )}
-=======
       <div className="page-header">
         <div>
           <h1>Blog Categories</h1>
           <p className="page-subtitle">Organize your blog posts with categories</p>
         </div>
->>>>>>> 6ce39d8a38482d183dffbc01ab120119e4797d93
       </div>
 
       <div className="card">
@@ -116,17 +87,18 @@ export default function BlogCategories() {
               value={newCategory}
               onChange={(e) => setNewCategory(e.target.value)}
               placeholder="e.g., Technology, Business, Marketing"
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  addCategory();
-                }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") addCategory();
               }}
             />
-            <button className="btn primary" onClick={addCategory}>
+            <button className="btn primary" onClick={addCategory} disabled={loading}>
               <span className="btn-icon">+</span>
-              Add Category
+              {loading ? "Adding..." : "Add Category"}
             </button>
           </div>
+          {error && (
+            <p style={{ color: "#b91c1c", marginTop: 10 }}>{error}</p>
+          )}
         </div>
       </div>
 

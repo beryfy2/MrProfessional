@@ -30,20 +30,33 @@ export default function BlogForm() {
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [categories, setCategories] = useState<Category[]>([]);
 
-  const loadCategories = async () => {
-    const data = await fetchCategories();
-    setCategories(data);
-  };
-
-  const loadBlog = async () => {
-    if (!id) return;
-    const blog = await fetchBlogById(id);
-
-    setTitle(blog.title);
-    setContent(blog.content);
-    setCategory(blog.category?._id);
-    setStatus(blog.status);
-  };
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const data = await fetchCategories();
+        if (mounted) setCategories(data);
+      } catch {
+        if (mounted) setCategories([]);
+      }
+      if (id) {
+        try {
+          const blog = await fetchBlogById(id);
+          if (mounted) {
+            setTitle(blog.title);
+            setContent(blog.content);
+            setCategory(blog.category?._id);
+            setStatus(blog.status);
+          }
+        } catch {
+          // ignore load error
+        }
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
 
   const saveBlog = async () => {
     if (!title || !category || !content) {
@@ -67,10 +80,7 @@ export default function BlogForm() {
     navigate("/admin/blogs");
   };
 
-  useEffect(() => {
-    loadCategories();
-    loadBlog();
-  }, []);
+  
 
   return (
     <div className="page">

@@ -1,13 +1,25 @@
-import {
-  getJSON,
-  sendJSON,
-  delJSON,
-} from "./api";
+import { getJSON, sendJSON, delJSON } from "./api";
+
+type Category = {
+  _id: string;
+  name: string;
+  slug?: string;
+};
+
+type Blog = {
+  _id: string;
+  title: string;
+  content: string;
+  category: Category | string;
+  status: "draft" | "published";
+  slug: string;
+  createdAt?: string;
+};
 
 /* ================= CATEGORIES ================= */
 
 export function fetchCategories() {
-  return getJSON<any[]>("/categories");
+  return getJSON<Category[]>("/categories");
 }
 
 export function createCategory(name: string) {
@@ -21,11 +33,11 @@ export function deleteCategory(id: string) {
 /* ================= BLOGS ================= */
 
 export function fetchBlogs() {
-  return getJSON<any[]>("/blogs");
+  return getJSON<Blog[]>("/blogs");
 }
 
 export function fetchBlogById(id: string) {
-  return getJSON<any>(`/blogs/by-id/${id}`);
+  return getJSON<Blog>(`/blogs/by-id/${id}`);
 }
 
 export function createBlog(data: {
