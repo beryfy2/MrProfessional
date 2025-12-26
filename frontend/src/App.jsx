@@ -26,6 +26,7 @@ import ServicePage from './pages/ServicePage'
 import AboutUs from './pages/AboutUs'
 import TeamMem from './pages/TeamMem'
 import Blogs from './pages/Blogs'
+import BlogPage from './pages/BlogPage'
 import Contact from './pages/Contact'
 import PartnersSignup from './pages/PartnersSignup'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -79,6 +80,7 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
         <Route path='/blogs' element={<Blogs/>} />
+        <Route path="/blogs/:slug" element={<BlogPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/partners-signup" element={<PartnersSignup />} />
         <Route path="/payment" element={<Payment/>} />
