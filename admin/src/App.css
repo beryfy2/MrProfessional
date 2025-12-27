@@ -25,3 +25,40 @@
   color: #fff;
   border-radius: 6px;
 }
+
+/* Root admin layout */
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* prevents body scroll */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  height: 100vh;
+}
+
+/* Right side (Topbar + Content) */
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* VERY IMPORTANT */
+}
+
+/* Topbar */
+.topbar {
+  height: 64px;
+  flex-shrink: 0;
+}
+
+/* SCROLL CONTAINER */
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  min-height: 0; /* VERY IMPORTANT */
+}

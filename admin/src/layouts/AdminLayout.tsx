@@ -11,12 +11,13 @@ const AdminLayout = () => {
     return <Navigate to="/" state={{ from: location.pathname }} replace />;
   }
   return (
-    <div className="app-layout">
+    <div className="admin-layout">
       <Sidebar />
-
-      <div className="main-content">
+      <div className="admin-main">
         <Topbar />
-        <Outlet />
+        <div className="admin-content">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
