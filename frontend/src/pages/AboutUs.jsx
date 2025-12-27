@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import '../style/aboutUs.css'
@@ -6,6 +6,7 @@ import '../style/team.css'
 import AnimatedShapes from '../components/AnimatedShapes'
 import ValueCard from '../components/ValueCard'
 
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 export default function AboutUs() {
   console.log('AboutUs component mounted')
@@ -47,6 +48,53 @@ export default function AboutUs() {
     }
 
     window.speechSynthesis.speak(utterance);
+  };
+
+  const [formData, setFormData] = useState({
+    name: '',
+    mobile: '',
+    email: '',
+    message: ''
+  });
+  const [sending, setSending] = useState(false);
+  const [notice, setNotice] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setNotice('');
+    if (!formData.name || !formData.email || !formData.mobile) {
+      setNotice('Please fill required fields');
+      return;
+    }
+    const data = new FormData();
+    data.append('contactPerson', formData.name);
+    data.append('email', formData.email);
+    data.append('subject', 'About Us Contact Form');
+    data.append('message', `${formData.message}\n\nMobile: ${formData.mobile}`);
+    data.append('companyName', 'Website Visitor');
+    try {
+      setSending(true);
+      const res = await fetch(`${API_BASE}/enquiries`, {
+        method: 'POST',
+        body: data
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error((body && (body.error || body.message)) || 'Failed to submit');
+      }
+      setNotice('Enquiry sent successfully!');
+      setFormData({ name: '', mobile: '', email: '', message: '' });
+    } catch (err) {
+      const msg = typeof err === 'object' && err && 'message' in err ? String(err.message) : 'Error sending enquiry';
+      setNotice(msg);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -185,7 +233,7 @@ export default function AboutUs() {
       </p>
 
       <p className="team-text">
-        Professional Utilities is transforming the way to start and manage a business
+        P is transforming the way to start and manage a business
         by simplifying business laws for entrepreneurs. Our experts, specializing
         across tax, accounting and compliances, handhold entrepreneurs throughout
         their journey right from business registration to complying with business laws.
@@ -222,8 +270,8 @@ export default function AboutUs() {
   </div>
 </section>
 
-{/* Contact Us Section */}
-<section className="contact-section">
+      {/* Contact Us Section */}
+      <section className="contact-section">
   <div className="contact-container">
 
     <h2 className="contact-title">
@@ -257,7 +305,7 @@ export default function AboutUs() {
         <div className="contact-card">
           <div className="contact-icon green">✉️</div>
           <h4>Email Us</h4>
-          <p>support@professionalutilities.com</p>
+          <p>support@example.com</p>
         </div>
 
         <div className="contact-card">
@@ -275,15 +323,47 @@ export default function AboutUs() {
           <span className="contact-underline left" />
         </h3>
 
-        <div className="form-row">
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Mobile No." />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="form-row">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="mobile"
+              placeholder="Mobile No."
+              value={formData.mobile}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input type="email" placeholder="Email" />
-        <textarea placeholder="Message" rows="4" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Message"
+            rows="4"
+            value={formData.message}
+            onChange={handleChange}
+          />
 
-        <button className="submit-btn">SUBMIT</button>
+          <button type="submit" className="submit-btn" disabled={sending}>
+            {sending ? 'Submitting...' : 'SUBMIT'}
+          </button>
+          {notice && <p style={{ marginTop: 8 }}>{notice}</p>}
+        </form>
       </div>
 
     </div>
