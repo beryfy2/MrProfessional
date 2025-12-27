@@ -1460,7 +1460,7 @@ body, html, #root {
 }
 
 .btn-secondary:hover {
-  background: #f1f5f9;
+  background: #009a21;
   border-color: var(--navy);
 }
 
