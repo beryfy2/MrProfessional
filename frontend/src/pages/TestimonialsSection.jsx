@@ -122,7 +122,13 @@ const TestimonialsSection = () => {
 
     return (
         <section
-            className="bg-[#03538e] py-16"
+            className="
+    py-24
+    bg-gradient-to-b
+    from-[#0b5fa5]
+    via-[#0a4f8a]
+    to-[#083b67]
+  "
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
         >

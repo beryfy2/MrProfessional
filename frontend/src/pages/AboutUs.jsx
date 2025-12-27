@@ -5,7 +5,6 @@ import '../style/aboutUs.css'
 import '../style/team.css'
 import AnimatedShapes from '../components/AnimatedShapes'
 import ValueCard from '../components/ValueCard'
-import stripImage from '../assets/images/Strip_image.png';
 
 
 export default function AboutUs() {
@@ -219,26 +218,6 @@ export default function AboutUs() {
           </div>
         ))}
       </div>
-    </div>
-  </div>
-</section>
-{/* Explore Our Services CTA */}
-<section className="explore-services">
-  <div className="explore-container">
-    <div className="explore-left">
-      <p className="explore-text">
-        For Company Registration, Compliances, GST Registration, Accounting & Bookkeeping,
-        ITR, Trademark Registration, Govt Tenders and much more
-      </p>
-
-      <button className="explore-btn">
-        EXPLORE OUR SERVICES
-      </button>
-    </div>
-
-    <div className="explore-right">
-     <img src={stripImage} alt="Explore Our Services" />
-
     </div>
   </div>
 </section>

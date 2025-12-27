@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import '../style/partnersSignup.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     faEnvelope, 
@@ -155,24 +156,42 @@ const PartnersSignup = () => {
     return (
         <div className="min-h-screen bg-gray-50">
             <NavBar />
-            
-            {/* Hero Section */}
-            <div className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20 md:py-28">
-                <div className="container mx-auto px-4 text-center relative z-10">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">Become a Partner</h1>
-                    <p className="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100 mb-8">
-                        Join our network of professionals and grow your business with us
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a 
-                            href="/contact" 
-                            className="border-2 border-white text-white font-semibold px-8 py-3 rounded-md hover:bg-white hover:bg-opacity-10 transition duration-300 text-center"
-                        >
-                            Contact Us
-                        </a>
-                    </div>
-                </div>
-            </div>
+          {/* ================= HERO SECTION ================= */}
+<section className="partner-hero">
+  <div className="partner-hero-overlay"></div>
+
+  <div className="partner-hero-container">
+    {/* LEFT CONTENT */}
+    <div className="partner-hero-content">
+      <h1>Let’s Partner Up!</h1>
+
+      <p className="partner-hero-subtitle">
+        Become our partner and drive your business to the next level.
+      </p>
+
+      <div className="partner-rating">
+        <FontAwesomeIcon icon={faGoogle} className="google-icon" />
+        <span className="rating-text">
+          Google Customer Rating <strong>4.9</strong>
+        </span>
+        <div className="stars">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <FontAwesomeIcon key={i} icon={faStar} />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* RIGHT IMAGE */}
+    <div className="partner-hero-image">
+      <img
+        src="https://professionalutilities.com/assets/images/partner-illustration.png"
+        alt="Partner Illustration"
+      />
+    </div>
+  </div>
+</section>
+
 
             {/* Main Content */}
             <div className="container mx-auto px-4 py-12 max-w-6xl">
@@ -361,21 +380,6 @@ const PartnersSignup = () => {
                 </div>
             </div>
 
-            {/* CTA Section */}
-            <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-16">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4">Ready to Grow Your Business?</h2>
-                    <p className="text-xl mb-8 max-w-2xl mx-auto text-blue-100">
-                        Join our network of professionals and take your practice to the next level
-                    </p>
-                    <a 
-                        href="#partner-form" 
-                        className="inline-block bg-white text-blue-800 font-semibold px-8 py-3 rounded-md hover:bg-gray-100 transition duration-300 transform hover:scale-105"
-                    >
-                        Become a Partner Today
-                    </a>
-                </div>
-            </div>
             
             {/* Footer */}
             <div className="bg-gray-900 text-white">

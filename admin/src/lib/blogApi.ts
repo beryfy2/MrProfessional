@@ -10,6 +10,7 @@ type Blog = {
   _id: string;
   title: string;
   content: string;
+  sections?: { heading: string; content: string }[];
   category: Category | string;
   status: "draft" | "published";
   slug: string;
@@ -42,7 +43,8 @@ export function fetchBlogById(id: string) {
 
 export function createBlog(data: {
   title: string;
-  content: string;
+  content?: string;
+  sections?: { heading: string; content: string }[];
   category: string;
   status: "draft" | "published";
 }) {
@@ -53,7 +55,8 @@ export function updateBlog(
   id: string,
   data: {
     title: string;
-    content: string;
+    content?: string;
+    sections?: { heading: string; content: string }[];
     category: string;
     status: "draft" | "published";
   }
