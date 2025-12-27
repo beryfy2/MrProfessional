@@ -5,7 +5,6 @@ import '../style/aboutUs.css'
 import '../style/team.css'
 import AnimatedShapes from '../components/AnimatedShapes'
 import ValueCard from '../components/ValueCard'
-import stripImage from '../assets/images/Strip_image.png';
 
 
 export default function AboutUs() {

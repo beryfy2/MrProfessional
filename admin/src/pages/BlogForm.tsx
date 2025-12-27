@@ -15,7 +15,8 @@ interface Category {
 
 type BlogPayload = {
   title: string;
-  content: string;
+  content?: string;
+  sections?: { heading: string; content: string }[];
   category: string;
   status: "draft" | "published";
 };
@@ -29,6 +30,8 @@ export default function BlogForm() {
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [categories, setCategories] = useState<Category[]>([]);
+  const [sectionCount, setSectionCount] = useState<number>(0);
+  const [sections, setSections] = useState<{ heading: string; content: string }[]>([]);
 
   useEffect(() => {
     let mounted = true;
@@ -45,6 +48,14 @@ export default function BlogForm() {
           if (mounted) {
             setTitle(blog.title);
             setContent(blog.content);
+            const bSections = (blog as unknown as { sections?: { heading?: string; content?: string }[] }).sections || [];
+            const loaded = Array.isArray(bSections) ? bSections : [];
+            const normalized = loaded.map((s: { heading?: string; content?: string }) => ({
+              heading: String(s?.heading || ""),
+              content: String(s?.content || "")
+            }));
+            setSections(normalized);
+            setSectionCount(normalized.length);
             const cat = blog.category as unknown;
             let catId = "";
             if (typeof cat === "string") {
@@ -65,16 +76,37 @@ export default function BlogForm() {
       mounted = false;
     };
   }, [id]);
+  useEffect(() => {
+    const next = [...sections];
+    if (sectionCount > next.length) {
+      for (let i = next.length; i < sectionCount; i++) {
+        next.push({ heading: "", content: "" });
+      }
+    } else if (sectionCount < next.length) {
+      next.length = sectionCount;
+    }
+    setSections(next);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sectionCount]);
 
   const saveBlog = async () => {
-    if (!title || !category || !content) {
+    const hasSections = sections.some((s) => (s.heading || s.content).trim());
+    if (!title || !category || (!content && !hasSections)) {
       alert("All fields are required");
       return;
     }
 
     const payload: BlogPayload = {
       title,
-      content,
+      content: content || undefined,
+      sections: hasSections
+        ? sections
+            .map((s) => ({
+              heading: s.heading.trim(),
+              content: s.content.trim()
+            }))
+            .filter((s) => s.heading || s.content)
+        : undefined,
       category,
       status,
     };
@@ -173,6 +205,55 @@ export default function BlogForm() {
 
         <div className="form-section">
           <BlogEditor value={content} onChange={setContent} />
+        </div>
+
+        <div className="form-section">
+          <label className="form-label">
+            <span className="label-text">Table Content</span>
+            <span className="label-hint">Enter number of titles and content for each</span>
+          </label>
+          <div className="grid-1-2" style={{ alignItems: "center" }}>
+            <input
+              className="form-input"
+              type="number"
+              placeholder="Number of titles"
+              value={sectionCount || ""}
+              onChange={(e) => setSectionCount(Number(e.target.value || 0))}
+            />
+            {sectionCount > 0 && (
+              <button
+                className="btn"
+                onClick={() => setSectionCount(Math.max(0, sectionCount - 1))}
+              >
+                Remove Last
+              </button>
+            )}
+          </div>
+          {sections.map((s, idx) => (
+            <div key={idx} className="card" style={{ display: "grid", gap: 8 }}>
+              <input
+                className="form-input"
+                placeholder={`Title ${idx + 1}`}
+                value={s.heading}
+                onChange={(e) => {
+                  const next = [...sections];
+                  next[idx] = { ...next[idx], heading: e.target.value };
+                  setSections(next);
+                }}
+              />
+              <textarea
+                className="form-input"
+                rows={4}
+                placeholder="Content"
+                value={s.content}
+                onChange={(e) => {
+                  const next = [...sections];
+                  next[idx] = { ...next[idx], content: e.target.value };
+                  setSections(next);
+                }}
+              />
+            </div>
+          ))}
         </div>
 
         <div className="form-actions">

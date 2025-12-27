@@ -59,15 +59,27 @@ export default function BlogPage() {
                 </p>
 
                 {/* TABLE OF CONTENT */}
-                <div className="toc-box">
-                  <h3>Table Of Content</h3>
-                  <ul>
-                    <li>BAD DEBTS WRITTEN OFF</li>
-                    <li>Methods of Accounting treatment</li>
-                    <li>Allowance method</li>
-                    <li>Direct write-off method</li>
-                  </ul>
-                </div>
+                {Array.isArray(blog.sections) && blog.sections.length > 0 && (
+                  <div className="toc-box">
+                    <h3>Table Of Content</h3>
+                    <ul>
+                      {blog.sections.map((s, i) => {
+                        const title = s?.heading || `Section ${i + 1}`;
+                        const id = `sec-${title
+                          .toLowerCase()
+                          .replace(/[^\w\s-]/g, "")
+                          .replace(/\s+/g, "-")}`;
+                        return (
+                          <li key={i}>
+                            <a href={`#${id}`} className="toc-link">
+                              {title}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
 
                 <div
                   className="blog-html"
@@ -75,6 +87,31 @@ export default function BlogPage() {
                     __html: blog.content || "",
                   }}
                 />
+                {Array.isArray(blog.sections) && blog.sections.length > 0 && (
+                  <div className="blog-sections">
+                    {blog.sections.map((s, i, arr) => {
+                      const title = s?.heading || `Section ${i + 1}`;
+                      const id = `sec-${title
+                        .toLowerCase()
+                        .replace(/[^\w\s-]/g, "")
+                        .replace(/\s+/g, "-")}`;
+                      const text = String(s?.content || "");
+                      const paras = text.split("\n\n");
+                      return (
+                        <section key={i} id={id} className="blog-section-item">
+                          <h2 className="section-title">{title}</h2>
+                          <div className="section-divider" />
+                          <div className="section-content">
+                            {paras.map((p, idx) => (
+                              <p key={idx}>{p}</p>
+                            ))}
+                          </div>
+                          {i !== arr.length - 1 && <div className="section-spacer" />}
+                        </section>
+                      );
+                    })}
+                  </div>
+                )}
                      {/* ================= WHY PROFESSIONAL UTILITIES ================= */}
 <section className="why-pu-section">
   <div className="why-pu-container">
@@ -82,16 +119,16 @@ export default function BlogPage() {
     <div className="why-pu-image">
       <img
         src="https://professionalutilities.com/assets/images/why-pu.png"
-        alt="Why Professional Utilities"
+        alt="Why "
       />
     </div>
 
     {/* CENTER CONTENT */}
     <div className="why-pu-content">
-      <h2>Why Professional Utilities?</h2>
+      <h2>Why ?</h2>
 
       <p className="why-pu-desc">
-        Professional Utilities simplify registrations, licenses, and compliances
+        simplify registrations, licenses, and compliances
         for your business. With experienced guidance and nationwide support, we
         help you complete every requirement efficiently and effectively.
       </p>

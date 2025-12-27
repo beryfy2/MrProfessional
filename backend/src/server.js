@@ -273,9 +273,11 @@ app.get("/api/blogs/by-id/:id", auth, async (req, res) => {
 });
 app.post("/api/blogs", auth, async (req, res) => {
   try {
-    const { title, content, category, status } = req.body || {};
+    const { title, content, category, status, sections } = req.body || {};
 
-    if (!title || !content || !category) {
+    const hasSections =
+      Array.isArray(sections) && sections.some((s) => String(s?.heading || s?.content || "").trim());
+    if (!title || !category || (!content && !hasSections)) {
       return res.status(400).json({ error: "Missing fields" });
     }
 
@@ -291,6 +293,14 @@ app.post("/api/blogs", auth, async (req, res) => {
       title,
       slug,
       content,
+      sections: hasSections
+        ? sections
+            .map((s) => ({
+              heading: String(s?.heading || "").trim(),
+              content: String(s?.content || "").trim(),
+            }))
+            .filter((s) => s.heading || s.content)
+        : [],
       category,
       status: status || "draft",
     });
@@ -302,9 +312,18 @@ app.post("/api/blogs", auth, async (req, res) => {
 });
 app.put("/api/blogs/:id", auth, async (req, res) => {
   try {
-    const { title, content, category, status } = req.body || {};
+    const { title, content, category, status, sections } = req.body || {};
 
     const update = { title, content, category, status };
+    if (Array.isArray(sections)) {
+      const cleaned = sections
+        .map((s) => ({
+          heading: String(s?.heading || "").trim(),
+          content: String(s?.content || "").trim(),
+        }))
+        .filter((s) => s.heading || s.content);
+      update.sections = cleaned;
+    }
 
     if (title) {
       const slugBase = slugifyBlog(title);

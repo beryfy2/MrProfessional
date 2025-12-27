@@ -18,6 +18,15 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    sections: [
+      new mongoose.Schema(
+        {
+          heading: { type: String },
+          content: { type: String },
+        },
+        { _id: false }
+      ),
+    ],
 
     category: {
       type: mongoose.Schema.Types.ObjectId,
