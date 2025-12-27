@@ -10,7 +10,7 @@ const API_BASE =
 /* Utility: strip HTML for safe preview */
 function stripHtml(html) {
   const div = document.createElement("div");
-  div.innerHTML = html;
+  div.innerHTML = html || "";
   return div.textContent || div.innerText || "";
 }
 
@@ -22,13 +22,13 @@ export default function Blogs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  /* Load categories + blogs */
+  /* ================= LOAD DATA ================= */
   useEffect(() => {
     async function loadData() {
       try {
         const [catRes, blogRes] = await Promise.all([
           fetch(`${API_BASE}/categories`),
-          fetch(`${API_BASE}/public/blogs?includeDrafts=1`),
+          fetch(`${API_BASE}/public/blogs`)
         ]);
 
         if (!catRes.ok || !blogRes.ok) {
@@ -50,7 +50,7 @@ export default function Blogs() {
     loadData();
   }, []);
 
-  /* Filter blogs */
+  /* ================= FILTER ================= */
   const filteredBlogs = useMemo(() => {
     return blogs.filter((b) => {
       const matchCategory =
@@ -58,7 +58,7 @@ export default function Blogs() {
         b.category?._id === activeCategory ||
         b.category?.slug === activeCategory;
 
-      const text = stripHtml(b.content || "").toLowerCase();
+      const text = stripHtml(b.content).toLowerCase();
       const matchSearch =
         b.title.toLowerCase().includes(search.toLowerCase()) ||
         text.includes(search.toLowerCase());
@@ -71,11 +71,12 @@ export default function Blogs() {
     <>
       <NavBar />
 
-      {/* BLOG HERO SECTION */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
       <section className="blog-hero">
-        <div className="blog-hero-overlay" />
-
         <div className="blog-hero-container">
+          {/* LEFT */}
           <div className="blog-hero-left">
             <h1>
               Professional Utilities Blog: <br />
@@ -90,7 +91,7 @@ export default function Blogs() {
             </ul>
 
             <div className="blog-rating">
-              <span className="google-logo">G</span>
+              <div className="google-logo">G</div>
               <div>
                 <p>Google Customer Rating</p>
                 <strong>4.9 ★★★★★</strong>
@@ -98,6 +99,7 @@ export default function Blogs() {
             </div>
           </div>
 
+          {/* RIGHT */}
           <div className="blog-hero-right">
             <div className="consultation-form">
               <h3>Get Expert Consultation</h3>
@@ -110,10 +112,12 @@ export default function Blogs() {
         </div>
       </section>
 
-      {/* ================= BLOG SEARCH + CATEGORIES + LIST ================= */}
+      {/* =====================================================
+          BLOG LIST SECTION
+      ===================================================== */}
       <section className="blog-section">
-        {/* SEARCH BAR */}
-        <div className="blog-search-wrapper">
+        {/* SEARCH */}
+        <div className="blog-search">
           <input
             type="text"
             placeholder="Search our knowledge base"
@@ -123,12 +127,11 @@ export default function Blogs() {
           <button>🔍</button>
         </div>
 
-        <div className="blog-layout">
-          {/* CATEGORY SIDEBAR */}
+        <div className="blog-wrapper">
+          {/* ================= SIDEBAR ================= */}
           <aside className="blog-sidebar">
             <h3>Blog Categories</h3>
-
-            <ul className="blog-category-list">
+            <ul>
               <li
                 className={!activeCategory ? "active" : ""}
                 onClick={() => setActiveCategory(null)}
@@ -137,7 +140,7 @@ export default function Blogs() {
               </li>
 
               {categories.length === 0 && (
-                <li className="empty-category">No categories added yet</li>
+                <li style={{ opacity: 0.6 }}>No categories found</li>
               )}
 
               {categories.map((cat) => (
@@ -152,35 +155,38 @@ export default function Blogs() {
             </ul>
           </aside>
 
-          {/* BLOG CARDS */}
-          <div className="blog-cards">
+          {/* ================= BLOG GRID ================= */}
+          <div className="blog-grid">
             {loading && <p>Loading blogs...</p>}
-            {error && <p className="error">{error}</p>}
+            {error && <p>{error}</p>}
 
             {!loading && !error && filteredBlogs.length === 0 && (
               <div className="blog-empty">
                 <h3>No Blogs Found</h3>
-                <p>Try another category or search term.</p>
+                <p>Try another category or search keyword.</p>
               </div>
             )}
 
             {filteredBlogs.map((blog) => (
               <article key={blog._id} className="blog-card">
-                <h3>{blog.title}</h3>
+                <div>
+                  <h3>{blog.title}</h3>
 
-                <p className="blog-meta">
-                  {blog.category?.name} •{" "}
-                  {new Date(blog.createdAt).toDateString()}
-                  {blog.status === "draft" && (
-                    <> • <span className="draft-badge">Draft</span></>
-                  )}
-                </p>
+                  <p className="blog-meta">
+                    {blog.category?.name || "General"} •{" "}
+                    {new Date(blog.createdAt).toDateString()}
+                    {blog.status === "draft" && " • Draft"}
+                  </p>
 
-                <p className="blog-excerpt">
-                  {stripHtml(blog.content).slice(0, 180)}...
-                </p>
+                  <p className="blog-desc">
+                    {stripHtml(blog.content).slice(0, 160)}...
+                  </p>
+                </div>
 
-                <Link to={`/blogs/${blog.slug}`} className="read-more">
+                <Link
+                  to={`/blogs/${blog.slug}`}
+                  className="read-btn"
+                >
                   Read More →
                 </Link>
               </article>

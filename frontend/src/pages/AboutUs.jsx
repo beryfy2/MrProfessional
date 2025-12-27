@@ -222,26 +222,6 @@ export default function AboutUs() {
     </div>
   </div>
 </section>
-{/* Explore Our Services CTA */}
-<section className="explore-services">
-  <div className="explore-container">
-    <div className="explore-left">
-      <p className="explore-text">
-        For Company Registration, Compliances, GST Registration, Accounting & Bookkeeping,
-        ITR, Trademark Registration, Govt Tenders and much more
-      </p>
-
-      <button className="explore-btn">
-        EXPLORE OUR SERVICES
-      </button>
-    </div>
-
-    <div className="explore-right">
-     <img src={stripImage} alt="Explore Our Services" />
-
-    </div>
-  </div>
-</section>
 
 {/* Contact Us Section */}
 <section className="contact-section">

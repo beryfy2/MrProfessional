@@ -26,13 +26,12 @@ import ServicePage from './pages/ServicePage'
 import AboutUs from './pages/AboutUs'
 import TeamMem from './pages/TeamMem'
 import Blogs from './pages/Blogs'
+import BlogPage from './pages/BlogPage'
 import Contact from './pages/Contact'
 import PartnersSignup from './pages/PartnersSignup'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsAndConditions from './pages/TermsAndConditions'
 import RefundPolicy from './pages/RefundPolicy'
-
-
 
 
 const Home = () => (
@@ -81,9 +80,10 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
         <Route path='/blogs' element={<Blogs/>} />
-<Route path="/partners-signup" element={<PartnersSignup />} />
+        <Route path="/blogs/:slug" element={<BlogPage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/partners-signup" element={<PartnersSignup />} />
         <Route path="/payment" element={<Payment/>} />
-        <Route path="/contact" element={<ContactSection />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />

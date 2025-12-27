@@ -3,6 +3,7 @@
    ===================================================== */
 
 .aboutUs-page {
+  
   width: 100%;
   overflow-x: hidden;
 }
@@ -17,7 +18,7 @@
   position: relative;
   overflow: hidden;
 
-  min-height: 640px;
+  min-height: 400px;
   padding-top: var(--navbar-height);
   padding-bottom: 140px;
 }
