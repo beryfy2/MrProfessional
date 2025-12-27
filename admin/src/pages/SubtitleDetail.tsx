@@ -19,6 +19,8 @@ export default function SubtitleDetail() {
   const [batchCount, setBatchCount] = useState<number>(0);
   const [batchNames, setBatchNames] = useState<string[]>([]);
   const [batchError, setBatchError] = useState<string>('');
+  const [batchFiles, setBatchFiles] = useState<File[]>([]);
+  const [batchUploading, setBatchUploading] = useState<boolean>(false);
 
   useEffect(() => {
     getJSON<Subtitle>(`/subtitles/${id}`).then((s) => {
@@ -70,37 +72,116 @@ export default function SubtitleDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [faqCount]);
 
-  async function uploadBatch(filesList: FileList | null) {
+  async function uploadBatch() {
     setBatchError('');
-    if (!filesList || filesList.length === 0) return;
+    if (batchFiles.length === 0) {
+      setBatchError('Select files to upload');
+      return;
+    }
     const count = Number(batchCount) || 0;
     if (count <= 0) {
       setBatchError('Enter number of files');
       return;
     }
-    if (filesList.length !== count) {
+    if (batchFiles.length !== count) {
       setBatchError('Selected files count does not match');
       return;
     }
     const names = Array.from({ length: count }, (_, i) => String(batchNames[i] || '').trim());
-    if (names.some((n) => !n)) {
-      setBatchError('Enter name for each file');
-      return;
-    }
     const form = new FormData();
-    Array.from(filesList).forEach((f, idx) => {
+    batchFiles.forEach((f, idx) => {
       form.append('files', f);
-      form.append(`customName_${idx}`, names[idx]);
+      if (names[idx]) {
+        form.append(`customName_${idx}`, names[idx]);
+      }
     });
-    const updated = await sendForm<Subtitle>(`/subtitles/${id}/files`, form, 'POST');
-    setFiles(updated.files || []);
-    setBatchCount(0);
-    setBatchNames([]);
+    try {
+      setBatchUploading(true);
+      const updated = await sendForm<Subtitle>(`/subtitles/${id}/files`, form, 'POST');
+      setFiles(updated.files || []);
+      setBatchCount(0);
+      setBatchNames([]);
+      setBatchFiles([]);
+    } catch (err) {
+      const msg =
+        typeof err === 'object' && err !== null && 'message' in err
+          ? String((err as { message?: unknown }).message || 'Failed to upload')
+          : 'Failed to upload';
+      setBatchError(msg);
+    } finally {
+      setBatchUploading(false);
+    }
   }
 
-  async function removeFile(fid: string) {
-    const updated = await delJSON<Subtitle>(`/subtitles/${id}/files/${fid}`);
-    setFiles(updated.files || []);
+  async function removeFile(
+    fid?: string,
+    fname?: string,
+    furl?: string,
+    cname?: string,
+    vname?: string,
+    lbl?: string
+  ) {
+    try {
+      if (!confirm('Remove this file?')) return;
+      const before = [...files];
+      const filtered = before.filter((f) => {
+        if (fid) return f._id !== fid;
+        if (furl) return f.url !== furl;
+        if (cname) return (f.customName || '') !== cname;
+        if (lbl) return (f.label || '') !== lbl;
+        if (vname) return ((f.customName || f.label || f.filename) || '') !== vname;
+        if (fname) return f.filename !== fname;
+        return true;
+      });
+      setFiles(filtered);
+      let updated: Subtitle | null = null;
+      try {
+        if (fid) {
+          updated = await delJSON<Subtitle>(`/subtitles/${id}/files/${String(fid)}`);
+        } else if (furl) {
+          updated = await delJSON<Subtitle>(`/subtitles/${id}/files?url=${encodeURIComponent(furl)}`);
+        } else if (cname) {
+          updated = await delJSON<Subtitle>(`/subtitles/${id}/files?customName=${encodeURIComponent(cname)}`);
+        } else if (lbl) {
+          updated = await delJSON<Subtitle>(`/subtitles/${id}/files?label=${encodeURIComponent(lbl)}`);
+        } else if (vname) {
+          // Try both as customName and label using visible name
+          updated = await delJSON<Subtitle>(`/subtitles/${id}/files?customName=${encodeURIComponent(vname)}`).catch(() => null);
+          if (!updated) {
+            updated = await delJSON<Subtitle>(`/subtitles/${id}/files?label=${encodeURIComponent(vname)}`).catch(() => null);
+          }
+        } else if (fname) {
+          updated = await delJSON<Subtitle>(`/subtitles/${id}/files?filename=${encodeURIComponent(fname)}`);
+        }
+      } catch { /* fall through */ }
+      if (!updated) {
+        try {
+          const resp = await sendJSON<Subtitle>(
+            `/subtitles/${id}`,
+            { title, content, price, questions, faqs, files: filtered },
+            'PUT'
+          );
+          updated = resp;
+        } catch { /* fall through */ }
+      }
+      if (updated && Array.isArray(updated.files)) {
+        setFiles(updated.files);
+      } else {
+        const ok = filtered.length < before.length;
+        if (!ok) {
+          setFiles(before);
+          throw new Error('Failed to remove file');
+        }
+      }
+    } catch (err) {
+      const msg =
+        typeof err === 'object' && err !== null && 'message' in err
+          ? String((err as { message?: unknown }).message || 'Failed to remove file')
+          : 'Failed to remove file';
+      alert(msg);
+    } finally {
+      /* noop */
+    }
   }
 
   async function uploadQuestionFiles(idx: number, filesList: FileList | null) {
@@ -112,8 +193,21 @@ export default function SubtitleDetail() {
   }
 
   async function removeQuestionFile(idx: number, fid: string) {
-    const updated = await delJSON<Subtitle>(`/subtitles/${id}/questions/${idx}/files/${fid}`);
-    setQuestions(normalizeQuestions(updated.questions || []));
+    try {
+      if (!fid) {
+        alert('Invalid file id');
+        return;
+      }
+      if (!confirm('Remove this attached file?')) return;
+      const updated = await delJSON<Subtitle>(`/subtitles/${id}/questions/${idx}/files/${String(fid)}`);
+      setQuestions(normalizeQuestions(updated.questions || []));
+    } catch (err) {
+      const msg =
+        typeof err === 'object' && err !== null && 'message' in err
+          ? String((err as { message?: unknown }).message || 'Failed to remove attached file')
+          : 'Failed to remove attached file';
+      alert(msg);
+    }
   }
 
   async function saveAll() {
@@ -230,9 +324,24 @@ export default function SubtitleDetail() {
                 type="file"
                 multiple
                 accept="application/pdf"
-                onChange={(e) => uploadBatch(e.target.files)}
+                onChange={(e) => {
+                  const list = Array.from(e.target.files || []);
+                  setBatchFiles(list);
+                  setBatchCount(list.length || 0);
+                }}
               />
             </div>
+            {batchFiles.length > 0 && (
+              <div className="form-section">
+                <button
+                  className="btn success"
+                  onClick={uploadBatch}
+                  disabled={batchUploading}
+                >
+                  {batchUploading ? 'Uploading...' : 'Upload'}
+                </button>
+              </div>
+            )}
             {batchError && <div className="error-message">{batchError}</div>}
           </div>
         </div>
@@ -244,9 +353,27 @@ export default function SubtitleDetail() {
             </label>
             <div className="files-grid">
               {files.map((f) => (
-                <div key={f._id} className="file-card">
-                  <div className="file-name">{f.customName || f.label || f.filename}</div>
-                  <button className="btn btn-delete" onClick={() => removeFile(f._id!)}>
+                <div key={f._id} className="file-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div className="file-card">
+                    <div className="file-name" title={f.customName || f.label || f.filename}>
+                      {f.customName || f.label || f.filename}
+                    </div>
+                  </div>
+                  <button
+                    className="btn btn-delete"
+                    type="button"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                    onClick={() =>
+                      removeFile(
+                        f._id,
+                        f.filename,
+                        f.url,
+                        f.customName,
+                        (f.customName || f.label || f.filename),
+                        f.label
+                      )
+                    }
+                  >
                     <span>🗑️</span>
                     Remove
                   </button>
@@ -456,9 +583,15 @@ export default function SubtitleDetail() {
                 {qa.files && qa.files.length > 0 && (
                   <div className="files-grid">
                     {qa.files.map((f) => (
-                      <div key={f._id} className="file-card">
-                        <div className="file-name">{f.filename}</div>
-                        <button className="btn btn-delete" onClick={() => removeQuestionFile(idx, f._id!)}>
+                      <div key={f._id} className="file-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div className="file-card">
+                          <div className="file-name" title={f.filename}>{f.filename}</div>
+                        </div>
+                        <button 
+                          className="btn btn-delete" 
+                          style={{ width: '100%', justifyContent: 'center' }}
+                          onClick={() => removeQuestionFile(idx, f._id!)}
+                        >
                           <span>🗑️</span>
                           Remove
                         </button>

@@ -755,6 +755,32 @@ app.delete('/api/subtitles/:sid/files/:fileId', auth, async (req, res) => {
   }
 });
 
+// Alternative deletion by filename or url (for legacy records without _id)
+app.delete('/api/subtitles/:sid/files', auth, async (req, res) => {
+  try {
+    const filename = req.query?.filename ? String(req.query.filename) : undefined;
+    const url = req.query?.url ? String(req.query.url) : undefined;
+    const customName = req.query?.customName ? String(req.query.customName) : undefined;
+    const label = req.query?.label ? String(req.query.label) : undefined;
+    if (!filename && !url && !customName && !label) {
+      return res.status(400).json({ error: 'filename, url, customName or label required' });
+    }
+    const match =
+      filename ? { filename } :
+      customName ? { customName } :
+      url ? { url } :
+      { label };
+    const sub = await Subtitle.findByIdAndUpdate(
+      req.params.sid,
+      { $pull: { files: match } },
+      { new: true }
+    );
+    res.json(sub);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to remove file' });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
