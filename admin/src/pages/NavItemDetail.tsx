@@ -73,11 +73,10 @@ export default function NavItemDetail() {
 
   return (
     <div className="page">
-
-      {/* BACK LINK – TOP LEFT (LIKE EMPLOYEES PAGE) */}
-      <div style={{ marginBottom: 16 }}>
+      {/* BACK LINK */}
+      <div className="back-navigation">
         <button
-          className="btn"
+          className="btn btn-secondary"
           onClick={() => navigate('/admin/nav-items')}
         >
           ← Back to Nav Items
@@ -86,27 +85,21 @@ export default function NavItemDetail() {
 
       {/* PAGE HEADER */}
       <div className="page-header">
-        <h1>Nav Item Details</h1>
-        <p className="page-subtitle">
-          Manage main title and its sub titles
-        </p>
+        <div>
+          <h1>Nav Item Details</h1>
+          <p className="page-subtitle">
+            Manage main title and its sub titles
+          </p>
+        </div>
       </div>
 
       {/* MAIN TITLE CARD */}
-      <div className="card" style={{ display: 'grid', gap: 16 }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}
-        >
-          <h2 style={{ margin: 0 }}>Main Title</h2>
-
+      <div className="card">
+        <div className="card-header">
+          <h2 className="card-title">Main Title</h2>
           {item && (
             <button
-              className="btn"
-              style={{ color: '#ef4444' }}
+              className="btn btn-danger"
               onClick={async () => {
                 if (!confirm('Delete this nav item and all its titles?')) return;
                 await delJSON(`/nav-items/${id}`);
@@ -118,53 +111,46 @@ export default function NavItemDetail() {
           )}
         </div>
 
-        <div style={{ display: 'flex', gap: 12 }}>
-          <input
-            className="input"
-            value={mainTitle}
-            onChange={(e) => setMainTitle(e.target.value)}
-            style={{ flex: 1 }}
-          />
-          <button className="btn primary" onClick={saveMainTitle}>
-            Save
-          </button>
+        <div className="form-section">
+          <div className="input-group">
+            <input
+              className="form-input"
+              value={mainTitle}
+              onChange={(e) => setMainTitle(e.target.value)}
+              placeholder="Enter main title"
+            />
+            <button className="btn primary" onClick={saveMainTitle}>
+              Save
+            </button>
+          </div>
         </div>
       </div>
 
       {/* TITLES CARD */}
       <div className="card">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 16
-          }}
-        >
-          <h2 style={{ margin: 0 }}>Titles</h2>
-
+        <div className="card-header">
+          <h2 className="card-title">Titles</h2>
           {!showAdd ? (
             <button className="btn primary" onClick={addTitle}>
+              <span className="btn-icon">+</span>
               Add Title
             </button>
           ) : (
-            <div style={{ display: 'flex', gap: 8 }}>
+            <div className="inline-form-group">
               <input
-                className="input"
+                className="form-input"
                 placeholder="Title name"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                style={{ width: 260 }}
               />
               <input
-                className="input"
+                className="form-input"
                 type="number"
                 placeholder="Order"
                 value={newOrder}
                 onChange={(e) =>
                   setNewOrder(e.target.value === '' ? '' : Number(e.target.value))
                 }
-                style={{ width: 110 }}
               />
               <button
                 className="btn success"
@@ -173,7 +159,7 @@ export default function NavItemDetail() {
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
-              <button className="btn" onClick={() => setShowAdd(false)}>
+              <button className="btn btn-secondary" onClick={() => setShowAdd(false)}>
                 Cancel
               </button>
             </div>
@@ -181,49 +167,37 @@ export default function NavItemDetail() {
         </div>
 
         {titles.length === 0 ? (
-          <p className="page-subtitle">No titles added yet</p>
+          <div className="empty-state-small">
+            <p className="empty-text">No titles added yet</p>
+            <p className="empty-subtext">Click "Add Title" to create your first title</p>
+          </div>
         ) : (
-          <div style={{ display: 'grid', gap: 12 }}>
+          <div className="items-list">
             {titles.map((t) => (
-              <div
-                key={t._id}
-                style={{
-                  border: '1px solid var(--border-light)',
-                  borderRadius: 12,
-                  padding: 14,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}
-              >
+              <div key={t._id} className="list-item-card">
                 <div
-                  style={{ cursor: 'pointer' }}
+                  className="list-item-content"
                   onClick={() => navigate(`/admin/titles/${t._id}`)}
                 >
-                  <div style={{ fontWeight: 600 }}>{t.title}</div>
-                  <div
-                    style={{
-                      fontSize: 13,
-                      color: '#64748b',
-                      marginTop: 4
-                    }}
-                  >
+                  <div className="list-item-title">{t.title}</div>
+                  <div className="list-item-preview">
                     {(t.content || '').slice(0, 80)}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 10 }}>
+                <div className="action-buttons">
                   <button
-                    className="btn"
+                    className="btn btn-edit"
                     onClick={() => navigate(`/admin/titles/${t._id}`)}
                   >
+                    <span>✏️</span>
                     Edit
                   </button>
                   <button
-                    className="btn"
-                    style={{ color: '#ef4444' }}
+                    className="btn btn-delete"
                     onClick={() => removeTitle(t._id!)}
                   >
+                    <span>🗑️</span>
                     Delete
                   </button>
                 </div>

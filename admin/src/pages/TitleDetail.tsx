@@ -60,58 +60,120 @@ export default function TitleDetail() {
   }
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={() => t && navigate(`/admin/nav-items/${t.navItem}`)}>← Back to Nav Item</button>
-      <div className="card" style={{ display: 'grid', gap: 12 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 600 }}>Title</div>
+    <div className="page">
+      <div className="back-navigation">
+        <button className="btn btn-secondary" onClick={() => t && navigate(`/admin/nav-items/${t.navItem}`)}>
+          ← Back to Nav Item
+        </button>
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <h2 className="card-title">Title</h2>
           {t && (
             <button
-              className="btn"
+              className="btn btn-danger"
               onClick={async () => {
                 if (!confirm('Delete this title and all its subtitles?')) return;
                 await delJSON(`/titles/${id}`);
                 navigate(`/admin/nav-items/${t.navItem}`);
               }}
-              style={{ color: '#DC2626' }}
             >
               Delete
             </button>
           )}
         </div>
-        <input className="input" value={name} onChange={(e) => setName(e.target.value)} />
-        <textarea className="input" rows={4} value={content} onChange={(e) => setContent(e.target.value)} />
-        <div>
-          <button className="btn primary" onClick={saveTitle}>Save</button>
+        <div className="form-section">
+          <label className="form-label">
+            <span className="label-text">Title Name</span>
+          </label>
+          <input 
+            className="form-input" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter title name"
+          />
+        </div>
+        
+        <div className="form-actions">
+          <button className="btn primary" onClick={saveTitle}>
+            <span className="btn-icon">💾</span>
+            Save Title
+          </button>
         </div>
       </div>
+
       <div className="card">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitles</div>
+        <div className="card-header">
+          <h2 className="card-title">Subtitles</h2>
           {!showAdd ? (
-            <button className="btn primary" onClick={addSubtitle}>Add Subtitle</button>
+            <button className="btn primary" onClick={addSubtitle}>
+              <span className="btn-icon">+</span>
+              Add Subtitle
+            </button>
           ) : (
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <input className="input" placeholder="Subtitle title" value={newSubtitleTitle} onChange={(e) => setNewSubtitleTitle(e.target.value)} style={{ width: 260 }} />
-              <input className="input" placeholder="Price (e.g., ₹499)" value={newSubtitlePrice} onChange={(e) => setNewSubtitlePrice(e.target.value)} style={{ width: 160 }} />
-              <button className="btn success" onClick={saveNewSubtitle} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
-              <button className="btn" onClick={() => setShowAdd(false)}>Cancel</button>
+            <div className="inline-form-group">
+              <input 
+                className="form-input" 
+                placeholder="Subtitle title" 
+                value={newSubtitleTitle} 
+                onChange={(e) => setNewSubtitleTitle(e.target.value)}
+              />
+              <input 
+                className="form-input" 
+                placeholder="Price (e.g., ₹499)" 
+                value={newSubtitlePrice} 
+                onChange={(e) => setNewSubtitlePrice(e.target.value)}
+              />
+              <button 
+                className="btn success" 
+                onClick={saveNewSubtitle} 
+                disabled={saving}
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </button>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => setShowAdd(false)}
+              >
+                Cancel
+              </button>
             </div>
           )}
         </div>
         {subs.length === 0 ? (
-          <div style={{ color: '#6B7280', marginTop: 12 }}>No subtitles yet</div>
+          <div className="empty-state-small">
+            <p className="empty-text">No subtitles yet</p>
+            <p className="empty-subtext">Click "Add Subtitle" to create your first subtitle</p>
+          </div>
         ) : (
-          <div style={{ marginTop: 12, display: 'grid', gap: 12 }}>
+          <div className="items-list">
             {subs.map((s) => (
-              <div key={s._id} style={{ border: '1px solid var(--border-light)', borderRadius: 10, padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ cursor: 'pointer', flex: 1 }} onClick={() => navigate(`/admin/subtitles/${s._id}`)}>
-                  <div style={{ fontWeight: 600 }}>{s.title}</div>
-                  <div style={{ fontSize: 13, color: '#6B7280' }}>{(s.content || '').slice(0, 80)}</div>
+              <div key={s._id} className="list-item-card">
+                <div 
+                  className="list-item-content"
+                  onClick={() => navigate(`/admin/subtitles/${s._id}`)}
+                >
+                  <div className="list-item-title">{s.title}</div>
+                  <div className="list-item-preview">
+                    {(s.content || '').slice(0, 80)}
+                  </div>
                 </div>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn" onClick={() => navigate(`/admin/subtitles/${s._id}`)} style={{ color: '#0f4260', fontWeight: 500 }}>Edit</button>
-                  <button className="btn" onClick={() => removeSubtitle(s._id!)} style={{ color: '#DC2626' }}>Delete</button>
+                <div className="action-buttons">
+                  <button 
+                    className="btn btn-edit" 
+                    onClick={() => navigate(`/admin/subtitles/${s._id}`)}
+                  >
+                    <span>✏️</span>
+                    Edit
+                  </button>
+                  <button 
+                    className="btn btn-delete" 
+                    onClick={() => removeSubtitle(s._id!)}
+                  >
+                    <span>🗑️</span>
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}

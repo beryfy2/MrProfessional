@@ -67,8 +67,10 @@ export default function NavItems() {
       {showAdd && (
         <div className="card">
           <div className="form-header">
-            <h3 className="form-title">Add New Navigation Item</h3>
-            <p className="form-subtitle">Create a new item for the main navigation menu</p>
+            <div>
+              <h3 className="form-title">Add New Navigation Item</h3>
+              <p className="form-subtitle">Create a new item for the main navigation menu</p>
+            </div>
           </div>
           <div className="grid-2">
             <div className="form-section">
@@ -96,7 +98,7 @@ export default function NavItems() {
             </div>
           </div>
           <div className="form-actions">
-            <button className="btn" onClick={() => setShowAdd(false)}>
+            <button className="btn btn-secondary" onClick={() => setShowAdd(false)}>
               Cancel
             </button>
             <button 
@@ -148,7 +150,7 @@ export default function NavItems() {
                       <div className="order-badge">{i.order}</div>
                     </td>
                     <td className="td">
-                      <strong>{i.name}</strong>
+                      <div className="nav-item-name">{i.name}</div>
                     </td>
                     <td className="td">
                       <code className="slug-text">{i.slug}</code>

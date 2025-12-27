@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { FileMeta, QA, Subtitle } from '../../../common/types';
 import { getJSON, sendJSON, sendForm, delJSON } from '../lib/api';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,8 +19,6 @@ export default function SubtitleDetail() {
   const [batchCount, setBatchCount] = useState<number>(0);
   const [batchNames, setBatchNames] = useState<string[]>([]);
   const [batchError, setBatchError] = useState<string>('');
-
-  const uploadRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     getJSON<Subtitle>(`/subtitles/${id}`).then((s) => {
@@ -72,13 +70,6 @@ export default function SubtitleDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [faqCount]);
 
-  async function uploadFiles(filesList: FileList | null) {
-    if (!filesList || filesList.length === 0) return;
-    const form = new FormData();
-    Array.from(filesList).forEach((f) => form.append('files', f));
-    const updated = await sendForm<Subtitle>(`/subtitles/${id}/files`, form, 'POST');
-    setFiles(updated.files || []);
-  }
   async function uploadBatch(filesList: FileList | null) {
     setBatchError('');
     if (!filesList || filesList.length === 0) return;
@@ -136,118 +127,162 @@ export default function SubtitleDetail() {
   }
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <button className="btn" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>
-        ← Back
-      </button>
-          {/* SUBTITLE INFO */}
-          <div className="card" style={{ display: 'grid', gap: 12 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div style={{ fontSize: 18, fontWeight: 600 }}>Subtitle Information</div>
-              {sub && (
-                <button
-                  className="btn"
-                  style={{ color: '#DC2626' }}
-                  onClick={async () => {
-                    if (!confirm('Delete this subtitle?')) return;
-                    await delJSON(`/subtitles/${id}`);
-                    navigate(`/admin/titles/${sub.parentTitleId}`);
-                  }}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
+    <div className="page">
+      <div className="back-navigation">
+        <button className="btn btn-secondary" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>
+          ← Back
+        </button>
+      </div>
 
-            <input className="input" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-
-            <div className="grid-1-2">
-              <textarea
-                className="input"
-                rows={4}
-                placeholder="Content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-              <input
-                className="input"
-                placeholder="Price (₹)"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-
-            <input
-              ref={uploadRef}
-              type="file"
-              multiple
-              accept="image/*,application/pdf"
-              hidden
-              onChange={(e) => uploadFiles(e.target.files)}
-            />
-            <button className="btn" onClick={() => uploadRef.current?.click()}>
-              Upload Files
+      {/* SUBTITLE INFO */}
+      <div className="card">
+        <div className="card-header">
+          <h2 className="card-title">Subtitle Information</h2>
+          {sub && (
+            <button
+              className="btn btn-danger"
+              onClick={async () => {
+                if (!confirm('Delete this subtitle?')) return;
+                await delJSON(`/subtitles/${id}`);
+                navigate(`/admin/titles/${sub.parentTitleId}`);
+              }}
+            >
+              Delete
             </button>
-            <div className="grid-1-2">
-              <div className="card" style={{ display: 'grid', gap: 8 }}>
-                <div style={{ fontWeight: 600 }}>Batch PDF Upload</div>
-                <input
-                  className="input"
-                  type="number"
-                  placeholder="Number of files"
-                  value={batchCount || ''}
-                  onChange={(e) => setBatchCount(Number(e.target.value || 0))}
-                />
-                {Array.from({ length: batchCount || 0 }).map((_, idx) => (
-                  <input
-                    key={idx}
-                    className="input"
-                    placeholder={`File ${idx + 1} name`}
-                    value={batchNames[idx] || ''}
-                    onChange={(e) => {
-                      const next = [...batchNames];
-                      next[idx] = e.target.value;
-                      setBatchNames(next);
-                    }}
-                  />
-                ))}
-                <input
-                  className="input"
-                  type="file"
-                  multiple
-                  accept="application/pdf"
-                  onChange={(e) => uploadBatch(e.target.files)}
-                />
-                {batchError && <div style={{ color: '#DC2626' }}>{batchError}</div>}
-              </div>
-            </div>
+          )}
+        </div>
 
-            {files.length > 0 && (
-              <div className="grid-2">
-                {files.map((f) => (
-                  <div key={f._id} className="card">
-                    <div style={{ fontSize: 13 }}>{f.customName || f.label || f.filename}</div>
-                    <button className="btn" style={{ color: '#DC2626' }} onClick={() => removeFile(f._id!)}>
-                      Remove
-                    </button>
-                  </div>
-                ))}
+        <div className="form-section">
+          <label className="form-label">
+            <span className="label-text">Title</span>
+          </label>
+          <input 
+            className="form-input" 
+            placeholder="Enter subtitle title" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div className="grid-1-2">
+          <div className="form-section">
+            <label className="form-label">
+              <span className="label-text">Content</span>
+            </label>
+            <textarea
+              className="form-textarea"
+              rows={4}
+              placeholder="Enter content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
+          <div className="form-section">
+            <label className="form-label">
+              <span className="label-text">Price</span>
+            </label>
+            <input
+              className="form-input"
+              placeholder="Price (₹)"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        </div>
+
+        
+
+        <div className="form-section">
+          <div className="card nested-card">
+            <h3 className="section-title">Batch PDF Upload</h3>
+            <div className="form-section">
+              <label className="form-label">
+                <span className="label-text">Number of Files</span>
+              </label>
+              <input
+                className="form-input"
+                type="number"
+                placeholder="Number of files"
+                value={batchCount || ''}
+                onChange={(e) => setBatchCount(Number(e.target.value || 0))}
+              />
+            </div>
+            {Array.from({ length: batchCount || 0 }).map((_, idx) => (
+              <div key={idx} className="form-section">
+                <label className="form-label">
+                  <span className="label-text">File {idx + 1} Name</span>
+                </label>
+                <input
+                  className="form-input"
+                  placeholder={`File ${idx + 1} name`}
+                  value={batchNames[idx] || ''}
+                  onChange={(e) => {
+                    const next = [...batchNames];
+                    next[idx] = e.target.value;
+                    setBatchNames(next);
+                  }}
+                />
               </div>
+            ))}
+            <div className="form-section">
+              <input
+                className="form-input"
+                type="file"
+                multiple
+                accept="application/pdf"
+                onChange={(e) => uploadBatch(e.target.files)}
+              />
+            </div>
+            {batchError && <div className="error-message">{batchError}</div>}
+          </div>
+        </div>
+
+        {files.length > 0 && (
+          <div className="form-section">
+            <label className="form-label">
+              <span className="label-text">Uploaded Files</span>
+            </label>
+            <div className="files-grid">
+              {files.map((f) => (
+                <div key={f._id} className="file-card">
+                  <div className="file-name">{f.customName || f.label || f.filename}</div>
+                  <button className="btn btn-delete" onClick={() => removeFile(f._id!)}>
+                    <span>🗑️</span>
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* QUESTIONS */}
+      <div className="card">
+        <div className="card-header">
+          <h2 className="card-title">Questions & Answers</h2>
+          <div className="button-group">
+            <button className="btn primary" onClick={() => setCount(count + 1)}>
+              <span className="btn-icon">+</span>
+              Add Question
+            </button>
+            {count > 0 && (
+              <button className="btn btn-secondary" onClick={() => setCount(Math.max(0, count - 1))}>
+                Remove Last
+              </button>
             )}
           </div>
+        </div>
 
-          {/* QUESTIONS */}
-          <div className="card" style={{ display: 'grid', gap: 12 }}>
-            <div style={{ fontSize: 18, fontWeight: 600 }}>Questions & Answers</div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              <button className="btn" onClick={() => setCount(count + 1)}>+ Add Question</button>
-              {count > 0 && <button className="btn" onClick={() => setCount(Math.max(0, count - 1))}>Remove Last</button>}
-            </div>
-
-            {questions.map((qa, idx) => (
-              <div key={idx} className="card">
+        <div className="questions-list">
+          {questions.map((qa, idx) => (
+            <div key={idx} className="card nested-card">
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">Question {idx + 1}</span>
+                </label>
                 <textarea
-                  className="input"
+                  className="form-textarea"
                   rows={3}
                   value={qa.question}
                   onChange={(e) => {
@@ -255,9 +290,15 @@ export default function SubtitleDetail() {
                     next[idx] = { ...qa, question: e.target.value };
                     setQuestions(next);
                   }}
+                  placeholder="Enter your question"
                 />
+              </div>
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">Answer Format</span>
+                </label>
                 <select
-                  className="input"
+                  className="form-input"
                   value={qa.format || 'written'}
                   onChange={(e) => {
                     const next = [...questions];
@@ -277,14 +318,16 @@ export default function SubtitleDetail() {
                   <option value="table">Table</option>
                   <option value="both">Both</option>
                 </select>
-                {(qa.format === 'table' || qa.format === 'both') && (
-                  <div style={{ display: 'grid', gap: 8 }}>
-                    <div style={{ fontWeight: 600 }}>Table Headers</div>
-                    <div className="grid-2">
+              </div>
+              {(qa.format === 'table' || qa.format === 'both') && (
+                <div className="table-editor">
+                  <div className="form-section">
+                    <h4 className="section-subtitle">Table Headers</h4>
+                    <div className="table-headers-grid">
                       {(qa.table?.headers || []).map((h, hIdx) => (
-                        <div key={hIdx} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <div key={hIdx} className="table-header-item">
                           <input
-                            className="input"
+                            className="form-input"
                             value={h}
                             onChange={(e) => {
                               const next = [...questions];
@@ -294,9 +337,10 @@ export default function SubtitleDetail() {
                               next[idx] = { ...next[idx], table: t };
                               setQuestions(next);
                             }}
+                            placeholder="Header name"
                           />
                           <button
-                            className="btn"
+                            className="btn btn-delete"
                             onClick={() => {
                               const next = [...questions];
                               const t = next[idx].table || { headers: [], rows: [] };
@@ -306,7 +350,6 @@ export default function SubtitleDetail() {
                               next[idx] = { ...next[idx], table: t };
                               setQuestions(next);
                             }}
-                            style={{ color: '#DC2626' }}
                           >
                             Remove
                           </button>
@@ -314,7 +357,7 @@ export default function SubtitleDetail() {
                       ))}
                     </div>
                     <button
-                      className="btn"
+                      className="btn btn-secondary"
                       onClick={() => {
                         const next = [...questions];
                         const t = next[idx].table || { headers: [], rows: [] };
@@ -326,15 +369,17 @@ export default function SubtitleDetail() {
                     >
                       + Add Column
                     </button>
-                    <div style={{ fontWeight: 600 }}>Table Rows</div>
-                    <div style={{ display: 'grid', gap: 8 }}>
+                  </div>
+                  <div className="form-section">
+                    <h4 className="section-subtitle">Table Rows</h4>
+                    <div className="table-rows-list">
                       {(qa.table?.rows || []).map((row, rIdx) => (
-                        <div key={rIdx} style={{ display: 'grid', gap: 8 }}>
-                          <div className="grid-2">
+                        <div key={rIdx} className="table-row-item">
+                          <div className="table-row-cells">
                             {(row || []).map((cell, cIdx) => (
                               <input
                                 key={cIdx}
-                                className="input"
+                                className="form-input"
                                 value={cell}
                                 onChange={(e) => {
                                   const next = [...questions];
@@ -345,29 +390,27 @@ export default function SubtitleDetail() {
                                   next[idx] = { ...next[idx], table: { headers: t.headers || [], rows } };
                                   setQuestions(next);
                                 }}
+                                placeholder={`Cell ${cIdx + 1}`}
                               />
                             ))}
                           </div>
-                          <div style={{ display: 'flex', gap: 8 }}>
-                            <button
-                              className="btn"
-                              onClick={() => {
-                                const next = [...questions];
-                                const t = next[idx].table || { headers: [], rows: [] };
-                                const rows = (t.rows || []).filter((_, i) => i !== rIdx);
-                                next[idx] = { ...next[idx], table: { headers: t.headers || [], rows } };
-                                setQuestions(next);
-                              }}
-                              style={{ color: '#DC2626' }}
-                            >
-                              Remove Row
-                            </button>
-                          </div>
+                          <button
+                            className="btn btn-delete"
+                            onClick={() => {
+                              const next = [...questions];
+                              const t = next[idx].table || { headers: [], rows: [] };
+                              const rows = (t.rows || []).filter((_, i) => i !== rIdx);
+                              next[idx] = { ...next[idx], table: { headers: t.headers || [], rows } };
+                              setQuestions(next);
+                            }}
+                          >
+                            Remove Row
+                          </button>
                         </div>
                       ))}
                     </div>
                     <button
-                      className="btn"
+                      className="btn btn-secondary"
                       onClick={() => {
                         const next = [...questions];
                         const t = next[idx].table || { headers: [], rows: [] };
@@ -381,9 +424,14 @@ export default function SubtitleDetail() {
                       + Add Row
                     </button>
                   </div>
-                )}
+                </div>
+              )}
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">Answer</span>
+                </label>
                 <textarea
-                  className="input"
+                  className="form-textarea"
                   rows={4}
                   value={qa.answer}
                   onChange={(e) => {
@@ -391,53 +439,78 @@ export default function SubtitleDetail() {
                     next[idx] = { ...qa, answer: e.target.value };
                     setQuestions(next);
                   }}
+                  placeholder="Enter your answer"
                 />
+              </div>
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">Attach Files</span>
+                </label>
                 <input
                   type="file"
                   multiple
                   accept="image/*,application/pdf"
                   onChange={(e) => uploadQuestionFiles(idx, e.target.files)}
+                  className="form-input"
                 />
                 {qa.files && qa.files.length > 0 && (
-                  <div className="grid-2">
+                  <div className="files-grid">
                     {qa.files.map((f) => (
-                      <div key={f._id} className="card">
-                        <div style={{ fontSize: 13 }}>{f.filename}</div>
-                        <button className="btn" style={{ color: '#DC2626' }} onClick={() => removeQuestionFile(idx, f._id!)}>
+                      <div key={f._id} className="file-card">
+                        <div className="file-name">{f.filename}</div>
+                        <button className="btn btn-delete" onClick={() => removeQuestionFile(idx, f._id!)}>
+                          <span>🗑️</span>
                           Remove
                         </button>
                       </div>
                     ))}
                   </div>
                 )}
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <button
-                    className="btn"
-                    onClick={() => {
-                      const next = [...questions];
-                      next.splice(idx, 1);
-                      setQuestions(next);
-                      setCount(next.length);
-                    }}
-                    style={{ color: '#DC2626' }}
-                  >
-                    Delete Question
-                  </button>
-                </div>
               </div>
-            ))}
-          </div>
-
-          <div className="card" style={{ display: 'grid', gap: 12 }}>
-            <div style={{ fontSize: 18, fontWeight: 600 }}>Frequently Asked Questions</div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              <button className="btn" onClick={() => setFaqCount(faqCount + 1)}>+ Add FAQ</button>
-              {faqCount > 0 && <button className="btn" onClick={() => setFaqCount(Math.max(0, faqCount - 1))}>Remove Last</button>}
+              <div className="form-actions">
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    const next = [...questions];
+                    next.splice(idx, 1);
+                    setQuestions(next);
+                    setCount(next.length);
+                  }}
+                >
+                  <span>🗑️</span>
+                  Delete Question
+                </button>
+              </div>
             </div>
-            {faqs.map((qa, idx) => (
-              <div key={idx} className="card">
+          ))}
+        </div>
+      </div>
+
+      {/* FAQS */}
+      <div className="card">
+        <div className="card-header">
+          <h2 className="card-title">Frequently Asked Questions</h2>
+          <div className="button-group">
+            <button className="btn primary" onClick={() => setFaqCount(faqCount + 1)}>
+              <span className="btn-icon">+</span>
+              Add FAQ
+            </button>
+            {faqCount > 0 && (
+              <button className="btn btn-secondary" onClick={() => setFaqCount(Math.max(0, faqCount - 1))}>
+                Remove Last
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="questions-list">
+          {faqs.map((qa, idx) => (
+            <div key={idx} className="card nested-card">
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">FAQ Question {idx + 1}</span>
+                </label>
                 <textarea
-                  className="input"
+                  className="form-textarea"
                   rows={3}
                   value={qa.question}
                   onChange={(e) => {
@@ -445,9 +518,15 @@ export default function SubtitleDetail() {
                     next[idx] = { ...qa, question: e.target.value };
                     setFaqs(next);
                   }}
+                  placeholder="Enter your FAQ question"
                 />
+              </div>
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">Answer Format</span>
+                </label>
                 <select
-                  className="input"
+                  className="form-input"
                   value={qa.format || 'written'}
                   onChange={(e) => {
                     const next = [...faqs];
@@ -467,14 +546,16 @@ export default function SubtitleDetail() {
                   <option value="table">Table</option>
                   <option value="both">Both</option>
                 </select>
-                {(qa.format === 'table' || qa.format === 'both') && (
-                  <div style={{ display: 'grid', gap: 8 }}>
-                    <div style={{ fontWeight: 600 }}>Table Headers</div>
-                    <div className="grid-2">
+              </div>
+              {(qa.format === 'table' || qa.format === 'both') && (
+                <div className="table-editor">
+                  <div className="form-section">
+                    <h4 className="section-subtitle">Table Headers</h4>
+                    <div className="table-headers-grid">
                       {(qa.table?.headers || []).map((h, hIdx) => (
-                        <div key={hIdx} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <div key={hIdx} className="table-header-item">
                           <input
-                            className="input"
+                            className="form-input"
                             value={h}
                             onChange={(e) => {
                               const next = [...faqs];
@@ -484,9 +565,10 @@ export default function SubtitleDetail() {
                               next[idx] = { ...next[idx], table: t };
                               setFaqs(next);
                             }}
+                            placeholder="Header name"
                           />
                           <button
-                            className="btn"
+                            className="btn btn-delete"
                             onClick={() => {
                               const next = [...faqs];
                               const t = next[idx].table || { headers: [], rows: [] };
@@ -496,7 +578,6 @@ export default function SubtitleDetail() {
                               next[idx] = { ...next[idx], table: t };
                               setFaqs(next);
                             }}
-                            style={{ color: '#DC2626' }}
                           >
                             Remove
                           </button>
@@ -504,7 +585,7 @@ export default function SubtitleDetail() {
                       ))}
                     </div>
                     <button
-                      className="btn"
+                      className="btn btn-secondary"
                       onClick={() => {
                         const next = [...faqs];
                         const t = next[idx].table || { headers: [], rows: [] };
@@ -516,15 +597,17 @@ export default function SubtitleDetail() {
                     >
                       + Add Column
                     </button>
-                    <div style={{ fontWeight: 600 }}>Table Rows</div>
-                    <div style={{ display: 'grid', gap: 8 }}>
+                  </div>
+                  <div className="form-section">
+                    <h4 className="section-subtitle">Table Rows</h4>
+                    <div className="table-rows-list">
                       {(qa.table?.rows || []).map((row, rIdx) => (
-                        <div key={rIdx} style={{ display: 'grid', gap: 8 }}>
-                          <div className="grid-2">
+                        <div key={rIdx} className="table-row-item">
+                          <div className="table-row-cells">
                             {(row || []).map((cell, cIdx) => (
                               <input
                                 key={cIdx}
-                                className="input"
+                                className="form-input"
                                 value={cell}
                                 onChange={(e) => {
                                   const next = [...faqs];
@@ -535,29 +618,27 @@ export default function SubtitleDetail() {
                                   next[idx] = { ...next[idx], table: { headers: t.headers || [], rows } };
                                   setFaqs(next);
                                 }}
+                                placeholder={`Cell ${cIdx + 1}`}
                               />
                             ))}
                           </div>
-                          <div style={{ display: 'flex', gap: 8 }}>
-                            <button
-                              className="btn"
-                              onClick={() => {
-                                const next = [...faqs];
-                                const t = next[idx].table || { headers: [], rows: [] };
-                                const rows = (t.rows || []).filter((_, i) => i !== rIdx);
-                                next[idx] = { ...next[idx], table: { headers: t.headers || [], rows } };
-                                setFaqs(next);
-                              }}
-                              style={{ color: '#DC2626' }}
-                            >
-                              Remove Row
-                            </button>
-                          </div>
+                          <button
+                            className="btn btn-delete"
+                            onClick={() => {
+                              const next = [...faqs];
+                              const t = next[idx].table || { headers: [], rows: [] };
+                              const rows = (t.rows || []).filter((_, i) => i !== rIdx);
+                              next[idx] = { ...next[idx], table: { headers: t.headers || [], rows } };
+                              setFaqs(next);
+                            }}
+                          >
+                            Remove Row
+                          </button>
                         </div>
                       ))}
                     </div>
                     <button
-                      className="btn"
+                      className="btn btn-secondary"
                       onClick={() => {
                         const next = [...faqs];
                         const t = next[idx].table || { headers: [], rows: [] };
@@ -571,9 +652,14 @@ export default function SubtitleDetail() {
                       + Add Row
                     </button>
                   </div>
-                )}
+                </div>
+              )}
+              <div className="form-section">
+                <label className="form-label">
+                  <span className="label-text">Answer</span>
+                </label>
                 <textarea
-                  className="input"
+                  className="form-textarea"
                   rows={4}
                   value={qa.answer}
                   onChange={(e) => {
@@ -581,34 +667,38 @@ export default function SubtitleDetail() {
                     next[idx] = { ...qa, answer: e.target.value };
                     setFaqs(next);
                   }}
+                  placeholder="Enter your answer"
                 />
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <button
-                    className="btn"
-                    onClick={() => {
-                      const next = [...faqs];
-                      next.splice(idx, 1);
-                      setFaqs(next);
-                      setFaqCount(next.length);
-                    }}
-                    style={{ color: '#DC2626' }}
-                  >
-                    Delete FAQ
-                  </button>
-                </div>
               </div>
-            ))}
-          </div>
+              <div className="form-actions">
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    const next = [...faqs];
+                    next.splice(idx, 1);
+                    setFaqs(next);
+                    setFaqCount(next.length);
+                  }}
+                >
+                  <span>🗑️</span>
+                  Delete FAQ
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-          {/* ACTIONS */}
-          <div style={{ display: 'flex', gap: 12 }}>
-            <button className="btn primary" onClick={saveAll}>
-              Save All Changes
-            </button>
-            <button className="btn" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>
-              Cancel
-            </button>
-          </div>
+      {/* ACTIONS */}
+      <div className="form-actions">
+        <button className="btn primary" onClick={saveAll}>
+          <span className="btn-icon">💾</span>
+          Save All Changes
+        </button>
+        <button className="btn btn-secondary" onClick={() => sub && navigate(`/admin/titles/${sub.parentTitleId}`)}>
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
