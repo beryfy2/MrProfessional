@@ -5,6 +5,7 @@ import '../style/aboutUs.css'
 import '../style/team.css'
 import AnimatedShapes from '../components/AnimatedShapes'
 import ValueCard from '../components/ValueCard'
+import { Link } from "react-router-dom";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
@@ -240,8 +241,12 @@ export default function AboutUs() {
       </p>
 
       <div className="team-buttons">
+         <Link to="/team">
         <button className="btn-green">MEET OUR TEAM</button>
+        </Link>
+         <Link to="/partners-signup">
         <button className="btn-blue">JOIN OUR TEAM</button>
+        </Link>
       </div>
     </div>
 
