@@ -2544,8 +2544,9 @@ body, html, #root {
 /* RIGHT SIDE */
 .topbar-right {
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 16px;
+  margin-left: auto;
   flex-shrink: 0;
 }
 

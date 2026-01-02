@@ -28,16 +28,7 @@ const Topbar = () => {
 
   return (
     <div className="topbar">
-      {/* Search */}
-      <div className="search-wrapper">
-        <span className="search-icon">🔍</span>
-        <input
-          className="search"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+ 
 
       {/* Right */}
       <div className="topbar-right">
