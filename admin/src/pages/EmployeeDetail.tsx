@@ -218,27 +218,45 @@ export default function EmployeeDetail() {
           </div>
 
           <div className="grid-2">
-            <input
+            <select
               className="input"
-              placeholder="Gender"
               value={emp.gender || ''}
               onChange={(e) => setEmp({ ...emp, gender: e.target.value })}
-            />
-            <input
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <select
               className="input"
-              placeholder="Blood Group"
               value={emp.bloodGroup || ''}
               onChange={(e) => setEmp({ ...emp, bloodGroup: e.target.value })}
-            />
+            >
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
           </div>
 
           <div className="grid-2">
-            <input
+            <select
               className="input"
-              placeholder="Marital Status"
               value={emp.maritalStatus || ''}
               onChange={(e) => setEmp({ ...emp, maritalStatus: e.target.value })}
-            />
+            >
+              <option value="">Select Marital Status</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
             <input
               className="input"
               type="date"

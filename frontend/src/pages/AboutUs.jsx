@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import '../style/aboutUs.css'
@@ -8,9 +8,23 @@ import ValueCard from '../components/ValueCard'
 import { Link } from "react-router-dom";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const IMG_BASE = API_BASE.replace('/api', '');
 
 export default function AboutUs() {
   console.log('AboutUs component mounted')
+
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/employees`)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setEmployees(data);
+        }
+      })
+      .catch(err => console.error('Failed to load employees', err));
+  }, []);
 
   const handlePlayWhoWeAre = () => {
     // Stop any existing speech
@@ -252,24 +266,21 @@ export default function AboutUs() {
 
     <div className="team-right">
       <div className="team-grid">
-        {[
-          'https://i.pravatar.cc/300?img=1',
-          'https://i.pravatar.cc/300?img=2',
-          'https://i.pravatar.cc/300?img=3',
-          'https://i.pravatar.cc/300?img=4',
-          'https://i.pravatar.cc/300?img=5',
-          'https://i.pravatar.cc/300?img=6',
-          'https://i.pravatar.cc/300?img=7',
-          'https://i.pravatar.cc/300?img=8',
-          'https://i.pravatar.cc/300?img=9',
-          'https://i.pravatar.cc/300?img=10',
-          'https://i.pravatar.cc/300?img=11',
-          'https://i.pravatar.cc/300?img=12',
-        ].map((img, index) => (
-          <div className="team-card" key={index}>
-            <img src={img} alt="Team Member" />
+        {employees.length > 0 ? (
+          employees.map((emp) => (
+            <div className="team-card" key={emp._id}>
+              <img 
+                src={emp.photoUrl ? `${IMG_BASE}${emp.photoUrl}` : 'https://via.placeholder.com/300?text=No+Image'} 
+                alt={emp.name}
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          ))
+        ) : (
+          <div className="team-card">
+             <p style={{ padding: 20 }}>Loading team...</p>
           </div>
-        ))}
+        )}
       </div>
     </div>
   </div>

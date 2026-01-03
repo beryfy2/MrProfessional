@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import '../style/teamMem.css';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+const IMG_BASE = API_BASE.replace('/api', '');
 
 export default function TeamMem() {
   const [employees, setEmployees] = useState([]);
@@ -15,7 +16,7 @@ export default function TeamMem() {
       .catch(() => setEmployees([]));
   }, []);
   function displayPhoto(emp) {
-    const url = emp.photoUrl ? `http://localhost:5000${emp.photoUrl}` : `https://i.pravatar.cc/400?u=${encodeURIComponent(emp.email || emp.name)}`;
+    const url = emp.photoUrl ? `${IMG_BASE}${emp.photoUrl}` : `https://i.pravatar.cc/400?u=${encodeURIComponent(emp.email || emp.name)}`;
     return url;
   }
   function displayRole(emp) {

@@ -2,25 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/team.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const IMG_BASE = API_BASE.replace('/api', '');
+
 const Team = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const [employees, setEmployees] = useState([]);
 
-  // Team member images from Unsplash
-  const teamImages = [
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=600&fit=crop',
-  ];
+  useEffect(() => {
+    fetch(`${API_BASE}/employees`)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          // Filter out employees without photos if you want, or keep all if you handle placeholders
+          const withPhotos = data.filter(e => e.photoUrl);
+          setEmployees(withPhotos.length > 0 ? withPhotos : []); 
+        }
+      })
+      .catch(err => console.error('Failed to load team', err));
+  }, []);
+
+  // Use employees for images, or fallback if none loaded yet
+  const displayImages = employees.length > 0 
+    ? employees.map(e => `${IMG_BASE}${e.photoUrl}`)
+    : [
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=600&fit=crop',
+      ];
 
   // Auto-scroll carousel every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % teamImages.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % displayImages.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [teamImages.length]);
+  }, [displayImages.length]);
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
@@ -61,7 +80,7 @@ const Team = () => {
         {/* Right Carousel Side */}
         <div className="team-carousel">
           <div className="carousel-container">
-            {teamImages.map((image, index) => (
+            {displayImages.map((image, index) => (
               <div
                 key={index}
                 className={`carousel-slide ${
@@ -79,7 +98,7 @@ const Team = () => {
 
           {/* Dots Indicator */}
           <div className="carousel-dots">
-            {teamImages.map((_, index) => (
+            {displayImages.map((_, index) => (
               <span
                 key={index}
                 className={`dot ${index === currentIndex ? 'active' : ''}`}
