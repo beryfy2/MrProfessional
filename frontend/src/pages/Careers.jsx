@@ -459,9 +459,9 @@ const Careers = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-[var(--bg-main)]">
       {/* Top Blue Banner */}
-      <div className="w-full bg-[#1e3a8a] py-2 px-4">
+      <div className="w-full bg-[var(--color-brand)] py-2 px-4">
         <div className="container mx-auto text-center text-white text-sm md:text-base">
           <p>We're hiring at <span className="font-bold">Mr.Pro</span>! Explore our current job openings and join our growing team.</p>
         </div>
@@ -474,13 +474,13 @@ const Careers = () => {
           alt="Join Our Team" 
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">Join Our Team</h1>
             <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8">Build your career with Mr.Pro and be part of something great</p>
             <a 
               href="#job-form" 
-              className="bg-[#1e3a8a] hover:bg-[#0d2b6b] text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-300 inline-block"
+              className="bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-300 inline-block"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('job-form').scrollIntoView({ behavior: 'smooth' });
@@ -493,104 +493,104 @@ const Careers = () => {
       </div>
       
       {/* Career Section */}
-      <section className="relative bg-[#f8f9fa] py-16 md:py-20">
+      <section className="relative bg-[var(--bg-secondary)] py-16 md:py-20 border-b border-[var(--border-color)]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Career at <span className="text-[#1e3a8a]">Mr.Pro</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-4">
+              Career at <span className="text-[var(--color-brand)]">Mr.Pro</span>
             </h1>
-            <div className="w-20 h-1 bg-[#1e3a8a] mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mb-6"></div>
+            <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
               Join our team of experts and be part of a company that values innovation, excellence, and professional growth.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Career Growth Card */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="bg-[#1e3a8a] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-[var(--bg-main)] rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-[var(--border-color)]">
+              <div className="bg-[var(--color-brand)] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Career Growth</h3>
-              <p className="text-gray-600">Opportunities for professional development and career advancement</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Career Growth</h3>
+              <p className="text-[var(--text-secondary)]">Opportunities for professional development and career advancement</p>
             </div>
 
             {/* Work-Life Balance Card */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="bg-[#1e3a8a] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-[var(--bg-main)] rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-[var(--border-color)]">
+              <div className="bg-[var(--color-brand)] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Work-Life Balance</h3>
-              <p className="text-gray-600">Flexible working hours and supportive work environment</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Work-Life Balance</h3>
+              <p className="text-[var(--text-secondary)]">Flexible working hours and supportive work environment</p>
             </div>
 
             {/* Learning Card */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="bg-[#1e3a8a] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-[var(--bg-main)] rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-[var(--border-color)]">
+              <div className="bg-[var(--color-brand)] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Continuous Learning</h3>
-              <p className="text-gray-600">Regular training and skill development programs</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Continuous Learning</h3>
+              <p className="text-[var(--text-secondary)]">Regular training and skill development programs</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Why Work at Professional Utilities */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-[var(--bg-main)] border-b border-[var(--border-color)]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Why Work at <span className="text-[#1e3a8a]">Professional Utilities</span>
+            <h2 className="text-4xl font-bold text-[var(--text-primary)] mb-4">
+              Why Work at <span className="text-[var(--color-brand)]">Professional Utilities</span>
             </h2>
-            <div className="w-20 h-1 bg-[#1e3a8a] mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mb-6"></div>
+            <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
               Join our team and be part of a company that values innovation, collaboration, and professional growth.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Work Environment */}
-            <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div className="bg-[#1e3a8a] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <div className="bg-[var(--bg-secondary)] p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-[var(--border-color)]">
+              <div className="bg-[var(--color-brand)] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-center text-gray-800 mb-3">Great Work Environment</h3>
-              <p className="text-gray-600 text-center">
+              <h3 className="text-xl font-semibold text-center text-[var(--text-primary)] mb-3">Great Work Environment</h3>
+              <p className="text-[var(--text-secondary)] text-center">
                 Enjoy a positive and collaborative workplace that encourages creativity and innovation.
               </p>
             </div>
 
             {/* Learning & Development */}
-            <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div className="bg-[#1e3a8a] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <div className="bg-[var(--bg-secondary)] p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-[var(--border-color)]">
+              <div className="bg-[var(--color-brand)] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0114 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-center text-gray-800 mb-3">Learning & Development</h3>
-              <p className="text-gray-600 text-center">
+              <h3 className="text-xl font-semibold text-center text-[var(--text-primary)] mb-3">Learning & Development</h3>
+              <p className="text-[var(--text-secondary)] text-center">
                 Access to training programs and workshops to enhance your skills and career growth.
               </p>
             </div>
 
             {/* Career Growth */}
-            <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div className="bg-[#1e3a8a] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <div className="bg-[var(--bg-secondary)] p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-[var(--border-color)]">
+              <div className="bg-[var(--color-brand)] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-center text-gray-800 mb-3">Career Growth</h3>
-              <p className="text-gray-600 text-center">
+              <h3 className="text-xl font-semibold text-center text-[var(--text-primary)] mb-3">Career Growth</h3>
+              <p className="text-[var(--text-secondary)] text-center">
                 Clear career progression paths and opportunities for advancement within the company.
               </p>
             </div>
@@ -599,40 +599,40 @@ const Careers = () => {
       </section>
 
       {/* Current Job Openings */}
-      <section id="job-openings" className="py-16 bg-white">
+      <section id="job-openings" className="py-16 bg-[var(--bg-secondary)]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
               Current Job Openings
             </h2>
-            <div className="w-20 h-1 bg-[#1e3a8a] mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mb-6"></div>
+            <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">
               Explore exciting career opportunities and join our growing team.
             </p>
           </div>
           <div className="space-y-6 max-w-5xl mx-auto">
             {jobOpenings.map((job, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div key={index} className="bg-[var(--bg-main)] rounded-lg shadow-md overflow-hidden border border-[var(--border-color)]">
                 {/* Job Header */}
                 <button
                   onClick={() => setExpandedJob(expandedJob === index ? null : index)}
-                  className="w-full text-left p-6 hover:bg-gray-50 transition-colors"
+                  className="w-full text-left p-6 hover:bg-[var(--bg-hover)] transition-colors"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div className="flex items-start space-x-4">
-                      <div className="bg-[#e8f5e9] text-[#2e7d32] p-3 rounded-lg">
+                      <div className="bg-[var(--bg-secondary)] text-[var(--color-success)] p-3 rounded-lg border border-[var(--border-color)]">
                         <span className="text-2xl">💼</span>
                       </div>
                       <div>
                         <div className="flex items-center space-x-3">
-                          <h3 className="text-xl font-semibold text-gray-800">{job.title}</h3>
+                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">{job.title}</h3>
                           {job.urgent && (
-                            <span className="bg-red-100 text-red-700 text-xs px-3 py-1 rounded-full font-bold">
+                            <span className="bg-[var(--bg-secondary)] text-[var(--color-danger)] text-xs px-3 py-1 rounded-full font-bold border border-[var(--color-danger)]">
                               Urgent Hiring
                             </span>
                           )}
                         </div>
-                        <div className="flex flex-wrap gap-3 mt-2 text-sm text-gray-600">
+                        <div className="flex flex-wrap gap-3 mt-2 text-sm text-[var(--text-secondary)]">
                           <span className="flex items-center">
                             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M12 18h.01M8 12h.01M12 12h.01M16 12h.01" />
@@ -657,7 +657,7 @@ const Careers = () => {
                       </div>
                     </div>
                     <div className="mt-4 md:mt-0 flex items-center">
-                      <span className="text-gray-600 text-2xl font-bold ml-4">
+                      <span className="text-[var(--text-secondary)] text-2xl font-bold ml-4">
                         {expandedJob === index ? '−' : '+'}
                       </span>
                     </div>
@@ -666,23 +666,23 @@ const Careers = () => {
 
                 {/* Expanded Job Details */}
                 {expandedJob === index && (
-                  <div className="px-6 pb-8 border-t border-gray-100">
+                  <div className="px-6 pb-8 border-t border-[var(--border-color)]">
                     <div className="pt-6 space-y-8">
                       {/* Job Description */}
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                          <svg className="w-5 h-5 mr-2 text-[#4caf50]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                          <svg className="w-5 h-5 mr-2 text-[var(--color-brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                           </svg>
                           Job Description
                         </h4>
-                        <p className="text-gray-600 leading-relaxed pl-7">{job.description}</p>
+                        <p className="text-[var(--text-secondary)] leading-relaxed pl-7">{job.description}</p>
                       </div>
 
                       {/* Key Responsibilities */}
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                          <svg className="w-5 h-5 mr-2 text-[#4caf50]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                          <svg className="w-5 h-5 mr-2 text-[var(--color-brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                           </svg>
                           Key Responsibilities
@@ -690,8 +690,8 @@ const Careers = () => {
                         <ul className="space-y-2 pl-7">
                           {job.responsibilities.map((responsibility, idx) => (
                             <li key={idx} className="flex items-start">
-                              <span className="text-[#4caf50] mr-2">•</span>
-                              <span className="text-gray-600">{responsibility}</span>
+                              <span className="text-[var(--color-brand)] mr-2">•</span>
+                              <span className="text-[var(--text-secondary)]">{responsibility}</span>
                             </li>
                           ))}
                         </ul>
@@ -700,8 +700,8 @@ const Careers = () => {
                       {/* Qualifications */}
                       {job.qualifications && job.qualifications.length > 0 && (
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                            <svg className="w-5 h-5 mr-2 text-[#4caf50]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                            <svg className="w-5 h-5 mr-2 text-[var(--color-brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Qualifications
@@ -709,8 +709,8 @@ const Careers = () => {
                           <ul className="space-y-2 pl-7">
                             {job.qualifications.map((qualification, idx) => (
                               <li key={idx} className="flex items-start">
-                                <span className="text-[#4caf50] mr-2">•</span>
-                                <span className="text-gray-600">{qualification}</span>
+                                <span className="text-[var(--color-brand)] mr-2">•</span>
+                                <span className="text-[var(--text-secondary)]">{qualification}</span>
                               </li>
                             ))}
                           </ul>
@@ -719,29 +719,29 @@ const Careers = () => {
 
                       {/* Location & Working Days */}
                       {(job.location || job.workingDays) && (
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="text-md font-semibold text-gray-800 mb-3">Job Details</h4>
+                        <div className="bg-[var(--bg-main)] p-4 rounded-lg border border-[var(--border-color)]">
+                          <h4 className="text-md font-semibold text-[var(--text-primary)] mb-3">Job Details</h4>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {job.location && (
                               <div className="flex items-start">
-                                <svg className="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg className="w-5 h-5 text-[var(--color-brand)] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                                 <div>
-                                  <p className="text-sm font-medium text-gray-600">Location</p>
-                                  <p className="text-gray-800">{job.location}</p>
+                                  <p className="text-sm font-medium text-[var(--text-secondary)]">Location</p>
+                                  <p className="text-[var(--text-primary)]">{job.location}</p>
                                 </div>
                               </div>
                             )}
                             {job.workingDays && (
                               <div className="flex items-start">
-                                <svg className="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg className="w-5 h-5 text-[var(--color-brand)] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                                 <div>
-                                  <p className="text-sm font-medium text-gray-600">Working Days</p>
-                                  <p className="text-gray-800">{job.workingDays}</p>
+                                  <p className="text-sm font-medium text-[var(--text-secondary)]">Working Days</p>
+                                  <p className="text-[var(--text-primary)]">{job.workingDays}</p>
                                 </div>
                               </div>
                             )}
@@ -760,7 +760,7 @@ const Careers = () => {
                             }));
                             document.getElementById('job-form').scrollIntoView({ behavior: 'smooth' });
                           }}
-                          className="bg-[#4caf50] hover:bg-[#3d8b40] text-white font-medium py-2.5 px-6 rounded-md transition duration-300 flex items-center mx-auto"
+                          className="bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white font-medium py-2.5 px-6 rounded-md transition duration-300 flex items-center mx-auto"
                         >
                           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -778,9 +778,9 @@ const Careers = () => {
       </section>
 
       {/* Job Application Form */}
-      <section id="job-form" className="py-16 bg-white">
+      <section id="job-form" className="py-16 bg-[var(--bg-main)]">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-green-400 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-[var(--color-brand)] mb-8 text-center">
             Apply for Job
           </h2>
 
@@ -790,18 +790,18 @@ const Careers = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-lg p-8 border border-gray-200 shadow-sm">
+          <form onSubmit={handleSubmit} className="bg-[var(--bg-secondary)] rounded-lg p-8 border border-[var(--border-color)] shadow-sm">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Job Type */}
               <div>
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   In-Office Job *
                 </label>
                 <select
                   name="jobType"
                   value={formData.jobType}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                   required
                 >
                   <option value="">Select Position</option>
@@ -813,7 +813,7 @@ const Careers = () => {
 
               {/* Name */}
               <div>
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Your Name *
                 </label>
                 <input
@@ -821,14 +821,14 @@ const Careers = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                   required
                 />
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Your Email *
                 </label>
                 <input
@@ -836,14 +836,14 @@ const Careers = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                   required
                 />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Phone Number *
                 </label>
                 <input
@@ -851,14 +851,14 @@ const Careers = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                   required
                 />
               </div>
 
               {/* Qualification */}
               <div>
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Qualification *
                 </label>
                 <input
@@ -867,14 +867,14 @@ const Careers = () => {
                   value={formData.qualification}
                   onChange={handleInputChange}
                   placeholder="e.g., B.Com, MBA, CA, etc."
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                   required
                 />
               </div>
 
               {/* Expected Salary */}
               <div>
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Expected Salary *
                 </label>
                 <input
@@ -883,14 +883,14 @@ const Careers = () => {
                   value={formData.expectedSalary}
                   onChange={handleInputChange}
                   placeholder="e.g., ₹3,00,000 per annum"
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                   required
                 />
               </div>
 
               {/* LinkedIn Profile */}
               <div className="md:col-span-2">
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   LinkedIn Profile
                 </label>
                 <input
@@ -899,13 +899,13 @@ const Careers = () => {
                   value={formData.linkedin}
                   onChange={handleInputChange}
                   placeholder="https://linkedin.com/in/yourprofile"
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                 />
               </div>
 
               {/* Message */}
               <div className="md:col-span-2">
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Message
                 </label>
                 <textarea
@@ -914,13 +914,13 @@ const Careers = () => {
                   onChange={handleInputChange}
                   placeholder="Tell us why you're interested in this position..."
                   rows="4"
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                 ></textarea>
               </div>
 
               {/* Resume Upload */}
               <div className="md:col-span-2">
-                <label className="block text-gray-800 font-semibold mb-2">
+                <label className="block text-[var(--text-primary)] font-semibold mb-2">
                   Upload Resume *
                 </label>
                 <input
@@ -928,10 +928,10 @@ const Careers = () => {
                   name="resume"
                   onChange={handleInputChange}
                   accept=".pdf,.doc,.docx"
-                  className="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600"
+                  className="w-full border border-[var(--border-color)] rounded-lg p-3 bg-[var(--bg-main)] text-[var(--text-primary)] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[var(--color-brand)] file:text-white hover:file:bg-[var(--color-brand-hover)]"
                   required
                 />
-                <p className="text-gray-500 text-sm mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
+                <p className="text-[var(--text-secondary)] text-sm mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
               </div>
             </div>
 
@@ -939,7 +939,7 @@ const Careers = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-blue-500 text-white px-12 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[var(--color-brand)] text-white px-12 py-3 rounded-lg font-semibold hover:bg-[var(--color-brand-hover)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Submitting...' : 'APPLY NOW'}
               </button>
@@ -949,7 +949,7 @@ const Careers = () => {
       </section>
 
       {/* Why Professional Utilities? */}
-      <div className="bg-gray-900">
+      <div className="bg-[var(--bg-main)]">
         <WhyCompanySection />
       </div>
 
@@ -957,7 +957,7 @@ const Careers = () => {
       <TestimonialsSection />
 
       {/* Trusted By */}
-      <div className="bg-gray-900">
+      <div className="bg-[var(--bg-main)]">
         <TrustedBy />
       </div>
     </div>

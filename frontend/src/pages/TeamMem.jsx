@@ -85,19 +85,19 @@ export default function TeamMem() {
       {selected && (
         <section className="leaders-section">
           <div className="leaders-container" style={{ gridTemplateColumns: '1fr' }}>
-            <div className="card" style={{ margin: '0 auto', maxWidth: 900, display: 'grid', gap: 16 }}>
+            <div className="card" style={{ margin: '0 auto', maxWidth: 900, display: 'grid', gap: 16, background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 12, padding: 16, color: 'var(--text-primary)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: 22, fontWeight: 700, color: '#0b3a5e' }}>{selected.name}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-brand)' }}>{selected.name}</div>
                 <button className="btn" onClick={() => setSelected(null)}>Close</button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: 16, alignItems: 'start' }}>
                 <img src={displayPhoto(selected)} alt={selected.name} style={{ width: 160, height: 160, borderRadius: 12, objectFit: 'cover' }} />
                 <div style={{ display: 'grid', gap: 8 }}>
                   <div style={{ fontSize: 16, fontWeight: 600 }}>{displayRole(selected)}</div>
-                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.department}</div>
-                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.email}</div>
-                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.phone}</div>
-                  <div style={{ fontSize: 14, color: '#374151' }}>{selected.workLocation}</div>
+                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.department}</div>
+                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.email}</div>
+                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.phone}</div>
+                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.workLocation}</div>
                 </div>
               </div>
             </div>

@@ -79,19 +79,19 @@ const MediaCoverage = () => {
     }, [slides.length, isHovering]);
 
     return (
-        <section className="bg-white py-16">
+        <section className="bg-[var(--bg-main)] py-16">
             <div className="max-w-7xl mx-auto px-4">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-sky-900">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
                         Media Coverage
                     </h2>
-                    <div className="h-1 w-24 bg-green-500 mx-auto mt-3 rounded-full" />
+                    <div className="h-1 w-24 bg-[var(--color-brand)] mx-auto mt-3 rounded-full" />
                 </div>
 
                 {/* Slider wrapper */}
                 <div
-                    className="relative overflow-hidden rounded-[30px] border border-green-400/60 shadow-xl bg-white "
+                    className="relative overflow-hidden rounded-[30px] border border-[var(--color-brand)] shadow-xl bg-[var(--bg-secondary)] "
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                 >
@@ -123,10 +123,10 @@ const MediaCard = ({ item }) => {
             {/* Outlet + logo */}
             <div className="flex items-center justify-between mb-4">
                 <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-sky-900">
+                    <h3 className="text-xl md:text-2xl font-semibold text-[var(--color-brand)]">
                         {item.outlet}
                     </h3>
-                    <div className="mt-1 h-1.5 w-16 rounded-full bg-green-500" />
+                    <div className="mt-1 h-1.5 w-16 rounded-full bg-[var(--color-brand)]" />
                 </div>
                 {item.logo && (
                     <img
@@ -138,10 +138,10 @@ const MediaCard = ({ item }) => {
             </div>
 
             {/* Content */}
-            <h4 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+            <h4 className="text-lg md:text-xl font-semibold text-[var(--text-primary)] mb-3">
                 {item.heading}
             </h4>
-            <div className="text-[15px] md:text-[16px] leading-relaxed text-gray-700 space-y-2 flex-1">
+            <div className="text-[15px] md:text-[16px] leading-relaxed text-[var(--text-secondary)] space-y-2 flex-1">
                 {item.body.map((p, i) => (
                     <p key={i}>{p}</p>
                 ))}
@@ -151,7 +151,7 @@ const MediaCard = ({ item }) => {
             <div className="mt-6">
                 <a
                     href={item.link}
-                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[#21c420] text-white text-sm font-semibold shadow-[0_10px_20px_rgba(0,160,0,0.25)] hover:bg-[#1aa81a] transition"
+                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-brand)] text-white text-sm font-semibold shadow-[0_10px_20px_rgba(0,160,0,0.25)] hover:bg-[var(--color-brand-hover)] transition"
                 >
                     Read More
                 </a>

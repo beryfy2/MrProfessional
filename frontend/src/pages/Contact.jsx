@@ -56,14 +56,14 @@ const ContactSection = () => {
         <div className="min-h-screen flex flex-col">
             <NavBar />
             <main className="flex-grow">
-                <section id="contact" className="bg-[#f9fbff] py-16">
+                <section id="contact" className="bg-[var(--bg-secondary)] py-16">
             <div className="max-w-7xl mx-auto px-4">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-sky-900">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
                         Contact Us
                     </h2>
-                    <div className="w-20 h-1 bg-green-500 mx-auto mt-3 rounded-full" />
+                    <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mt-3 rounded-full" />
                 </div>
 
                 {/* Content */}
@@ -103,74 +103,111 @@ const ContactSection = () => {
                     </div>
 
                     {/* Form */}
-                    <div className="bg-white rounded shadow-[0_20px_60px_rgba(0,0,0,0.10)] p-8">
-                        <h3 className="text-2xl md:text-3xl font-bold text-sky-900 mb-2">
-                            Get Expert Assistance
-                        </h3>
-                        <div className="w-20 h-[3px] bg-green-500 mb-6" />
+                    <div className="bg-[var(--bg-secondary)] rounded-2xl shadow-xl p-8 md:p-12 border border-[var(--border-color)]">
+                        <div className="text-center mb-8">
+                            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-brand)] mb-2">
+                                Get Expert Assistance
+                            </h3>
+                            <p className="text-[var(--text-secondary)]">
+                                Fill out the form below and our team will get back to you shortly.
+                            </p>
+                        </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            {/* Name + Mobile */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                                    required
-                                />
-                                <input
-                                    type="tel"
-                                    name="mobile"
-                                    placeholder="Mobile No."
-                                    value={formData.mobile}
-                                    onChange={handleChange}
-                                    className="border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                                    required
-                                />
+                        <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Name */}
+                                <div>
+                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        placeholder="John Doe"
+                                        className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
+                                        required
+                                    />
+                                </div>
+
+                                {/* Phone */}
+                                <div>
+                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        name="mobile"
+                                        value={formData.mobile}
+                                        onChange={handleChange}
+                                        placeholder="+91 98765 43210"
+                                        className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
+                                        required
+                                    />
+                                </div>
                             </div>
 
-                            {/* Email */}
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                                required
-                            />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Email */}
+                                <div>
+                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="john@example.com"
+                                        className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
+                                        required
+                                    />
+                                </div>
 
-                            {/* Subject */}
-                            <input
-                                type="text"
-                                name="subject"
-                                placeholder="Subject"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                                required
-                            />
+                                {/* Subject */}
+                                <div>
+                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                        Subject
+                                    </label>
+                                    <select
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
+                                    >
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Tax Consultation">Tax Consultation</option>
+                                        <option value="Legal Services">Legal Services</option>
+                                        <option value="Partnership">Partnership</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             {/* Message */}
-                            <textarea
-                                rows={4}
-                                name="message"
-                                placeholder="Message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                            />
+                            <div>
+                                <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                    Message
+                                </label>
+                                <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    rows="4"
+                                    placeholder="How can we help you?"
+                                    className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition resize-none"
+                                    required
+                                ></textarea>
+                            </div>
 
-                            {/* Submit button */}
-                            <button
-                                type="submit"
-                                className="mt-2 inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-2.5 rounded-full shadow-[0_12px_30px_rgba(0,200,0,0.35)] transition"
-                            >
-                                Submit
-                            </button>
+                            <div className="text-center">
+                                <button
+                                    type="submit"
+                                    className="mt-2 inline-flex items-center justify-center bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white font-semibold px-8 py-2.5 rounded-full shadow-[0_12px_30px_rgba(0,200,0,0.35)] transition"
+                                >
+                                    Submit
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -183,13 +220,13 @@ const ContactSection = () => {
 };
 
 const InfoCard = ({ icon, title, lines }) => (
-    <div className="bg-white rounded shadow-[0_20px_60px_rgba(0,0,0,0.10)] px-8 py-8 flex flex-col items-center text-center">
-        <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mb-4">
+    <div className="bg-[var(--bg-main)] border border-[var(--border-color)] rounded shadow-lg px-8 py-8 flex flex-col items-center text-center">
+        <div className="h-10 w-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center mb-4">
             <FontAwesomeIcon icon={icon} className="text-white text-lg" />
         </div>
-        <h4 className="text-xl font-bold text-sky-900 mb-2">{title}</h4>
+        <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2">{title}</h4>
         {lines.map((line, idx) => (
-            <p key={idx} className="text-sm text-gray-600">
+            <p key={idx} className="text-sm text-[var(--text-secondary)]">
                 {line}
             </p>
         ))}

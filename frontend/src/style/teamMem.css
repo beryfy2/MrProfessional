@@ -1,6 +1,6 @@
 /* HERO SECTION */
 .team-hero {
-  background-color: #0b3a5e;
+  background-color: var(--bg-main);
   min-height: 420px;
   display: flex;
   align-items: center;
@@ -22,20 +22,20 @@
 .team-hero-left h1 {
   font-size: 42px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 14px;
 }
 
 .team-hero-left p {
   font-size: 18px;
-  color: #cfe3f3;
+  color: var(--text-secondary);
   line-height: 1.6;
   max-width: 480px;
 }
 
 /* RIGHT CARD */
 .team-hero-card {
-  background: #c7d2db;
+  background: var(--bg-secondary);
   border-radius: 14px;
   padding: 28px 32px;
   display: flex;
@@ -48,13 +48,13 @@
 .team-card-text h3 {
   font-size: 20px;
   font-weight: 700;
-  color: #0b3a5e;
+  color: var(--text-primary);
   margin-bottom: 10px;
 }
 
 .team-card-text p {
   font-size: 16px;
-  color: #1f2d3a;
+  color: var(--text-secondary);
   line-height: 1.6;
   max-width: 360px;
 }
@@ -63,8 +63,8 @@
 .team-card-icon {
   width: 64px;
   height: 64px;
-  background: #2bdc2b;
-  color: white;
+  background: var(--color-brand);
+  color: #ffffff;
   border-radius: 50%;
   font-size: 28px;
   display: flex;
@@ -93,14 +93,14 @@
 /* SECTION */
 .leaders-section {
   padding: 80px 20px;
-  background: #ffffff;
+  background: var(--bg-main);
   text-align: center;
 }
 
 .leaders-title {
   font-size: 36px;
   font-weight: 700;
-  color: #0b3a5e;
+  color: var(--text-primary);
   margin-bottom: 70px;
 }
 
@@ -123,7 +123,8 @@
   border-radius: 14px;
   overflow: hidden;
   margin: 0 auto;
-  background: linear-gradient(180deg, #0a2d44, #0f4d6d);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .leader-img {
@@ -137,7 +138,7 @@
   position: absolute;
   bottom: 40px;
   left: 30px;
-  color: white;
+  color: var(--text-primary);
   text-align: left;
 }
 
@@ -149,7 +150,7 @@
 
 .leader-overlay p {
   font-size: 16px;
-  color: #2cff2c;
+  color: var(--color-brand);
   font-weight: 600;
 }
 
@@ -163,7 +164,7 @@
 .leader-socials i {
   font-size: 16px;
   cursor: pointer;
-  color: white;
+  color: var(--text-primary);
   transition: transform 0.2s ease;
 }
 
@@ -179,7 +180,7 @@
 .leader-info h4 {
   font-size: 22px;
   font-weight: 700;
-  color: #0b3a5e;
+  color: var(--text-primary);
 }
 
 .leader-info span {
@@ -187,7 +188,7 @@
   margin-top: 6px;
   font-size: 16px;
   font-weight: 600;
-  color: #22d622;
+  color: var(--text-secondary);
 }
 
 /* RESPONSIVE */

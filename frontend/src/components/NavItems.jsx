@@ -8,7 +8,7 @@ const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 export default function NavItems({ transparent = false }) {
     const navigate = useNavigate();
-    const solidBg = "bg-[#0f4260]";
+    const solidBg = "bg-[var(--bg-secondary)]";
     const finalBg = solidBg;
 
     const [navItems, setNavItems] = useState([]);
@@ -192,7 +192,7 @@ export default function NavItems({ transparent = false }) {
                 <div className="flex items-center gap-3">
                     <a href="/">
                         <div className="flex items-center gap-3">
-                            <span className="text-white font-semibold hidden sm:inline">
+                            <span className="text-[var(--text-primary)] font-semibold hidden sm:inline">
                                 Company
                             </span>
                         </div>
@@ -200,7 +200,7 @@ export default function NavItems({ transparent = false }) {
                 </div>
 
                 {/* Nav links */}
-                <ul className="hidden lg:flex items-center gap-6 text-white text-[14px] font-medium">
+                <ul className="hidden lg:flex items-center gap-6 text-[var(--text-primary)] text-[14px] font-medium">
                     {navItems.map((nav) => {
                         const isOpen = openMenu === nav._id;
                         const titles = titlesByNav[nav._id] || [];
@@ -216,14 +216,14 @@ export default function NavItems({ transparent = false }) {
                             >
                                 <button
                                     type="button"
-                                    className={`flex items-center gap-1 cursor-pointer transition px-2 py-1 ${isOpen ? "text-green-400" : "hover:text-green-400"
+                                    className={`flex items-center gap-1 cursor-pointer transition px-2 py-1 ${isOpen ? "text-[var(--color-brand-hover)]" : "hover:text-[var(--color-brand-hover)]"
                                         }`}
                                     onClick={() => toggleClick(nav._id)}
                                 >
                                     <span>{nav.name}</span>
                                     <FontAwesomeIcon
                                         icon={faChevronDown}
-                                        className={`text-green-400 text-xs transition-transform ${isOpen ? "rotate-180" : ""
+                                        className={`text-[var(--color-brand-hover)] text-xs transition-transform ${isOpen ? "rotate-180" : ""
                                             }`}
                                     />
                                 </button>
@@ -258,8 +258,8 @@ export default function NavItems({ transparent = false }) {
                 <button
                     type="button"
                     onClick={() => navigate("/blogs")}
-                    className="flex items-center gap-2 text-white font-medium px-3 py-1.5 rounded-lg
-                        hover:bg-white/10 hover:text-green-400 transition-all duration-200"
+                    className="flex items-center gap-2 text-[var(--text-primary)] font-medium px-3 py-1.5 rounded-lg
+                        hover:bg-[var(--bg-hover)] hover:text-[var(--color-brand-hover)] transition-all duration-200"
                 >
                     <FontAwesomeIcon icon={faNewspaper} className="text-sm" />
                     <span className="hidden sm:inline">Blog</span>
@@ -306,20 +306,20 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
             onMouseLeave={onMouseLeave}
             style={{ left: pos.left, top: pos.top, width: pos.width, maxWidth: '92vw' }}
         >
-            <div className="bg-white rounded-2xl shadow-2xl border-t-4 border-green-400">
+            <div className="bg-[var(--bg-secondary)] rounded-2xl shadow-2xl border-t-4 border-[var(--color-brand)]">
                 <div className="px-6 py-5 grid grid-cols-2 gap-6">
                     <div>
-                        <h4 className="text-green-600 font-semibold mb-2">Titles</h4>
-                        <div className="text-sky-900 font-semibold mb-3">{title}</div>
-                        <ul className="space-y-2 text-sm text-gray-800">
+                        <h4 className="text-[var(--color-brand)] font-semibold mb-2">Titles</h4>
+                        <div className="text-[var(--text-primary)] font-semibold mb-3">{title}</div>
+                        <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                             {titles.length === 0 ? (
-                                <li className="text-gray-500">No titles yet</li>
+                                <li className="text-[var(--text-secondary)]">No titles yet</li>
                             ) : (
                                 titles.map((t) => (
                                     <li key={t._id}>
                                         <button
                                             type="button"
-                                            className={`w-full text-left px-3 py-2 rounded-lg cursor-pointer transition ${hoverTitleId === t._id ? "bg-sky-50" : "hover:bg-sky-50"}`}
+                                            className={`w-full text-left px-3 py-2 rounded-lg cursor-pointer transition ${hoverTitleId === t._id ? "bg-[var(--bg-main)]" : "hover:bg-[var(--bg-main)]"}`}
                                             onMouseEnter={() => onHoverTitle(t._id)}
                                             onClick={() => onHoverTitle(t._id)}
                                         >
@@ -331,16 +331,16 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-green-600 font-semibold mb-3">Subtitles{activeTitle ? ` — ${activeTitle.title}` : ''}</h4>
-                        <ul className="space-y-1 text-sm text-gray-900">
+                        <h4 className="text-[var(--color-brand)] font-semibold mb-3">Subtitles{activeTitle ? ` — ${activeTitle.title}` : ''}</h4>
+                        <ul className="space-y-1 text-sm text-[var(--text-secondary)]">
                             {subtitles.length === 0 ? (
-                                <li className="text-gray-500">Hover a title to see subtitles</li>
+                                <li className="text-[var(--text-secondary)]">Hover a title to see subtitles</li>
                             ) : (
                                 subtitles.map((s, idx) => (
                                     <li key={s._id}>
                                         <button
                                             type="button"
-                                            className="flex items-center gap-2 hover:text-sky-700 cursor-pointer"
+                                            className="flex items-center gap-2 hover:text-[var(--color-brand-hover)] cursor-pointer"
                                             onClick={() => {
                                                 if (typeof onSelectService === 'function') onSelectService(s.title);
                                                 else { const slug = s.title.toLowerCase().replace(/\.(php|html)$/, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); window.location.href = `/services/${slug}` }
@@ -348,7 +348,7 @@ function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anc
                                         >
                                             <span>{s.title}</span>
                                             {idx < 2 && (
-                                                <FontAwesomeIcon icon={faFire} className="text-orange-500 text-xs" />
+                                                <FontAwesomeIcon icon={faFire} className="text-[var(--color-warning)] text-xs" />
                                             )}
                                         </button>
                                     </li>

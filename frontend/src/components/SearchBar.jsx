@@ -35,19 +35,19 @@ export default function SearchBar() {
     return (
         <div className="flex justify-center items-center gap-12">
 
-            <div className="flex items-center bg-white border-2 border-green-500 rounded-xl px-4 py-1 w-60 shadow-sm">
+            <div className="flex items-center bg-[var(--bg-main)] border-2 border-[var(--color-brand)] rounded-xl px-4 py-1 w-60 shadow-sm">
 
                 <input
                     ref={inputRef}
                     type="text"
                     placeholder="Search Service"
-                    className="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-500"
+                    className="flex-1 bg-transparent outline-none text-[var(--text-primary)] placeholder-[var(--text-secondary)]"
                 />
 
                 <FontAwesomeIcon
                     icon={faMicrophone}
                     onClick={startListening}
-                    className={`cursor-pointer transition-all duration-300 ${listening ? "text-red-500 animate-pulse" : "text-gray-400"
+                    className={`cursor-pointer transition-all duration-300 ${listening ? "text-red-500 animate-pulse" : "text-[var(--text-secondary)]"
                         }`}
                     style={{ fontSize: "18px" }}
                 />

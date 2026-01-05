@@ -92,13 +92,13 @@ const PartnersSignup = () => {
 
     const renderFormField = (label, name, type = 'text', required = true, icon = null, options = []) => (
         <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-semibold mb-2 uppercase tracking-wider">
-                {label} {required && <span className="text-red-500">*</span>}
+            <label className="block text-[var(--text-secondary)] text-sm font-semibold mb-2 uppercase tracking-wider">
+                {label} {required && <span className="text-[var(--color-danger)]">*</span>}
             </label>
             <div className="relative">
                 {icon && (
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FontAwesomeIcon icon={icon} className="h-4 w-4 text-gray-400" />
+                        <FontAwesomeIcon icon={icon} className="h-4 w-4 text-[var(--text-secondary)]" />
                     </div>
                 )}
                 {type === 'select' ? (
@@ -106,7 +106,7 @@ const PartnersSignup = () => {
                         name={name}
                         value={formData[name] || ''}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border ${formErrors[name] ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200 ${icon ? 'pl-12' : ''} hover:border-blue-300`}
+                        className={`w-full px-4 py-3 bg-[var(--bg-main)] text-[var(--text-primary)] border ${formErrors[name] ? 'border-red-500' : 'border-[var(--border-color)]'} rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent transition duration-200 ${icon ? 'pl-12' : ''} hover:border-[var(--color-brand)]`}
                         required={required}
                     >
                         <option value="">Select {label}</option>
@@ -118,7 +118,7 @@ const PartnersSignup = () => {
                     </select>
                 ) : type === 'file' ? (
                     <div className="flex items-center">
-                        <label className="flex flex-col items-center px-4 py-2 bg-white text-blue-600 rounded-lg tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-50">
+                        <label className="flex flex-col items-center px-4 py-2 bg-[var(--bg-main)] text-[var(--color-brand)] rounded-lg tracking-wide uppercase border border-[var(--color-brand)] cursor-pointer hover:bg-[var(--bg-secondary)]">
                             <FontAwesomeIcon icon={faUpload} className="w-4 h-4 mr-2" />
                             <span className="text-xs">Choose File</span>
                             <input 
@@ -130,7 +130,7 @@ const PartnersSignup = () => {
                             />
                         </label>
                         {formData[name] && (
-                            <span className="ml-2 text-sm text-gray-600">
+                            <span className="ml-2 text-sm text-[var(--text-secondary)]">
                                 <FontAwesomeIcon icon={faFileAlt} className="mr-1" />
                                 {formData[name].name}
                             </span>
@@ -142,19 +142,19 @@ const PartnersSignup = () => {
                         name={name}
                         value={formData[name] || ''}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 border ${formErrors[name] ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200 ${icon ? 'pl-12' : ''} hover:border-blue-300`}
+                        className={`w-full px-4 py-3 bg-[var(--bg-main)] text-[var(--text-primary)] border ${formErrors[name] ? 'border-red-500' : 'border-[var(--border-color)]'} rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent transition duration-200 ${icon ? 'pl-12' : ''} hover:border-[var(--color-brand)]`}
                         required={required}
                     />
                 )}
                 {formErrors[name] && (
-                    <p className="mt-1 text-sm text-red-600">{formErrors[name]}</p>
+                    <p className="mt-1 text-sm text-[var(--color-danger)]">{formErrors[name]}</p>
                 )}
             </div>
         </div>
     );
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-[var(--bg-main)]">
             <NavBar />
           {/* ================= HERO SECTION ================= */}
 <section className="partner-hero">
@@ -195,50 +195,50 @@ const PartnersSignup = () => {
 
             {/* Main Content */}
             <div className="container mx-auto px-4 py-12 max-w-6xl">
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="bg-[var(--bg-secondary)] rounded-lg shadow-lg overflow-hidden border border-[var(--border-color)]">
                     <div className="flex flex-col lg:flex-row gap-8">
                         {/* Left Sidebar */}
                         <div className="lg:w-1/3 p-6">
                             {/* Services */}
-                            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-                                <h3 className="text-2xl font-bold text-gray-800 mb-6">Our Services</h3>
+                            <div className="bg-[var(--bg-main)] rounded-lg shadow-md p-6 mb-6 border border-[var(--border-color)]">
+                                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Our Services</h3>
                                 
                                 <div className="space-y-6">
-                                    <div className="flex items-start p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                                        <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full">
-                                            <FontAwesomeIcon icon={faFileAlt} className="h-5 w-5 text-blue-600" />
+                                    <div className="flex items-start p-4 bg-[var(--bg-secondary)] rounded-lg hover:bg-[var(--bg-hover)] transition-colors">
+                                        <div className="flex-shrink-0 bg-[var(--bg-main)] p-3 rounded-full border border-[var(--border-color)]">
+                                            <FontAwesomeIcon icon={faFileAlt} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold text-gray-800">Legal</h4>
-                                            <p className="mt-1 text-gray-600">Expert legal services for all your business needs</p>
+                                            <h4 className="text-lg font-semibold text-[var(--text-primary)]">Legal</h4>
+                                            <p className="mt-1 text-[var(--text-secondary)]">Expert legal services for all your business needs</p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-start p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                                        <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full">
-                                            <FontAwesomeIcon icon={faGlobe} className="h-5 w-5 text-blue-600" />
+                                    <div className="flex items-start p-4 bg-[var(--bg-secondary)] rounded-lg hover:bg-[var(--bg-hover)] transition-colors">
+                                        <div className="flex-shrink-0 bg-[var(--bg-main)] p-3 rounded-full border border-[var(--border-color)]">
+                                            <FontAwesomeIcon icon={faGlobe} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold text-gray-800">Digital Presence</h4>
-                                            <p className="mt-1 text-gray-600">Enhance your online visibility and reach</p>
+                                            <h4 className="text-lg font-semibold text-[var(--text-primary)]">Digital Presence</h4>
+                                            <p className="mt-1 text-[var(--text-secondary)]">Enhance your online visibility and reach</p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-start p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                                        <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full">
-                                            <FontAwesomeIcon icon={faChartLine} className="h-5 w-5 text-blue-600" />
+                                    <div className="flex items-start p-4 bg-[var(--bg-secondary)] rounded-lg hover:bg-[var(--bg-hover)] transition-colors">
+                                        <div className="flex-shrink-0 bg-blue-900/20 p-3 rounded-full">
+                                            <FontAwesomeIcon icon={faChartLine} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold text-gray-800">Fundraising</h4>
-                                            <p className="mt-1 text-gray-600">Strategic financial solutions for growth</p>
+                                            <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fundraising</h4>
+                                            <p className="mt-1 text-[var(--text-secondary)]">Strategic financial solutions for growth</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Why Partner With Us */}
-                            <div className="bg-white rounded-lg shadow-md p-6">
-                                <h3 className="text-xl font-semibold mb-4 text-gray-800">Why Partner With Us?</h3>
+                            <div className="bg-[var(--bg-main)] rounded-lg shadow-md p-6 border border-[var(--border-color)]">
+                                <h3 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">Why Partner With Us?</h3>
                                 
                                 <ul className="space-y-3">
                                     {[
@@ -251,23 +251,23 @@ const PartnersSignup = () => {
                                     ].map((item, index) => (
                                         <li key={index} className="flex items-start">
                                             <div className="flex-shrink-0 mt-1">
-                                                <div className="h-4 w-4 bg-blue-100 rounded-full flex items-center justify-center mr-2">
-                                                    <FontAwesomeIcon icon={faCheck} className="h-2.5 w-2.5 text-blue-600" />
+                                                <div className="h-4 w-4 bg-blue-900/20 rounded-full flex items-center justify-center mr-2">
+                                                    <FontAwesomeIcon icon={faCheck} className="h-2.5 w-2.5 text-[var(--color-brand)]" />
                                                 </div>
                                             </div>
-                                            <span className="text-sm text-gray-700">{item}</span>
+                                            <span className="text-sm text-[var(--text-secondary)]">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
 
-                                <div className="mt-6 p-3 bg-blue-50 rounded-lg">
+                                <div className="mt-6 p-3 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-color)]">
                                     <div className="flex items-center">
-                                        <div className="flex-shrink-0 bg-white p-2 rounded-full mr-3">
-                                            <FontAwesomeIcon icon={faGoogle} className="h-5 w-5 text-blue-600" />
+                                        <div className="flex-shrink-0 bg-[var(--bg-main)] p-2 rounded-full mr-3">
+                                            <FontAwesomeIcon icon={faGoogle} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div>
-                                            <p className="text-sm font-medium text-gray-800">Google Partner</p>
-                                            <p className="text-xs text-gray-500">Certified Company</p>
+                                            <p className="text-sm font-medium text-[var(--text-primary)]">Google Partner</p>
+                                            <p className="text-xs text-[var(--text-secondary)]">Certified Company</p>
                                         </div>
                                     </div>
                                 </div>
@@ -276,13 +276,13 @@ const PartnersSignup = () => {
 
                         {/* Right Side - Form */}
                         <div className="lg:w-2/3 p-6">
-                            <div className="bg-white rounded-lg shadow-md overflow-hidden p-8">
-                                <h2 className="text-3xl font-bold text-gray-800 mb-2">Become a Partner</h2>
-                                <p className="text-gray-600 mb-8">Fill out the form below and we'll get back to you soon</p>
+                            <div className="bg-[var(--bg-main)] rounded-lg shadow-md overflow-hidden p-8 border border-[var(--border-color)]">
+                                <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-2">Become a Partner</h2>
+                                <p className="text-[var(--text-secondary)] mb-8">Fill out the form below and we'll get back to you soon</p>
 
                                 {/* Form */}
                                 <div className="p-6">
-                                    <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                                    <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
                                         {activeTab === 'individual' ? 'Individual Professional' : 'Company / CA Firm'} Registration
                                     </h2>
                                     
@@ -325,13 +325,13 @@ const PartnersSignup = () => {
                                             ])}
                                             
                                             <div className="mb-4">
-                                                <label className="block text-gray-700 text-sm font-medium mb-1">
+                                                <label className="block text-[var(--text-secondary)] text-sm font-medium mb-1">
                                                     Message <span className="text-red-500">*</span>
                                                 </label>
                                                 <textarea
                                                     name="message"
                                                     rows="4"
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    className="w-full px-3 py-2 bg-[var(--bg-main)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                                     placeholder="Tell us about your requirements..."
                                                     required
                                                 ></textarea>
@@ -343,11 +343,11 @@ const PartnersSignup = () => {
                                                 type="submit"
                                                 onClick={handleSubmit}
                                                 disabled={sending}
-                                                className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-semibold py-4 px-6 rounded-md text-lg transition duration-200 flex items-center justify-center"
+                                                className="w-full bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] disabled:bg-opacity-50 text-white font-semibold py-4 px-6 rounded-md text-lg transition duration-200 flex items-center justify-center"
                                             >
                                                 {sending ? 'Submitting...' : 'GET PROPOSAL'}
                                             </button>
-                                            {notice && <div className="text-center text-sm mt-3">{notice}</div>}
+                                            {notice && <div className="text-center text-sm mt-3 text-[var(--text-primary)]">{notice}</div>}
                                         </div>
                                     </form>
                                 </div>
@@ -358,15 +358,15 @@ const PartnersSignup = () => {
             </div>
 
             {/* Testimonials Section */}
-            <div className="bg-gray-50 py-16">
+            <div className="bg-[var(--bg-secondary)] py-16">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900">What Our Partners Say</h2>
-                        <div className="w-20 h-1 bg-green-500 mx-auto mt-4"></div>
+                        <h2 className="text-3xl font-bold text-[var(--text-primary)]">What Our Partners Say</h2>
+                        <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mt-4"></div>
                     </div>
 
                     {/* Testimonial Carousel Placeholder */}
-                    <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <div className="max-w-4xl mx-auto bg-[var(--bg-secondary)] p-8 rounded-lg shadow-md border border-[var(--border-color)]">
                         <div className="text-center">
                             <div className="text-yellow-400 text-4xl mb-4">"</div>
                             <p className="text-lg text-gray-700 italic mb-6">

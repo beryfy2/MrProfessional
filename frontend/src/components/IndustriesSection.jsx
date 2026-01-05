@@ -44,22 +44,22 @@ const INDUSTRIES = [
 
 const IndustriesSection = () => {
     return (
-        <section className="bg-white py-12">
+        <section className="bg-[var(--bg-main)] py-12">
             <div className="max-w-6xl mx-auto px-3">
-                <div className=" rounded-[20px] border border-green-400 bg-white shadow-[0_14px_30px_rgba(0,0,0,0.1)] px-1.5 py-5 md:px-3">
+                <div className=" rounded-[20px] border border-[var(--color-brand)] bg-[var(--bg-secondary)] shadow-[0_14px_30px_rgba(0,0,0,0.1)] px-1.5 py-5 md:px-3">
 
                     {/* Heading */}
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-sky-900">
-                            Industries Served by <span className="text-sky-900">Company</span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+                            Industries Served by <span className="text-[var(--color-brand)]">Company</span>
                         </h2>
-                        <div className="mt-3 h-1 w-32 bg-green-500 mx-auto rounded-full" />
+                        <div className="mt-3 h-1 w-32 bg-[var(--color-brand)] mx-auto rounded-full" />
                     </div>
 
                     {/* Outer frame */}
-                    <div className="rounded-4xl border border-green-400 bg-white shadow-[0_16px_40px_rgba(0,0,0,0.12)] overflow-hidden">
-                        {/* solid blue background */}
-                        <div className="bg-[#0064a8]">
+                    <div className="rounded-4xl border border-[var(--color-brand)] bg-[var(--bg-secondary)] shadow-[0_16px_40px_rgba(0,0,0,0.12)] overflow-hidden">
+                        {/* background */}
+                        <div className="bg-[var(--bg-secondary)]">
                             {/* 9 x 3 strict grid (tightly packed) */}
                             <div className="grid grid-cols-3 md:grid-cols-6 xl:grid-cols-9">
                                 {INDUSTRIES.map((item) => (
@@ -79,19 +79,19 @@ const IndustriesSection = () => {
 };
 
 const IndustryTile = ({ label, icon }) => (
-    <div className="relative group border-r border-b border-[#005591] last:border-r-0 xl:last:border-r border-opacity-60">
-        <div className="flex h-[105px] md:h-[115px] xl:h-[120px] flex-col items-center justify-center gap-2 px-2 text-center bg-[#0075c4] transition-colors duration-200 group-hover:bg-[#005f9c]">
+    <div className="relative group border-r border-b border-[var(--border-color)] last:border-r-0 xl:last:border-r border-opacity-60">
+        <div className="flex h-[105px] md:h-[115px] xl:h-[120px] flex-col items-center justify-center gap-2 px-2 text-center bg-[var(--bg-secondary)] transition-colors duration-200 hover:bg-[var(--bg-main)]">
             <FontAwesomeIcon
                 icon={icon}
-                className="text-[26px] md:text-[28px] text-[#b9ff16]"
+                className="text-[26px] md:text-[28px] text-[var(--color-brand)]"
             />
-            <p className="text-white text-[11px] md:text-[12px] font-medium leading-tight">
+            <p className="text-[var(--text-secondary)] text-[11px] md:text-[12px] font-medium leading-tight">
                 {label}
             </p>
         </div>
 
         {/* green underline on hover, like in reference */}
-        <div className="pointer-events-none absolute bottom-0 left-4 right-4 h-1 rounded-full bg-[#b9ff16] scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
+        <div className="pointer-events-none absolute bottom-0 left-4 right-4 h-1 rounded-full bg-[var(--color-brand)] scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-200" />
     </div>
 );
 

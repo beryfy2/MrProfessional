@@ -35,42 +35,11 @@
 
 .card {
   padding: 2em;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
 }
 
 .read-the-docs {
-  color: #888;
-}
-If your navbar JSX has any of these, REMOVE them:
-
-bg-transparent
-bg-white/70
-backdrop-blur
-backdrop-blur-md
-bg-opacity-*
-
-Example ❌
-<nav className="bg-white/70 backdrop-blur sticky top-0">
-
-Correct ✅
-<nav className="navbar">
-/* ===============================
-   SOLID NAVBAR (SAFE & SCOPED)
-   =============================== */
-
-/* ONLY target the main website navbar */
-.site-nav,
-.site-nav header,
-.site-nav nav {
-  background-color: #0b3a66 !important; /* homepage blue */
-  opacity: 1 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* Ensure it stays solid on scroll */
-.site-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
+  color: var(--text-secondary);
 }

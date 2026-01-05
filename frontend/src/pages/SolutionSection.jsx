@@ -156,19 +156,19 @@ const SolutionSection = () => {
     const activeCategory = CATEGORIES.find((c) => c.id === activeId);
 
     return (
-        <section className="bg-white py-16">
+        <section className="bg-[var(--bg-main)] py-16">
             <div className="max-w-6xl mx-auto px-4">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-sky-900">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
                         One-Stop Corporate Solution
                     </h2>
-                    <p className="mt-3 text-gray-600 max-w-3xl mx-auto">
+                    <p className="mt-3 text-[var(--text-secondary)] max-w-3xl mx-auto">
                         Startup or an established business, you'll find Professional
                         Utilities services{" "}
-                        <span className="text-green-500 font-semibold">fast</span>,{" "}
-                        <span className="text-green-500 font-semibold">affordable</span> and{" "}
-                        <span className="text-green-500 font-semibold">hassle-free</span>.
+                        <span className="text-[var(--color-brand)] font-semibold">fast</span>,{" "}
+                        <span className="text-[var(--color-brand)] font-semibold">affordable</span> and{" "}
+                        <span className="text-[var(--color-brand)] font-semibold">hassle-free</span>.
                     </p>
                 </div>
 
@@ -184,8 +184,8 @@ const SolutionSection = () => {
                                     type="button"
                                     onClick={() => setActiveId(cat.id)}
                                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition shadow-sm
-                    ${isActive ? "bg-sky-900 border-sky-900 text-white" : "bg-white border-gray-200 text-sky-900 hover:border-sky-400"}`}><span className={`flex h-9 w-9 items-center justify-center rounded-full border-2
-                    ${isActive ? "bg-green-500 border-green-500 text-white" : "bg-green-100 border-green-400 text-green-600" }`}>
+                    ${isActive ? "bg-[var(--color-brand)] border-[var(--color-brand)] text-white" : "bg-[var(--bg-secondary)] border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--color-brand)]"}`}><span className={`flex h-9 w-9 items-center justify-center rounded-full border-2
+                    ${isActive ? "bg-[var(--bg-secondary)] border-[var(--color-brand)] text-[var(--text-primary)]" : "bg-[var(--color-brand)]/10 border-[var(--color-brand)] text-[var(--color-brand)]" }`}>
                                         <FontAwesomeIcon icon={cat.icon} className="text-sm" />
                                     </span>
                                     <span className="font-semibold text-sm md:text-[15px]">
@@ -198,28 +198,28 @@ const SolutionSection = () => {
 
                     {/* Services List */}
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-sky-900 mb-2">
+                        <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2">
                             {activeCategory.question}
                         </h3>
-                        <p className="text-gray-600 mb-5">{activeCategory.subtitle}</p>
+                        <p className="text-[var(--text-secondary)] mb-5">{activeCategory.subtitle}</p>
 
                         <div className="space-y-3">
                             {activeCategory.services.map((service) => (
                                 <div
                                     key={service}
-                                    className="flex items-center justify-between bg-sky-50 rounded-full px-4 py-3 hover:bg-sky-100 transition cursor-pointer shadow-sm"
+                                    className="flex items-center justify-between bg-[var(--bg-secondary)] rounded-full px-4 py-3 hover:opacity-90 transition cursor-pointer shadow-sm"
                                 >
                                     <div className="flex items-center gap-3">
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-500 text-white">
+                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-brand)] text-white">
                                             <FontAwesomeIcon icon={faCircleCheck} />
                                         </span>
-                                        <span className="text-sm md:text-[15px] text-sky-900 font-medium">
+                                        <span className="text-sm md:text-[15px] text-[var(--text-primary)] font-medium">
                                             {service}
                                         </span>
                                     </div>
                                     <FontAwesomeIcon
                                         icon={faArrowRight}
-                                        className="text-sky-500 text-sm"
+                                        className="text-[var(--color-brand)] text-sm"
                                     />
                                 </div>
                             ))}
@@ -244,31 +244,31 @@ const SolutionSection = () => {
 
                 {/* stats bar */}
                 <div className="mt-14">
-                    <div className="rounded-3xl bg-linear-to-r from-sky-700 to-sky-900 text-white px-8 py-8 md:py-10 shadow-lg">
+                    <div className="rounded-3xl bg-[var(--bg-secondary)] text-white px-8 py-8 md:py-10 shadow-lg border border-[var(--border-color)]">
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                             <StatItem
                                 icon={faSmile}
                                 value="5K+"
                                 label="Happy Clients"
-                                accent="text-green-400"
+                                accent="text-[var(--color-brand)]"
                             />
                             <StatItem
                                 icon={faSuitcase}
                                 value="250+"
                                 label="Professional Services"
-                                accent="text-green-400"
+                                accent="text-[var(--color-brand)]"
                             />
                             <StatItem
                                 icon={faStar}
                                 value="500+"
                                 label="5 Star Reviews"
-                                accent="text-green-400"
+                                accent="text-[var(--color-brand)]"
                             />
                             <StatItem
                                 icon={faHandshake}
                                 value="20K+"
                                 label="Questions Solved"
-                                accent="text-green-400"
+                                accent="text-[var(--color-brand)]"
                             />
                         </div>
                     </div>
@@ -278,9 +278,9 @@ const SolutionSection = () => {
     );
 };
 
-const StatItem = ({ icon, value, label, accent = "text-green-400" }) => (
+const StatItem = ({ icon, value, label, accent = "text-[var(--color-brand)]" }) => (
     <div className="flex flex-col items-center gap-3">
-        <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center">
+        <div className="h-12 w-12 rounded-full bg-[var(--bg-hover)] flex items-center justify-center">
             <FontAwesomeIcon icon={icon} className="text-white text-lg" />
         </div>
         <div className={`text-3xl font-bold ${accent}`}>{value}</div>

@@ -124,18 +124,15 @@ const TestimonialsSection = () => {
         <section
             className="
     py-24
-    bg-gradient-to-b
-    from-[#0b5fa5]
-    via-[#0a4f8a]
-    to-[#083b67]
+    bg-[var(--bg-secondary)]
   "
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
         >
-            <div className="max-w-6xl mx-auto px-4 text-white">
+            <div className="max-w-6xl mx-auto px-4 text-[var(--text-primary)]">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <p className="text-xl md:text-2xl font-semibold text-green-400">
+                    <p className="text-xl md:text-2xl font-semibold text-[var(--color-brand)]">
                         "Explore how Company has helped businesses reach new heights as their trusted partner."
                     </p>
                     <div className="w-16 h-1 bg-green-400 mx-auto mt-4 rounded-full" />
@@ -149,7 +146,7 @@ const TestimonialsSection = () => {
                         <div className="space-y-4 text-sm">
                             <RatingRow
                                 iconClass="fa-brands fa-google"
-                                iconBg="bg-white"
+                                iconBg="bg-[var(--bg-main)]"
                                 iconColor="text-[#4285F4]"
                                 label="Google Customer Rating"
                                 score="4.9"
@@ -188,13 +185,13 @@ const TestimonialsSection = () => {
                         <div className="flex items-center gap-3 mt-6">
                             <button
                                 onClick={goPrev}
-                                className="h-9 w-9 rounded-full bg-white text-[#03538e] flex items-center justify-center shadow hover:bg-slate-100"
+                                className="h-9 w-9 rounded-full bg-[var(--bg-main)] text-[#03538e] flex items-center justify-center shadow hover:bg-[var(--bg-hover)]"
                             >
                                 <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
                             </button>
                             <button
                                 onClick={goNext}
-                                className="h-9 w-9 rounded-full bg-white text-[#03538e] flex items-center justify-center shadow hover:bg-slate-100"
+                                className="h-9 w-9 rounded-full bg-[var(--bg-main)] text-[#03538e] flex items-center justify-center shadow hover:bg-[var(--bg-hover)]"
                             >
                                 <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
                             </button>
@@ -207,25 +204,25 @@ const TestimonialsSection = () => {
                             {visible.map((t) => (
                                 <div
                                     key={t.id}
-                                    className="bg-white text-slate-800 rounded-3xl shadow-lg px-6 py-6 border-b-4 border-green-400 
+                                    className="bg-[var(--bg-main)] text-[var(--text-primary)] rounded-3xl shadow-lg px-6 py-6 border-b-4 border-b-[var(--color-brand)] border-[var(--border-color)] 
                                         flex flex-col justify-between min-h-[360px] h-full"
                                 >
                                     <div>
                                         <FontAwesomeIcon
                                             icon="fa-solid fa-quote-left"
-                                            className="text-sky-300 text-lg mb-3"
+                                            className="text-[var(--color-brand)] text-lg mb-3"
                                         />
-                                        <p className="text-sm leading-relaxed text-slate-700">
+                                        <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
                                             {t.text}
                                         </p>
                                     </div>
-                                    <div className="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
-                                        <div className="h-10 w-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-700 font-bold text-sm overflow-hidden">
+                                    <div className="flex items-center gap-3 mt-5 pt-4 border-t border-[var(--border-color)]">
+                                        <div className="h-10 w-10 rounded-full bg-[var(--color-brand)]/10 flex items-center justify-center text-[var(--color-brand)] font-bold text-sm overflow-hidden">
                                             {t.initials}
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="font-semibold text-sm">{t.name}</span>
-                                            <div className="flex items-center gap-2 text-xs text-slate-600">
+                                            <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
                                                 <FontAwesomeIcon
                                                     icon="fa-brands fa-google"
                                                     className="text-[#4285F4]"
@@ -244,7 +241,7 @@ const TestimonialsSection = () => {
                                 <button
                                     key={i}
                                     onClick={() => setPage(i)}
-                                    className={`h-2 w-2 rounded-full transition ${i === page ? "bg-white" : "bg-white/40"
+                                    className={`h-2 w-2 rounded-full transition ${i === page ? "bg-[var(--color-brand)]" : "bg-[var(--text-secondary)]/40"
                                         }`}
                                 />
                             ))}

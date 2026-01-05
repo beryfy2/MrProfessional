@@ -51,14 +51,14 @@ const ContactSection = () => {
     };
 
     return (
-        <section id="contact" className="bg-[#f9fbff] py-16">
+        <section id="contact" className="bg-[var(--bg-main)] py-16">
             <div className="max-w-7xl mx-auto px-4">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-sky-900">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
                         Contact Us
                     </h2>
-                    <div className="w-20 h-1 bg-green-500 mx-auto mt-3 rounded-full" />
+                    <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mt-3 rounded-full" />
                 </div>
 
                 {/* Content */}
@@ -98,11 +98,11 @@ const ContactSection = () => {
                     </div>
 
                     {/* Form */}
-                    <div className="bg-white rounded shadow-[0_20px_60px_rgba(0,0,0,0.10)] p-8">
-                        <h3 className="text-2xl md:text-3xl font-bold text-sky-900 mb-2">
+                    <div className="bg-[var(--bg-main)] border border-[var(--border-color)] rounded shadow-lg p-8">
+                        <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2">
                             Get Expert Assistance
                         </h3>
-                        <div className="w-20 h-[3px] bg-green-500 mb-6" />
+                        <div className="w-20 h-[3px] bg-[var(--color-brand)] mb-6" />
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             {/* Name + Mobile */}
@@ -113,7 +113,7 @@ const ContactSection = () => {
                                     placeholder="Name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                                    className="bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                     required
                                 />
                                 <input
@@ -122,7 +122,7 @@ const ContactSection = () => {
                                     placeholder="Mobile No."
                                     value={formData.mobile}
                                     onChange={handleChange}
-                                    className="border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                                    className="bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                     required
                                 />
                             </div>
@@ -134,7 +134,7 @@ const ContactSection = () => {
                                 placeholder="Email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                 required
                             />
 
@@ -145,7 +145,7 @@ const ContactSection = () => {
                                 placeholder="Subject"
                                 value={formData.subject}
                                 onChange={handleChange}
-                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                 required
                             />
 
@@ -156,13 +156,13 @@ const ContactSection = () => {
                                 placeholder="Message"
                                 value={formData.message}
                                 onChange={handleChange}
-                                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                             />
 
                             {/* Submit button */}
                             <button
                                 type="submit"
-                                className="mt-2 inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-2.5 rounded-full shadow-[0_12px_30px_rgba(0,200,0,0.35)] transition"
+                                className="mt-2 inline-flex items-center justify-center bg-[var(--color-brand)] hover:opacity-90 text-white font-semibold px-8 py-2.5 rounded-full shadow-[0_12px_30px_rgba(0,200,0,0.35)] transition"
                             >
                                 Submit
                             </button>
@@ -175,13 +175,13 @@ const ContactSection = () => {
 };
 
 const InfoCard = ({ icon, title, lines }) => (
-    <div className="bg-white rounded shadow-[0_20px_60px_rgba(0,0,0,0.10)] px-8 py-8 flex flex-col items-center text-center">
-        <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mb-4">
+    <div className="bg-[var(--bg-main)] border border-[var(--border-color)] rounded shadow-lg px-8 py-8 flex flex-col items-center text-center">
+        <div className="h-10 w-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center mb-4">
             <FontAwesomeIcon icon={icon} className="text-white text-lg" />
         </div>
-        <h4 className="text-xl font-bold text-sky-900 mb-2">{title}</h4>
+        <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2">{title}</h4>
         {lines.map((line, idx) => (
-            <p key={idx} className="text-sm text-gray-600">
+            <p key={idx} className="text-sm text-[var(--text-secondary)]">
                 {line}
             </p>
         ))}

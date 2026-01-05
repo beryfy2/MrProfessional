@@ -16,23 +16,23 @@ const FEATURES = [
 
 const WhyCompanySection = () => {
     return (
-        <section className="bg-white py-16">
+        <section className="bg-[var(--bg-main)] py-16">
             <div className="max-w-6xl mx-auto px-4">
 
                 {/* Top text*/}
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
                         Why Us?
                     </h2>
 
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
+                    <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
                         At Professional Utilities, we leverage our industry knowledge and
                         expertise to help businesses navigate complex regulations, minimize
                         risks, and optimize operations for maximum efficiency and
                         profitability.<br />{" "}
                         <a
                             href="#reviews"
-                            className="text-sky-600 font-semibold hover:underline"
+                            className="text-[var(--color-brand)] font-semibold hover:underline"
                         >
                             Read our reviews.
                         </a>
@@ -44,8 +44,8 @@ const WhyCompanySection = () => {
                     {FEATURES.map((item) => (
                         <div
                             key={item.title}
-                            className="flex items-center gap-4 bg-white rounded-xl
-                                shadow-[0_12px_35px_rgba(0,0,0,0.1)]
+                            className="flex items-center gap-4 bg-[var(--bg-main)] border border-[var(--border-color)] rounded-xl
+                                shadow-lg
                                 px-6 py-6 hover:-translate-y-1 transition-all duration-300"
                         >
                             {/* GREEN ICON */}
@@ -58,11 +58,11 @@ const WhyCompanySection = () => {
                                         className="text-white text-lg"
                                     />
                                 </div>
-                                <div className="absolute inset-0 rounded-full border border-white/60"></div>
+                                <div className="absolute inset-0 rounded-full border border-[var(--border-color)]"></div>
                             </div>
 
                             {/* Text */}
-                            <div className="text-sky-900 text-sm md:text-base font-semibold leading-snug">
+                            <div className="text-[var(--text-primary)] text-sm md:text-base font-semibold leading-snug">
                                 <div>{item.title}</div>
                                 {item.subtitle && <div>{item.subtitle}</div>}
                             </div>

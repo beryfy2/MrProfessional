@@ -143,8 +143,8 @@ export default function AboutUs() {
         </div>
       </header>
 
-      <main style={{ padding: '48px 28px', minHeight: '60vh', background: '#fff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', color: '#0b2940' }}>
+      <main className="bg-[var(--bg-main)] text-[var(--text-primary)] py-12 px-7 min-h-[60vh]">
+        <div className="max-w-[1200px] mx-auto">
           <section className="who-we-are">
             <div className="who-inner">
               <div className="who-left">
@@ -184,8 +184,8 @@ export default function AboutUs() {
             </button>
           </section>
           {/* Stats / Key numbers section */}
-          <section className="stats-section" style={{ marginTop: 48 }}>
-            <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <section className="stats-section mt-12">
+            <div className="max-w-[1200px] mx-auto">
               <div className="stats-grid">
                 <div className="stat-card">
                   <div className="stat-number">4K+</div>
@@ -378,7 +378,7 @@ export default function AboutUs() {
           <button type="submit" className="submit-btn" disabled={sending}>
             {sending ? 'Submitting...' : 'SUBMIT'}
           </button>
-          {notice && <p style={{ marginTop: 8 }}>{notice}</p>}
+          {notice && <p className="mt-2">{notice}</p>}
         </form>
       </div>
 

@@ -21,12 +21,12 @@
 
 .trusted-wrapper::before {
     left: 0;
-    background: linear-gradient(to right, #ffffff 70%, rgba(255, 255, 255, 0));
+    background: linear-gradient(to right, var(--bg-main) 70%, rgba(10, 16, 32, 0));
 }
 
 .trusted-wrapper::after {
     right: 0;
-    background: linear-gradient(to left, #ffffff 70%, rgba(255, 255, 255, 0));
+    background: linear-gradient(to left, var(--bg-main) 70%, rgba(10, 16, 32, 0));
 }
 
 .trusted-row {
@@ -78,7 +78,7 @@
 .brand-card {
     min-width: 175px;
     height: 95px;
-    background: #ffffff;
+    background: var(--bg-secondary);
     border-radius: 16px;
     box-shadow: 0 10px 14px rgba(15, 23, 42, 0.07);
     display: flex;
@@ -91,7 +91,7 @@
 
 /* Hover effect Outline */
 .brand-card:hover {
-    border: 2px solid #22c55e;
+    border: 2px solid var(--color-brand);
     box-shadow: 0 14px 24px rgba(15, 23, 42, 0.12);
 }
 

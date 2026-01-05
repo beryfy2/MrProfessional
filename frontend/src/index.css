@@ -3,6 +3,25 @@
 /* Navbar height variable for consistent spacing */
 :root {
   --navbar-height: 80px;
+
+  /* Color System */
+  --bg-main: #0A1020;
+  --bg-secondary: #131B2E;
+  --color-brand: #007C82;
+  --color-brand-hover: #00A3AA;
+  --color-accent: #4A4EBB;
+  --text-primary: #E8ECF3;
+  --text-secondary: #A0AEC0;
+  --border-color: #1E293B;
+  --color-success: #10B981;
+  --color-danger: #EF4444;
+  --color-warning: #F59E0B;
+  --bg-hover: #1E293B;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
 /* ===============================
    GLOBAL SOLID NAVBAR FIX
@@ -12,7 +31,7 @@ header,
 .navbar,
 .site-header,
 .main-navbar {
-  background-color: #0b3a66 !important; /* brand blue */
+  background-color: var(--bg-secondary) !important; /* Secondary Background */
   opacity: 1 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -36,10 +55,11 @@ header,
 .site-nav,
 .site-nav header,
 .site-nav nav {
-  background-color: #0b3a66 !important; /* homepage blue */
+  background-color: var(--bg-secondary) !important; /* Secondary Background */
   opacity: 1 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Ensure it stays solid on scroll */

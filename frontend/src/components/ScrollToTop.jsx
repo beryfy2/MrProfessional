@@ -31,7 +31,7 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 left-8 z-50 bg-[#0f4260] hover:bg-[#0a2d47] text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl group"
+      className="fixed bottom-8 left-8 z-50 bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl group"
       aria-label="Scroll to top"
     >
       <FontAwesomeIcon 

@@ -16,8 +16,8 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(7, 52, 92, 0.92),
-    rgba(7, 52, 92, 0.85)
+    rgba(10, 16, 32, 0.92),
+    rgba(10, 16, 32, 0.85)
   );
   z-index: 1;
 }
@@ -38,14 +38,14 @@
 .partner-hero-content h1 {
   font-size: 42px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 12px;
 }
 
 .partner-hero-subtitle {
   font-size: 20px;
   font-weight: 600;
-  color: #22c55e;
+  color: var(--color-brand);
   margin-bottom: 24px;
 }
 

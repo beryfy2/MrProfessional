@@ -85,10 +85,10 @@ const StickyConsultationCard = ({ price, title }) => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-[420px]">
+    <div className="bg-[var(--bg-secondary)] rounded-xl shadow-xl p-8 w-full max-w-[420px] border border-[var(--border-color)]">
 
       {/* Title */}
-      <h3 className="text-2xl font-bold text-[#0f4260] mb-6 text-center">
+      <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6 text-center">
         Get Expert Consultation
       </h3>
 
@@ -99,73 +99,31 @@ const StickyConsultationCard = ({ price, title }) => {
           placeholder="Full Name *"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="
-            w-full
-            px-4 py-3
-            border border-slate-300
-            rounded-md
-            text-slate-700
-            placeholder-slate-400
-            focus:outline-none
-            focus:border-[#0f4260]
-          "
+          className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] bg-[var(--bg-main)] text-[var(--text-primary)]"
         />
-
         <input
           type="email"
-          placeholder="Email *"
+          placeholder="Email Address *"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="
-            w-full
-            px-4 py-3
-            border border-slate-300
-            rounded-md
-            text-slate-700
-            placeholder-slate-400
-            focus:outline-none
-            focus:border-[#0f4260]
-          "
+          className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] bg-[var(--bg-main)] text-[var(--text-primary)]"
         />
-
         <input
           type="tel"
-          placeholder="Mobile *"
+          placeholder="Phone Number *"
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
-          className="
-            w-full
-            px-4 py-3
-            border border-slate-300
-            rounded-md
-            text-slate-700
-            placeholder-slate-400
-            focus:outline-none
-            focus:border-[#0f4260]
-          "
+          className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] bg-[var(--bg-main)] text-[var(--text-primary)]"
         />
-      </div>
 
-      {/* CTA Button */}
-      <button
-        onClick={submit}
-        disabled={loading}
-        className="
-          w-full
-          mt-6
-          bg-[#33cc33]
-          hover:bg-[#2eb82e]
-          text-white
-          py-3
-          rounded-md
-          font-semibold
-          text-sm
-          tracking-wide
-          transition
-        "
-      >
-        {loading ? 'Submitting...' : 'REQUEST A CALLBACK'}
-      </button>
+        <button
+          onClick={submit}
+          disabled={loading}
+          className="w-full bg-[var(--color-brand)] text-white font-bold py-3 rounded-lg hover:bg-[var(--color-brand-hover)] transition-colors disabled:opacity-50"
+        >
+          {loading ? 'Submitting...' : 'Request Callback'}
+        </button>
+      </div>
 
       {notice && (
         <p className="text-center text-sm mt-3">{notice}</p>
@@ -173,7 +131,7 @@ const StickyConsultationCard = ({ price, title }) => {
 
       {/* Price */}
       {price && (
-        <p className="text-center text-sm text-slate-500 mt-4">
+        <p className="text-center text-sm text-[var(--text-secondary)] mt-4">
           Starting from <span className="font-semibold">{price}</span>
         </p>
       )}
@@ -255,7 +213,7 @@ const ServicePage = () => {
     return (
       <div className="p-10">
         <h1 className="text-2xl font-bold">Service not found</h1>
-        <Link to="/" className="text-blue-600 underline">
+        <Link to="/" className="text-[var(--color-brand)] underline">
           Go Home
         </Link>
       </div>
@@ -280,22 +238,22 @@ const ServicePage = () => {
         />
 
         {/* DARK GRADIENT OVERLAY */}
-        <div className="absolute inset-0 bg-linear-to-r from-[#0f4260]/80 to-[#0b3550]/80 z-10" />
+        <div className="absolute inset-0 bg-linear-to-r from-[var(--bg-main)]/90 to-[var(--bg-secondary)]/90 z-10" />
 
         {/* CONTENT */}
         <div className="relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12">
 
             {/* LEFT */}
-            <div className="text-white">
+            <div className="text-[var(--text-primary)]">
               <h1 className="text-4xl font-bold mb-4">
                 {page.title}
               </h1>
 
-              {/* <p className="text-green-400 text-lg font-semibold mb-6">
+              {/* <p className="text-[var(--color-brand)] text-lg font-semibold mb-6">
                 Get your Company Registration starts @ ₹8,499 Only!
               </p> */}
-              <div className="text-green-400 text-lg font-semibold mb-6">
+              <div className="text-[var(--color-brand)] text-lg font-semibold mb-6">
                 <h1 >
                   Get your Company Registration starts ₹{page.price} Only!
                 </h1>
@@ -330,7 +288,7 @@ const ServicePage = () => {
         {/* LEFT CONTENT */}
         <div>
           {page.updated && (
-            <p className="text-sm text-slate-500 mb-4">
+            <p className="text-sm text-[var(--text-secondary)] mb-4">
               Updated on {page.updated}
             </p>
           )}
@@ -339,16 +297,16 @@ const ServicePage = () => {
             {page.title} – Process, Fees & Documents Required
           </h2>
 
-          <p className="text-slate-700 leading-relaxed text-justify">
+          <p className="text-[var(--text-secondary)] leading-relaxed text-justify">
             {page.content}
           </p>
         </div>
 
         {/* RIGHT CERTIFICATE PDF */}
-        <div className="bg-[#f5f5f5] p-4">
+        <div className="bg-[var(--bg-secondary)] p-4">
 
           {/* OUTER DOCUMENT FRAME */}
-          <div className="bg-white border border-gray-300">
+          <div className="bg-[var(--bg-main)] border border-[var(--border-color)]">
 
             {/* INNER CONTENT */}
             <div className="px-4 py-3">
@@ -363,8 +321,8 @@ const ServicePage = () => {
                   ["Pvt Ltd", "LLP", "OPC", "Public Ltd", "Section 8"].map((t) => (
                     <button
                       key={t}
-                      className="px-3 py-1 border text-sm
-                        hover:bg-[#0f4260] hover:text-white transition"
+                      className="px-3 py-1 border border-[var(--border-color)] text-sm
+                        hover:bg-[var(--color-brand)] hover:text-white transition"
                     >
                       {t}
                     </button>
@@ -382,8 +340,8 @@ const ServicePage = () => {
                     const isActive = idx === activePdfIndex;
                     const base =
                       "px-3 py-1 border text-sm transition";
-                    const active = "bg-[#0f4260] text-white";
-                    const normal = "hover:bg-[#0f4260] hover:text-white";
+                    const active = "bg-[var(--color-brand)] text-white";
+                    const normal = "hover:bg-[var(--color-brand)] hover:text-white";
                     return (
                       <button
                         key={`${name}-${idx}`}
@@ -430,7 +388,7 @@ const ServicePage = () => {
                 window.currentPdfUrl = pdfUrl;
 
                 return (
-                  <div className="border-t border-b border-black">
+                  <div className="border-t border-b border-[var(--border-color)]">
                     <iframe
                       src={PdfUrlView}
                       title="Partnership Deed"
@@ -446,7 +404,7 @@ const ServicePage = () => {
                   href={window.currentPdfUrl || "/certificate-sample.pdf"}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-600 underline"
+                  className="text-[var(--color-brand)] underline"
                 >
                   Open Full Document
                 </a>
@@ -461,16 +419,16 @@ const ServicePage = () => {
       {/* TABLE OF CONTENT */}
       {(page.faqs || page.questions)?.length > 0 && (
         <section className="max-w-7xl mx-auto px-6 py-12">
-          <div className="border rounded-2xl p-8 grid md:grid-cols-2 gap-10 bg-gray-100">
+          <div className="border border-[var(--border-color)] rounded-2xl p-8 grid md:grid-cols-2 gap-10 bg-[var(--bg-secondary)]">
 
             {/* LEFT */}
             <div>
               <h2 className="text-2xl font-bold mb-6 relative inline-block">
                 Table of Content
-                <span className="absolute left-0 -bottom-2 w-14 h-1 bg-green-500 rounded"></span>
+                <span className="absolute left-0 -bottom-2 w-14 h-1 bg-[var(--color-brand)] rounded"></span>
               </h2>
 
-              <ul className="space-y-3 text-slate-700">
+              <ul className="space-y-3 text-[var(--text-secondary)]">
                 {(page.questions).map((f, index) => {
                   const question = f.question;
                   const id = `q-${question
@@ -480,10 +438,10 @@ const ServicePage = () => {
 
                   return (
                     <li key={index} className="flex gap-2">
-                      <span className="text-green-500">•</span>
+                      <span className="text-[var(--color-brand)]">•</span>
                       <a
                         href={`#${id}`}
-                        className="hover:underline hover:text-[#0f4260]"
+                        className="hover:underline hover:text-[var(--color-brand-hover)]"
                       >
                         {question}
                       </a>
@@ -526,17 +484,17 @@ const ServicePage = () => {
                 className="scroll-mt-32"
               >
                 {/* QUESTION HEADING */}
-                <h2 className="text-3xl md:text-4xl font-bold text-center text-[#0f4260]">
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)]">
                   {question}
                 </h2>
 
                 {/* GREEN UNDERLINE */}
                 <div className="flex justify-center mt-3 mb-8">
-                  <span className="w-14 h-1 bg-green-500 rounded"></span>
+                  <span className="w-14 h-1 bg-[var(--color-brand)] rounded"></span>
                 </div>
 
                 {/* ANSWER */}
-                <div className="max-w-5xl mx-auto text-slate-700 leading-relaxed space-y-4 text-[17px]">
+                <div className="max-w-5xl mx-auto text-[var(--text-secondary)] leading-relaxed space-y-4 text-[17px]">
                   {answer?.split("\n\n").map((p, i) => (
                     <p key={i} className="text-justify">{p}</p>
                   ))}
@@ -545,9 +503,9 @@ const ServicePage = () => {
                 {/* PRO DIVIDER */}
                 {index !== arr.length - 1 && (
                   <div className="flex items-center gap-4 mt-14 opacity-40">
-                    <div className="flex-1 h-px bg-slate-300"></div>
-                    <span className="font-bold text-slate-300">PRO</span>
-                    <div className="flex-1 h-px bg-slate-300"></div>
+                    <div className="flex-1 h-px bg-[var(--border-color)]"></div>
+                    <span className="font-bold text-[var(--border-color)]">PRO</span>
+                    <div className="flex-1 h-px bg-[var(--border-color)]"></div>
                   </div>
                 )}
               </section>
@@ -566,7 +524,7 @@ const ServicePage = () => {
             <h2 className="text-3xl font-bold mb-4">
               {s.heading}
             </h2>
-            <p className="text-slate-700 max-w-4xl leading-relaxed text-justify">
+            <p className="text-[var(--text-secondary)] max-w-4xl leading-relaxed text-justify">
               {s.content}
             </p>
           </section>
@@ -581,12 +539,12 @@ const ServicePage = () => {
               {(page.faqs || page.questions)?.map((f, i) => (
                 <details
                   key={i}
-                  className="border rounded-lg p-4 bg-white"
+                  className="border border-[var(--border-color)] rounded-lg p-4 bg-[var(--bg-secondary)]"
                 >
                   <summary className="font-medium cursor-pointer">
                     {f.q || f.question}
                   </summary>
-                  <p className="mt-2 text-slate-600 text-justify">
+                  <p className="mt-2 text-[var(--text-secondary)] text-justify">
                     {f.a || f.answer}
                   </p>
                 </details>

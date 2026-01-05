@@ -1,10 +1,11 @@
 .payment-page {
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--bg-main);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Segoe UI", sans-serif;
+  color: var(--text-primary);
 }
 
 .payment-container {
@@ -95,8 +96,10 @@
   padding: 0 14px;
   font-size: 15px;
   border-radius: 6px;
-  border: 1px solid #dcdcdc;
+  border: 1px solid var(--border-color);
   outline: none;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .payment-form input:focus {

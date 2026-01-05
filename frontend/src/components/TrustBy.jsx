@@ -10,12 +10,12 @@ const TrustedBy = () => {
     const bottomRow = BRANDS.slice(14, 28);
 
     return (
-        <section className="bg-white py-14">
+        <section className="bg-[var(--bg-main)] py-14">
             <div className="max-w-8xl mx-auto px-4">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold text-sky-900">Trusted By</h2>
-                    <div className="h-1 w-20 bg-green-500 mx-auto mt-2 rounded-full" />
+                    <h2 className="text-3xl font-bold text-[var(--text-primary)]">Trusted By</h2>
+                    <div className="h-1 w-20 bg-[var(--color-brand)] mx-auto mt-2 rounded-full" />
                 </div>
 
                 {/* Wrapper with fade on edges */}

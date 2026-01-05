@@ -35,19 +35,19 @@ export default function TypingBanner() {
   }, [charIndex, isDeleting, textIndex]);
 
   return (
-    <section className="py-6 px-4 bg-white">
+    <section className="py-6 px-4 bg-[var(--bg-main)]">
       <div className="max-w-6xl mx-auto">
         {/* CARD */}
-        <div className="relative overflow-visible rounded-2xl bg-linear-to-r from-sky-700 to-sky-900 px-10 py-10">
+        <div className="relative overflow-visible rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] px-10 py-10">
           
           {/* LEFT TEXT */}
-          <div className="max-w-xl text-white space-y-4 z-20 relative">
-            <h2 className="text-2xl font-bold text-green-400 min-h-[72px]">
+          <div className="max-w-xl text-[var(--text-primary)] space-y-4 z-20 relative">
+            <h2 className="text-2xl font-bold text-[var(--color-brand)] min-h-[72px]">
               {displayText}
               <span className="animate-pulse">|</span>
             </h2>
 
-            <p className="text-white/90 text-sm md:text-base">
+            <p className="text-[var(--text-secondary)] text-sm md:text-base">
               Large suite of services to start and manage your entire business,
               brought to you by a company with the long term vision to transform
               the way you manage business.
@@ -66,7 +66,7 @@ export default function TypingBanner() {
                   window.scrollTo({ top: y, behavior: "smooth" });
                 }
               }}
-              className="inline-flex mt-2 items-center justify-center rounded-full bg-green-500 hover:bg-green-600 text-white font-bold px-7 py-2 shadow-lg transition"
+              className="inline-flex mt-2 items-center justify-center rounded-full bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] text-white font-bold px-7 py-2 shadow-lg transition"
             >
               Get Expert Assistance
             </button>

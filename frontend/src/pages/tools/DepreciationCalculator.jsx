@@ -114,51 +114,51 @@ const DepreciationCalculator = () => {
   return (
     <div className="has-fixed-navbar">
       {/* Hero Section */}
-      <section className="calculator-hero bg-gradient-to-r from-blue-900 to-blue-600 flex items-center pt-24">
+      <section className="calculator-hero bg-[var(--bg-main)] flex items-center pt-24 border-b border-[var(--border-color)]">
         <div className="max-w-7xl mx-auto px-4 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
             {/* Left Side - 60% */}
-            <div className="lg:col-span-3 text-white">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <div className="lg:col-span-3 text-[var(--text-primary)]">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
                 Depreciation Calculator
               </h1>
-              <p className="text-lg mb-4">
+              <p className="text-lg mb-4 text-[var(--text-secondary)]">
                 Calculate depreciation for your assets using Straight Line Method (SLM) or Written Down Value (WDV) as per Income Tax Act and Companies Act in India. Get precise calculations with year-by-year breakdown.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Tax Savings</span>
-                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Accurate Calculations</span>
-                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">Year-wise Breakdown</span>
-                <span className="bg-green-500 text-white px-3 py-1 rounded text-sm">SLM & WDV Methods</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Tax Savings</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Accurate Calculations</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Year-wise Breakdown</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">SLM & WDV Methods</span>
               </div>
             </div>
             
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
-              <div className="expert-consultation-form bg-white border-2 border-green-600 rounded-lg p-3 w-full max-w-xs shadow-2xl">
-                <h3 className="text-green-600 font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+              <div className="expert-consultation-form bg-[var(--bg-secondary)] border-2 border-[var(--color-brand)] rounded-lg p-3 w-full max-w-xs shadow-2xl">
+                <h3 className="text-[var(--color-brand)] font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
                 <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full px-2 py-1 text-xs rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full p-3 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition-colors"
+                    className="w-full bg-[var(--color-brand)] text-white py-3 rounded font-semibold hover:bg-[var(--color-brand-hover)] transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
@@ -170,17 +170,17 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Depreciation Calculator Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-[var(--bg-main)]">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+          <div className="bg-[var(--bg-secondary)] rounded-xl shadow-2xl p-8 border border-[var(--border-color)]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left Side - Inputs */}
               <div>
-                <h2 className="text-2xl font-bold text-teal-600 mb-6">Depreciation Calculator</h2>
+                <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6">Depreciation Calculator</h2>
                 <div className="space-y-6">
                   {/* Purchase Amount */}
                   <div>
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
+                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
                       Purchase Amount (₹)
                     </label>
                     <input
@@ -188,26 +188,26 @@ const DepreciationCalculator = () => {
                       min="1"
                       value={purchaseAmount}
                       onChange={(e) => setPurchaseAmount(Number(e.target.value))}
-                      className="w-full border border-gray-300 rounded-lg p-3 mb-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 mb-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                   </div>
 
                   {/* Purchase Date */}
                   <div>
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
+                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
                       Purchase Date
                     </label>
                     <input
                       type="date"
                       value={purchaseDate}
                       onChange={(e) => setPurchaseDate(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg p-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                   </div>
 
                   {/* Depreciation Rate */}
                   <div>
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
+                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
                       Depreciation Rate (%)
                     </label>
                     <div className="flex gap-3 items-center mb-3">
@@ -218,16 +218,16 @@ const DepreciationCalculator = () => {
                         step="0.1"
                         value={depreciationRate}
                         onChange={(e) => setDepreciationRate(Number(e.target.value))}
-                        className="w-full border border-gray-300 rounded-lg p-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                       />
-                      <span className="text-lg text-gray-600">%</span>
+                      <span className="text-lg text-[var(--text-secondary)]">%</span>
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                       {commonRates.map((rate) => (
                         <button
                           key={rate.label}
                           onClick={() => handleRateSelect(rate.rate)}
-                          className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 p-2 rounded border border-gray-300 transition-colors"
+                          className="text-sm bg-[var(--bg-main)] hover:bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] p-2 rounded border border-[var(--border-color)] transition-colors"
                         >
                           {rate.label}: {rate.rate}%
                         </button>
@@ -237,7 +237,7 @@ const DepreciationCalculator = () => {
 
                   {/* Depreciation Method */}
                   <div>
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
+                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
                       Depreciation Method
                     </label>
                     <div className="space-y-2">
@@ -249,7 +249,7 @@ const DepreciationCalculator = () => {
                           onChange={(e) => setDepreciationMethod(e.target.value)}
                           className="mr-3"
                         />
-                        <span className="text-gray-900">Straight Line Method (SLM)</span>
+                        <span className="text-[var(--text-primary)]">Straight Line Method (SLM)</span>
                       </label>
                       <label className="flex items-center">
                         <input
@@ -259,14 +259,14 @@ const DepreciationCalculator = () => {
                           onChange={(e) => setDepreciationMethod(e.target.value)}
                           className="mr-3"
                         />
-                        <span className="text-gray-900">Written Down Value (WDV)</span>
+                        <span className="text-[var(--text-primary)]">Written Down Value (WDV)</span>
                       </label>
                     </div>
                   </div>
 
                   {/* Duration */}
                   <div>
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
+                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
                       Duration (Years)
                     </label>
                     <input
@@ -275,7 +275,7 @@ const DepreciationCalculator = () => {
                       max="50"
                       value={duration}
                       onChange={(e) => setDuration(Number(e.target.value))}
-                      className="w-full border border-gray-300 rounded-lg p-3 text-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                     <input
                       type="range"
@@ -285,7 +285,7 @@ const DepreciationCalculator = () => {
                       onChange={(e) => setDuration(Number(e.target.value))}
                       className="w-full mt-3"
                     />
-                    <div className="flex justify-between text-sm text-gray-600 mt-2">
+                    <div className="flex justify-between text-sm text-[var(--text-secondary)] mt-2">
                       <span>1 Year</span>
                       <span>50 Years</span>
                     </div>
@@ -300,7 +300,7 @@ const DepreciationCalculator = () => {
                         onChange={(e) => setAdditionalDepreciation(e.target.checked)}
                         className="mr-3"
                       />
-                      <span className="text-gray-900">Eligible for Additional Depreciation (20%)</span>
+                      <span className="text-[var(--text-primary)]">Eligible for Additional Depreciation (20%)</span>
                     </label>
                   </div>
                 </div>
@@ -309,31 +309,31 @@ const DepreciationCalculator = () => {
               {/* Right Side - Results */}
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-sm text-gray-600 mb-2">Total Depreciation</div>
-                  <div className="text-4xl md:text-5xl font-bold text-teal-600 mb-6">
+                  <div className="text-sm text-[var(--text-secondary)] mb-2">Total Depreciation</div>
+                  <div className="text-4xl md:text-5xl font-bold text-[var(--color-brand)] mb-6">
                     {formatINR(totalDepreciation || 0)}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <span className="font-medium text-gray-900">Original Cost</span>
-                    <span className="font-bold text-lg text-teal-600">{formatINR(purchaseAmount || 0)}</span>
+                  <div className="flex justify-between items-center p-4 bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
+                    <span className="font-medium text-[var(--text-primary)]">Original Cost</span>
+                    <span className="font-bold text-lg text-[var(--color-brand)]">{formatINR(purchaseAmount || 0)}</span>
                   </div>
 
-                  <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <span className="font-medium text-gray-900">Total Depreciation</span>
-                    <span className="font-bold text-lg text-red-500">{formatINR(totalDepreciation || 0)}</span>
+                  <div className="flex justify-between items-center p-4 bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
+                    <span className="font-medium text-[var(--text-primary)]">Total Depreciation</span>
+                    <span className="font-bold text-lg text-[var(--color-danger)]">{formatINR(totalDepreciation || 0)}</span>
                   </div>
 
-                  <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <span className="font-medium text-gray-900">Written Down Value</span>
-                    <span className="font-bold text-lg text-green-600">{formatINR(finalValue || 0)}</span>
+                  <div className="flex justify-between items-center p-4 bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
+                    <span className="font-medium text-[var(--text-primary)]">Written Down Value</span>
+                    <span className="font-bold text-lg text-[var(--color-success)]">{formatINR(finalValue || 0)}</span>
                   </div>
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-lg text-center border border-blue-200">
-                  <p className="text-gray-900 text-sm">
+                <div className="bg-[var(--bg-main)] p-4 rounded-lg text-center border border-[var(--border-color)]">
+                  <p className="text-[var(--text-primary)] text-sm">
                     {depreciationMethod === 'WDV'
                       ? 'WDV method provides higher depreciation in early years, better for tax savings.'
                       : 'SLM method provides uniform depreciation throughout the asset\'s life.'
@@ -346,30 +346,30 @@ const DepreciationCalculator = () => {
             {/* Depreciation Schedule Table */}
             {depreciationSchedule.length > 0 && (
               <div className="mt-8">
-                <h3 className="text-xl font-bold text-teal-600 mb-4">Year-wise Depreciation Schedule</h3>
+                <h3 className="text-xl font-bold text-[var(--color-brand)] mb-4">Year-wise Depreciation Schedule</h3>
                 <div className="overflow-x-auto">
-                  <table className="w-full bg-white rounded-lg border border-gray-200">
+                  <table className="w-full bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left p-3 text-green-600">Year</th>
-                        <th className="text-right p-3 text-green-600">Opening WDV</th>
-                        <th className="text-right p-3 text-green-600">Depreciation</th>
-                        {additionalDepreciation && <th className="text-right p-3 text-green-600">Additional Dep.</th>}
-                        <th className="text-right p-3 text-green-600">Total Dep.</th>
-                        <th className="text-right p-3 text-green-600">Closing WDV</th>
+                      <tr className="border-b border-[var(--border-color)]">
+                        <th className="text-left p-3 text-[var(--color-brand)]">Year</th>
+                        <th className="text-right p-3 text-[var(--color-brand)]">Opening WDV</th>
+                        <th className="text-right p-3 text-[var(--color-brand)]">Depreciation</th>
+                        {additionalDepreciation && <th className="text-right p-3 text-[var(--color-brand)]">Additional Dep.</th>}
+                        <th className="text-right p-3 text-[var(--color-brand)]">Total Dep.</th>
+                        <th className="text-right p-3 text-[var(--color-brand)]">Closing WDV</th>
                       </tr>
                     </thead>
                     <tbody>
                       {depreciationSchedule.map((row) => (
-                        <tr key={row.year} className="border-b border-gray-100">
-                          <td className="p-3 text-gray-900">Year {row.year}</td>
-                          <td className="p-3 text-right text-gray-900">{formatINR(row.openingValue)}</td>
-                          <td className="p-3 text-right text-red-500">{formatINR(row.depreciation)}</td>
+                        <tr key={row.year} className="border-b border-[var(--border-color)]">
+                          <td className="p-3 text-[var(--text-primary)]">Year {row.year}</td>
+                          <td className="p-3 text-right text-[var(--text-primary)]">{formatINR(row.openingValue)}</td>
+                          <td className="p-3 text-right text-[var(--color-danger)]">{formatINR(row.depreciation)}</td>
                           {additionalDepreciation && (
-                            <td className="p-3 text-right text-orange-500">{formatINR(row.additionalDepreciation)}</td>
+                            <td className="p-3 text-right text-[var(--color-warning)]">{formatINR(row.additionalDepreciation)}</td>
                           )}
-                          <td className="p-3 text-right text-red-500">{formatINR(row.totalDepreciation)}</td>
-                          <td className="p-3 text-right text-green-600">{formatINR(row.closingValue)}</td>
+                          <td className="p-3 text-right text-[var(--color-danger)]">{formatINR(row.totalDepreciation)}</td>
+                          <td className="p-3 text-right text-[var(--color-success)]">{formatINR(row.closingValue)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -383,32 +383,32 @@ const DepreciationCalculator = () => {
 
       {/* Informational Sections */}
       {/* Section 1: Understanding Depreciation in India */}
-      <section className="bg-white py-16">
+      <section className="bg-[var(--bg-main)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6 text-center">
             Understanding Depreciation in India
           </h2>
-          <div className="text-gray-900 space-y-6">
-            <p className="text-center max-w-4xl mx-auto">
+          <div className="text-[var(--text-primary)] space-y-6">
+            <p className="text-center max-w-4xl mx-auto text-[var(--text-secondary)]">
               Depreciation represents the reduction in an asset's value due to usage, wear and tear, obsolescence, or market changes. In India, companies must calculate depreciation for both accounting purposes (Companies Act) and tax purposes (Income Tax Act).
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h3 className="text-green-600 font-semibold mb-3">Straight Line Method (SLM)</h3>
-                <p className="text-gray-600 text-sm mb-3">Under SLM, the depreciation runs along at a fixed slice of the asset's starting cost every year. The result is even predictable depreciation across the asset's useful life.</p>
-                <div className="bg-gray-100 p-3 rounded text-center border border-gray-200">
-                  <p className="text-green-600 font-mono text-sm">Depreciation = (Original Cost × Rate) / 100</p>
+              <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
+                <h3 className="text-[var(--color-brand)] font-semibold mb-3">Straight Line Method (SLM)</h3>
+                <p className="text-[var(--text-secondary)] text-sm mb-3">Under SLM, the depreciation runs along at a fixed slice of the asset's starting cost every year. The result is even predictable depreciation across the asset's useful life.</p>
+                <div className="bg-[var(--bg-main)] p-3 rounded text-center border border-[var(--border-color)]">
+                  <p className="text-[var(--color-brand)] font-mono text-sm">Depreciation = (Original Cost × Rate) / 100</p>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">Best for: Assets whose values depreciate uniformly over time</p>
+                <p className="text-xs text-[var(--text-secondary)] mt-2">Best for: Assets whose values depreciate uniformly over time</p>
               </div>
-              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h3 className="text-green-600 font-semibold mb-3">Written Down Value Method (WDV)</h3>
-                <p className="text-gray-600 text-sm mb-3">It works on the basis of the reducing book value of the asset, whereby heftier write-offs come in the early years and smaller ones later.</p>
-                <div className="bg-gray-100 p-3 rounded text-center border border-gray-200">
-                  <p className="text-green-600 font-mono text-sm">Depreciation = (Opening WDV × Rate) / 100</p>
+              <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
+                <h3 className="text-[var(--color-brand)] font-semibold mb-3">Written Down Value Method (WDV)</h3>
+                <p className="text-[var(--text-secondary)] text-sm mb-3">It works on the basis of the reducing book value of the asset, whereby heftier write-offs come in the early years and smaller ones later.</p>
+                <div className="bg-[var(--bg-main)] p-3 rounded text-center border border-[var(--border-color)]">
+                  <p className="text-[var(--color-brand)] font-mono text-sm">Depreciation = (Opening WDV × Rate) / 100</p>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">Best for: Assets whose value depreciates faster during their early years</p>
+                <p className="text-xs text-[var(--text-secondary)] mt-2">Best for: Assets whose value depreciates faster during their early years</p>
               </div>
             </div>
           </div>
@@ -416,19 +416,19 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-white">
-        <div className="border-t border-gray-300 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-[var(--bg-main)]">
+        <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 2: Depreciation Under Income Tax Act */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-[var(--bg-secondary)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6 text-center">
             Depreciation Under Income Tax Act
           </h2>
-          <div className="text-gray-900 space-y-6">
+          <div className="text-[var(--text-primary)] space-y-6">
             <p className="text-center max-w-4xl mx-auto">
               The Income Tax Act specifies the rate of depreciation on various types of assets. Following are the important points of the Income Tax Act:
             </p>
@@ -436,49 +436,49 @@ const DepreciationCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 font-bold">•</span>
-                  <p className="text-gray-600">Depreciation for tax purposes is calculated using the written down value method.</p>
+                  <span className="text-[var(--color-brand)] font-bold">•</span>
+                  <p className="text-[var(--text-secondary)]">Depreciation for tax purposes is calculated using the written down value method.</p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 font-bold">•</span>
-                  <p className="text-gray-600">If an asset is used for fewer than 180 days in the first year, a special half-year rule is applied for depreciation.</p>
+                  <span className="text-[var(--color-brand)] font-bold">•</span>
+                  <p className="text-[var(--text-secondary)]">If an asset is used for fewer than 180 days in the first year, a special half-year rule is applied for depreciation.</p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 font-bold">•</span>
-                  <p className="text-gray-600">New plant and machinery may qualify for additional depreciation.</p>
+                  <span className="text-[var(--color-brand)] font-bold">•</span>
+                  <p className="text-[var(--text-secondary)]">New plant and machinery may qualify for additional depreciation.</p>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 font-bold">•</span>
-                  <p className="text-gray-600">Simple calculations are made possible since assets are blocked together.</p>
+                  <span className="text-[var(--color-brand)] font-bold">•</span>
+                  <p className="text-[var(--text-secondary)]">Simple calculations are made possible since assets are blocked together.</p>
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="text-green-600 font-semibold mb-4">Common Depreciation Rates</h3>
+              <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
+                <h3 className="text-[var(--color-brand)] font-semibold mb-4">Common Depreciation Rates</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Residential Buildings</span>
-                    <span className="text-green-600">5%</span>
+                    <span className="text-[var(--text-secondary)]">Residential Buildings</span>
+                    <span className="text-[var(--color-brand)]">5%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Commercial Buildings</span>
-                    <span className="text-green-600">10%</span>
+                    <span className="text-[var(--text-secondary)]">Commercial Buildings</span>
+                    <span className="text-[var(--color-brand)]">10%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Furniture and Fittings</span>
-                    <span className="text-green-400">10%</span>
+                    <span className="text-[var(--text-secondary)]">Furniture and Fittings</span>
+                    <span className="text-[var(--color-brand)]">10%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Plant and Machinery</span>
-                    <span className="text-green-400">15%</span>
+                    <span className="text-[var(--text-secondary)]">Plant and Machinery</span>
+                    <span className="text-[var(--color-brand)]">15%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Computers and Software</span>
-                    <span className="text-green-400">40%</span>
+                    <span className="text-[var(--text-secondary)]">Computers and Software</span>
+                    <span className="text-[var(--color-brand)]">40%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Motor Vehicles</span>
-                    <span className="text-green-400">15-20%</span>
+                    <span className="text-[var(--text-secondary)]">Motor Vehicles</span>
+                    <span className="text-[var(--color-brand)]">15-20%</span>
                   </div>
                 </div>
               </div>
@@ -488,35 +488,35 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-white">
-        <div className="border-t border-gray-300 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-[var(--bg-main)]">
+        <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 3: Depreciation Under Companies Act */}
-      <section className="bg-white py-16">
+      <section className="bg-[var(--bg-main)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6 text-center">
             Depreciation Under Companies Act
           </h2>
-          <div className="text-gray-900 space-y-6">
+          <div className="text-[var(--text-primary)] space-y-6">
             <p className="text-center max-w-4xl mx-auto">
               Under the Companies Act, 2013, for the purpose of financial reporting, one can follow SLM or WDV. The estimated assets' lives are given in Schedule II.
             </p>
 
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-green-600 font-semibold mb-4">Key Points Under Companies Act</h3>
+            <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
+              <h3 className="text-[var(--color-brand)] font-semibold mb-4">Key Points Under Companies Act</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <ul className="space-y-2">
-                  <li className="flex items-center"><span className="text-green-600 mr-2">•</span>Can use either SLM or WDV method</li>
-                  <li className="flex items-center"><span className="text-green-600 mr-2">•</span>Asset lives specified in Schedule II</li>
-                  <li className="flex items-center"><span className="text-green-600 mr-2">•</span>Used for financial reporting purposes</li>
+                  <li className="flex items-center"><span className="text-[var(--color-brand)] mr-2">•</span>Can use either SLM or WDV method</li>
+                  <li className="flex items-center"><span className="text-[var(--color-brand)] mr-2">•</span>Asset lives specified in Schedule II</li>
+                  <li className="flex items-center"><span className="text-[var(--color-brand)] mr-2">•</span>Used for financial reporting purposes</li>
                 </ul>
                 <ul className="space-y-2">
-                  <li className="flex items-center"><span className="text-green-600 mr-2">•</span>No half-year rule like Income Tax Act</li>
-                  <li className="flex items-center"><span className="text-green-600 mr-2">•</span>Focus on true and fair view</li>
-                  <li className="flex items-center"><span className="text-green-600 mr-2">•</span>Regulatory compliance requirement</li>
+                  <li className="flex items-center"><span className="text-[var(--color-brand)] mr-2">•</span>No half-year rule like Income Tax Act</li>
+                  <li className="flex items-center"><span className="text-[var(--color-brand)] mr-2">•</span>Focus on true and fair view</li>
+                  <li className="flex items-center"><span className="text-[var(--color-brand)] mr-2">•</span>Regulatory compliance requirement</li>
                 </ul>
               </div>
             </div>
@@ -525,27 +525,27 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-white">
-        <div className="border-t border-gray-300 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-[var(--bg-main)]">
+        <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 4: Additional Depreciation Benefits */}
-      <section className="bg-white py-16">
+      <section className="bg-[var(--bg-main)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6 text-center">
             Additional Depreciation Benefits
           </h2>
-          <div className="text-gray-900 space-y-6">
+          <div className="text-[var(--text-primary)] space-y-6">
             <p className="text-center max-w-4xl mx-auto">
               To incentivize investment in new plant and machinery, extra depreciation is available under the Income Tax Act:
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-green-600 font-semibold mb-3">20% Additional Depreciation</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
+              <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
+                <h3 className="text-[var(--color-brand)] font-semibold mb-3">20% Additional Depreciation</h3>
+                <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                   <li>• Available on new plant and machinery</li>
                   <li>• Office equipment and vehicles are excluded</li>
                   <li>• Can be claimed in the year of installation</li>
@@ -553,9 +553,9 @@ const DepreciationCalculator = () => {
                 </ul>
               </div>
 
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-green-600 font-semibold mb-3">35% Additional Depreciation</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
+              <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
+                <h3 className="text-[var(--color-brand)] font-semibold mb-3">35% Additional Depreciation</h3>
+                <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                   <li>• For manufacturers in notified backward areas</li>
                   <li>• Higher incentive for specific regions</li>
                   <li>• Additional benefit over regular 20%</li>
@@ -568,64 +568,64 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-white">
-        <div className="border-t border-gray-300 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-[var(--bg-main)]">
+        <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 5: Advantages of Using Depreciation Calculator */}
-      <section className="bg-white py-16">
+      <section className="bg-[var(--bg-main)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6 text-center">
             Advantages of Using Depreciation Calculator
           </h2>
-          <div className="text-gray-900">
+          <div className="text-[var(--text-primary)]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 text-xl">✓</span>
+                  <span className="text-[var(--color-brand)] text-xl">✓</span>
                   <div>
-                    <h3 className="text-green-600 font-semibold">Accurate Calculations</h3>
-                    <p className="text-gray-600 text-sm">Ensure asset values are always current and calculations are precise.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold">Accurate Calculations</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Ensure asset values are always current and calculations are precise.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 text-xl">✓</span>
+                  <span className="text-[var(--color-brand)] text-xl">✓</span>
                   <div>
-                    <h3 className="text-green-600 font-semibold">Tax Savings</h3>
-                    <p className="text-gray-600 text-sm">Use tax deductions to save money on your tax liability.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold">Tax Savings</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Use tax deductions to save money on your tax liability.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 text-xl">✓</span>
+                  <span className="text-[var(--color-brand)] text-xl">✓</span>
                   <div>
-                    <h3 className="text-green-600 font-semibold">Asset Replacement Planning</h3>
-                    <p className="text-gray-600 text-sm">Think about when to replace assets based on their depreciated value.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold">Asset Replacement Planning</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Think about when to replace assets based on their depreciated value.</p>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 text-xl">✓</span>
+                  <span className="text-[var(--color-brand)] text-xl">✓</span>
                   <div>
-                    <h3 className="text-green-600 font-semibold">Method Comparison</h3>
-                    <p className="text-gray-600 text-sm">Compare different ways to calculate depreciation (SLM vs WDV).</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold">Method Comparison</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Compare different ways to calculate depreciation (SLM vs WDV).</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 text-xl">✓</span>
+                  <span className="text-[var(--color-brand)] text-xl">✓</span>
                   <div>
-                    <h3 className="text-green-600 font-semibold">Detailed Records</h3>
-                    <p className="text-gray-600 text-sm">Create clear and detailed depreciation records for compliance.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold">Detailed Records</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Create clear and detailed depreciation records for compliance.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <span className="text-green-600 text-xl">✓</span>
+                  <span className="text-[var(--color-brand)] text-xl">✓</span>
                   <div>
-                    <h3 className="text-green-600 font-semibold">Financial Reporting</h3>
-                    <p className="text-gray-600 text-sm">Improve the precision of financial reports and statements.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold">Financial Reporting</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Improve the precision of financial reports and statements.</p>
                   </div>
                 </div>
               </div>
@@ -635,19 +635,19 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-white">
-        <div className="border-t border-gray-300 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-[var(--bg-main)]">
+        <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 6: How to Use Our Depreciation Calculator */}
-      <section className="bg-white py-16">
+      <section className="bg-[var(--bg-main)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-6 text-center">
             How to Use Our Depreciation Calculator
           </h2>
-          <div className="text-gray-900 space-y-6">
+          <div className="text-[var(--text-primary)] space-y-6">
             <p className="text-center max-w-4xl mx-auto">
               Our depreciation calculator is designed to be intuitive and user-friendly. Follow these simple steps to calculate depreciation for your assets:
             </p>
@@ -655,60 +655,60 @@ const DepreciationCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">Enter Purchase Amount</h3>
-                    <p className="text-gray-600 text-sm">Input the total cost of the asset in rupees that you want to depreciate.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">Enter Purchase Amount</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Input the total cost of the asset in rupees that you want to depreciate.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">Select Purchase Date</h3>
-                    <p className="text-gray-600 text-sm">Choose the date when the asset was purchased to determine the depreciation period.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">Select Purchase Date</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Choose the date when the asset was purchased to determine the depreciation period.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">Choose Depreciation Rate</h3>
-                    <p className="text-gray-600 text-sm">Select the appropriate depreciation rate or choose from common rates for different asset types.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">Choose Depreciation Rate</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Select the appropriate depreciation rate or choose from common rates for different asset types.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">4</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">4</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">Select Depreciation Method</h3>
-                    <p className="text-gray-600 text-sm">Choose between Straight Line Method (SLM) or Written Down Value (WDV) method.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">Select Depreciation Method</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Choose between Straight Line Method (SLM) or Written Down Value (WDV) method.</p>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">5</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">5</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">Set Duration</h3>
-                    <p className="text-gray-600 text-sm">Specify the number of years over which you want to calculate depreciation.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">Set Duration</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Specify the number of years over which you want to calculate depreciation.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">6</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">6</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">Check Additional Depreciation</h3>
-                    <p className="text-gray-600 text-sm">If eligible, check the box for additional depreciation benefits (20% extra).</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">Check Additional Depreciation</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">If eligible, check the box for additional depreciation benefits (20% extra).</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">7</div>
+                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">7</div>
                   <div>
-                    <h3 className="text-green-600 font-semibold mb-2">View Results</h3>
-                    <p className="text-gray-600 text-sm">Get instant results with total depreciation, written down value, and year-wise breakdown.</p>
+                    <h3 className="text-[var(--color-brand)] font-semibold mb-2">View Results</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Get instant results with total depreciation, written down value, and year-wise breakdown.</p>
                   </div>
                 </div>
               </div>
@@ -718,50 +718,50 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Divider */}
-      <div className="flex justify-center py-8 bg-white">
-        <div className="border-t border-gray-300 w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-white px-2 text-gray-500 text-sm">PU</span>
+      <div className="flex justify-center py-8 bg-[var(--bg-main)]">
+        <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
+          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
         </div>
       </div>
 
       {/* Section 7: Frequently Asked Questions */}
-      <section className="bg-white py-16">
+      <section className="bg-[var(--bg-main)] py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-green-600 mb-8 text-center">
+          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-8 text-center">
             Frequently Asked Questions About Depreciation
           </h2>
           <div className="space-y-4">
-            <div className="bg-gray-50 border border-green-200 rounded-lg overflow-hidden">
+            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === 0 ? null : 0)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-100 transition-colors"
+                className="w-full text-left p-4 flex justify-between items-center hover:bg-[var(--bg-hover)] transition-colors"
               >
-                <span className="text-gray-900 font-medium">What is the difference between SLM and WDV methods?</span>
-                <span className="text-green-600 text-xl">{openFaq === 0 ? '−' : '+'}</span>
+                <span className="text-[var(--text-primary)] font-medium">What is the difference between SLM and WDV methods?</span>
+                <span className="text-[var(--color-brand)] text-xl">{openFaq === 0 ? '−' : '+'}</span>
               </button>
               {openFaq === 0 && (
-                <div className="px-4 pb-4 text-gray-600">
+                <div className="px-4 pb-4 text-[var(--text-secondary)]">
                   SLM provides uniform depreciation throughout the asset's life, while WDV provides higher depreciation in early years and lower amounts in later years. WDV is mandatory for tax purposes under the Income Tax Act.
                 </div>
               )}
             </div>
 
-            <div className="bg-gray-50 border border-green-200 rounded-lg overflow-hidden">
+            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-100 transition-colors"
+                className="w-full text-left p-4 flex justify-between items-center hover:bg-[var(--bg-hover)] transition-colors"
               >
-                <span className="text-gray-900 font-medium">When is additional depreciation applicable?</span>
-                <span className="text-green-600 text-xl">{openFaq === 1 ? '−' : '+'}</span>
+                <span className="text-[var(--text-primary)] font-medium">When is additional depreciation applicable?</span>
+                <span className="text-[var(--color-brand)] text-xl">{openFaq === 1 ? '−' : '+'}</span>
               </button>
               {openFaq === 1 && (
-                <div className="px-4 pb-4 text-gray-600">
+                <div className="px-4 pb-4 text-[var(--text-secondary)]">
                   Additional depreciation of 20% is available on new plant and machinery (excluding office equipment and vehicles) in the year of installation. 35% additional depreciation is available for manufacturers in notified backward areas.
                 </div>
               )}
             </div>
 
-            <div className="bg-gray-50 border border-green-200 rounded-lg overflow-hidden">
+            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}
                 className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-100 transition-colors"
@@ -810,7 +810,7 @@ const DepreciationCalculator = () => {
       </section>
 
       {/* Section 8: Why Professional Utilities? */}
-      <div className="bg-white">
+      <div className="bg-[var(--bg-main)]">
         <WhyCompanySection />
       </div>
 
@@ -818,7 +818,7 @@ const DepreciationCalculator = () => {
       <TestimonialsSection />
 
       {/* Section 10: Trusted By */}
-      <div className="bg-white">
+      <div className="bg-[var(--bg-main)]">
         <TrustedBy />
       </div>
     </div>
