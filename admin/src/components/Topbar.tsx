@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
   const [openProfile, setOpenProfile] = useState(false);
   const profileRef = useRef(null);
 

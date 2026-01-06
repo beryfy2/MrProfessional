@@ -149,15 +149,9 @@ entrepreneurs and strengthening the Indian startup ecosystem.
                 <div className="who-underline" />
 
                 <p className="who-paragraph">
-<<<<<<< HEAD
-                  Mr Professional is the advisor, guide, and facilitator to every entrepreneur looking to start
-                  and manage a business in India. We are the first point of contact for startups whom we handhold from the day
-                  they start their business and at every step of the way throughout their entrepreneurship journey.
-=======
-                  Mr.Professional is a professional services firm started by M/s Aaramo Private Limited,
-  backed by a team of Chartered Accountants, Company Secretaries, Cost Accountants,
-  Advocates, and IIM-trained professionals.
->>>>>>> e88dc536f529d97d1923309b21fa3712023198f8
+                  Mr Professional is the advisor, guide, and facilitator to entrepreneurs
+                  looking to start and manage a business in India. We handhold startups from
+                  day one and at every step throughout their entrepreneurship journey.
                 </p>
 
                 <p className="who-paragraph" style={{ marginTop: 28 }}>

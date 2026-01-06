@@ -110,13 +110,10 @@ const Footer = () => {
                                     <p className="text-[var(--color-brand)] font-semibold text-xs mb-1">
                                         Call us on
                                     </p>
-                                    <p className="text-3xl md:text-4xl font-bold leading-tight">
-                                        +918800932090
-                                            <p>+919415718705</p>
-
-                                
-
-                                    </p>
+                                    <div className="text-3xl md:text-4xl font-bold leading-tight">
+                                        <div>+918800932090</div>
+                                        <div className="text-xl md:text-2xl font-semibold mt-1">+919415718705</div>
+                                    </div>
                                     <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
                                         [Mon - Sat, 10am - 7pm]
                                     </p>

@@ -9,6 +9,8 @@ const NavBar = () => {
     const { hideUpper, lowerSticky } = useScrollState({
         lowerStickyThreshold: 260,
     });
+    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 640 : false;
+    const sticky = lowerSticky || isMobile;
 
     return (
         <>
@@ -18,20 +20,20 @@ const NavBar = () => {
             {/* Lower navigation */}
             <div
                 className={`w-full transition-all duration-300 ease-in-out
-                    ${lowerSticky
-                        ? "fixed top-0 left-0 right-0 z-60"
-                        : "absolute top-14 left-0 right-0 z-40"
+                    ${sticky
+                        ? "fixed top-0 left-0 right-0 z-[1000]"
+                        : "absolute top-14 left-0 right-0 z-[400]"
                     }`}
             >
                 <NavItems
-                    sticky={lowerSticky}
-                    adoptUpperColor={lowerSticky}
-                    transparent={!lowerSticky}
+                    sticky={sticky}
+                    adoptUpperColor={sticky}
+                    transparent={!sticky}
                 />
             </div>
 
             {/* Spacer only when navbar is fixed */}
-            {lowerSticky && <div style={{ height: NAVBAR_HEIGHT }} />}
+            {sticky && <div style={{ height: NAVBAR_HEIGHT }} />}
         </>
     );
 };

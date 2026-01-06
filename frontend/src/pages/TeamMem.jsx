@@ -85,19 +85,19 @@ export default function TeamMem() {
       {selected && (
         <section className="leaders-section">
           <div className="leaders-container" style={{ gridTemplateColumns: '1fr' }}>
-            <div className="card" style={{ margin: '0 auto', maxWidth: 900, display: 'grid', gap: 16, background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 12, padding: 16, color: 'var(--text-primary)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-brand)' }}>{selected.name}</div>
+            <div className="team-detail-card">
+              <div className="team-detail-header">
+                <div className="team-detail-name">{selected.name}</div>
                 <button className="btn" onClick={() => setSelected(null)}>Close</button>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: 16, alignItems: 'start' }}>
-                <img src={displayPhoto(selected)} alt={selected.name} style={{ width: 160, height: 160, borderRadius: 12, objectFit: 'cover' }} />
-                <div style={{ display: 'grid', gap: 8 }}>
-                  <div style={{ fontSize: 16, fontWeight: 600 }}>{displayRole(selected)}</div>
-                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.department}</div>
-                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.email}</div>
-                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.phone}</div>
-                  <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selected.workLocation}</div>
+              <div className="team-detail-grid">
+                <img src={displayPhoto(selected)} alt={selected.name} className="team-detail-photo" />
+                <div className="team-detail-info">
+                  <div className="team-detail-role">{displayRole(selected)}</div>
+                  <div className="team-detail-meta">{selected.department}</div>
+                  <div className="team-detail-meta">{selected.email}</div>
+                  <div className="team-detail-meta">{selected.phone}</div>
+                  <div className="team-detail-meta">{selected.workLocation}</div>
                 </div>
               </div>
             </div>

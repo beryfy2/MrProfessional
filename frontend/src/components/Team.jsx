@@ -61,12 +61,8 @@ const Team = () => {
           </p>
 
           <p className="team-long-description">
-<<<<<<< HEAD
-            Mr. Professional has been providing clients with personalized tax preparation and accounting services throughout India. With years of certified training, We have the necessary skills, qualifications and expertise to get the job done. Whether you’re looking for a Tax Expert or a Financial Advisor, Financial Services. We are in the business of Startup Registration, Licenses, Accounting, Taxes, Tax Planning & Management, Legal Services, Payroll Labour Laws and in Protection & Enforcement of Intellectual Property Rights.
-=======
-           Mr.Professional is a young and energetic team focused on supporting 
-entrepreneurs and strengthening the Indian startup ecosystem. 
->>>>>>> e88dc536f529d97d1923309b21fa3712023198f8
+            Mr. Professional is a young and energetic team focused on supporting
+            entrepreneurs and strengthening the Indian startup ecosystem.
           </p>
 
           <div className="team-buttons">

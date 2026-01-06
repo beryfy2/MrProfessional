@@ -62,3 +62,26 @@
   padding: 16px;
   min-height: 0; /* VERY IMPORTANT */
 }
+
+/* ===============================
+   RESPONSIVE ADMIN LAYOUT
+   =============================== */
+@media (max-width: 900px) {
+  .admin-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .topbar {
+    height: 60px;
+    min-height: 60px;
+  }
+  .admin-content {
+    padding: 14px;
+  }
+}

@@ -198,3 +198,74 @@
     gap: 80px;
   }
 }
+
+/* ===============================
+   TEAM DETAIL CARD (RESPONSIVE)
+   =============================== */
+.team-detail-card {
+  margin: 0 auto;
+  max-width: 900px;
+  display: grid;
+  gap: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.team-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-detail-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.team-detail-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.team-detail-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.team-detail-info {
+  display: grid;
+  gap: 8px;
+}
+
+.team-detail-role {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.team-detail-meta {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .team-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .team-detail-photo {
+    width: 100%;
+    height: auto;
+    max-height: 240px;
+  }
+  .team-detail-name {
+    font-size: 20px;
+  }
+}
