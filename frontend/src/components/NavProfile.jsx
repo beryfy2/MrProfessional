@@ -26,12 +26,12 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
             <div className="flex items-center gap-8">
                 <span className="font-semibold flex items-center gap-2 leading-none">
                     <FontAwesomeIcon icon={["fas", "envelope"]} style={{ color: "var(--color-brand)" }} />
-                    <span className="cursor-pointer hover:text-[var(--color-brand-hover)]">support@example.com</span>
+                    <span className="cursor-pointer hover:text-[var(--color-brand-hover)]">info@mrprofessional.co.in</span>
                 </span>
 
                 <span className="font-semibold flex items-center gap-2 leading-none">
                     <FontAwesomeIcon icon={["fas", "phone"]} style={{ color: "var(--color-brand)" }} />
-                    <span className="cursor-pointer hover:text-[var(--color-brand-hover)]">XXXXXXXXXX</span>
+                    <span className="cursor-pointer hover:text-[var(--color-brand-hover)]">+918800932090</span>
                 </span>
             </div>
 
@@ -50,12 +50,66 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
 
             {/* Socials media */}
             <div className="hidden md:flex items-center gap-4 text-lg">
-                <FontAwesomeIcon className="cursor-pointer hover:text-[var(--color-brand-hover)]" icon={["fab", "whatsapp"]} />
-                <FontAwesomeIcon className="cursor-pointer hover:text-blue-500" icon={["fab", "facebook-f"]} />
-                <FontAwesomeIcon className="cursor-pointer hover:text-pink-400" icon={["fab", "instagram"]} />
-                <FontAwesomeIcon className="cursor-pointer hover:text-[var(--text-primary)]" icon={["fab", "x-twitter"]} />
-                <FontAwesomeIcon className="cursor-pointer hover:text-blue-300" icon={["fab", "linkedin-in"]} />
-            </div>
+  <a
+    href="https://wa.me/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+  >
+    <FontAwesomeIcon
+      className="cursor-pointer hover:text-[var(--color-brand-hover)]"
+      icon={["fab", "whatsapp"]}
+    />
+  </a>
+
+  <a
+    href="https://www.facebook.com/Mr.ProfessionalOfficial#"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+  >
+    <FontAwesomeIcon
+      className="cursor-pointer hover:text-blue-500"
+      icon={["fab", "facebook-f"]}
+    />
+  </a>
+
+  <a
+    href="https://www.instagram.com/mrprofessional.official/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <FontAwesomeIcon
+      className="cursor-pointer hover:text-pink-400"
+      icon={["fab", "instagram"]}
+    />
+  </a>
+
+  <a
+    href="https://x.com/MrProfe19311696"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Twitter / X"
+  >
+    <FontAwesomeIcon
+      className="cursor-pointer hover:text-[var(--text-primary)]"
+      icon={["fab", "x-twitter"]}
+    />
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/mrprofessionalofficial/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+  >
+    <FontAwesomeIcon
+      className="cursor-pointer hover:text-blue-300"
+      icon={["fab", "linkedin-in"]}
+    />
+  </a>
+</div>
         </div>
     );
 };

@@ -152,7 +152,7 @@ export default function AboutUs() {
                 <div className="who-underline" />
 
                 <p className="who-paragraph">
-                  PU Professional Utilities Pvt Ltd is the advisor, guide, and facilitator to every entrepreneur looking to start
+                  Mr Professional is the advisor, guide, and facilitator to every entrepreneur looking to start
                   and manage a business in India. We are the first point of contact for startups whom we handhold from the day
                   they start their business and at every step of the way throughout their entrepreneurship journey.
                 </p>
@@ -239,7 +239,7 @@ export default function AboutUs() {
 <section className="team-section">
   <div className="team-container">
     <div className="team-left">
-      <h2 className="team-heading">Meet The Professional Utilities Team</h2>
+      <h2 className="team-heading">Meet The Mr Professional Team</h2>
       <div className="who-underline" />
 
       <p className="team-text">
@@ -248,17 +248,17 @@ export default function AboutUs() {
       </p>
 
       <p className="team-text">
-        P is transforming the way to start and manage a business
+        Mr Professional is transforming the way to start and manage a business
         by simplifying business laws for entrepreneurs. Our experts, specializing
         across tax, accounting and compliances, handhold entrepreneurs throughout
         their journey right from business registration to complying with business laws.
       </p>
 
       <div className="team-buttons">
-         <Link to="/team">
+          <Link to="/team">
         <button className="btn-green">MEET OUR TEAM</button>
         </Link>
-         <Link to="/partners-signup">
+          <Link to="/partners-signup">
         <button className="btn-blue">JOIN OUR TEAM</button>
         </Link>
       </div>
@@ -278,7 +278,7 @@ export default function AboutUs() {
           ))
         ) : (
           <div className="team-card">
-             <p style={{ padding: 20 }}>Loading team...</p>
+              <p style={{ padding: 20 }}>Loading team...</p>
           </div>
         )}
       </div>
@@ -304,8 +304,8 @@ export default function AboutUs() {
           <div className="contact-icon green">📍</div>
           <h4>Our Address</h4>
           <p>
-            804, 8th Floor, Bhandari House Building<br />
-            No.-91, Nehru Place, New Delhi - 110019
+            SF-1, Reliable City Center, Sector-6, Vasundhara<br />
+            Ghaziabad, Uttar Pradesh, India – 201014 
           </p>
         </div>
 
@@ -321,13 +321,13 @@ export default function AboutUs() {
         <div className="contact-card">
           <div className="contact-icon green">✉️</div>
           <h4>Email Us</h4>
-          <p>support@example.com</p>
+          <p>info@mrprofessional.co.in</p>
         </div>
 
         <div className="contact-card">
           <div className="contact-icon green">📞</div>
           <h4>Call Us</h4>
-          <p>+91 9821113172</p>
+          <p>+918800932090</p>
         </div>
 
       </div>

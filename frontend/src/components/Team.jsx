@@ -61,7 +61,7 @@ const Team = () => {
           </p>
 
           <p className="team-long-description">
-            Professional Utilities is transforming the way to start and manage a business by simplifying the business laws for entrepreneurs. Our experts, specializing across tax, accounting and compliances, handhold entrepreneurs through their entrepreneurship journey right from business registration to complying with business laws.
+            Mr. Professional has been providing clients with personalized tax preparation and accounting services throughout India. With years of certified training, We have the necessary skills, qualifications and expertise to get the job done. Whether you’re looking for a Tax Expert or a Financial Advisor, Financial Services. We are in the business of Startup Registration, Licenses, Accounting, Taxes, Tax Planning & Management, Legal Services, Payroll Labour Laws and in Protection & Enforcement of Intellectual Property Rights.
           </p>
 
           <div className="team-buttons">

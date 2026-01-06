@@ -111,7 +111,11 @@ const Footer = () => {
                                         Call us on
                                     </p>
                                     <p className="text-3xl md:text-4xl font-bold leading-tight">
-                                        +91 XXXXXXXXXX
+                                        +918800932090
+                                            <p>+919415718705</p>
+
+                                
+
                                     </p>
                                     <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
                                         [Mon - Sat, 10am - 7pm]
@@ -122,7 +126,7 @@ const Footer = () => {
                                     <p className="text-[var(--color-brand)] font-semibold text-xs mb-1">
                                         Write to us
                                     </p>
-                                    <p className="text-[13px]">support@example.com</p>
+                                    <p className="text-[13px]">info@mrprofessional.co.in</p>
                                 </div>
 
                                 <div>
@@ -130,12 +134,51 @@ const Footer = () => {
                                         Follow us on
                                     </p>
                                     <div className="mt-2 flex items-center gap-3 text-lg">
-                                        <IconBubble icon={faFacebookF} />
-                                        <IconBubble icon={faInstagram} />
-                                        <IconBubble icon={faXTwitter} />
-                                        <IconBubble icon={faLinkedinIn} />
-                                        <IconBubble icon={faPinterestP} />
-                                    </div>
+                                                <a
+    href="https://www.facebook.com/Mr.ProfessionalOfficial#"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+  >
+    <IconBubble icon={faFacebookF} />
+  </a>
+
+  <a
+    href="https://www.instagram.com/mrprofessional.official/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <IconBubble icon={faInstagram} />
+  </a>
+
+  <a
+    href="https://x.com/MrProfe19311696"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Twitter / X"
+  >
+    <IconBubble icon={faXTwitter} />
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/mrprofessionalofficial/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+  >
+    <IconBubble icon={faLinkedinIn} />
+  </a>
+
+  <a
+    href="https://www.pinterest.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Pinterest"
+  >
+    <IconBubble icon={faPinterestP} />
+  </a>
+</div>
                                 </div>
 
                                 <div className="flex items-start gap-3 pt-2">
@@ -144,8 +187,8 @@ const Footer = () => {
                                         className="text-[var(--color-brand)] text-lg mt-1"
                                     />
                                     <div className="space-y-1">
-                                        <p>804, 8th Floor, Bhandari House -</p>
-                                        <p>91, Nehru Place, New Delhi 110019</p>
+                                        <p>SF-1, Reliable City Center, Sector-6, Vasundhara </p>
+                                        <p>  Ghaziabad, Uttar Pradesh, India – 201014</p>
                                     </div>
                                 </div>
                             </div>

@@ -91,14 +91,14 @@ const ContactSection = () => {
                         <InfoCard
                             icon="fa-solid fa-envelope"
                             title="Email Us"
-                            lines={["support@example.com"]}
+                            lines={["info@mrprofessional.co.in"]}
                         />
 
                         {/* Call */}
                         <InfoCard
                             icon="fa-solid fa-phone"
                             title="Call Us"
-                            lines={["+91 XXXXXXXXXX"]}
+                            lines={["+918800932090","+919415718705"]}
                         />
                     </div>
 
