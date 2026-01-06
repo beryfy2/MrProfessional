@@ -61,18 +61,20 @@ const Team = () => {
           </p>
 
           <p className="team-long-description">
-            Professional Utilities is transforming the way to start and manage a business by simplifying the business laws for entrepreneurs. Our experts, specializing across tax, accounting and compliances, handhold entrepreneurs through their entrepreneurship journey right from business registration to complying with business laws.
+           Mr.Professional is a young and energetic team focused on supporting 
+entrepreneurs and strengthening the Indian startup ecosystem. 
           </p>
 
           <div className="team-buttons">
             <button
               type="button"
               className="btn-more-about"
+              background="#3B3C99"
               onClick={() => navigate('/about')}
             >
               More About Us
             </button>
-            <button className="btn-meet-team"
+            <button className="btn-meet-team" background="#3B3C99"
             onClick={()=> navigate('/team')}>Meet Our Team</button>
           </div>
         </div>
