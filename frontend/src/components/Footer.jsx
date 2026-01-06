@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLocationDot,
@@ -14,9 +14,12 @@ import {
     faLinkedinIn,
     faPinterestP,
 } from "@fortawesome/free-brands-svg-icons";
-import phonepeImg from '../assets/payments/phonepe.svg';
-import upiImg from '../assets/payments/payment.svg';
-import googleImg from '../assets/images/google.svg';
+
+import phonepeImg from "../assets/payments/phonepe.svg";
+import upiImg from "../assets/payments/payment.svg";
+import googleImg from "../assets/images/google.svg";
+
+/* ---------------- DATA ---------------- */
 
 const ORG_LINKS = [
     { label: "About Us", path: "/about" },
@@ -24,7 +27,7 @@ const ORG_LINKS = [
     { label: "The Team", path: "/team" },
     { label: "Contact Us", path: "/contact" },
     { label: "Blogs", path: "/blogs" },
-    { label: "Privacy Policy", path: "/privacy-policy" }
+    { label: "Privacy Policy", path: "/privacy-policy" },
 ];
 
 const POPULAR_SERVICES = [
@@ -46,293 +49,262 @@ const USEFUL_TOOLS = [
 const TESTIMONIALS = [
     {
         id: 1,
-        name: "Vivek Anand Ji",
-        avatar: "/images/testimonials/vivek.png",
-        text: `They've been very helpful in our registration with ICEGATE. It was a small thing with a small amount paid which somehow escalated to a very painful procedure. Never did they say "You've only paid so much. It's too much effort for us.".`,
+        name: "Himanshu Karia",
+        role: "Director, Autogrid Mobility Pvt Ltd",
+        text:
+            "The people in the organization are highly professional and helped me throughout the work in the best possible manner.",
     },
     {
         id: 2,
-        name: "Vaibhav Agrawal",
-        avatar: "/images/testimonials/vaibhav.png",
-        text: `They are one of the most genuine and reasonable people. I applied for Impc certificate through them and they charged me a very nominal amount as compared to what other firms asked.`,
+        name: "Lalla Singh",
+        role: "Director, Arifin India Nidhi Limited",
+        text:
+            "The best consultants I’ve worked with. The approach toward work is highly professional and effective. An energetic team.",
     },
     {
         id: 3,
-        name: "Jay Prakash Maurya",
-        avatar: "/images/testimonials/jay.png",
-        text: `Mr Professional is fully professional in their work. Rates are too low and genuine. Services and satisfaction are high so I highly recommended Mr Professional.`,
+        name: "Amit Keshari",
+        role: "Director, Trueon Lifesciences (OPC) Pvt Ltd",
+        text:
+            "The services from Mr Professional are best in class. The support they provide throughout the work is excellent.",
+    },
+    {
+        id: 4,
+        name: "Deepesh Kurupath",
+        role: "Founder & CEO, CargoFL",
+        text:
+            "Best in class service provider. A very cooperative and understanding team that helps explain all technicalities effectively.",
+    },
+    {
+        id: 5,
+        name: "Arya Chaurasia",
+        role: "CEO, Profilance Pvt Ltd",
+        text:
+            "The teamwork is excellent. My work was completed before time. Very supportive and helpful team.",
     },
 ];
+
+
+/* ---------------- COMPONENT ---------------- */
 
 const Footer = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-        }, 8000); // 8 seconds
+        const interval = setInterval(
+            () => setActiveIndex((i) => (i + 1) % TESTIMONIALS.length),
+            8000
+        );
         return () => clearInterval(interval);
     }, []);
 
     const activeTestimonial = TESTIMONIALS[activeIndex];
 
     return (
-        <footer
-            className="text-[var(--text-secondary)] bg-[var(--bg-secondary)] border-t border-[var(--border-color)]"
-        >
-            <div className="">
-                <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pt-10 pb-6 space-y-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr_1.2fr] gap-10">
-                        <FooterColumn title="Organization">
-                            {ORG_LINKS.map((item) => (
-                                <FooterItem key={item.label} to={item.path}>
-                                    {item.label}
-                                </FooterItem>
-                            ))}
-                        </FooterColumn>
+        <footer className="bg-(--bg-secondary) text-(--text-secondary) border-t border-(--border-color)">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pt-10 pb-6 space-y-12">
 
-                        <FooterColumn title="Popular Services">
-                            {POPULAR_SERVICES.map((item) => (
-                                <FooterItem key={item}>{item}</FooterItem>
-                            ))}
-                        </FooterColumn>
+                {/* ---------------- TOP LINKS ---------------- */}
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr_1.2fr] gap-10">
+                    <FooterColumn title="Organization">
+                        {ORG_LINKS.map((i) => (
+                            <FooterItem key={i.label} to={i.path}>{i.label}</FooterItem>
+                        ))}
+                    </FooterColumn>
 
-                        <FooterColumn title="Useful Tools">
-                            {USEFUL_TOOLS.map((item) => (
-                                <FooterItem key={item.label} to={item.path}>
-                                    {item.label}
-                                </FooterItem>
-                            ))}
-                        </FooterColumn>
+                    <FooterColumn title="Popular Services">
+                        {POPULAR_SERVICES.map((i) => (
+                            <FooterItem key={i}>{i}</FooterItem>
+                        ))}
+                    </FooterColumn>
 
-                        <div className="space-y-4 text-sm">
-                                <div>
-                                    <p className="text-[var(--color-brand)] font-semibold text-xs mb-1">
-                                        Call us on
-                                    </p>
-                                    <div className="text-3xl md:text-4xl font-bold leading-tight">
-                                        <div>+918800932090</div>
-                                        <div className="text-xl md:text-2xl font-semibold mt-1">+919415718705</div>
-                                    </div>
-                                    <p className="mt-1 text-[13px] text-[var(--text-secondary)]">
-                                        [Mon - Sat, 10am - 7pm]
-                                    </p>
+                    <FooterColumn title="Useful Tools">
+                        {USEFUL_TOOLS.map((i) => (
+                            <FooterItem key={i.label} to={i.path}>{i.label}</FooterItem>
+                        ))}
+                    </FooterColumn>
+
+                    {/* CONTACT */}
+                    <div className="space-y-4 text-sm">
+                        <div>
+                            <p className="text-(--color-brand) font-semibold text-xs mb-1">
+                                Call us on
+                            </p>
+                            <div className="text-3xl font-bold">
+                                +91 88009 32090
+                                <div className="text-xl font-semibold mt-1">
+                                    +91 94157 18705
                                 </div>
+                            </div>
+                            <p className="text-xs mt-1">[Mon - Sat, 10am - 7pm]</p>
+                        </div>
 
-                                <div>
-                                    <p className="text-[var(--color-brand)] font-semibold text-xs mb-1">
-                                        Write to us
-                                    </p>
-                                    <p className="text-[13px]">info@mrprofessional.co.in</p>
-                                </div>
+                        <div>
+                            <p className="text-(--color-brand) font-semibold text-xs mb-1">
+                                Write to us
+                            </p>
+                            <p>info@mrprofessional.co.in</p>
+                        </div>
 
-                                <div>
-                                    <p className="text-[var(--color-brand)] font-semibold text-xs mb-1">
-                                        Follow us on
-                                    </p>
-                                    <div className="mt-2 flex items-center gap-3 text-lg">
-                                                <a
-    href="https://www.facebook.com/Mr.ProfessionalOfficial#"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-  >
-    <IconBubble icon={faFacebookF} />
-  </a>
-
-  <a
-    href="https://www.instagram.com/mrprofessional.official/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-  >
-    <IconBubble icon={faInstagram} />
-  </a>
-
-  <a
-    href="https://x.com/MrProfe19311696"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Twitter / X"
-  >
-    <IconBubble icon={faXTwitter} />
-  </a>
-
-  <a
-    href="https://www.linkedin.com/company/mrprofessionalofficial/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="LinkedIn"
-  >
-    <IconBubble icon={faLinkedinIn} />
-  </a>
-
-  <a
-    href="https://www.pinterest.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Pinterest"
-  >
-    <IconBubble icon={faPinterestP} />
-  </a>
-</div>
-                                </div>
-
-                                <div className="flex items-start gap-3 pt-2">
-                                    <FontAwesomeIcon
-                                        icon={faLocationDot}
-                                        className="text-[var(--color-brand)] text-lg mt-1"
-                                    />
-                                    <div className="space-y-1">
-                                        <p>SF-1, Reliable City Center, Sector-6, Vasundhara </p>
-                                        <p>  Ghaziabad, Uttar Pradesh, India – 201014</p>
-                                    </div>
-                                </div>
+                        <div>
+                            <p className="text-(--color-brand) font-semibold text-xs mb-1">
+                                Follow us on
+                            </p>
+                            <div className="flex gap-3 mt-2">
+                                <IconBubble icon={faFacebookF} />
+                                <IconBubble icon={faInstagram} />
+                                <IconBubble icon={faXTwitter} />
+                                <IconBubble icon={faLinkedinIn} />
+                                <IconBubble icon={faPinterestP} />
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center gap-6">
-                            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                                <TrustBadge icon={faShieldHalved} label="Reliable" />
-                                <div className="hidden md:block h-10 w-px bg-[var(--color-brand)]" />
-                                <TrustBadge icon={faTags} label="Affordable" />
-                                <div className="hidden md:block h-10 w-px bg-[var(--color-brand)]" />
-                                <TrustBadge icon={faHandshake} label="Assurity" />
+                        <div className="flex gap-3 pt-2">
+                            <FontAwesomeIcon
+                                icon={faLocationDot}
+                                className="text-(--color-brand) mt-1"
+                            />
+                            <div>
+                                <p>SF-1, Reliable City Center, Sector-6</p>
+                                <p>Vasundhara, Ghaziabad – 201014</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <div className="flex flex-col md:flex-row items-center gap-6">
-                                <Link 
-                                    to="/partners-signup" 
-                                    className="px-8 py-2 rounded-full bg-transparent border border-[var(--color-brand)] text-[var(--color-brand)] text-sm font-semibold hover:bg-[var(--color-brand)] hover:text-white transition shadow-[0_0_0_1px_rgba(0,0,0,0.1)]"
-                                >
-                                    Partner With Us
-                                </Link>
+                {/* TRUST + TESTIMONIAL*/}
+                <div className=" rounded-3xl px-6 md:px-10 py-8 border-(--border-color)">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 items-center">
 
-                                <div className="flex items-center gap-4">
+                        {/* LEFT */}
+                        <div className="grid grid-cols-[auto_40px_auto_40px_auto] gap-y-6">
+
+                            {/* BADGES ROW */}
+                            <TrustBadge icon={faShieldHalved} label="Reliable" />
+                            <Divider />
+                            <TrustBadge icon={faTags} label="Affordable" />
+                            <Divider />
+                            <TrustBadge icon={faHandshake} label="Assurity" />
+
+                            {/* CTA ROW – CENTERED UNDER MIDDLE BADGE */}
+                            <div className="col-span-5 flex justify-center">
+                                <div className="flex items-center gap-5">
+                                    <Link
+                                        to="/partners-signup"
+                                        className="px-8 py-2 rounded-full bg-(--color-brand) text-white text-sm font-semibold hover:opacity-90 transition"
+                                    >
+                                        Partner With Us
+                                    </Link>
+
                                     <Link to="/payment">
                                         <img
                                             src={phonepeImg}
-                                            alt="Pay via PhonePe"
-                                            className="h-9 object-contain cursor-pointer hover:scale-105 transition"
+                                            alt="PhonePe"
+                                            className="h-9 hover:scale-105 transition"
                                         />
                                     </Link>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-6">
-                                <img
-                                    src={upiImg}
-                                    alt="UPI"
-                                    className="h-7 object-contain"
-                                />
+                            {/* PAYMENT ICONS – SAME CENTER */}
+                            <div className="col-span-5 flex justify-center">
+                                <img src={upiImg} alt="UPI" className="h-7" />
                             </div>
+
                         </div>
 
-                        <div>
-                            <div className="bg-[var(--bg-main)] rounded-3xl px-6 md:px-10 py-6 flex flex-col md:flex-row gap-6 items-center transition-all duration-500 border border-[var(--border-color)]">
-                                <div className="flex-1 text-sm md:text-[15px] leading-relaxed">
-                                    {activeTestimonial.text}
-                                </div>
-                                <div className="flex flex-col gap-4 min-w-[230px]">
-                                    <div className="flex items-center gap-3">
-                                        <div className="text-sm">
-                                            <p className="font-semibold">{activeTestimonial.name}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <img
-                                            src={googleImg}
-                                            alt="Google Customer Rating"
-                                            className="h-8 object-contain"
-                                        />
-                                        <div className="text-sm">
-                                            <p className="font-semibold">
-                                                4.9{" "}
-                                                <span className="text-yellow-400">★★★★★</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2 mt-1">
-                                        {TESTIMONIALS.map((t, idx) => (
-                                            <button
-                                                key={t.id}
-                                                onClick={() => setActiveIndex(idx)}
-                                                className={`h-2.5 w-2.5 rounded-full transition ${
-                                                    idx === activeIndex
-                                                        ? "bg-[var(--color-brand)]"
-                                                        : "bg-[var(--text-secondary)] hover:bg-[var(--text-primary)]"
-                                                }`}
-                                            />
-                                        ))}
-                                    </div>
+
+
+                        {/* RIGHT – TESTIMONIAL */}
+                        <div className="bg-(--bg-main) rounded-2xl px-6 py-6 border border-(--border-color) flex flex-col gap-4">
+                            <p className="text-sm md:text-[15px] leading-relaxed">
+                                {activeTestimonial.text}
+                            </p>
+
+                            <div className="flex items-center justify-between flex-wrap gap-3">
+                                <p className="font-semibold">{activeTestimonial.name}</p>
+
+                                <div className="flex items-center gap-2">
+                                    <img src={googleImg} alt="Google" className="h-8" />
+                                    <span className="font-semibold text-sm">
+                                        4.9 <span className="text-yellow-400">★★★★★</span>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="border-t border-[var(--border-color)] pt-4 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] md:text-xs text-[var(--text-secondary)]">
-                            <div className="flex items-center gap-3">
-                                <span>© 2025 Mr Professional Pvt Ltd - All Rights Reserved.</span>
-                            </div>
-
-                            <div className="flex flex-wrap items-center gap-4">
-                                <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
-                                <Divider />
-                                <FooterLink to="/terms-and-conditions">Terms &amp; Conditions</FooterLink>
-                                <Divider />
-                                <FooterLink to="/refund-policy">Refund Policy</FooterLink>
-                                <Divider />
-                                <FooterLink to="/tools/emi-calculator">EMI Calculator</FooterLink>
-                                <Divider />
-                                <FooterLink to="/contact">Contact Us</FooterLink>
+                            <div className="flex gap-2">
+                                {TESTIMONIALS.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setActiveIndex(i)}
+                                        className={`h-2.5 w-2.5 rounded-full ${i === activeIndex
+                                            ? "bg-(--color-brand)"
+                                            : "bg-(--text-secondary)"
+                                            }`}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
-            </footer>
-        );
-    };
 
-    const FooterColumn = ({ title, children }) => (
-        <div>
-            <h4 className="text-[var(--color-brand)] font-semibold mb-3">{title}</h4>
-            <ul className="space-y-2 text-sm">{children}</ul>
-        </div>
-    );
+                {/* ---------------- BOTTOM BAR ---------------- */}
+                <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row justify-between items-center text-xs">
+                    <span>© 2025 Mr Professional Pvt Ltd. All Rights Reserved.</span>
+                    <div className="flex gap-4">
+                        <FooterLink to="/privacy-policy">Privacy</FooterLink>
+                        <FooterLink to="/terms-and-conditions">Terms</FooterLink>
+                        <FooterLink to="/refund-policy">Refund</FooterLink>
+                        <FooterLink to="/tools/emi-calculator">EMI</FooterLink>
+                        <FooterLink to="/contact">Contact</FooterLink>
+                    </div>
+                </div>
 
-    const FooterItem = ({ to, children }) => (
-        <li>
-            <Link to={to} className="block text-sm text-[var(--text-secondary)] hover:text-[var(--color-brand-hover)] transition">
-                {children}
-            </Link>
-        </li>
-    );
-
-    const IconBubble = ({ icon }) => (
-        <div className="h-8 w-8 rounded-full border border-[var(--border-color)] flex items-center justify-center hover:bg-[var(--bg-main)] cursor-pointer text-[var(--text-secondary)] hover:text-[var(--color-brand)]">
-            <FontAwesomeIcon icon={icon} className="text-sm" />
-        </div>
-    );
-
-    const TrustBadge = ({ icon, label }) => (
-        <div className="flex items-center gap-3 text-base md:text-lg">
-            <div className="h-11 w-11 rounded-full border border-[var(--color-brand)] bg-[var(--bg-main)] flex items-center justify-center">
-                <FontAwesomeIcon icon={icon} className="text-[var(--color-brand)] text-xl" />
             </div>
-            <span className="font-semibold">{label}</span>
-        </div>
+        </footer>
     );
+};
 
-    const FooterLink = ({ children, to }) => {
-        if (to) {
-            return (
-                <Link to={to} className="hover:text-[var(--color-brand-hover)]">
-                    {children}
-                </Link>
-            );
-        }
-        return <button className="hover:text-[var(--color-brand-hover)]">{children}</button>;
-    };
+/* ---------------- HELPERS ---------------- */
 
-    const Divider = () => <span className="hidden md:inline text-[var(--border-color)]">|</span>;
+const FooterColumn = ({ title, children }) => (
+    <div>
+        <h4 className="text-(--color-brand) font-semibold mb-3">{title}</h4>
+        <ul className="space-y-2">{children}</ul>
+    </div>
+);
+
+const FooterItem = ({ to = "#", children }) => (
+    <li>
+        <Link to={to} className="hover:text-(--color-brand-hover)">
+            {children}
+        </Link>
+    </li>
+);
+
+const IconBubble = ({ icon }) => (
+    <div className="h-8 w-8 rounded-full border border-(--border-color) flex items-center justify-center hover:bg-(--bg-main)">
+        <FontAwesomeIcon icon={icon} />
+    </div>
+);
+
+const TrustBadge = ({ icon, label }) => (
+    <div className="flex items-center gap-3">
+        <div className="h-11 w-11 rounded-full border border-(--color-brand) flex items-center justify-center">
+            <FontAwesomeIcon icon={icon} className="text-(--color-brand) text-xl" />
+        </div>
+        <span className="font-semibold">{label}</span>
+    </div>
+);
+
+const Divider = () => (
+    <div className="hidden md:block h-8 w-px bg-(--color-brand)" />
+);
+
+const FooterLink = ({ to, children }) => (
+    <Link to={to} className="hover:text-(--color-brand-hover)">
+        {children}
+    </Link>
+);
 
 export default Footer;
