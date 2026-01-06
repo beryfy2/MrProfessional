@@ -33,18 +33,15 @@ export default function AboutUs() {
     const text = `
     Who We Are.
 
-    PU Professional Utilities Private Limited is the advisor, guide, and facilitator
-    to every entrepreneur looking to start and manage a business in India.
-
-    We are the first point of contact for startups, handholding them from the day
-    they start their business and at every step throughout their entrepreneurship journey.
-
-    We are a technology-enabled company that facilitates startups and established businesses
-    by helping entrepreneurs with professional services at the most affordable price in the market.
-
-    Professional Utilities promotes startup environment wellbeing and allows entrepreneurs
-    to have more liberty in using their capital as per their business needs,
-    while saving money on professional services to comply with business laws.
+    Mr.Professional is a professional services firm started by M/s Aaramo Private Limited, 
+backed by a team of Chartered Accountants, Company Secretaries, Cost Accountants, 
+Advocates, and IIM-trained professionals. 
+The firm provides personalized services across India in tax preparation, accounting, 
+business setup, startup registration, licensing, compliance, legal support, tax planning and 
+management, payroll and labour law services, and protection and enforcement of 
+Intellectual Property Rights (IPR). 
+Mr.Professional describes itself as a young and energetic team focused on supporting 
+entrepreneurs and strengthening the Indian startup ecosystem.
     `;
 
     const utterance = new SpeechSynthesisUtterance(text);
@@ -59,7 +56,7 @@ export default function AboutUs() {
     );
 
     if (preferredVoice) {
-      utterance.voice = preferredVoice;
+      utterance.voice = preferredVoice; 
     }
 
     window.speechSynthesis.speak(utterance);
@@ -121,7 +118,7 @@ export default function AboutUs() {
         <AnimatedShapes count={7} />
         <div className="about-hero-inner">
           <div className="about-hero-left">
-            <h1>Professional Utilities</h1>
+            <h1>Mr.Professional</h1>
             <p className="subtitle">Your one-stop shop for professional services in India</p>
           </div>
 
@@ -152,16 +149,21 @@ export default function AboutUs() {
                 <div className="who-underline" />
 
                 <p className="who-paragraph">
+<<<<<<< HEAD
                   Mr Professional is the advisor, guide, and facilitator to every entrepreneur looking to start
                   and manage a business in India. We are the first point of contact for startups whom we handhold from the day
                   they start their business and at every step of the way throughout their entrepreneurship journey.
+=======
+                  Mr.Professional is a professional services firm started by M/s Aaramo Private Limited,
+  backed by a team of Chartered Accountants, Company Secretaries, Cost Accountants,
+  Advocates, and IIM-trained professionals.
+>>>>>>> e88dc536f529d97d1923309b21fa3712023198f8
                 </p>
 
                 <p className="who-paragraph" style={{ marginTop: 28 }}>
-                  We are a technology-enabled company that facilitates startups and established businesses by helping entrepreneurs
-                  with professional services at the most affordable price in the market. Professional Utilities promotes startup
-                  environment wellbeing and allows entrepreneurs to have more liberty in using their capital as per their business
-                  needs while saving money on professional services to comply with business laws.
+                  The firm provides personalized services across India in tax preparation, accounting,
+  business setup, startup registration, licensing, compliance, legal support, tax planning,
+  payroll and labour law services, and Intellectual Property Rights (IPR) protection.
                 </p>
               </div>
 
