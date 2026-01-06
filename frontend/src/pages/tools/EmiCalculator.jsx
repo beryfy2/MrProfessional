@@ -323,7 +323,7 @@ export default function EmiCalculator() {
     </h2>
 
     <p className="formula-intro">
-      There is a specific formula that Professional Utilities uses to compute
+      There is a specific formula that Mr Professional uses to compute
       the EMI amount for a loan.
     </p>
 

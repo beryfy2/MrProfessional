@@ -370,7 +370,7 @@ const PartnersSignup = () => {
                         <div className="text-center">
                             <div className="text-yellow-400 text-4xl mb-4">"</div>
                             <p className="text-lg text-gray-700 italic mb-6">
-                                Partnering with Professional Utilities has been a game-changer for my practice. 
+                                Partnering with Mr Professional has been a game-changer for my practice. 
                                 Their support and resources have helped me serve my clients better and grow my business.
                             </p>
                             <div className="font-semibold text-gray-900">Rahul Sharma</div>

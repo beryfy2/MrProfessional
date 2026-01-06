@@ -31,7 +31,7 @@ const CATEGORIES = [
         label: "Start Business",
         icon: faRocket,
         question: "Starting A New Business?",
-        subtitle: "Incorporate your business with Professional Utilities:",
+        subtitle: "Incorporate your business with Mr Professional:",
         image: startBusinessImg,
         services: [
             "Private Limited Company",
@@ -164,8 +164,7 @@ const SolutionSection = () => {
                         One-Stop Corporate Solution
                     </h2>
                     <p className="mt-3 text-[var(--text-secondary)] max-w-3xl mx-auto">
-                        Startup or an established business, you'll find Professional
-                        Utilities services{" "}
+                        Startup or an established business, you'll find Mr Professional services{" "}
                         <span className="text-[var(--color-brand)] font-semibold">fast</span>,{" "}
                         <span className="text-[var(--color-brand)] font-semibold">affordable</span> and{" "}
                         <span className="text-[var(--color-brand)] font-semibold">hassle-free</span>.

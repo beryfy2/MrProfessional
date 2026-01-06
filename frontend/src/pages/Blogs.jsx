@@ -79,7 +79,7 @@ export default function Blogs() {
           {/* LEFT */}
           <div className="blog-hero-left">
             <h1>
-              Professional Utilities Blog: <br />
+              Mr Professional Blog: <br />
               Business & Compliance Tips
             </h1>
 

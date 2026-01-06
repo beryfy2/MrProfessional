@@ -26,7 +26,7 @@ const WhyCompanySection = () => {
                     </h2>
 
                     <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
-                        At Professional Utilities, we leverage our industry knowledge and
+                        At Mr Professional, we leverage our industry knowledge and
                         expertise to help businesses navigate complex regulations, minimize
                         risks, and optimize operations for maximum efficiency and
                         profitability.<br />{" "}

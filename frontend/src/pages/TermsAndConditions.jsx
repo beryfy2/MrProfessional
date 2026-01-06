@@ -51,7 +51,7 @@ const TermsAndConditions = () => {
 
                         <h3 className="text-xl font-semibold text-[var(--text-primary)] mt-6 mb-3">6. Limitation of Liability</h3>
                         <p className="text-[var(--text-secondary)] mb-4">
-                            Professional Utilities shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services.
+                            Mr Professional shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services.
                         </p>
 
                         <h3 className="text-xl font-semibold text-[var(--text-primary)] mt-6 mb-3">7. Governing Law</h3>

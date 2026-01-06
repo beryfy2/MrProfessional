@@ -4,7 +4,7 @@ const TEXTS = [
   "A FinTech platform that understands your need",
   "All professional services you need to run your business",
   "There’s a smarter way to start and manage a business",
-  "Your business powered by Professional Utilities",
+  "Your business powered by Mr Professional",
 ];
 
 export default function TypingBanner() {

@@ -60,7 +60,7 @@ const TESTIMONIALS = [
         id: 3,
         name: "Jay Prakash Maurya",
         avatar: "/images/testimonials/jay.png",
-        text: `Professional Utilities is fully professional in their work. Rates are too low and genuine. Services and satisfaction are high so I highly recommended Professional Utilities.`,
+        text: `Mr Professional is fully professional in their work. Rates are too low and genuine. Services and satisfaction are high so I highly recommended Mr Professional.`,
     },
 ];
 
@@ -271,7 +271,7 @@ const Footer = () => {
 
                         <div className="border-t border-[var(--border-color)] pt-4 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] md:text-xs text-[var(--text-secondary)]">
                             <div className="flex items-center gap-3">
-                                <span>© 2025 PU Professional Utilities Pvt Ltd - All Rights Reserved.</span>
+                                <span>© 2025 Mr Professional Pvt Ltd - All Rights Reserved.</span>
                             </div>
 
                             <div className="flex flex-wrap items-center gap-4">

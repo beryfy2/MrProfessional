@@ -547,7 +547,7 @@ const Careers = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[var(--text-primary)] mb-4">
-              Why Work at <span className="text-[var(--color-brand)]">Professional Utilities</span>
+              Why Work at <span className="text-[var(--color-brand)]">Mr Professional</span>
             </h2>
             <div className="w-20 h-1 bg-[var(--color-brand)] mx-auto mb-6"></div>
             <p className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto">

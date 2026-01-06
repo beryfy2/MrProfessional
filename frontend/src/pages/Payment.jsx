@@ -50,7 +50,7 @@ export default function Payment() {
             <h4>Terms & Conditions:</h4>
             <p>
               You agree to share information entered on this page with
-              Professional Utilities (owner of this page) and PhonePe,
+              Mr Professional (owner of this page) and PhonePe,
               adhering to applicable laws.
             </p>
           </div>

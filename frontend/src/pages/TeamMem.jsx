@@ -36,7 +36,7 @@ export default function TeamMem() {
 
           {/* LEFT CONTENT */}
           <div className="team-hero-left">
-            <h1>The Professional Utilities Team</h1>
+            <h1>Mr Professional Team</h1>
             <p>
               Young individuals who are passionate about helping <br />
               entrepreneurs of India

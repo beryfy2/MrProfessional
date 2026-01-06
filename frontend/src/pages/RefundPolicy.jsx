@@ -23,7 +23,7 @@ const RefundPolicy = () => {
                         
                         <div className="space-y-6 text-[var(--text-secondary)]">
                             <p>
-                                At Professional Utilities, we strive to provide the best services to our clients. Please read our refund and cancellation policy carefully.
+                                At Mr Professional, we strive to provide the best services to our clients. Please read our refund and cancellation policy carefully.
                             </p>
 
                             <div>

@@ -75,8 +75,8 @@ const ContactSection = () => {
                             icon="fa-solid fa-location-dot"
                             title="Our Address"
                             lines={[
-                                "XYZ, Xth Floor, ABC House,",
-                                "Nehru Place, New Delhi XXXXXX",
+                                "SF-1, Reliable City Center, Sector-6, Vasundhara",
+                                "Ghaziabad, Uttar Pradesh, India – 201014",
                             ]}
                         />
 
