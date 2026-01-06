@@ -2,29 +2,29 @@ import React from "react";
 
 const VideoConsultBanner = () => {
     return (
-        <section className="py-6 px-4 bg-[var(--bg-main)]">
+        <section className="py-6 px-4 bg-(--bg-main)">
             <div className="max-w-6xl mx-auto">
                 <div className="
                     relative overflow-visible rounded-2xl 
-                    bg-[var(--bg-secondary)] border border-[var(--border-color)]
+                    bg-(--bg-secondary) border border-(--border-color)
                     px-10 py-10
                     shadow-lg
                 ">
                     {/* LEFT TEXT */}
-                    <div className="max-w-xl text-[var(--text-primary)] space-y-4 z-20 relative">
+                    <div className="max-w-xl text-(--text-primary) space-y-4 z-20 relative">
                         <h2 className="text-3xl font-bold">
-                            <span className="text-[var(--color-brand)]">FREE</span>{" "}
-                            <span className="text-[var(--color-brand)]">Video Consultation</span>
+                            <span className="text-(--color-brand)">FREE</span>{" "}
+                            <span className="text-(--color-brand)">Video Consultation</span>
                         </h2>
 
-                        <p className="text-[var(--text-primary)] text-xl font-semibold">
+                        <p className="text-(--text-primary) text-xl font-semibold">
                             Schedule a virtual meeting with an expert
                         </p>
 
                         <button
                             type="button"
                             className="inline-flex items-center justify-center
-                            bg-[var(--color-brand)] hover:opacity-90
+                            bg-(--color-brand) hover:opacity-90
                             text-white font-semibold
                             px-8 py-2.5 rounded-full
                             shadow-lg
