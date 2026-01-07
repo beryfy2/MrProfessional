@@ -12,7 +12,6 @@ import {
     faInstagram,
     faXTwitter,
     faLinkedinIn,
-    faPinterestP,
 } from "@fortawesome/free-brands-svg-icons";
 
 import phonepeImg from "../assets/payments/phonepe.svg";
@@ -151,11 +150,10 @@ const Footer = () => {
                                 Follow us on
                             </p>
                             <div className="flex gap-3 mt-2">
-                                <IconBubble icon={faFacebookF} />
-                                <IconBubble icon={faInstagram} />
-                                <IconBubble icon={faXTwitter} />
-                                <IconBubble icon={faLinkedinIn} />
-                                <IconBubble icon={faPinterestP} />
+                                <a href="https://www.facebook.com/Mr.ProfessionalOfficial#"><IconBubble icon={faFacebookF} /></a>
+                                <a href="https://www.instagram.com/mrprofessional.official/"><IconBubble icon={faInstagram} /></a>
+                                <a href="https://x.com/MrProfe19311696"><IconBubble icon={faXTwitter} /></a>
+                                <a href="https://www.linkedin.com/company/mrprofessionalofficial/"><IconBubble icon={faLinkedinIn} /></a>
                             </div>
                         </div>
 
