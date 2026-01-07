@@ -598,7 +598,7 @@
 
 /* Card text */
 .contact-card p {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;

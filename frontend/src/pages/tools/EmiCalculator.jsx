@@ -94,37 +94,12 @@ const FAQSection = () => {
             </div>
           ))}
         </div>
-
-        {/* RIGHT – EXPERT CARD */}
-        <div className="expert-card">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-            alt="Expert"
-          />
-
-          <h3>Speak Directly to our Expert Today</h3>
-
-          <button>Get in Touch</button>
-
-          <div className="expert-trust">
-            <div>
-              🛡
-              <span>Reliable</span>
-            </div>
-            <div>
-              💰
-              <span>Affordable</span>
-            </div>
-            <div>
-              🤝
-              <span>Assured</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
-};
+}
+      
+        
 
 /* ================= MAIN ================= */
 export default function EmiCalculator() {
@@ -350,7 +325,7 @@ export default function EmiCalculator() {
   </div>
 
   {/* PU Divider */}
-  <div className="pu-divider" />
+
 </section>
 
       {/* ================= REST (UNCHANGED) ================= */}

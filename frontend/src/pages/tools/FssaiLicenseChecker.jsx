@@ -273,7 +273,9 @@ const FssaiLicenseChecker = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">9-14</div>
+                <div className="h-8 min-w-[44px] px-2 flex items-center justify-center rounded-full bg-[var(--color-brand)] text-white text-xs whitespace-nowrap font-bold">9-14
+</div>
+
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Next Six Digits (9th to 14th)</h3>
                     <p className="text-[var(--text-secondary)] text-sm">A unique license number of the food business operator.</p>

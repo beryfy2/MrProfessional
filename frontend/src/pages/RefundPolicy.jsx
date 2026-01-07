@@ -1,82 +1,132 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
+import React from "react";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const RefundPolicy = () => {
-    return (
-        <div className="min-h-screen bg-[var(--bg-main)]">
-            <NavBar />
-            
-            {/* Hero Section */}
-            <div className="bg-[var(--color-brand)] text-white py-16">
-                <div className="container mx-auto px-4">
-                    <h1 className="text-4xl font-bold">Refund & Cancellation Policy</h1>
-                </div>
-            </div>
+  return (
+    <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)]">
+      <NavBar />
 
-            {/* Main Content */}
-            <div className="container mx-auto px-4 py-12 max-w-4xl">
-                <div className="bg-[var(--bg-secondary)] rounded-lg shadow-lg p-8 border border-[var(--border-color)]">
-                    <div className="prose max-w-none">
-                        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Refund & Cancellation Policy</h2>
-                        
-                        <div className="space-y-6 text-[var(--text-secondary)]">
-                            <p>
-                                At Mr Professional, we strive to provide the best services to our clients. Please read our refund and cancellation policy carefully.
-                            </p>
-
-                            <div>
-                                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">1. Refund Policy</h3>
-                                <ul className="list-disc pl-6 space-y-2">
-                                    <li>Refunds are processed as per the terms agreed upon in the service agreement.</li>
-                                    <li>Service fees are non-refundable once the service has been initiated.</li>
-                                    <li>In case of duplicate payment, the excess amount will be refunded within 7-10 working days.</li>
-                                    <li>Refunds will be processed through the original mode of payment.</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">2. Cancellation Policy</h3>
-                                <ul className="list-disc pl-6 space-y-2">
-                                    <li>Service cancellation requests must be made in writing to support@professionalutilities.com</li>
-                                    <li>Cancellation requests will be processed within 2-3 working days.</li>
-                                    <li>No cancellation is possible once the service has been delivered.</li>
-                                    <li>Any government fees or third-party charges already paid are non-refundable.</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">3. Processing Time</h3>
-                                <p>
-                                    Refunds are typically processed within 7-10 working days from the date of approval. The time taken to reflect in your account may vary depending on your bank.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">4. Contact Us</h3>
-                                <p>
-                                    For any queries regarding refunds or cancellations, please contact us at:
-                                </p>
-                                <p className="mt-2">
-                                    Email: support@professionalutilities.com<br />
-                                    Phone: +91 XXXXXXXXXX
-                                </p>
-                            </div>
-
-                            <div className="pt-4 border-t border-[var(--border-color)]">
-                                <p className="text-sm text-[var(--text-secondary)]">
-                                    Last updated: December 26, 2025
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <Footer />
+      {/* Header */}
+      <section className="bg-[var(--color-brand)] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl font-bold">Refund Policy</h1>
         </div>
-    );
+      </section>
+
+      {/* Content */}
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-8 space-y-8">
+
+          {/* Intro */}
+          <p className="text-[var(--text-secondary)]">
+            This Refund Policy outlines the terms and conditions under which
+            refunds may be granted by <strong>Mr. Professional</strong>.
+            By availing any of our incubation, compliance, legal, taxation,
+            accounting, or advisory services, you agree to this policy.
+          </p>
+
+          {/* No Refund */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">1. No Refund on Completed or Initiated Services</h2>
+            <p className="text-[var(--text-secondary)]">
+              Once a service request has been initiated, processed, or submitted
+              to any government authority or third-party platform, 
+              <strong> no refunds shall be provided</strong>.
+            </p>
+          </div>
+
+          {/* Eligibility */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">2. Eligibility for Refund</h2>
+            <p className="text-[var(--text-secondary)]">
+              Refunds may be considered only under the following circumstances:
+            </p>
+            <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+              <li>Duplicate payment made for the same service</li>
+              <li>Payment deducted but service not initiated</li>
+              <li>Service cancelled before any work or documentation begins</li>
+            </ul>
+          </div>
+
+          {/* Non-refundable */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">3. Non-Refundable Items</h2>
+            <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+              <li>Government fees, statutory charges, or filing fees</li>
+              <li>Third-party service charges</li>
+              <li>Consultation fees once consultation is delivered</li>
+              <li>Incubation or mentorship services already commenced</li>
+            </ul>
+          </div>
+
+          {/* Partial Refund */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">4. Partial Refunds</h2>
+            <p className="text-[var(--text-secondary)]">
+              If a service is partially completed, Mr. Professional reserves the
+              right to deduct charges proportional to the work already performed.
+              Any applicable refund will be processed after such deductions.
+            </p>
+          </div>
+
+          {/* Timeline */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">5. Refund Processing Timeline</h2>
+            <p className="text-[var(--text-secondary)]">
+              Approved refunds will be processed within 
+              <strong> 7–10 working days</strong> from the date of approval and
+              credited back to the original mode of payment.
+            </p>
+          </div>
+
+          {/* Cancellation */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">6. Service Cancellation</h2>
+            <p className="text-[var(--text-secondary)]">
+              Cancellation requests must be submitted in writing via email.
+              Verbal or telephonic cancellation requests will not be considered valid.
+            </p>
+          </div>
+
+          {/* Discretion */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">7. Discretion of Mr. Professional</h2>
+            <p className="text-[var(--text-secondary)]">
+              All refund requests are subject to internal review. 
+              The final decision regarding refunds shall rest solely with 
+              <strong> Mr. Professional</strong>.
+            </p>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">8. Legal Jurisdiction</h2>
+            <p className="text-[var(--text-secondary)]">
+              This Refund Policy shall be governed by and interpreted in
+              accordance with the laws of India. Any disputes shall be subject
+              to the exclusive jurisdiction of Indian courts.
+            </p>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">9. Contact Us</h2>
+            <p className="text-[var(--text-secondary)]">
+              For refund-related queries, contact us at:
+              <br /><br />
+              📞 +91 88009 32090, +91 94157 18705 <br />
+              🕘 Mon – Sat, 9:00 AM – 6:30 PM <br />
+              📧 info@mrprofessional.co.in
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
 };
 
 export default RefundPolicy;

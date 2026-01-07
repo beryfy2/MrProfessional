@@ -1,98 +1,147 @@
-import React from 'react';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
+import React from "react";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const PrivacyPolicy = () => {
-    return (
-        <div className="min-h-screen bg-[var(--bg-main)]">
-            <NavBar />
-            
-            {/* Hero Section */}
-            <div className="bg-[var(--color-brand)] text-white py-16">
-                <div className="container mx-auto px-4">
-                    <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
-                </div>
-            </div>
+  return (
+    <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)]">
+      <NavBar />
 
-            {/* Main Content */}
-            <div className="container mx-auto px-4 py-12 max-w-14xl">
-                <div className="bg-[var(--bg-secondary)] rounded-lg shadow-lg p-8 border border-[var(--border-color)]">
-                    <div className="prose max-w-none">
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Our Commitment to Privacy</h2>
-                            <p className="text-[var(--text-secondary)] mb-4">
-                                We provide this Privacy Policy to make you aware of our privacy practices and of the choices you can make about the way your information is collected and used. This Privacy Policy describes what information we may collect about you; how we use your information; how we protect it; and what choices you have about how that information is used.
-                            </p>
-                            <p className="text-[var(--text-secondary)]">
-                                We may revise any portion of the Site, including this Privacy Policy, from time to time to keep up with technical innovation, post new Site content, and for other reasons. All revisions to this Privacy Policy will be effective upon notice given by means of posting the revised Privacy Policy on the Site, with a new effective date posted at the top.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Information We Collect from Website Users</h2>
-                            <p className="text-[var(--text-secondary)] mb-4">
-                                "Personal Information" includes information that can be used to identify a unique individual, such as a name, physical address, e-mail address, or telephone number. We collect Personal Information when you register for our news and events, or request a download of our case studies or white papers. We also collect Personal Information when you email or otherwise contact us through or regarding the Site.
-                            </p>
-                            <p className="text-[var(--text-secondary)]">
-                                We may also automatically collect information that includes Personal Information from all Site visitors, even if he or she does not register for the services discussed above. For example, we may use "cookies" or other technology to collect information about your use of the Site or emails we send to you.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Use of the Information We Collect from Website Users</h2>
-                            <p className="text-[var(--text-secondary)] mb-4">
-                                We may use your Personal Information internally for our own purposes, including to manage and maintain the Site, to provide or improve our services to you, to analyze your use of the Site, to study trends regarding use of the Site, to comply with our contractual obligations, or to fulfill other legitimate interests.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Third Parties</h2>
-                            <p className="text-[var(--text-secondary)] mb-4">
-                                Your Personal Information will not be sold, disclosed, or made available to any third party without your permission except as set forth in this Privacy Policy. We do not share your Personal Information with third parties for direct marketing purposes.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Cookies and Do Not Track</h2>
-                            <p className="text-[var(--text-secondary)] mb-4">
-                                Cookies are unique identifiers sent to your device by a web server and stored on your device's storage. A cookie allows many sites to identify you upon each visit with a personalized message before you actively login or to track a returning user.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Security</h2>
-                            <p className="text-[var(--text-secondary)] mb-4">
-                                We use commercially reasonable administrative, physical, and technical measures that are reasonably designed to safeguard your personal information and help protect it from unauthorized access. However, we cannot guarantee the security of your information since no security can be 100% effective.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Our Commitment to Children's Privacy</h2>
-                            <p className="text-[var(--text-secondary)]">
-                                We do not knowingly collect or maintain personally identifiable information from persons under 13 years of age, and no part of our website is directed to persons under 13. If you are under 13 years of age, then please do not use or access this website at any time or in any manner.
-                            </p>
-                        </section>
-
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Contact Us</h2>
-                            <p className="text-[var(--text-secondary)]">
-                                If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
-                            </p>
-                            <p className="text-[var(--text-secondary)] mt-2">
-                                Email: info@professionalutilities.com<br />
-                                Phone: +1 (800) 123-4567
-                            </p>
-                        </section>
-                    </div>
-                </div>
-            </div>
-
-            {/* Footer */}
-            <div className="bg-[var(--bg-main)] text-white">
-                <Footer />
-            </div>
+      {/* Header */}
+      <section className="bg-[var(--color-brand)] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl font-bold">Privacy Policy</h1>
         </div>
-    );
+      </section>
+
+      {/* Content */}
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-8 space-y-8">
+
+          {/* Intro */}
+          <p className="text-[var(--text-secondary)]">
+            Mr. Professional (“we”, “our”, “us”) respects your privacy and is
+            committed to protecting your personal and business information.
+            This Privacy Policy explains how we collect, use, disclose, and
+            safeguard your information when you visit our website or use our
+            incubation, compliance, legal, accounting, taxation, and advisory
+            services.
+          </p>
+
+          {/* Info Collection */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">1. Information We Collect</h2>
+            <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+              <li>Personal details such as name, email address, phone number</li>
+              <li>Business details including company name, address, and documents</li>
+              <li>Identity and compliance documents (PAN, Aadhaar, GST, etc.)</li>
+              <li>Payment and transaction-related information</li>
+              <li>Website usage data such as IP address, browser type, cookies</li>
+            </ul>
+          </div>
+
+          {/* Usage */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">2. How We Use Your Information</h2>
+            <p className="text-[var(--text-secondary)]">
+              We use the collected information to:
+            </p>
+            <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+              <li>Provide incubation, registration, compliance, and advisory services</li>
+              <li>Process payments and fulfill contractual obligations</li>
+              <li>Communicate service updates and regulatory requirements</li>
+              <li>Improve our website, services, and customer experience</li>
+              <li>Comply with legal and regulatory obligations</li>
+            </ul>
+          </div>
+
+          {/* Sharing */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">3. Information Sharing & Disclosure</h2>
+            <p className="text-[var(--text-secondary)]">
+              We do not sell or rent your personal information. Information may
+              be shared only with:
+            </p>
+            <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
+              <li>Government authorities for statutory filings</li>
+              <li>Professional partners (CA, CS, Lawyers) strictly for service delivery</li>
+              <li>Technology and payment service providers</li>
+              <li>Legal authorities when required by law</li>
+            </ul>
+          </div>
+
+          {/* Cookies */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">4. Cookies & Tracking Technologies</h2>
+            <p className="text-[var(--text-secondary)]">
+              Our website may use cookies to enhance user experience, analyze
+              traffic, and improve functionality. You may choose to disable
+              cookies through your browser settings.
+            </p>
+          </div>
+
+          {/* Security */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">5. Data Security</h2>
+            <p className="text-[var(--text-secondary)]">
+              We implement reasonable administrative, technical, and physical
+              safeguards to protect your information. However, no electronic
+              transmission over the internet is completely secure.
+            </p>
+          </div>
+
+          {/* Retention */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">6. Data Retention</h2>
+            <p className="text-[var(--text-secondary)]">
+              We retain personal information only for as long as required to
+              fulfill legal, contractual, and business obligations.
+            </p>
+          </div>
+
+          {/* Rights */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">7. Your Rights</h2>
+            <p className="text-[var(--text-secondary)]">
+              You have the right to access, update, or request deletion of your
+              personal information, subject to legal requirements.
+            </p>
+          </div>
+
+          {/* Children */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">8. Children’s Privacy</h2>
+            <p className="text-[var(--text-secondary)]">
+              Our services are not intended for individuals under 18 years of age.
+              We do not knowingly collect data from minors.
+            </p>
+          </div>
+
+          {/* Updates */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">9. Policy Updates</h2>
+            <p className="text-[var(--text-secondary)]">
+              We may update this Privacy Policy from time to time. Any changes
+              will be posted on this page with immediate effect.
+            </p>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">10. Contact Us</h2>
+            <p className="text-[var(--text-secondary)]">
+              📞 +91 88009 32090, +91 94157 18705 <br />
+              🕘 Mon – Sat, 9:00 AM – 6:30 PM <br />
+              📧 info@mrprofessional.co.in
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
 };
 
 export default PrivacyPolicy;

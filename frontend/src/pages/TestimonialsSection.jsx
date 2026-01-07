@@ -21,7 +21,7 @@ const TESTIMONIALS = [
         platform: "Google",
         rating: 5,
         initials: "A",
-        text: `Thank you so much Professional Utilities team for their wonderful help. I really appreciate your efforts in getting start business. Pvt Ltd company registration was smooth yet quick.`,
+        text: `Thank you so much Mr Professional team for their wonderful help. I really appreciate your efforts in getting start business. Pvt Ltd company registration was smooth yet quick.`,
     },
     {
         id: 3,
