@@ -313,24 +313,6 @@
    PU DIVIDER (TOP & BOTTOM)
 ===================================================== */
 
-.pu-divider {
-  position: relative;
-  border-top: 1px solid var(--border-color);
-  margin: 60px 0;
-}
-
-.pu-divider::after {
-  content: "PU";
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-main);
-  padding: 0 14px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
 
 /* ================= DONUT ================= */
 
