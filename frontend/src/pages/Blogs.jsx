@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../style/blog.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
 
 const API_BASE =
   import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
@@ -123,9 +126,16 @@ export default function Blogs() {
             placeholder="Search our knowledge base"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+            }}
           />
-          <button>🔍</button>
+
+          <button type="button" aria-label="Search">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
         </div>
+
 
         <div className="blog-wrapper">
           {/* ================= SIDEBAR ================= */}

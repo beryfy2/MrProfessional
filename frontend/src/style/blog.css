@@ -342,3 +342,37 @@ body {
     height: 48px;
   }
 }
+.blog-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 8px 12px;
+  max-width: 420px;
+  margin-bottom: 24px;
+}
+
+.blog-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #454647;
+  background: transparent;
+}
+
+.blog-search button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 16px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.blog-search button:hover {
+  color: #111827;
+
+}
