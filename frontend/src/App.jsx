@@ -9,7 +9,7 @@ import TestimonialsSection from './pages/TestimonialsSection'
 import TypingBanner from './components/TypingBanner'
 import NavBar from './components/NavBar'
 import Team from './components/Team'
-import VideoConsultBanner from './components/VideoConsultBanner'
+import Map from './components/Map'
 import WhyUs from './pages/WhyUs'
 import Footer from './components/Footer'
 import Payment from './pages/Payment';
@@ -49,7 +49,7 @@ const Home = () => (
     <TrustedBy />
     <MediaCoverage />
     
-    <VideoConsultBanner />
+    <Map />
     <WhyUs />
 
     <Footer />

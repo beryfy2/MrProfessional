@@ -53,7 +53,7 @@ const Team = () => {
         {/* Left Content Side */}
         <div className="team-content">
           <h2 className="team-title">
-            Meet the <span className="team-highlight">Professional Utilities</span> team
+            Meet the <span className="team-highlight"> Mr.Professional</span> team
           </h2>
 
           <p className="team-description">
@@ -61,8 +61,8 @@ const Team = () => {
           </p>
 
           <p className="team-long-description">
-            Mr. Professional is a young and energetic team focused on supporting
-            entrepreneurs and strengthening the Indian startup ecosystem.
+           Mr.Professional is a young and energetic team focused on supporting 
+entrepreneurs and strengthening the Indian startup ecosystem. 
           </p>
 
           <div className="team-buttons">
