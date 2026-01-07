@@ -51,7 +51,7 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
             {/* Socials media */}
             <div className="hidden md:flex items-center gap-4 text-lg">
   <a
-    href="https://wa.me/"
+    href="https://wa.me/8800932090"
     target="_blank"
     rel="noopener noreferrer"
     aria-label="WhatsApp"

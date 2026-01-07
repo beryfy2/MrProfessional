@@ -26,14 +26,14 @@ export default function HeroPage() {
 
             <div className="fixed right-6 bottom-6 z-999 flex flex-col gap-4">
                 <a
-                    href="tel:9958881763"
+                    href="tel:88009 32090"
                     className="h-14 w-14 rounded-full bg-[var(--color-brand)] flex items-center justify-center text-white shadow-lg hover:scale-110 transition"
                 >
                     <FontAwesomeIcon icon={faPhone} />
                 </a>
 
                 <a
-                    href="https://wa.me/XXXXXXXXXX"
+                    href="https://wa.me/8800932090"
                     className="h-14 w-14 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg hover:scale-110 transition"
                 >
                     <FontAwesomeIcon icon={faWhatsapp} />
