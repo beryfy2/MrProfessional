@@ -418,7 +418,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+
         </div>
       </div>
 
@@ -490,7 +490,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+
         </div>
       </div>
 
@@ -527,7 +527,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+          
         </div>
       </div>
 
@@ -570,7 +570,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+          
         </div>
       </div>
 
@@ -637,7 +637,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+          
         </div>
       </div>
 
@@ -720,7 +720,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+        
         </div>
       </div>
 

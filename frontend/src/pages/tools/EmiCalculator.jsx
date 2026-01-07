@@ -313,8 +313,7 @@ export default function EmiCalculator() {
 
 {/* ================= EMI FORMULA SECTION ================= */}
 <section className="emi-formula-section">
-  {/* PU Divider */}
-  <div className="pu-divider" />
+ 
 
   <div className="formula-container">
     <h2>
