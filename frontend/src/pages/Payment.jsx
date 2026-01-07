@@ -34,7 +34,7 @@ export default function Payment() {
           <div className="brand">
             <img src={puLogo} alt="mrpro" />
             <h2>
-              mrpro <br /> Utilities
+             Mr Professional <br /> 
             </h2>
           </div>
 
@@ -42,8 +42,9 @@ export default function Payment() {
 
           <div className="contact">
             <h4>Contact Us:</h4>
-            <p>📧 support@XYZ.com</p>
-            <p>📞 +91XXXXXXXXXX</p>
+            <p>📧 info@mrprofessional.co.in</p>
+            <p>📞 +91-8800932090</p>
+            <p>📞 +91-94157 18705</p>
           </div>
 
           <div className="terms">
