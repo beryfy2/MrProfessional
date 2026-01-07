@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../style/payment.css";
-import puLogo from "../assets/images/pu-logo.png"; // use your PU logo here
+// use uploaded logo from backend uploads
+const API_HOST = (import.meta.env.VITE_API_BASE || "http://localhost:5000").replace(/\/api$/, "");
 
 export default function Payment() {
   const [form, setForm] = useState({
@@ -32,7 +33,7 @@ export default function Payment() {
           </h1>
 
           <div className="brand">
-            <img src={puLogo} alt="mrpro" />
+            <img src={`${API_HOST}/uploads/logo.png`} alt="Mr Professional" />
             <h2>
              Mr Professional <br /> 
             </h2>
