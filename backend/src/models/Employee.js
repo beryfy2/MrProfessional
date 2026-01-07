@@ -27,7 +27,11 @@ const EmployeeSchema = new mongoose.Schema(
     salary: { type: String },
     employeeId: { type: String },
     employmentType: { type: String },
-    workLocation: { type: String }
+    workLocation: { type: String },
+    educationLevel: { type: String },
+    degree: { type: String },
+    institution: { type: String },
+    graduationYear: { type: String }
   },
   { timestamps: true }
 );

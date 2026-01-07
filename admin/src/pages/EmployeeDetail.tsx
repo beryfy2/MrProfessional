@@ -19,12 +19,6 @@ export default function EmployeeDetail() {
           designation: '',
           department: '',
           phone: '',
-          address: '',
-          street: '',
-          city: '',
-          state: '',
-          zip: '',
-          country: '',
           gender: '',
           bloodGroup: '',
           maritalStatus: '',
@@ -35,7 +29,11 @@ export default function EmployeeDetail() {
           salary: '',
           employeeId: '',
           employmentType: '',
-          workLocation: ''
+          workLocation: '',
+          educationLevel: '',
+          degree: '',
+          institution: '',
+          graduationYear: ''
         } as Employee)
       : null
   );
@@ -352,55 +350,46 @@ export default function EmployeeDetail() {
           />
         </div>
 
-        {/* ADDRESS */}
+        {/* EDUCATION */}
         <div className="card" style={{ display: 'grid', gap: 12 }}>
           <div style={{ fontSize: 16, fontWeight: 600 }}>
-            Address
+            Education
           </div>
-
-          <input
-            className="input"
-            placeholder="Address Line"
-            value={emp.address || ''}
-            onChange={(e) => setEmp({ ...emp, address: e.target.value })}
-          />
-
+          <div className="grid-2">
+            <select
+              className="input"
+              value={emp.educationLevel || ''}
+              onChange={(e) => setEmp({ ...emp, educationLevel: e.target.value })}
+            >
+              <option value="">Select Education Level</option>
+              <option value="High School">High School</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Bachelor's">Bachelor's</option>
+              <option value="Master's">Master's</option>
+              <option value="Doctorate">Doctorate</option>
+              <option value="Other">Other</option>
+            </select>
+            <input
+              className="input"
+              placeholder="Degree"
+              value={emp.degree || ''}
+              onChange={(e) => setEmp({ ...emp, degree: e.target.value })}
+            />
+          </div>
           <div className="grid-2">
             <input
               className="input"
-              placeholder="Street"
-              value={emp.street || ''}
-              onChange={(e) => setEmp({ ...emp, street: e.target.value })}
+              placeholder="Institution"
+              value={emp.institution || ''}
+              onChange={(e) => setEmp({ ...emp, institution: e.target.value })}
             />
             <input
               className="input"
-              placeholder="City"
-              value={emp.city || ''}
-              onChange={(e) => setEmp({ ...emp, city: e.target.value })}
+              placeholder="Graduation Year"
+              value={emp.graduationYear || ''}
+              onChange={(e) => setEmp({ ...emp, graduationYear: e.target.value })}
             />
           </div>
-
-          <div className="grid-2">
-            <input
-              className="input"
-              placeholder="State"
-              value={emp.state || ''}
-              onChange={(e) => setEmp({ ...emp, state: e.target.value })}
-            />
-            <input
-              className="input"
-              placeholder="ZIP / Postal Code"
-              value={emp.zip || ''}
-              onChange={(e) => setEmp({ ...emp, zip: e.target.value })}
-            />
-          </div>
-
-          <input
-            className="input"
-            placeholder="Country"
-            value={emp.country || ''}
-            onChange={(e) => setEmp({ ...emp, country: e.target.value })}
-          />
         </div>
 
         {/* SAVE */}

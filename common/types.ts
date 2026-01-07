@@ -74,6 +74,10 @@ export type Employee = {
   employeeId?: string;
   employmentType?: string;
   workLocation?: string;
+  educationLevel?: string;
+  degree?: string;
+  institution?: string;
+  graduationYear?: string;
 };
 
 export type Enquiry = {
