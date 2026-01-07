@@ -250,11 +250,10 @@ const Footer = () => {
                 <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row justify-between items-center text-xs">
                     <span>© 2025 Mr Professional Pvt Ltd. All Rights Reserved.</span>
                     <div className="flex gap-4">
-                        <FooterLink to="/privacy-policy">Privacy</FooterLink>
-                        <FooterLink to="/terms-and-conditions">Terms</FooterLink>
-                        <FooterLink to="/refund-policy">Refund</FooterLink>
-                        <FooterLink to="/tools/emi-calculator">EMI</FooterLink>
-                        <FooterLink to="/contact">Contact</FooterLink>
+                        <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
+                        <FooterLink to="/terms-and-conditions">Terms & Conditions</FooterLink>
+                        <FooterLink to="/refund-policy">Refund Policy</FooterLink>
+
                     </div>
                 </div>
 
