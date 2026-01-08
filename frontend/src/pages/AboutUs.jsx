@@ -140,7 +140,7 @@ entrepreneurs and strengthening the Indian startup ecosystem.
         </div>
       </header>
 
-      <main className="bg-[var(--bg-main)] text-[var(--text-primary)] py-12 px-7 min-h-[60vh]">
+      <main className="bg-(--bg-main) text-(--text-primary) py-12 px-7 min-h-[60vh]">
         <div className="max-w-[1200px] mx-auto">
           <section className="who-we-are">
             <div className="who-inner">

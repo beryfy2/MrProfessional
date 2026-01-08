@@ -3,7 +3,7 @@
    ===================================================== */
 
 .aboutUs-page {
-  
+
   width: 100%;
   overflow-x: hidden;
 }
@@ -19,7 +19,7 @@
   overflow: hidden;
 
   min-height: 400px;
-  padding-top: var(--navbar-height);
+  margin-top: 63px;
   padding-bottom: 140px;
 }
 
@@ -115,22 +115,59 @@
   bottom: -20%;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   animation: floatUpCustom 20s linear infinite;
 }
 
 @keyframes floatUpCustom {
-  0% { transform: translateY(0) rotate(-12deg); opacity: 0; }
-  10% { opacity: 0.06; }
-  90% { opacity: 0.06; }
-  100% { transform: translateY(-150vh) rotate(-12deg); opacity: 0; }
+  0% {
+    transform: translateY(0) rotate(-12deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.06;
+  }
+
+  90% {
+    opacity: 0.06;
+  }
+
+  100% {
+    transform: translateY(-150vh) rotate(-12deg);
+    opacity: 0;
+  }
 }
 
-.float.f1 { width: 220px; height: 220px; left: 6%; }
-.float.f2 { width: 140px; height: 140px; left: 26%; }
-.float.f3 { width: 180px; height: 180px; left: 46%; }
-.float.f4 { width: 100px; height: 100px; left: 66%; }
-.float.f5 { width: 130px; height: 130px; left: 82%; }
+.float.f1 {
+  width: 220px;
+  height: 220px;
+  left: 6%;
+}
+
+.float.f2 {
+  width: 140px;
+  height: 140px;
+  left: 26%;
+}
+
+.float.f3 {
+  width: 180px;
+  height: 180px;
+  left: 46%;
+}
+
+.float.f4 {
+  width: 100px;
+  height: 100px;
+  left: 66%;
+}
+
+.float.f5 {
+  width: 130px;
+  height: 130px;
+  left: 82%;
+}
 
 /* =====================================================
    WHO WE ARE SECTION
@@ -177,7 +214,7 @@
 .who-right img {
   max-width: 680px;
   border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* Play button */
@@ -195,7 +232,7 @@
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 8px 26px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.18);
 }
 
 .play-triangle {
@@ -229,7 +266,7 @@
   padding: 34px 22px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 30px 80px rgba(13,45,72,0.06);
+  box-shadow: 0 30px 80px rgba(13, 45, 72, 0.06);
   border: 1px solid var(--border-color);
 }
 
@@ -270,7 +307,7 @@
   padding: 44px 34px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 30px 80px rgba(13,45,72,0.06);
+  box-shadow: 0 30px 80px rgba(13, 45, 72, 0.06);
   border: 1px solid var(--border-color);
 }
 
@@ -318,6 +355,7 @@
 }
 
 @media (max-width: 600px) {
+
   .stats-grid,
   .values-grid {
     grid-template-columns: 1fr;
@@ -328,6 +366,7 @@
     padding-bottom: 100px;
   }
 }
+
 /* ================================
    TEAM SECTION
 ================================ */
@@ -376,7 +415,7 @@
 }
 
 .btn-blue {
-  background: #3B3C99 ;
+  background: #3B3C99;
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   padding: 14px 26px;
@@ -449,6 +488,7 @@
     font-size: 34px;
   }
 }
+
 /* =====================================
    EXPLORE OUR SERVICES (FINAL MATCH)
 ===================================== */
@@ -526,7 +566,8 @@
 }
 
 .contact-container {
-  max-width: 1140px;   /* EXACT WIDTH */
+  max-width: 1140px;
+  /* EXACT WIDTH */
   margin: 0 auto;
 }
 
@@ -550,7 +591,8 @@
 /* Main grid */
 .contact-grid {
   display: grid;
-  grid-template-columns: 520px 1fr; /* EXACT PROPORTION */
+  grid-template-columns: 520px 1fr;
+  /* EXACT PROPORTION */
   gap: 36px;
   align-items: flex-start;
 }
@@ -559,7 +601,8 @@
 
 .contact-cards {
   display: grid;
-  grid-template-columns: repeat(2, 240px); /* FIXED CARD WIDTH */
+  grid-template-columns: repeat(2, 240px);
+  /* FIXED CARD WIDTH */
   gap: 24px;
 }
 
@@ -568,7 +611,8 @@
   background: var(--bg-secondary);
   border-radius: 14px;
   padding: 26px 20px 28px;
-  height: 200px;              /* 🔥 FIX HEIGHT */
+  height: 200px;
+  /* 🔥 FIX HEIGHT */
   text-align: center;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border-color);
@@ -611,7 +655,8 @@
   border-radius: 16px;
   padding: 36px 36px 40px;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.06);
-  height: 440px;               /* 🔥 FIX HEIGHT */
+  height: 440px;
+  /* 🔥 FIX HEIGHT */
   border: 1px solid var(--border-color);
 }
 
@@ -642,8 +687,8 @@
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: var(--color-brand);
-    outline: none;
+  border-color: var(--color-brand);
+  outline: none;
 }
 
 /* First row inputs */
@@ -656,7 +701,8 @@
 /* Textarea */
 .contact-form textarea {
   resize: none;
-  height: 96px;                /* 🔥 FIX TEXTAREA HEIGHT */
+  height: 96px;
+  /* 🔥 FIX TEXTAREA HEIGHT */
 }
 
 /* Button */
@@ -675,7 +721,7 @@
 }
 
 .submit-btn:hover {
-    background: var(--color-brand-hover);
+  background: var(--color-brand-hover);
 }
 
 /* ================= RESPONSIVE ================= */
