@@ -418,7 +418,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+
         </div>
       </div>
 
@@ -490,7 +490,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+
         </div>
       </div>
 
@@ -527,7 +527,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+          
         </div>
       </div>
 
@@ -570,7 +570,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+          
         </div>
       </div>
 
@@ -637,7 +637,7 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+          
         </div>
       </div>
 
@@ -720,94 +720,67 @@ const DepreciationCalculator = () => {
       {/* Divider */}
       <div className="flex justify-center py-8 bg-[var(--bg-main)]">
         <div className="border-t border-[var(--border-color)] w-full max-w-xs relative">
-          <span className="absolute left-1/2 transform -translate-x-1/2 -top-3 bg-[var(--bg-main)] px-2 text-[var(--text-secondary)] text-sm">PU</span>
+        
         </div>
       </div>
 
-      {/* Section 7: Frequently Asked Questions */}
-      <section className="bg-[var(--bg-main)] py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-[var(--color-brand)] mb-8 text-center">
-            Frequently Asked Questions About Depreciation
-          </h2>
-          <div className="space-y-4">
-            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
-              <button
-                onClick={() => setOpenFaq(openFaq === 0 ? null : 0)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-[var(--bg-hover)] transition-colors"
-              >
-                <span className="text-[var(--text-primary)] font-medium">What is the difference between SLM and WDV methods?</span>
-                <span className="text-[var(--color-brand)] text-xl">{openFaq === 0 ? '−' : '+'}</span>
-              </button>
-              {openFaq === 0 && (
-                <div className="px-4 pb-4 text-[var(--text-secondary)]">
-                  SLM provides uniform depreciation throughout the asset's life, while WDV provides higher depreciation in early years and lower amounts in later years. WDV is mandatory for tax purposes under the Income Tax Act.
-                </div>
-              )}
-            </div>
+     {/* Section 7: Frequently Asked Questions */}
+<section className="bg-[var(--bg-main)] py-16">
+  <div className="max-w-6xl mx-auto px-4">
+    <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-8 text-center">
+      Frequently Asked Questions About Depreciation
+    </h2>
 
-            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
-              <button
-                onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-[var(--bg-hover)] transition-colors"
-              >
-                <span className="text-[var(--text-primary)] font-medium">When is additional depreciation applicable?</span>
-                <span className="text-[var(--color-brand)] text-xl">{openFaq === 1 ? '−' : '+'}</span>
-              </button>
-              {openFaq === 1 && (
-                <div className="px-4 pb-4 text-[var(--text-secondary)]">
-                  Additional depreciation of 20% is available on new plant and machinery (excluding office equipment and vehicles) in the year of installation. 35% additional depreciation is available for manufacturers in notified backward areas.
-                </div>
-              )}
-            </div>
+    <div className="space-y-4">
+      {[
+        {
+          q: "What is the difference between SLM and WDV methods?",
+          a: "SLM provides uniform depreciation throughout the asset's life, while WDV provides higher depreciation in early years and lower amounts in later years. WDV is mandatory for tax purposes under the Income Tax Act."
+        },
+        {
+          q: "When is additional depreciation applicable?",
+          a: "Additional depreciation of 20% is available on new plant and machinery (excluding office equipment and vehicles) in the year of installation. 35% additional depreciation is available for manufacturers in notified backward areas."
+        },
+        {
+          q: "What is the half-year rule for depreciation?",
+          a: "If an asset is used for fewer than 180 days in the first year, only half of the normal depreciation is allowed for that year. This rule applies under the Income Tax Act for tax depreciation calculations."
+        },
+        {
+          q: "Why is there a ₹1 residual value in the depreciation table?",
+          a: "The ₹1 residual value represents the minimum book value that an asset can have. Even after full depreciation, assets are shown with a nominal value of ₹1 to indicate ownership."
+        },
+        {
+          q: "Which depreciation method is better for tax savings?",
+          a: "WDV method is generally better for tax savings as it allows higher depreciation in early years, reducing taxable income more significantly."
+        }
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl overflow-hidden"
+        >
+          <button
+            onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            className="w-full text-left px-5 py-4 flex justify-between items-center
+                       text-[var(--text-primary)] hover:bg-[var(--bg-hover)]
+                       transition-colors"
+          >
+            <span className="font-medium">{item.q}</span>
+            <span className="text-[var(--color-brand)] text-xl">
+              {openFaq === index ? "−" : "+"}
+            </span>
+          </button>
 
-            <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
-              <button
-                onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-100 transition-colors"
-              >
-                <span className="text-gray-900 font-medium">What is the half-year rule for depreciation?</span>
-                <span className="text-green-600 text-xl">{openFaq === 2 ? '−' : '+'}</span>
-              </button>
-              {openFaq === 2 && (
-                <div className="px-4 pb-4 text-gray-600">
-                  If an asset is used for fewer than 180 days in the first year, only half of the normal depreciation is allowed for that year. This rule applies under the Income Tax Act for tax depreciation calculations.
-                </div>
-              )}
+          {openFaq === index && (
+            <div className="px-5 pb-4 text-[var(--text-secondary)] text-sm leading-relaxed">
+              {item.a}
             </div>
-
-            <div className="bg-gray-50 border border-green-200 rounded-lg overflow-hidden">
-              <button
-                onClick={() => setOpenFaq(openFaq === 3 ? null : 3)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-100 transition-colors"
-              >
-                <span className="text-gray-900 font-medium">Why is there a ₹1 residual value in the depreciation table?</span>
-                <span className="text-green-600 text-xl">{openFaq === 3 ? '−' : '+'}</span>
-              </button>
-              {openFaq === 3 && (
-                <div className="px-4 pb-4 text-gray-600">
-                  The ₹1 residual value represents the minimum book value that an asset can have. Even after full depreciation, assets are shown with a nominal value of ₹1 in the books to indicate they are still owned by the company.
-                </div>
-              )}
-            </div>
-
-            <div className="bg-gray-50 border border-green-200 rounded-lg overflow-hidden">
-              <button
-                onClick={() => setOpenFaq(openFaq === 4 ? null : 4)}
-                className="w-full text-left p-4 flex justify-between items-center hover:bg-gray-100 transition-colors"
-              >
-                <span className="text-gray-900 font-medium">Which depreciation method is better for tax savings?</span>
-                <span className="text-green-600 text-xl">{openFaq === 4 ? '−' : '+'}</span>
-              </button>
-              {openFaq === 4 && (
-                <div className="px-4 pb-4 text-gray-600">
-                  WDV method is generally better for tax savings as it allows higher depreciation in early years, reducing taxable income more significantly when the asset is new. However, the choice depends on your specific financial situation and cash flow requirements.
-                </div>
-              )}
-            </div>
-          </div>
+          )}
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Section 8: Why Professional Utilities? */}
       <div className="bg-[var(--bg-main)]">
@@ -815,13 +788,14 @@ const DepreciationCalculator = () => {
       </div>
 
       {/* Section 9: Testimonials */}
+        <div className="bg-[var(--bg-main)]"></div>
       <TestimonialsSection />
 
       {/* Section 10: Trusted By */}
-      <div className="bg-[var(--bg-main)]">
+      <div className="bg-[var(--bg-main)]"></div>
         <TrustedBy />
       </div>
-    </div>
+     
   );
 };
 

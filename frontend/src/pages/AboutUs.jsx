@@ -310,7 +310,7 @@ entrepreneurs and strengthening the Indian startup ecosystem.
           <h4>Working Hours</h4>
           <p>
             Monday - Saturday<br />
-            10:00AM - 07:00PM (IST)
+            9 AM - 6:30 PM (IST)
           </p>
         </div>
 
@@ -324,6 +324,7 @@ entrepreneurs and strengthening the Indian startup ecosystem.
           <div className="contact-icon green">📞</div>
           <h4>Call Us</h4>
           <p>+918800932090</p>
+          <p>+919415718705</p>
         </div>
 
       </div>

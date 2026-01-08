@@ -15,7 +15,10 @@ import {
     faStar,
     faHandshake,
     faSuitcase,
+    faFileInvoiceDollar,
+    faScaleBalanced
 } from "@fortawesome/free-solid-svg-icons";
+
 import startBusinessImg from "../assets/solutions/start-business.svg";
 import manufacturingImg from "../assets/solutions/manufacturing.svg";
 import importExportImg from "../assets/solutions/import-export.svg";
@@ -27,129 +30,74 @@ import taxAccountingImg from "../assets/solutions/tax-accounting.svg";
 
 const CATEGORIES = [
     {
-        id: "start-business",
-        label: "Start Business",
+        id: "Accounting",
+        label: "Accounting",
         icon: faRocket,
-        question: "Starting A New Business?",
-        subtitle: "Incorporate your business with Mr Professional:",
-        image: startBusinessImg,
+        question: "Get Your Accounting Done Right",
         services: [
-            "Private Limited Company",
-            "Sole Proprietorship",
-            "Limited Liability Partnership",
-            "NGO Registration",
-            "Nidhi Company",
-            "Partnership Firm",
-            "Hotel Registration",
+            "Book Keeping",
+            "Day to Day Accounting",
+            "Maintenance of Documents",
+            "Budgeting and Valuations",
+            "Periodic Review and Finalisation of Accounts",
+            "Monthly Compliance Management",
+            "ERP and SOP Implementation",
+            "Financial Due Diligence and Financial Modelling",
+            "Business Risk Analysis",
+            "Business Valuation Services",
+            "Statutory Audits, Tax Audits, External Audits, Internal Audits",
+            "Financialization of Final Accounts"
         ],
     },
+
     {
-        id: "manufacturing",
-        label: "Manufacturing",
-        icon: faIndustry,
-        question: "Manufacturing",
+        id: "taxation",
+        label: "Taxation",
+        icon: faFileInvoiceDollar,
+        question: "Taxation Services",
         subtitle:
-            "Empower your production with expert manufacturing solutions.",
-        image: manufacturingImg,
+            "Comprehensive tax solutions with round-the-clock expert attention.",
         services: [
-            "Factory License",
-            "NOC From Pollution Board",
-            "Fire NOC",
-            "EPF & ESIC",
-            "EPR from CPCB",
-            "Packaging License",
+            "Round the Clock Attention",
+            "Individual Income Tax Return Filing",
+            "Business / Corporate Income Tax Return Filing",
+            "Income Tax Audit Support Service",
+            "TDS and TCS Compliance Services",
+            "Refund Process",
+            "Advisory Services",
+            "Assessment Support",
+            "Annual Return Support Services",
+            "Income Tax and GST Advisory",
+            "Transaction Consulting"
         ],
     },
+
     {
-        id: "import-export",
-        label: "Import Export",
-        icon: faRightLeft,
-        question: "For Importers and Exporters",
+        id: "legal-licenses",
+        label: "Legal & Licenses",
+        icon: faScaleBalanced,
+        question: "Legal and License Services",
         subtitle:
-            "Streamline global trade with seamless import-export solutions.",
-        image: importExportImg,
+            "Complete legal compliance and licensing support for your business.",
         services: [
-            "Import Export Code",
-            "MSDS Certificate",
-            "Spices Board Registration",
-            "APEDA Registration",
-            "SAFTA License",
-            "FSSAI Central License",
-        ],
-    },
-    {
-        id: "gem-services",
-        label: "GeM Services",
-        icon: faGears,
-        question: "GeM Services",
-        subtitle: "Get registered and sell on the Government e-Marketplace.",
-        image: gemImg,
-        services: [
-            "GeM Seller Registration",
-            "OEM Registration",
-            "Brand Approval",
-            "Vendor Assessment",
-        ],
-    },
-    {
-        id: "epr-bis",
-        label: "EPR & BIS",
-        icon: faCertificate,
-        question: "EPR & BIS Compliance",
-        subtitle: "Meet environmental and product quality compliance easily.",
-        image: eprBisImg,
-        services: [
-            "EPR Registration",
-            "Plastic Waste EPR",
-            "Battery Waste EPR",
-            "BIS License",
-            "ISI Mark Certification",
-        ],
-    },
-    {
-        id: "trademark-ip",
-        label: "Trademark & IP",
-        icon: faTrademark,
-        question: "Trademark & Intellectual Property",
-        subtitle: "Protect your brand and innovations.",
-        image: trademarkImg,
-        services: [
-            "Trademark Registration",
-            "Copyright Registration",
-            "Patent Filing",
-            "Design Registration",
-        ],
-    },
-    {
-        id: "manage-business",
-        label: "Manage Business",
-        icon: faBriefcase,
-        question: "Manage Business",
-        subtitle: "Manage your business legally and financially.",
-        image: startBusinessImg,
-        services: [
-            "ROC Compliance",
-            "Annual Filing",
-            "Director KYC",
-            "Change in Company Details",
-        ],
-    },
-    {
-        id: "tax-accounting",
-        label: "Tax & Accounting",
-        icon: faCalculator,
-        question: "Tax & Accounting",
-        subtitle: "All taxation and accounting services in one place.",
-        image: taxAccountingImg,
-        services: [
-            "GST Registration",
-            "GST Return Filing",
-            "ITR Filing",
-            "TDS Return",
-            "Accounting & Bookkeeping",
+            "Incorporation of Company and LLP (Including Advisory)",
+            "Drafting of Agreements (Term Sheet, SS&SHA, ESOPs)",
+            "IPR Support (Patent, Copyright, Trademark)",
+            "Shareholder Structuring",
+            "Import Export Code Registration",
+            "Food License (FSSAI)",
+            "MSME Registration",
+            "DIPP Registration for Startup",
+            "Section 8 Company Registration",
+            "Partnership Registration",
+            "Proprietorship / Firm Registration",
+            "Society Registration",
+            "Trust Registration"
         ],
     },
 ];
+
+
 
 const SolutionSection = () => {
     const [activeId, setActiveId] = useState(CATEGORIES[0].id);
@@ -228,15 +176,6 @@ const SolutionSection = () => {
                     {/* Illustration */}
                     <div className="flex justify-center md:justify-end">
 
-                        <img
-                            src={activeCategory.image}
-                            alt={activeCategory.label}
-                            className="
-                                w-full h-full
-                                max-h-120
-                                object-contain
-                            "
-                        />
 
                     </div>
                 </div>

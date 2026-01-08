@@ -313,24 +313,6 @@
    PU DIVIDER (TOP & BOTTOM)
 ===================================================== */
 
-.pu-divider {
-  position: relative;
-  border-top: 1px solid var(--border-color);
-  margin: 60px 0;
-}
-
-.pu-divider::after {
-  content: "PU";
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-main);
-  padding: 0 14px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
 
 /* ================= DONUT ================= */
 
@@ -407,65 +389,73 @@
    FAQ SECTION (PIXEL PERFECT)
 ===================================================== */
 
+/* ================= FAQ SECTION ================= */
+
 .faq-section {
   background: var(--bg-secondary);
-  padding: 90px 0;
+  padding: 80px 0;
 }
 
+/* Title */
 .faq-title {
   text-align: center;
   font-size: 36px;
   font-weight: 700;
   color: var(--color-brand);
-  margin-bottom: 60px;
+  margin-bottom: 48px;
 }
 
-/* Layout */
+/* Wrapper – CENTERED & FULL */
 .faq-wrapper {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
+  max-width: 1100px;        /* ✅ FIXED WIDTH */
+  margin: 0 auto;          /* ✅ CENTER */
   padding: 0 20px;
 }
 
-/* ================= FAQ LEFT ================= */
+/* ================= FAQ LIST ================= */
 
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
+  width: 100%;
 }
 
+/* FAQ CARD */
 .faq-item {
+  width: 100%;
   background: var(--bg-main);
   border-radius: 18px;
-  padding: 24px 28px;
+  padding: 26px 28px;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   position: relative;
   transition: all 0.3s ease;
   border: 1px solid var(--border-color);
 }
 
+/* Hover */
 .faq-item:hover {
   background: var(--bg-secondary);
+  border-color: var(--color-brand);
+  transform: translateY(-2px);
 }
 
+/* Question */
 .faq-question {
   font-size: 18px;
   font-weight: 500;
   color: var(--text-primary);
-  padding-right: 50px;
+  padding-right: 60px; /* space for plus */
 }
 
+/* Plus Icon */
 .faq-plus {
   position: absolute;
-  top: 22px;
+  top: 50%;
   right: 22px;
-  height: 30px;
-  width: 30px;
+  transform: translateY(-50%);
+  height: 34px;
+  width: 34px;
   background: var(--bg-main);
   color: var(--color-brand);
   font-size: 22px;
@@ -477,12 +467,14 @@
   border: 1px solid var(--border-color);
 }
 
+/* Answer */
 .faq-answer {
   margin-top: 14px;
   font-size: 16px;
   line-height: 1.7;
   color: var(--text-secondary);
 }
+
 
 /* ================= EXPERT CARD ================= */
 

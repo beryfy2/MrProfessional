@@ -84,7 +84,7 @@ const ContactSection = () => {
                         <InfoCard
                             icon="fa-solid fa-clock"
                             title="Working Hours"
-                            lines={["Monday - Saturday", "10:00AM - 07:00PM (IST)"]}
+                            lines={["Monday - Saturday", "9 AM - 6:30 PM (IST)"]}
                         />
 
                         {/* Email */}
@@ -141,7 +141,7 @@ const ContactSection = () => {
                                         name="mobile"
                                         value={formData.mobile}
                                         onChange={handleChange}
-                                        placeholder="+91 98765 43210"
+                                        placeholder="xxxxxxxxxx"
                                         className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
                                         required
                                     />
