@@ -36,10 +36,7 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
       </div>
 
       {/* Search + PDF button */}
-      <div className="flex items-center gap-6">
-        <div className="hidden sm:block">
-          <SearchBar />
-        </div>
+      <div className="flex items-end-safe">
         <a href="../../public/sample.pdf" target="_blank" rel="noopener noreferrer">
           <button className="flex items-center gap-2 bg-(--color-brand) hover:bg-(--color-brand-hover) text-white font-semibold px-3 py-1 rounded-xl shadow-md transition cursor-pointer">
             <FontAwesomeIcon icon={["fas", "arrow-down"]} style={{ color: "#ffffff" }} />
