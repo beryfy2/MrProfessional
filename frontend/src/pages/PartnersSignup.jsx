@@ -369,12 +369,12 @@ const PartnersSignup = () => {
                     <div className="max-w-4xl mx-auto bg-[var(--bg-secondary)] p-8 rounded-lg shadow-md border border-[var(--border-color)]">
                         <div className="text-center">
                             <div className="text-yellow-400 text-4xl mb-4">"</div>
-                            <p className="text-lg text-gray-700 italic mb-6">
+                            <p className="text-lg text-white italic mb-6">
                                 Partnering with Mr Professional has been a game-changer for my practice. 
                                 Their support and resources have helped me serve my clients better and grow my business.
                             </p>
-                            <div className="font-semibold text-gray-900">Rahul Sharma</div>
-                            <div className="text-sm text-gray-600">Chartered Accountant, Mumbai</div>
+                            <div className="font-semibold text-white">Rahul Sharma</div>
+                            <div className="text-sm text-white">Chartered Accountant, Mumbai</div>
                         </div>
                     </div>
                 </div>

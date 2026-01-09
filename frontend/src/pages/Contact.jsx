@@ -174,7 +174,10 @@ const ContactSection = () => {
                                         name="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
+                                        className="w-full px-4 py-3 rounded-lg border border-[var(--border-color)] bg-[#131B2E] text-white focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition"
+
+ 
+
                                     >
                                         <option value="General Inquiry">General Inquiry</option>
                                         <option value="Tax Consultation">Tax Consultation</option>

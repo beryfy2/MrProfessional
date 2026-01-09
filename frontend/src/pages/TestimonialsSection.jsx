@@ -153,18 +153,7 @@ const TestimonialsSection = () => {
                             />
                         </div>
 
-                        {/* 10+ years badge */}
-                        <div className="mt-4">
-                            <div className="inline-flex flex-col items-start gap-1">
-                                <div className="text-4xl font-extrabold text-yellow-300 leading-none">
-                                    10<span className="text-2xl">+</span>
-                                </div>
-                                <div className="text-xs tracking-[0.2em] uppercase text-white/80">
-                                    Years of Professional
-                                </div>
-                                <div className="text-base font-semibold">Experience</div>
-                            </div>
-                        </div>
+                        
 
                         {/* Arrows */}
                         <div className="flex items-center gap-3 mt-6">
