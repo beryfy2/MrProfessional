@@ -111,12 +111,6 @@ const Footer = () => {
                         ))}
                     </FooterColumn>
 
-                    <FooterColumn title="Popular Services">
-                        {POPULAR_SERVICES.map((i) => (
-                            <FooterItem key={i}>{i}</FooterItem>
-                        ))}
-                    </FooterColumn>
-
                     <FooterColumn title="Useful Tools">
                         {USEFUL_TOOLS.map((i) => (
                             <FooterItem key={i.label} to={i.path}>{i.label}</FooterItem>
@@ -124,7 +118,7 @@ const Footer = () => {
                     </FooterColumn>
 
                     {/* CONTACT */}
-                    <div className="space-y-4 text-sm">
+                    <div className="space-y-4 text-sm lg:col-start-4">
                         <div>
                             <p className="text-(--color-brand) font-semibold text-xs mb-1">
                                 Call us on

@@ -176,7 +176,7 @@ const SolutionSection = () => {
                     {/* Illustration */}
                     <div className="flex justify-center md:justify-end">
 
-
+cd
                     </div>
                 </div>
 
