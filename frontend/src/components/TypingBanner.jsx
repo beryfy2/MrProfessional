@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TEXTS = [
   "A FinTech platform that understands your need",
@@ -12,6 +13,7 @@ export default function TypingBanner() {
   const [displayText, setDisplayText] = useState("");
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const currentText = TEXTS[textIndex];
@@ -54,18 +56,7 @@ export default function TypingBanner() {
             </p>
 
             <button
-              onClick={() => {
-                const el = document.getElementById("contact");
-                if (el) {
-                  const yOffset = -80; // navbar height
-                  const y =
-                    el.getBoundingClientRect().top +
-                    window.pageYOffset +
-                    yOffset;
-
-                  window.scrollTo({ top: y, behavior: "smooth" });
-                }
-              }}
+              onClick={() => navigate("/contact")}
               className="inline-flex mt-2 items-center justify-center rounded-full bg-(--color-brand) hover:bg-(--color-brand-hover) text-white font-bold px-7 py-2 shadow-lg transition"
             >
               Get Expert Assistance
