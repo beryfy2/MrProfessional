@@ -255,7 +255,7 @@ const ServicePage = () => {
               </p> */}
               <div className="text-[var(--color-brand)] text-lg font-semibold mb-6">
                 <h1 >
-                  Get your Company Registration starts ₹{page.price} Only!
+                  Get your {page.title} starts ₹{page.price} Only!
                 </h1>
 
               </div>
