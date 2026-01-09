@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../style/payment.css";
-// use uploaded logo from backend uploads
-const API_HOST = (import.meta.env.VITE_API_BASE || "http://localhost:5000").replace(/\/api$/, "");
+import logo from "../assets/images/logo.png";
+
 
 export default function Payment() {
   const [form, setForm] = useState({
@@ -16,9 +16,39 @@ export default function Payment() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Payment flow will be integrated here");
+
+    if (!form.amount || form.amount <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/phonepe/pay", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          address: form.address,
+          amount: Number(form.amount),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      } else {
+        alert("Payment initiation failed");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -33,10 +63,8 @@ export default function Payment() {
           </h1>
 
           <div className="brand">
-            <img src={`${API_HOST}/uploads/logo.png`} alt="Mr Professional" />
-            <h2>
-             Mr Professional <br /> 
-            </h2>
+            <img src={logo} alt="mrpro" />
+            <h2>Mr Professional</h2>
           </div>
 
           <p className="tagline">"One-Stop Corporate Solution"</p>
@@ -52,8 +80,7 @@ export default function Payment() {
             <h4>Terms & Conditions:</h4>
             <p>
               You agree to share information entered on this page with
-              Mr Professional (owner of this page) and PhonePe,
-              adhering to applicable laws.
+              Mr Professional and PhonePe, adhering to applicable laws.
             </p>
           </div>
         </div>
@@ -66,51 +93,12 @@ export default function Payment() {
           </h2>
 
           <form onSubmit={handleSubmit} className="payment-form">
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Email address"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone number"
-              value={form.phone}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={form.address}
-              onChange={handleChange}
-            />
-
-            <input
-              type="number"
-              name="amount"
-              placeholder="Enter Amount"
-              value={form.amount}
-              onChange={handleChange}
-              required
-            />
-
-            <button type="submit">Submit</button>
+            <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+            <input type="email" name="email" placeholder="Email address" value={form.email} onChange={handleChange} required />
+            <input type="tel" name="phone" placeholder="Phone number" value={form.phone} onChange={handleChange} required />
+            <input type="text" name="address" placeholder="Address" value={form.address} onChange={handleChange} />
+            <input type="number" name="amount" placeholder="Enter Amount" value={form.amount} onChange={handleChange} required />
+            <button type="submit">Proceed to Pay</button>
           </form>
         </div>
 
