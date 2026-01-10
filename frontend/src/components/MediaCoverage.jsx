@@ -1,5 +1,5 @@
 // src/components/MediaCoverage.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const MEDIA_ITEMS = [
     {
@@ -53,111 +53,148 @@ const MEDIA_ITEMS = [
 ];
 
 const MediaCoverage = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [isHovering, setIsHovering] = useState(false);
+    const [current, setCurrent] = useState(0);
+    const [hover, setHover] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const touchStart = useRef(null);
 
-    // Build overlapping pairs:
-    // [0,1], [1,2], [2,3], [3,0]
-    const slides = useMemo(() => {
-        const arr = [];
-        const n = MEDIA_ITEMS.length;
-        for (let i = 0; i < n; i += 1) {
-            arr.push([MEDIA_ITEMS[i], MEDIA_ITEMS[(i + 1) % n]]);
-        }
-        return arr;
+    useEffect(() => {
+        const resize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener("resize", resize);
+        return () => window.removeEventListener("resize", resize);
     }, []);
 
-    // Auto-advance slider
+    const slides = useMemo(() => {
+        if (isMobile) {
+            return MEDIA_ITEMS.map(i => [i]);
+        }
+        const arr = [];
+        for (let i = 0; i < MEDIA_ITEMS.length; i++) {
+            arr.push([
+                MEDIA_ITEMS[i],
+                MEDIA_ITEMS[(i + 1) % MEDIA_ITEMS.length],
+            ]);
+        }
+        return arr;
+    }, [isMobile]);
+
     useEffect(() => {
-        if (isHovering) return;
-
+        if (hover) return;
         const id = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 6000); // 6s per step; tweak if you like
-
+            setCurrent(p => (p + 1) % slides.length);
+        }, 6000);
         return () => clearInterval(id);
-    }, [slides.length, isHovering]);
+    }, [hover, slides.length]);
+
+    const prev = () =>
+        setCurrent(p => (p === 0 ? slides.length - 1 : p - 1));
+    const next = () =>
+        setCurrent(p => (p === slides.length - 1 ? 0 : p + 1));
 
     return (
-        <section className="bg-[var(--bg-main)] py-16">
+        <section className="bg-(--bg-main) py-16">
             <div className="max-w-7xl mx-auto px-4">
+
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+                    <h2 className="text-3xl md:text-4xl font-bold text-(--text-primary)">
                         Media Coverage
                     </h2>
-                    <div className="h-1 w-24 bg-[var(--color-brand)] mx-auto mt-3 rounded-full" />
+                    <div className="h-1 w-24 bg-(--color-brand) mx-auto mt-3 rounded-full" />
                 </div>
 
-                {/* Slider wrapper */}
+                {/* Slider */}
                 <div
-                    className="relative overflow-hidden rounded-[30px] border border-[var(--color-brand)] shadow-xl bg-[var(--bg-secondary)] "
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
+                    className="relative overflow-hidden rounded-3xl border border-(--color-brand)
+                    shadow-xl bg-(--bg-secondary)"
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}
+                    onTouchStart={e => (touchStart.current = e.touches[0].clientX)}
+                    onTouchEnd={e => {
+                        const diff =
+                            touchStart.current - e.changedTouches[0].clientX;
+                        if (diff > 60) next();
+                        if (diff < -60) prev();
+                    }}
                 >
-                    {/* Slides row */}
+
+                    {/* Slides */}
                     <div
                         className="flex transition-transform duration-700 ease-out"
-                        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                        style={{ transform: `translateX(-${current * 100}%)` }}
                     >
                         {slides.map((pair, idx) => (
                             <div
                                 key={idx}
-                                className="min-w-full grid gap-8 md:grid-cols-2 px-8 py-10 md:px-12 md:py-12"
+                                className="min-w-full grid gap-8 md:grid-cols-2
+                px-6 py-8 md:px-12 md:py-12"
                             >
-                                {pair.map((item) => (
+                                {pair.map(item => (
                                     <MediaCard key={item.id} item={item} />
                                 ))}
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {/* Dots */}
+                <div className="flex justify-center gap-2 mt-5">
+                    {slides.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => setCurrent(i)}
+                            className={`h-2 w-2 rounded-full transition ${i === current
+                                    ? "bg-(--color-brand)"
+                                    : "bg-(--text-secondary)/40"
+                                }`}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );
 };
 
-const MediaCard = ({ item }) => {
-    return (
-        <article className="flex flex-col">
-            {/* Outlet + logo */}
-            <div className="flex items-center justify-between mb-4">
-                <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-[var(--color-brand)]">
-                        {item.outlet}
-                    </h3>
-                    <div className="mt-1 h-1.5 w-16 rounded-full bg-[var(--color-brand)]" />
-                </div>
-                {item.logo && (
-                    <img
-                        src={item.logo}
-                        alt={item.outlet}
-                        className="h-10 md:h-12 object-contain"
-                    />
-                )}
+const MediaCard = ({ item }) => (
+    <article className="flex flex-col h-full">
+        <div className="flex items-center justify-between mb-4">
+            <div>
+                <h3 className="text-xl font-semibold text-(--color-brand)">
+                    {item.outlet}
+                </h3>
+                <div className="mt-1 h-1.5 w-16 bg-(--color-brand) rounded-full" />
             </div>
 
-            {/* Content */}
-            <h4 className="text-lg md:text-xl font-semibold text-[var(--text-primary)] mb-3">
-                {item.heading}
-            </h4>
-            <div className="text-[15px] md:text-[16px] leading-relaxed text-[var(--text-secondary)] space-y-2 flex-1">
-                {item.body.map((p, i) => (
-                    <p key={i}>{p}</p>
-                ))}
-            </div>
+            {item.logo && (
+                <img
+                    src={item.logo}
+                    alt={item.outlet}
+                    className="h-10 object-contain"
+                />
+            )}
+        </div>
 
-            {/* Button */}
-            <div className="mt-6">
-                <a
-                    href={item.link}
-                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-[var(--color-brand)] text-white text-sm font-semibold shadow-[0_10px_20px_rgba(0,160,0,0.25)] hover:bg-[var(--color-brand-hover)] transition"
-                >
-                    Read More
-                </a>
-            </div>
-        </article>
-    );
-};
+        <h4 className="text-lg font-semibold text-(--text-primary) mb-3">
+            {item.heading}
+        </h4>
+
+        <div className="text-sm leading-relaxed text-(--text-secondary)
+    space-y-2 flex-1">
+            {item.body.map((p, i) => (
+                <p key={i}>{p}</p>
+            ))}
+        </div>
+
+        <a
+            href={item.link}
+            className="mt-6 inline-flex items-center justify-center
+      px-5 py-2.5 rounded-lg bg-(--color-brand)
+      text-white text-sm font-semibold shadow
+      hover:bg-(--color-brand-hover) transition"
+        >
+            Read More
+        </a>
+    </article>
+);
 
 export default MediaCoverage;

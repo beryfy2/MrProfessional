@@ -101,3 +101,58 @@
     max-width: 100%;
     object-fit: contain;
 }
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .trusted-wrapper {
+        max-width: 100%;
+        padding: 15px 0;
+    }
+
+    .trusted-wrapper::before,
+    .trusted-wrapper::after {
+        width: 30px;
+        /* wider fade */
+    }
+
+
+    .trusted-row-top,
+    .trusted-row-bottom {
+        animation-duration: 10s;
+    }
+
+    .brand-card {
+        min-width: 120px;
+        height: 70px;
+        padding: 0 14px;
+        border-radius: 12px;
+    }
+
+    .brand-logo {
+        max-height: 36px;
+    }
+}
+
+/* EXTRA SMALL */
+@media (max-width: 480px) {
+
+    /* KEEP BOTH ROWS */
+    .trusted-row-bottom {
+        display: flex;
+    }
+
+    .trusted-row {
+        gap: 1rem;
+    }
+
+    .brand-card {
+        min-width: 100px;
+        height: 60px;
+    }
+
+    .brand-logo {
+        max-height: 28px;
+    }
+}
