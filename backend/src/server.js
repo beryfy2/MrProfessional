@@ -45,6 +45,7 @@ import AdminConfig from './models/AdminConfig.js';
 import ResetToken from './models/ResetToken.js';
 import Category from "./models/Category.js";
 import Blog from "./models/Blog.js";
+import Achievement from "./models/Achievement.js";
 import phonepeRouter from './routes/phonepe.routes.js';
 
 import jwt from 'jsonwebtoken';
@@ -453,6 +454,88 @@ app.delete('/api/employees/:id', auth, async (req, res) => {
     res.json({ ok: true });
   } catch (e) {
     res.status(400).json({ error: 'Failed to delete employee' });
+  }
+});
+
+// ================= ACHIEVEMENTS (ADMIN) =================
+
+app.get('/api/achievements', async (req, res) => {
+  const list = await Achievement.find().sort({ date: -1 });
+  res.json(list);
+});
+
+app.get('/api/achievements/:id', async (req, res) => {
+  try {
+    const item = await Achievement.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Not found' });
+    res.json(item);
+  } catch {
+    res.status(404).json({ error: 'Not found' });
+  }
+});
+
+app.post('/api/achievements', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const { title, content, date } = req.body;
+    const photo = req.file ? `/uploads/${req.file.filename}` : undefined;
+    
+    if (!photo) return res.status(400).json({ error: 'Photo is required' });
+
+    const item = await Achievement.create({ 
+      title, 
+      content, 
+      photo,
+      date: date || new Date()
+    });
+    res.status(201).json(item);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to create achievement' });
+  }
+});
+
+app.put('/api/achievements/:id', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const { title, content, date } = req.body;
+    const updateData = { title, content, date };
+    
+    if (req.file) {
+      updateData.photo = `/uploads/${req.file.filename}`;
+    }
+
+    const item = await Achievement.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    res.json(item);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to update achievement' });
+  }
+});
+
+app.delete('/api/achievements/:id', auth, async (req, res) => {
+  try {
+    await Achievement.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete achievement' });
+  }
+});
+
+// ================= ACHIEVEMENTS (PUBLIC) =================
+
+app.get('/api/public/achievements', async (req, res) => {
+  try {
+    const list = await Achievement.find().sort({ date: -1 });
+    res.json(list);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load achievements' });
+  }
+});
+
+app.get('/api/public/achievements/:id', async (req, res) => {
+  try {
+    const item = await Achievement.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Achievement not found' });
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load achievement' });
   }
 });
 

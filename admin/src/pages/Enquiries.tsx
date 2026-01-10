@@ -440,7 +440,7 @@ export default function Enquiries() {
                     setOpenId(openId === e._id ? null : e._id!);
                     if (openId !== e._id && !e.read) {
                       try {
-                        await sendJSON({}, `/enquiries/${e._id}/read`, 'PUT');
+                        await sendJSON('', `/enquiries/${e._id}/read`, 'PUT');
                         setList(prev => prev.map(item => 
                           item._id === e._id ? { ...item, read: true } : item
                         ));
