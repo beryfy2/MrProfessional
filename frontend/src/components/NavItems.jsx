@@ -12,6 +12,7 @@ const STATIC_NAV = [
     { label: "Team", path: "/team" },
     { label: "Contact", path: "/contact" },
     { label: "Blog", path: "/blogs" },
+    { label: "Achievements", path: "/achievements" },
 ];
 
 export default function NavItems({ sticky }) {
