@@ -33,6 +33,10 @@ export default function Sidebar() {
             <span className="nav-icon">💼</span>
             <span className="nav-text">Careers</span>
           </NavLink>
+          <NavLink to="/admin/achievements" className="nav-item">
+            <span className="nav-icon">🏆</span>
+            <span className="nav-text">Achievements</span>
+          </NavLink>
         </div>
 
         <div className="nav-section">
