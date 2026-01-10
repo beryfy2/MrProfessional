@@ -2,396 +2,358 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faFire, faNewspaper, faPenNib, faBlog } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faFire, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
-
 
 const STATIC_NAV = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about" },
     { label: "Team", path: "/team" },
     { label: "Contact", path: "/contact" },
+    { label: "Blogs", path: "/blogs" },
 ];
 
+export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
 
-export default function NavItems({ transparent = false }) {
     const navigate = useNavigate();
-    const solidBg = "bg-[var(--bg-secondary)]";
-    const finalBg = solidBg;
+    const finalBg = "bg-[var(--bg-secondary)]";
 
     const [navItems, setNavItems] = useState([]);
     const [openMenu, setOpenMenu] = useState(null);
-    const closeTimer = useRef(null);
-    const openTimer = useRef(null);
     const [titlesByNav, setTitlesByNav] = useState({});
     const [hoverTitleId, setHoverTitleId] = useState(null);
     const [subtitlesByTitle, setSubtitlesByTitle] = useState({});
-    const itemRefs = useRef({});
-    const [menuHovering, setMenuHovering] = useState(false);
-    const [headHovering, setHeadHovering] = useState(false);
+
+    const closeTimer = useRef(null);
+    const openTimer = useRef(null);
     const leaveTimer = useRef(null);
+
+    const itemRefs = useRef({});
     const menuHoveringRef = useRef(false);
     const headHoveringRef = useRef(false);
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+
+    /* -------------------- RESPONSIVE -------------------- */
     useEffect(() => {
-        function handleWindowMouseOut(e) {
-            if (!e.relatedTarget) {
-                setOpenMenu(null);
-                setHoverTitleId(null);
-                menuHoveringRef.current = false;
-                headHoveringRef.current = false;
-                setMenuHovering(false);
-                setHeadHovering(false);
-            }
-        }
-        window.addEventListener('mouseout', handleWindowMouseOut);
-        return () => window.removeEventListener('mouseout', handleWindowMouseOut);
+        const resize = () => setIsMobile(window.innerWidth <= 640);
+        window.addEventListener("resize", resize);
+        return () => window.removeEventListener("resize", resize);
     }, []);
 
-    // Close dropdown menus on scroll
+    /* -------------------- FETCH NAV -------------------- */
     useEffect(() => {
-        function handleScroll() {
-            if (openMenu !== null) {
-                setOpenMenu(null);
-                setHoverTitleId(null);
-                menuHoveringRef.current = false;
-                headHoveringRef.current = false;
-                setMenuHovering(false);
-                setHeadHovering(false);
-                // Clear all timers
-                if (closeTimer.current) {
-                    clearTimeout(closeTimer.current);
-                    closeTimer.current = null;
-                }
-                if (openTimer.current) {
-                    clearTimeout(openTimer.current);
-                    openTimer.current = null;
-                }
-                if (leaveTimer.current) {
-                    clearTimeout(leaveTimer.current);
-                    leaveTimer.current = null;
-                }
-            }
-        }
+        fetch(`${API_BASE}/nav-items`)
+            .then(r => r.json())
+            .then(items => setNavItems(items || []));
+    }, []);
+
+    /* -------------------- CLOSE ON SCROLL -------------------- */
+    useEffect(() => {
+        const handleScroll = () => {
+            setOpenMenu(null);
+            setHoverTitleId(null);
+        };
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [openMenu]);
-
-    useEffect(() => {
-        fetch(`${API_BASE}/nav-items`).then((r) => r.json()).then((items) => setNavItems(items || []));
     }, []);
 
+    /* -------------------- DESKTOP HOVER LOGIC -------------------- */
     const open = (navId) => {
-        if (closeTimer.current) {
-            clearTimeout(closeTimer.current);
-            closeTimer.current = null;
-        }
+        clearTimeout(closeTimer.current);
         setOpenMenu(navId);
-        setHoverTitleId(null); // reset hovered title when switching head item
+        setHoverTitleId(null);
+
         if (!titlesByNav[navId]) {
-            fetch(`${API_BASE}/nav-items/${navId}/titles`).then((r) => r.json()).then((titles) => {
-                setTitlesByNav((prev) => ({ ...prev, [navId]: titles || [] }));
-            });
+            fetch(`${API_BASE}/nav-items/${navId}/titles`)
+                .then(r => r.json())
+                .then(titles => {
+                    setTitlesByNav(prev => ({ ...prev, [navId]: titles || [] }));
+                });
         }
     };
 
-    const scheduleClose = (delay = 200) => {
+    const scheduleClose = () => {
         clearTimeout(closeTimer.current);
         closeTimer.current = setTimeout(() => {
-            // Check current hover state using refs to avoid stale closures
             if (!menuHoveringRef.current && !headHoveringRef.current) {
                 setOpenMenu(null);
                 setHoverTitleId(null);
             }
-        }, delay);
+        }, 200);
     };
 
-
-    const handleItemEnter = (navId) => {
-        // Clear any pending leave timer
-        if (leaveTimer.current) {
-            clearTimeout(leaveTimer.current);
-            leaveTimer.current = null;
-        }
+    const handleItemEnter = (id) => {
+        clearTimeout(leaveTimer.current);
         headHoveringRef.current = true;
-        setHeadHovering(true);
-        if (openTimer.current) clearTimeout(openTimer.current);
-        if (closeTimer.current) {
-            clearTimeout(closeTimer.current);
-            closeTimer.current = null;
-        }
-        openTimer.current = setTimeout(() => open(navId), 80);
+        clearTimeout(openTimer.current);
+        openTimer.current = setTimeout(() => open(id), 80);
     };
+
     const handleItemLeave = () => {
-        // Don't immediately set headHovering to false - wait a bit
-        // This prevents flickering when moving to dropdown
-        if (leaveTimer.current) clearTimeout(leaveTimer.current);
         leaveTimer.current = setTimeout(() => {
-            // Only close if not hovering over the menu (check ref for current value)
-            if (!menuHoveringRef.current) {
-                headHoveringRef.current = false;
-                setHeadHovering(false);
-                scheduleClose(200);
-            }
-            leaveTimer.current = null;
-        }, 50);
+            headHoveringRef.current = false;
+            scheduleClose();
+        }, 80);
     };
+
     const handleMenuEnter = () => {
-        // Clear any pending leave timer
-        if (leaveTimer.current) {
-            clearTimeout(leaveTimer.current);
-            leaveTimer.current = null;
-        }
         menuHoveringRef.current = true;
-        headHoveringRef.current = true;
-        setMenuHovering(true);
-        setHeadHovering(true);
-        if (closeTimer.current) {
-            clearTimeout(closeTimer.current);
-            closeTimer.current = null;
-        }
-        if (openTimer.current) {
-            clearTimeout(openTimer.current);
-            openTimer.current = null;
-        }
+        clearTimeout(closeTimer.current);
     };
+
     const handleMenuLeave = () => {
         menuHoveringRef.current = false;
-        headHoveringRef.current = false;
-        setMenuHovering(false);
-        setHeadHovering(false);
-        scheduleClose(200);
+        scheduleClose();
     };
 
-    const toggleClick = (navId) => {
-        // optional click toggle
-        setOpenMenu((prev) => (prev === navId ? null : navId));
-    };
-
-    const slugify = (text) => {
-        return text
-            .toLowerCase()
-            .replace(/\.(php|html)$/, '')
+    /* -------------------- UTILS -------------------- */
+    const slugify = (text) =>
+        text.toLowerCase().replace(/\.(php|html)$/, '')
             .replace(/[^a-z0-9\s-]/g, '')
-            .trim()
-            .replace(/\s+/g, '-')
-            .replace(/-+/, '-');
-    };
+            .trim().replace(/\s+/g, '-');
 
     const navigateToService = (name, navName) => {
-        // Handle Tools section differently
-        if (navName === 'Tools') {
-            const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/calculator$/, '-calculator');
-            navigate(`/tools/${slug}`);
-            return;
-        }
-
-        const base = slugify(name);
-        // Try base slug first; ServicePage will attempt common variants
-        navigate(`/services/${base}`);
+        const slug = slugify(name);
+        navigate(`/services/${slug}`);
+        setMobileOpen(false);
     };
 
+    /* ======================================================= */
+
     return (
-        <div
-            className={`${finalBg} transition-all duration-300 shadow-lg`}
-        >
-            <div className="max-w-[1500px] h-15 mx-auto px-6 py-4 flex items-center justify-between relative">
-                {/* Logo */}
-                <div className="flex items-center gap-3">
-                    <a href="/">
-                        <div className="flex items-center gap-3">
-                            <span className="text-(--text-primary) text-xl font-semibold hidden sm:inline">
-                                Mr. Professional
-                            </span>
-                        </div>
-                    </a>
-                </div>
+        <div className={`${finalBg} transition-all duration-300 shadow-lg`}>
 
-                {/* Nav links */}
-                <ul className="hidden lg:flex items-center gap-12 text-(--text-primary) text-[14px] font-medium">
+            <div className="max-w-[1500px] mx-auto px-6 py-4 flex items-center relative">
 
-                    {/* STATIC LINKS */}
-                    {STATIC_NAV.map((item) => (
+                {/* LOGO */}
+                <span
+                    className="text-xl font-semibold cursor-pointer text-(--text-primary)"
+                    onClick={() => navigate("/")}
+                >
+                    Mr. Professional
+                </span>
+
+                {/* HAMBURGER RIGHT */}
+                <button
+                    className="lg:hidden ml-auto text-2xl"
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                >
+                    <FontAwesomeIcon icon={faBars} />
+                </button>
+
+                {/* DESKTOP MENU */}
+                <ul className="hidden lg:flex items-center gap-14 ml-auto text-(--text-primary)">
+
+                    {STATIC_NAV.map(item => (
                         <li key={item.label}>
                             <button
-                                type="button"
                                 onClick={() => navigate(item.path)}
-                                className="text-[16px] px-2 py-1 transition hover:text-(--color-brand-hover)"
+                                className="hover:text-(--color-brand-hover)"
                             >
                                 {item.label}
                             </button>
                         </li>
                     ))}
 
-                    {/* DYNAMIC LINKS */}
-                    {navItems.map((nav) => {
+                    {navItems.map(nav => {
                         const isOpen = openMenu === nav._id;
-                        const titles = titlesByNav[nav._id] || [];
 
                         return (
                             <li
                                 key={nav._id}
-                                className="text-[16px] relative"
+                                className="relative"
                                 onMouseEnter={() => handleItemEnter(nav._id)}
                                 onMouseLeave={handleItemLeave}
-                                ref={(el) => {
-                                    if (el) itemRefs.current[nav._id] = el;
-                                }}
+                                ref={el => el && (itemRefs.current[nav._id] = el)}
                             >
-                                <button
-                                    type="button"
-                                    className={`flex items-center gap-1 px-2 py-1 transition ${isOpen
-                                            ? "text-(--color-brand-hover)"
-                                            : "hover:text-(--color-brand-hover)"
-                                        }`}
-                                    onClick={() => toggleClick(nav._id)}
-                                >
-                                    <span>{nav.name}</span>
+                                <button className="flex items-center gap-1">
+                                    {nav.name}
                                     <FontAwesomeIcon
                                         icon={faChevronDown}
-                                        className={`text-xs transition-transform ${isOpen ? "rotate-180" : ""
-                                            }`}
+                                        className={`text-xs transition ${isOpen && "rotate-180"}`}
                                     />
                                 </button>
 
                                 {isOpen && (
                                     <DynamicMenu
                                         title={nav.name}
-                                        titles={titles}
+                                        titles={titlesByNav[nav._id] || []}
                                         hoverTitleId={hoverTitleId}
-                                        onHoverTitle={(tid) => {
-                                            setHoverTitleId(tid);
-                                            if (!subtitlesByTitle[tid]) {
-                                                fetch(`${API_BASE}/titles/${tid}/subtitles`)
-                                                    .then((r) => r.json())
-                                                    .then((subs) => {
-                                                        setSubtitlesByTitle((prev) => ({
-                                                            ...prev,
-                                                            [tid]: subs || [],
-                                                        }));
+                                        onHoverTitle={(id) => {
+                                            setHoverTitleId(id);
+                                            if (!subtitlesByTitle[id]) {
+                                                fetch(`${API_BASE}/titles/${id}/subtitles`)
+                                                    .then(r => r.json())
+                                                    .then(subs => {
+                                                        setSubtitlesByTitle(p => ({ ...p, [id]: subs || [] }));
                                                     });
                                             }
                                         }}
-                                        subtitles={
-                                            hoverTitleId ? subtitlesByTitle[hoverTitleId] || [] : []
-                                        }
+                                        subtitles={hoverTitleId ? subtitlesByTitle[hoverTitleId] || [] : []}
                                         anchorEl={itemRefs.current[nav._id]}
                                         onMouseEnter={handleMenuEnter}
                                         onMouseLeave={handleMenuLeave}
-                                        onSelectService={(serviceName) =>
-                                            navigateToService(serviceName, nav.name)
-                                        }
+                                        onSelectService={(s) => navigateToService(s, nav.name)}
                                     />
                                 )}
                             </li>
                         );
                     })}
                 </ul>
-
-
-                {/* Blog */}
-                <button
-                    type="button"
-                    onClick={() => navigate("/blogs")}
-                    className="flex items-center gap-2 text-(--text-primary) font-medium px-3 py-1.5 rounded-lg
-                        hover:bg-(--bg-hover) hover:text-(--color-brand-hover) transition-all duration-200"
-                >
-                    <FontAwesomeIcon icon={faNewspaper} className="text-sm" />
-                    <span className="hidden sm:inline">Blog</span>
-                </button>
-
-
             </div>
-        </div>
 
+            {/* ================= MOBILE DRAWER ================= */}
+            {mobileOpen && (
+                <div className="lg:hidden bg-(--bg-secondary) shadow-xl">
+
+                    <ul className="flex flex-col p-6 gap-4">
+
+                        {STATIC_NAV.map(item => (
+                            <li key={item.label}>
+                                <button
+                                    className="w-full text-left text-lg"
+                                    onClick={() => {
+                                        navigate(item.path);
+                                        setMobileOpen(false);
+                                    }}
+                                >
+                                    {item.label}
+                                </button>
+                            </li>
+                        ))}
+
+                        {/* DYNAMIC */}
+                        {navItems.map(nav => (
+                            <li key={nav._id}>
+
+                                <button
+                                    className="flex justify-between w-full text-lg"
+                                    onClick={() =>
+                                        setOpenMenu(openMenu === nav._id ? null : nav._id)
+                                    }
+                                >
+                                    {nav.name}
+                                    ▼
+                                </button>
+
+                                {openMenu === nav._id && (
+                                    <div className="pl-4 mt-2 space-y-2">
+
+                                        {(titlesByNav[nav._id] || []).map(t => (
+                                            <button
+                                                key={t._id}
+                                                className="block text-sm"
+                                                onClick={() => navigateToService(t.title, nav.name)}
+                                            >
+                                                {t.title}
+                                            </button>
+                                        ))}
+
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+
+                    </ul>
+                </div>
+            )}
+        </div>
     );
 }
 
+/* ================== MEGA MENU ================== */
 
-function DynamicMenu({ title, titles, hoverTitleId, onHoverTitle, subtitles, anchorEl, onMouseEnter, onMouseLeave, onSelectService }) {
-    const [pos, setPos] = useState({ left: 8, top: 0, width: Math.min(720, typeof window !== 'undefined' ? window.innerWidth - 16 : 720) });
-    const activeTitle = titles.find((t) => t._id === hoverTitleId);
+function DynamicMenu({
+    title, titles, hoverTitleId, onHoverTitle,
+    subtitles, anchorEl, onMouseEnter, onMouseLeave, onSelectService
+}) {
+
+    const [pos, setPos] = useState({ left: 8, top: 0, width: 720 });
 
     useEffect(() => {
-        function compute() {
+        const compute = () => {
             const vw = window.innerWidth;
             const desired = Math.min(720, vw - 16);
-            const margin = 8;
-            if (!anchorEl) {
-                const left = Math.max(margin, (vw - desired) / 2);
-                setPos({ left, top: 100, width: desired });
-                return;
-            }
-            const rect = anchorEl.getBoundingClientRect();
-            const center = rect.left + rect.width / 2;
-            let left = center - desired / 2;
-            left = Math.max(margin, Math.min(left, vw - desired - margin));
-            const top = rect.bottom + 14;
+            const rect = anchorEl?.getBoundingClientRect();
+
+            let left = rect
+                ? rect.left + rect.width / 2 - desired / 2
+                : (vw - desired) / 2;
+
+            left = Math.max(8, Math.min(left, vw - desired - 8));
+            const top = rect ? rect.bottom + 14 : 100;
+
             setPos({ left, top, width: desired });
-        }
+        };
+
         compute();
         window.addEventListener('resize', compute);
         return () => window.removeEventListener('resize', compute);
     }, [anchorEl]);
 
+    const active = titles.find(t => t._id === hoverTitleId);
+
     return (
         <div
             className="fixed z-50"
+            style={{ ...pos }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            style={{ left: pos.left, top: pos.top, width: pos.width, maxWidth: '92vw' }}
         >
             <div className="bg-(--bg-secondary) rounded-2xl shadow-2xl border-t-4 border-(--color-brand)">
+
                 <div className="px-6 py-5 grid grid-cols-2 gap-6">
+
+                    {/* TITLES */}
                     <div>
                         <h4 className="text-(--color-brand) font-semibold mb-2">Titles</h4>
-                        <div className="text-(--text-primary) font-semibold mb-3">{title}</div>
-                        <ul className="space-y-2 text-sm text-(--text-secondary)">
-                            {titles.length === 0 ? (
-                                <li className="text-(--text-secondary)">No titles yet</li>
-                            ) : (
-                                titles.map((t) => (
-                                    <li key={t._id}>
-                                        <button
-                                            type="button"
-                                            className={`w-full text-left px-3 py-2 rounded-lg cursor-pointer transition ${hoverTitleId === t._id ? "bg-(--bg-main)" : "hover:bg-(--bg-main)"}`}
-                                            onMouseEnter={() => onHoverTitle(t._id)}
-                                            onClick={() => onHoverTitle(t._id)}
-                                        >
-                                            {t.title}
-                                        </button>
-                                    </li>
-                                ))
-                            )}
+                        <div className="font-semibold mb-3">{title}</div>
+
+                        <ul className="space-y-2 text-sm">
+                            {titles.map(t => (
+                                <li key={t._id}>
+                                    <button
+                                        className={`w-full text-left px-3 py-2 rounded-lg
+                    ${hoverTitleId === t._id
+                                                ? "bg-(--bg-main)"
+                                                : "hover:bg-(--bg-main)"}`}
+                                        onMouseEnter={() => onHoverTitle(t._id)}
+                                    >
+                                        {t.title}
+                                    </button>
+                                </li>
+                            ))}
                         </ul>
                     </div>
+
+                    {/* SUBTITLES */}
                     <div>
-                        <h4 className="text-(--color-brand) font-semibold mb-3">Subtitles{activeTitle ? ` — ${activeTitle.title}` : ''}</h4>
-                        <ul className="space-y-1 text-sm text-(--text-secondary)">
-                            {subtitles.length === 0 ? (
-                                <li className="text-(--text-secondary)">Hover a title to see subtitles</li>
-                            ) : (
-                                subtitles.map((s, idx) => (
-                                    <li key={s._id}>
-                                        <button
-                                            type="button"
-                                            className="flex items-center gap-2 hover:text-(--color-brand-hover) cursor-pointer"
-                                            onClick={() => {
-                                                if (typeof onSelectService === 'function') onSelectService(s.title);
-                                                else { const slug = s.title.toLowerCase().replace(/\.(php|html)$/, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); window.location.href = `/services/${slug}` }
-                                            }}
-                                        >
-                                            <span>{s.title}</span>
-                                            {idx < 2 && (
-                                                <FontAwesomeIcon icon={faFire} className="text-(--color-warning) text-xs" />
-                                            )}
-                                        </button>
-                                    </li>
-                                ))
-                            )}
+                        <h4 className="text-(--color-brand) font-semibold mb-3">
+                            Subtitles {active && `— ${active.title}`}
+                        </h4>
+
+                        <ul className="space-y-1 text-sm">
+                            {subtitles.map((s, i) => (
+                                <li key={s._id}>
+                                    <button
+                                        className="flex gap-2 hover:text-(--color-brand-hover)"
+                                        onClick={() => onSelectService(s.title)}
+                                    >
+                                        {s.title}
+                                        {i < 2 && (
+                                            <FontAwesomeIcon
+                                                icon={faFire}
+                                                className="text-(--color-warning) text-xs"
+                                            />
+                                        )}
+                                    </button>
+                                </li>
+                            ))}
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
