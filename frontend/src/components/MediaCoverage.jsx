@@ -82,7 +82,7 @@ const MediaCoverage = () => {
         if (hover) return;
         const id = setInterval(() => {
             setCurrent(p => (p + 1) % slides.length);
-        }, 6000);
+        }, 4500);
         return () => clearInterval(id);
     }, [hover, slides.length]);
 
