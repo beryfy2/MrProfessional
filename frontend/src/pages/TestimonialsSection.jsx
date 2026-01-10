@@ -98,105 +98,120 @@ const TESTIMONIALS = [
     },
 ];
 
-const PER_PAGE = 3;
+const PER_PAGE_DESKTOP = 3;
+const PER_PAGE_MOBILE = 1;
 
 const TestimonialsSection = () => {
     const [page, setPage] = useState(0);
     const [isHover, setIsHover] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+    useEffect(() => {
+        const resize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener("resize", resize);
+        return () => window.removeEventListener("resize", resize);
+    }, []);
+
+    const PER_PAGE = isMobile ? PER_PAGE_MOBILE : PER_PAGE_DESKTOP;
     const totalPages = Math.ceil(TESTIMONIALS.length / PER_PAGE);
     const start = page * PER_PAGE;
     const visible = TESTIMONIALS.slice(start, start + PER_PAGE);
 
-    const goPrev = () => setPage((p) => (p === 0 ? totalPages - 1 : p - 1));
-    const goNext = () => setPage((p) => (p === totalPages - 1 ? 0 : p + 1));
-
+    const goPrev = () =>
+        setPage((p) => (p === 0 ? totalPages - 1 : p - 1));
+    const goNext = () =>
+        setPage((p) => (p === totalPages - 1 ? 0 : p + 1));
 
     useEffect(() => {
         if (isHover) return;
         const id = setInterval(() => {
             setPage((p) => (p === totalPages - 1 ? 0 : p + 1));
-        }, 2400);
+        }, 3000);
         return () => clearInterval(id);
     }, [isHover, totalPages]);
 
     return (
         <section
             className="
-    py-24
-    bg-(--bg-secondary)
-  "
+                py-24
+                bg-(--bg-secondary)
+                text-(--text-primary)
+            "
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
         >
             <div className="max-w-6xl mx-auto px-4 text-(--text-primary)">
+
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <p className="text-xl md:text-2xl font-semibold text-(--color-brand)">
+                    <p className="text-lg md:text-2xl font-semibold text-(--color-brand)">
                         "Explore how Company has helped businesses reach new heights as their trusted partner."
                     </p>
                     <div className="w-16 h-1 bg-green-400 mx-auto mt-4 rounded-full" />
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-8 items-start">
-                    {/* LEFT SIDE: ratings & arrows */}
-                    <div className="space-y-6">
-                        <h3 className="text-2xl font-bold text-green-400">Testimonials</h3>
+                {/* Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-8">
 
-                        <div className="space-y-4 text-sm mb-30">
-                            <RatingRow
-                                iconClass="fa-brands fa-google"
-                                iconBg="bg-[var(--bg-main)]"
-                                iconColor="text-[#4285F4]"
-                                label="Google Customer Rating"
-                                score="4.7"
-                            />
-                        </div>
+                    {/* LEFT */}
+                    <div className="space-y-6 text-center lg:text-left">
+                        <h3 className="text-xl md:text-2xl font-bold text-green-400">
+                            Testimonials
+                        </h3>
 
-                        
+                        <RatingRow
+                            iconClass="fa-brands fa-google"
+                            iconBg="bg-[var(--bg-main)]"
+                            iconColor="text-[#4285F4]"
+                            label="Google Customer Rating"
+                            score="4.7"
+                        />
 
                         {/* Arrows */}
-                        <div className="flex items-center gap-3 mt-6">
+                        <div className="hidden lg:flex items-center gap-3 mt-6">
                             <button
                                 onClick={goPrev}
-                                className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e] flex items-center justify-center shadow hover:bg-(--bg-hover)"
+                                className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e] flex items-center justify-center shadow"
                             >
                                 <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
                             </button>
                             <button
                                 onClick={goNext}
-                                className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e] flex items-center justify-center shadow hover:bg-(--bg-hover)"
+                                className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e] flex items-center justify-center shadow"
                             >
                                 <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
                             </button>
                         </div>
                     </div>
 
-                    {/* cards slider */}
-                    <div className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+                    {/* SLIDER */}
+                    <div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                             {visible.map((t) => (
                                 <div
                                     key={t.id}
-                                    className="bg-(--bg-main) text-(--text-primary) rounded-3xl shadow-lg px-6 py-6 border-b-4 border-b-(--color-brand) border-(--border-color) 
-                                        flex flex-col justify-between min-h-[360px] h-full"
+                                    className="bg-(--bg-main) rounded-3xl shadow-lg px-6 py-6 border-b-4 border-b-(--color-brand)
+                                        flex flex-col justify-between min-h-80"
                                 >
                                     <div>
                                         <FontAwesomeIcon
                                             icon="fa-solid fa-quote-left"
-                                            className="text-(--color-brand) text-lg mb-3"
+                                            className="text-(--color-brand) mb-3"
                                         />
                                         <p className="text-sm leading-relaxed text-(--text-secondary)">
                                             {t.text}
                                         </p>
                                     </div>
-                                    <div className="flex items-center gap-3 mt-5 pt-4 border-t border-(--border-color)">
-                                        <div className="h-10 w-10 rounded-full bg-(--color-brand)/10 flex items-center justify-center text-(--color-brand) font-bold text-sm overflow-hidden">
+
+                                    <div className="flex items-center gap-3 mt-5 pt-4 border-t">
+                                        <div className="h-10 w-10 rounded-full bg-(--color-brand)/10 flex items-center justify-center font-bold">
                                             {t.initials}
                                         </div>
-                                        <div className="flex flex-col">
-                                            <span className="font-semibold text-sm">{t.name}</span>
-                                            <div className="flex items-center gap-2 text-xs text-(--text-secondary)">
+                                        <div>
+                                            <span className="font-semibold text-sm">
+                                                {t.name}
+                                            </span>
+                                            <div className="flex items-center gap-2 text-xs">
                                                 <FontAwesomeIcon
                                                     icon="fa-brands fa-google"
                                                     className="text-[#4285F4]"
@@ -209,17 +224,38 @@ const TestimonialsSection = () => {
                             ))}
                         </div>
 
-                        {/* Dots */}
-                        <div className="flex justify-center gap-2 mt-2">
+                        {/* DOTS */}
+                        <div className="flex justify-center gap-2 mt-4">
                             {Array.from({ length: totalPages }).map((_, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setPage(i)}
-                                    className={`h-2 w-2 rounded-full transition ${i === page ? "bg-(--color-brand)" : "bg-(--text-secondary)/40"
+                                    className={`h-2 w-2 rounded-full ${i === page
+                                        ? "bg-(--color-brand)"
+                                        : "bg-(--text-secondary)/40"
                                         }`}
                                 />
                             ))}
                         </div>
+                        {/* MOBILE arrows (below dots) */}
+                        <div className="flex lg:hidden justify-center gap-4 mt-4">
+                            <button
+                                onClick={goPrev}
+                                className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e]
+      flex items-center justify-center shadow hover:bg-(--bg-hover)"
+                            >
+                                <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+                            </button>
+
+                            <button
+                                onClick={goNext}
+                                className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e]
+      flex items-center justify-center shadow hover:bg-(--bg-hover)"
+                            >
+                                <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
