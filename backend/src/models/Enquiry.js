@@ -8,7 +8,12 @@ const EnquirySchema = new mongoose.Schema(
     subject: { type: String, required: true },
     message: { type: String, required: true },
     file: { type: String },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    // Payment related fields
+    transactionId: { type: String },
+    paymentStatus: { type: String },
+    amount: { type: Number },
+    read: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

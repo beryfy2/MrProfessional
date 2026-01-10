@@ -120,6 +120,7 @@ export default function BlogPage() {
       <img
         src="https://professionalutilities.com/assets/images/why-pu.png"
         alt="Why "
+        className="max-w-full h-auto"
       />
     </div>
 

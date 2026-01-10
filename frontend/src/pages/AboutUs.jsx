@@ -163,7 +163,7 @@ entrepreneurs and strengthening the Indian startup ecosystem.
 
               <div className="who-right">
                 <img
-                  className="who-image"
+                  className="who-image max-w-full h-auto"
                   src="https://images.unsplash.com/photo-1544006659-f0b21884ce1d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=0c3b9d8b9e6f5b1d3f8c6a2c8a2b9f1a"
                   alt="Team"
                 />

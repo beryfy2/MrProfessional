@@ -6,6 +6,10 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import axios from "axios";        
+import crypto from "crypto";      
+import Payment from "./models/Payment.js"; 
+
 
 
 dotenv.config();
@@ -41,6 +45,7 @@ import AdminConfig from './models/AdminConfig.js';
 import ResetToken from './models/ResetToken.js';
 import Category from "./models/Category.js";
 import Blog from "./models/Blog.js";
+import phonepeRouter from './routes/phonepe.routes.js';
 
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -457,6 +462,24 @@ app.get('/api/enquiries', async (req, res) => {
   res.json(list);
 });
 
+app.get('/api/enquiries/unread-count', async (req, res) => {
+  try {
+    const count = await Enquiry.countDocuments({ read: false });
+    res.json({ count });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to fetch unread count' });
+  }
+});
+
+app.put('/api/enquiries/:id/read', auth, async (req, res) => {
+  try {
+    const enquiry = await Enquiry.findByIdAndUpdate(req.params.id, { read: true }, { new: true });
+    res.json(enquiry);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to mark enquiry as read' });
+  }
+});
+
 app.post('/api/enquiries', upload.single('file'), async (req, res) => {
   try {
     const { companyName, contactPerson, email, subject, message } = req.body || {};
@@ -780,6 +803,9 @@ app.delete('/api/subtitles/:sid/files', auth, async (req, res) => {
     res.status(400).json({ error: 'Failed to remove file' });
   }
 });
+// Mount PhonePe routes from routes/phonepe.routes.js
+app.use('/api/phonepe', phonepeRouter);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
