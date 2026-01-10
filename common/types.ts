@@ -89,6 +89,10 @@ export type Enquiry = {
   message: string;
   file?: string;
   date?: string;
+  transactionId?: string;
+  paymentStatus?: string;
+  amount?: number;
+  read?: boolean;
 };
 
 export type Job = {

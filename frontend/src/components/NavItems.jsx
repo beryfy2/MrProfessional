@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faFire, faNewspaper, faPenNib, faBlog } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,6 +22,20 @@ export default function NavItems({ transparent = false }) {
 
     const [navItems, setNavItems] = useState([]);
     const [openMenu, setOpenMenu] = useState(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
+
+    // Close mobile menu automatically on route change
+    useEffect(() => {
+        setMobileOpen(false);
+    }, [location.pathname]);
+
+    // Prevent background scroll when mobile menu is open
+    useEffect(() => {
+        document.body.style.overflow = mobileOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [mobileOpen]);
+
     const closeTimer = useRef(null);
     const openTimer = useRef(null);
     const [titlesByNav, setTitlesByNav] = useState({});
@@ -290,6 +304,16 @@ export default function NavItems({ transparent = false }) {
                 </ul>
 
 
+                {/* Mobile menu toggle (visible on small screens) */}
+                <button
+                    type="button"
+                    aria-label="Open menu"
+                    className="lg:hidden p-2 rounded-md bg-transparent hover:bg-(--bg-hover)"
+                    onClick={() => setMobileOpen(true)}
+                >
+                    <svg className="w-6 h-6 text-(--text-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+
                 {/* Blog */}
                 <button
                     type="button"
@@ -303,6 +327,33 @@ export default function NavItems({ transparent = false }) {
 
 
             </div>
+
+            {/* MOBILE NAV OVERLAY */}
+            {mobileOpen && (
+                <div className="fixed inset-0 z-50 bg-black/50 lg:hidden" onClick={() => setMobileOpen(false)}>
+                    <div className="absolute right-0 top-0 w-80 max-w-[85vw] h-full bg-(--bg-secondary) p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center justify-between mb-6">
+                            <a href="/" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>Mr. Professional</a>
+                            <button aria-label="Close menu" onClick={() => setMobileOpen(false)} className="p-2">✕</button>
+                        </div>
+
+                        <nav className="space-y-3">
+                            {STATIC_NAV.map((i) => (
+                                <button key={i.label} onClick={() => { navigate(i.path); setMobileOpen(false); }} className="w-full text-left block py-2">{i.label}</button>
+                            ))}
+
+                            <div className="mt-4 border-t pt-4">
+                                <div className="text-sm font-semibold mb-2">Services</div>
+                                {navItems.map((nav) => (
+                                    <button key={nav._id} onClick={() => { navigate(`/services/${slugify(nav.name)}`); setMobileOpen(false); }} className="w-full text-left block py-2">{nav.name}</button>
+                                ))}
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>
+            )}
+
         </div>
 
     );

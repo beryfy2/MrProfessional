@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { logout } from "../lib/api";
+import { logout, getJSON } from "../lib/api";
 import { useState, useRef, useEffect } from "react";
 
 const Topbar = () => {
   const navigate = useNavigate();
   const [openProfile, setOpenProfile] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const profileRef = useRef(null);
 
   // Close on outside click
@@ -16,6 +17,22 @@ const Topbar = () => {
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      try {
+        const data = await getJSON<{ count: number }>("/enquiries/unread-count");
+        setUnreadCount(data.count);
+      } catch (error) {
+        console.error("Failed to fetch unread count:", error);
+      }
+    };
+
+    fetchUnreadCount();
+    // Poll every 30 seconds
+    const interval = setInterval(fetchUnreadCount, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleLogout = () => {
@@ -37,7 +54,7 @@ const Topbar = () => {
           onClick={() => navigate("/admin/enquiries")}
         >
           🔔
-          <span className="notification-badge">3</span>
+          {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
         </button>
 
         {/* Profile */}

@@ -187,6 +187,17 @@
 @media (max-width: 900px) {
   .payment-container {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 40px;
+    padding: 0 16px;
   }
+  .payment-left, .payment-right { padding: 0; }
+  .status-icon { width: 56px; height: 56px; font-size: 28px; }
+  .brand img { width: 64px; }
+}
+
+@media (max-width: 480px) {
+  .payment-container { gap: 30px; }
+  .reassurance, .terms p { max-width: 100%; }
+  .section-title { font-size: 20px; }
+  .status-icon { width: 48px; height: 48px; font-size: 22px; }
 }

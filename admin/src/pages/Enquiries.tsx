@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import type { Enquiry } from '../../../common/types';
-import { getJSON, delJSON } from '../lib/api';
+import { getJSON, delJSON, sendJSON } from '../lib/api';
+import '../payment-status.css';
 
 type SortOption = 'newest' | 'oldest' | 'company' | 'subject';
 type FilterOption = 'all' | 'with-attachment' | 'without-attachment';
@@ -298,6 +299,11 @@ export default function Enquiries() {
                         📎
                       </span>
                     )}
+                    {e.paymentStatus && (
+                      <span className={`status-badge status-${e.paymentStatus.toLowerCase()}`}>
+                        {e.paymentStatus}
+                      </span>
+                    )}
                   </div>
                   <div className="enquiry-meta">
                     <span className="meta-item" title={e.companyName}>
@@ -356,6 +362,29 @@ export default function Enquiries() {
                       </span>
                     </div>
 
+                    {e.paymentStatus && (
+                      <>
+                        <div className="detail-item">
+                          <span className="detail-label">Payment Status:</span>
+                          <span className={`detail-value status-text-${e.paymentStatus.toLowerCase()}`}>
+                            {e.paymentStatus}
+                          </span>
+                        </div>
+                        {e.amount && (
+                          <div className="detail-item">
+                            <span className="detail-label">Amount:</span>
+                            <span className="detail-value">₹{e.amount}</span>
+                          </div>
+                        )}
+                        {e.transactionId && (
+                          <div className="detail-item">
+                            <span className="detail-label">Transaction ID:</span>
+                            <span className="detail-value">{e.transactionId}</span>
+                          </div>
+                        )}
+                      </>
+                    )}
+
                     {e.file && (
                       <div className="detail-item">
                         <span className="detail-label">Attachment:</span>
@@ -407,7 +436,19 @@ export default function Enquiries() {
 
                 <button
                   className="btn btn-secondary"
-                  onClick={() => setOpenId(openId === e._id ? null : e._id!)}
+                  onClick={async () => {
+                    setOpenId(openId === e._id ? null : e._id!);
+                    if (openId !== e._id && !e.read) {
+                      try {
+                        await sendJSON({}, `/enquiries/${e._id}/read`, 'PUT');
+                        setList(prev => prev.map(item => 
+                          item._id === e._id ? { ...item, read: true } : item
+                        ));
+                      } catch (err) {
+                        console.error('Failed to mark as read', err);
+                      }
+                    }
+                  }}
                 >
                   <span>{openId === e._id ? '👁️‍🗨️' : '👁️'}</span>
                   {openId === e._id ? 'Hide' : 'View'} Details

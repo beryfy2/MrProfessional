@@ -13,7 +13,7 @@ export default function PaymentFailed() {
         {/* LEFT SECTION – BRAND */}
         <div className="payment-left">
           <div className="brand">
-            <img src={logo} alt="Mr Professional Logo" />
+            <img src={logo} alt="Mr Professional Logo" className="max-w-full h-auto" />
             <h2>Mr Professional</h2>
           </div>
 
