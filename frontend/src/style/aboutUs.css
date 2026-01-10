@@ -84,21 +84,6 @@
   line-height: 1.6;
 }
 
-/* Green icon circle */
-.about-hero-right .card::after {
-  content: "";
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-brand);
-  box-shadow: 0 8px 16px rgba(0, 255, 120, 0.35);
-}
-
 /* =====================================================
    FLOATING SHAPES (UNCHANGED)
    ===================================================== */

@@ -156,8 +156,8 @@ entrepreneurs and strengthening the Indian startup ecosystem.
 
                 <p className="who-paragraph" style={{ marginTop: 28 }}>
                   The firm provides personalized services across India in tax preparation, accounting,
-  business setup, startup registration, licensing, compliance, legal support, tax planning,
-  payroll and labour law services, and Intellectual Property Rights (IPR) protection.
+                  business setup, startup registration, licensing, compliance, legal support, tax planning,
+                  payroll and labour law services, and Intellectual Property Rights (IPR) protection.
                 </p>
               </div>
 
