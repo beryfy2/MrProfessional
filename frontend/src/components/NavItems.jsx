@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faFire, faBars } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,7 +11,7 @@ const STATIC_NAV = [
     { label: "About Us", path: "/about" },
     { label: "Team", path: "/team" },
     { label: "Contact", path: "/contact" },
-    { label: "Blogs", path: "/blogs" },
+    { label: "Blog", path: "/blogs" },
 ];
 
 export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
@@ -24,6 +24,8 @@ export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
     const [titlesByNav, setTitlesByNav] = useState({});
     const [hoverTitleId, setHoverTitleId] = useState(null);
     const [subtitlesByTitle, setSubtitlesByTitle] = useState({});
+    const navCenterRef = useRef(null);
+
 
     const closeTimer = useRef(null);
     const openTimer = useRef(null);
@@ -125,83 +127,96 @@ export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
     return (
         <div className={`${finalBg} transition-all duration-300 shadow-lg`}>
 
-            <div className="max-w-[1500px] mx-auto px-6 py-4 flex items-center relative">
+            <div className="max-w-[1500px] mx-auto px-4 py-3 grid grid-cols-2 lg:grid-cols-3 items-center">
 
-                {/* LOGO */}
-                <span
-                    className="text-xl font-semibold cursor-pointer text-(--text-primary)"
-                    onClick={() => navigate("/")}
+
+                {/* LOGO - LEFT */}
+                <div className="flex justify-start">
+                    <span
+                        className="text-xl font-semibold cursor-pointer text-(--text-primary)"
+                        onClick={() => navigate("/")}
+                    >
+                        Mr. Professional
+                    </span>
+                </div>
+
+                {/* CENTER MENU */}
+                <div
+                    ref={navCenterRef}
+                    className="hidden lg:flex justify-center ml-24"
                 >
-                    Mr. Professional
-                </span>
 
-                {/* HAMBURGER RIGHT */}
-                <button
-                    className="lg:hidden ml-auto text-2xl"
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                >
-                    <FontAwesomeIcon icon={faBars} />
-                </button>
+                    <ul className="flex items-center gap-16 text-(--text-primary)">
 
-                {/* DESKTOP MENU */}
-                <ul className="hidden lg:flex items-center gap-14 ml-auto text-(--text-primary)">
-
-                    {STATIC_NAV.map(item => (
-                        <li key={item.label}>
-                            <button
-                                onClick={() => navigate(item.path)}
-                                className="hover:text-(--color-brand-hover)"
-                            >
-                                {item.label}
-                            </button>
-                        </li>
-                    ))}
-
-                    {navItems.map(nav => {
-                        const isOpen = openMenu === nav._id;
-
-                        return (
-                            <li
-                                key={nav._id}
-                                className="relative"
-                                onMouseEnter={() => handleItemEnter(nav._id)}
-                                onMouseLeave={handleItemLeave}
-                                ref={el => el && (itemRefs.current[nav._id] = el)}
-                            >
-                                <button className="flex items-center gap-1">
-                                    {nav.name}
-                                    <FontAwesomeIcon
-                                        icon={faChevronDown}
-                                        className={`text-xs transition ${isOpen && "rotate-180"}`}
-                                    />
+                        {STATIC_NAV.map(item => (
+                            <li key={item.label}>
+                                <button
+                                    onClick={() => navigate(item.path)}
+                                    className="hover:text-(--color-brand-hover) whitespace-nowrap"
+                                >
+                                    {item.label}
                                 </button>
-
-                                {isOpen && (
-                                    <DynamicMenu
-                                        title={nav.name}
-                                        titles={titlesByNav[nav._id] || []}
-                                        hoverTitleId={hoverTitleId}
-                                        onHoverTitle={(id) => {
-                                            setHoverTitleId(id);
-                                            if (!subtitlesByTitle[id]) {
-                                                fetch(`${API_BASE}/titles/${id}/subtitles`)
-                                                    .then(r => r.json())
-                                                    .then(subs => {
-                                                        setSubtitlesByTitle(p => ({ ...p, [id]: subs || [] }));
-                                                    });
-                                            }
-                                        }}
-                                        subtitles={hoverTitleId ? subtitlesByTitle[hoverTitleId] || [] : []}
-                                        anchorEl={itemRefs.current[nav._id]}
-                                        onMouseEnter={handleMenuEnter}
-                                        onMouseLeave={handleMenuLeave}
-                                        onSelectService={(s) => navigateToService(s, nav.name)}
-                                    />
-                                )}
                             </li>
-                        );
-                    })}
-                </ul>
+                        ))}
+
+                        {navItems.map(nav => {
+                            const isOpen = openMenu === nav._id;
+
+                            return (
+                                <li
+                                    key={nav._id}
+                                    className="relative"
+                                    onMouseEnter={() => handleItemEnter(nav._id)}
+                                    onMouseLeave={handleItemLeave}
+                                    ref={el => el && (itemRefs.current[nav._id] = el)}
+                                >
+                                    <button className="flex items-center gap-1">
+                                        {nav.name}
+                                        <FontAwesomeIcon
+                                            icon={faChevronDown}
+                                            className={`text-xs transition ${isOpen ? "rotate-180" : ""}`}
+                                        />
+                                    </button>
+
+                                    {isOpen && (
+                                        <DynamicMenu
+                                            title={nav.name}
+                                            titles={titlesByNav[nav._id] || []}
+                                            hoverTitleId={hoverTitleId}
+                                            onHoverTitle={(id) => {
+                                                setHoverTitleId(id);
+                                                if (!subtitlesByTitle[id]) {
+                                                    fetch(`${API_BASE}/titles/${id}/subtitles`)
+                                                        .then(r => r.json())
+                                                        .then(subs => {
+                                                            setSubtitlesByTitle(p => ({ ...p, [id]: subs || [] }));
+                                                        });
+                                                }
+                                            }}
+                                            subtitles={hoverTitleId ? subtitlesByTitle[hoverTitleId] || [] : []}
+                                            anchorEl={navCenterRef.current}
+
+                                            onMouseEnter={handleMenuEnter}
+                                            onMouseLeave={handleMenuLeave}
+                                            onSelectService={(s) => navigateToService(s, nav.name)}
+                                        />
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+
+                {/* HAMBURGER - RIGHT */}
+                <div className="flex justify-end">
+                    <button
+                        className="lg:hidden text-2xl"
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                    >
+                        <FontAwesomeIcon icon={faBars} />
+                    </button>
+                </div>
+
             </div>
 
             {/* ================= MOBILE DRAWER ================= */}
@@ -273,20 +288,30 @@ function DynamicMenu({
     const [pos, setPos] = useState({ left: 8, top: 0, width: 720 });
 
     useEffect(() => {
-        const compute = () => {
+        function compute() {
             const vw = window.innerWidth;
             const desired = Math.min(720, vw - 16);
-            const rect = anchorEl?.getBoundingClientRect();
+            const margin = 8;
 
-            let left = rect
-                ? rect.left + rect.width / 2 - desired / 2
-                : (vw - desired) / 2;
+            if (!anchorEl) {
+                const left = (vw - desired) / 2;
+                setPos({ left, top: 120, width: desired });
+                return;
+            }
 
-            left = Math.max(8, Math.min(left, vw - desired - 8));
-            const top = rect ? rect.bottom + 14 : 100;
+            const rect = anchorEl.getBoundingClientRect();
+
+            // 👉 CENTER of whole nav menu
+            const center = rect.left + rect.width / 2;
+
+            let left = center - desired / 2;
+            left = Math.max(margin, Math.min(left, vw - desired - margin));
+
+            const top = rect.bottom + 14;
 
             setPos({ left, top, width: desired });
-        };
+        }
+
 
         compute();
         window.addEventListener('resize', compute);
