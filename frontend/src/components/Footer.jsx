@@ -29,14 +29,6 @@ const ORG_LINKS = [
     { label: "Privacy Policy", path: "/privacy-policy" },
 ];
 
-const POPULAR_SERVICES = [
-    "GeM Registration",
-    "Pvt. Ltd. Company",
-    "LLP Registration",
-    "Trademark Registration",
-    "Section 8 Company",
-];
-
 const USEFUL_TOOLS = [
     { label: "Check FSSAI License Number Status", path: "/tools/fssai-status" },
     { label: "TDS Interest Calculator", path: "/tools/tds-interest-calculator" },
@@ -83,7 +75,6 @@ const TESTIMONIALS = [
     },
 ];
 
-
 /* ---------------- COMPONENT ---------------- */
 
 const Footer = () => {
@@ -104,7 +95,8 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pt-10 pb-6 space-y-12">
 
                 {/* ---------------- TOP LINKS ---------------- */}
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr_1.2fr] gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1.2fr] gap-8">
+
                     <FooterColumn title="Organization">
                         {ORG_LINKS.map((i) => (
                             <FooterItem key={i.label} to={i.path}>{i.label}</FooterItem>
@@ -118,7 +110,8 @@ const Footer = () => {
                     </FooterColumn>
 
                     {/* CONTACT */}
-                    <div className="space-y-4 text-sm lg:col-start-4">
+                    <div className="space-y-4 text-sm text-center lg:text-left lg:col-start-4">
+
                         <div>
                             <p className="text-(--color-brand) font-semibold text-xs mb-1">
                                 Call us on
@@ -143,15 +136,15 @@ const Footer = () => {
                             <p className="text-(--color-brand) font-semibold text-xs mb-1">
                                 Follow us on
                             </p>
-                            <div className="flex gap-3 mt-2">
-                                <a href="https://www.facebook.com/Mr.ProfessionalOfficial#"><IconBubble icon={faFacebookF} /></a>
-                                <a href="https://www.instagram.com/mrprofessional.official/"><IconBubble icon={faInstagram} /></a>
-                                <a href="https://x.com/MrProfe19311696"><IconBubble icon={faXTwitter} /></a>
-                                <a href="https://www.linkedin.com/company/mrprofessionalofficial/"><IconBubble icon={faLinkedinIn} /></a>
+                            <div className="flex gap-3 mt-2 justify-center lg:justify-start">
+                                <a href="#"><IconBubble icon={faFacebookF} /></a>
+                                <a href="#"><IconBubble icon={faInstagram} /></a>
+                                <a href="#"><IconBubble icon={faXTwitter} /></a>
+                                <a href="#"><IconBubble icon={faLinkedinIn} /></a>
                             </div>
                         </div>
 
-                        <div className="flex gap-3 pt-2">
+                        <div className="flex gap-3 pt-2 justify-center lg:justify-start">
                             <FontAwesomeIcon
                                 icon={faLocationDot}
                                 className="text-(--color-brand) mt-1"
@@ -164,23 +157,22 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* TRUST + TESTIMONIAL*/}
-                <div className=" rounded-3xl px-6 md:px-10 py-8 border-(--border-color)">
+                {/* TRUST + TESTIMONIAL */}
+                <div className="rounded-3xl px-6 md:px-10 py-8 border-(--border-color)">
                     <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 items-center">
 
                         {/* LEFT */}
-                        <div className="grid grid-cols-[auto_40px_auto_40px_auto] gap-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-[auto_40px_auto_40px_auto] gap-y-6">
 
-                            {/* BADGES ROW */}
                             <TrustBadge icon={faShieldHalved} label="Reliable" />
                             <Divider />
                             <TrustBadge icon={faTags} label="Affordable" />
                             <Divider />
                             <TrustBadge icon={faHandshake} label="Assurity" />
 
-                            {/* CTA ROW – CENTERED UNDER MIDDLE BADGE */}
-                            <div className="col-span-5 flex justify-center">
-                                <div className="flex items-center gap-5">
+                            {/* CTA */}
+                            <div className="md:col-span-5 flex justify-center">
+                                <div className="flex flex-col sm:flex-row items-center gap-4">
                                     <Link
                                         to="/partners-signup"
                                         className="px-8 py-2 rounded-full bg-(--color-brand) text-white text-sm font-semibold hover:opacity-90 transition"
@@ -198,22 +190,20 @@ const Footer = () => {
                                 </div>
                             </div>
 
-                            {/* PAYMENT ICONS – SAME CENTER */}
-                            <div className="col-span-5 flex justify-center">
+                            {/* PAYMENT ICONS */}
+                            <div className="md:col-span-5 flex justify-center">
                                 <img src={upiImg} alt="UPI" className="h-7" />
                             </div>
-
                         </div>
 
+                        {/* RIGHT */}
+                        <div className="bg-(--bg-main) rounded-2xl px-4 md:px-6 py-5 md:py-6 border border-(--border-color) flex flex-col gap-4">
 
-
-                        {/* RIGHT – TESTIMONIAL */}
-                        <div className="bg-(--bg-main) rounded-2xl px-6 py-6 border border-(--border-color) flex flex-col gap-4">
                             <p className="text-sm md:text-[15px] leading-relaxed">
                                 {activeTestimonial.text}
                             </p>
 
-                            <div className="flex items-center justify-between flex-wrap gap-3">
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                                 <p className="font-semibold">{activeTestimonial.name}</p>
 
                                 <div className="flex items-center gap-2">
@@ -224,14 +214,14 @@ const Footer = () => {
                                 </div>
                             </div>
 
-                            <div className="flex gap-2">
+                            <div className="flex justify-center lg:justify-start gap-2">
                                 {TESTIMONIALS.map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => setActiveIndex(i)}
                                         className={`h-2.5 w-2.5 rounded-full ${i === activeIndex
-                                            ? "bg-(--color-brand)"
-                                            : "bg-(--text-secondary)"
+                                                ? "bg-(--color-brand)"
+                                                : "bg-(--text-secondary)"
                                             }`}
                                     />
                                 ))}
@@ -241,13 +231,13 @@ const Footer = () => {
                 </div>
 
                 {/* ---------------- BOTTOM BAR ---------------- */}
-                <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row justify-between items-center text-xs">
+                <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-center md:text-left">
                     <span>© 2025 Mr Professional Pvt Ltd. All Rights Reserved.</span>
+
                     <div className="flex gap-4">
                         <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
                         <FooterLink to="/terms-and-conditions">Terms & Conditions</FooterLink>
                         <FooterLink to="/refund-policy">Refund Policy</FooterLink>
-
                     </div>
                 </div>
 
@@ -280,7 +270,7 @@ const IconBubble = ({ icon }) => (
 );
 
 const TrustBadge = ({ icon, label }) => (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 justify-center md:justify-start">
         <div className="h-11 w-11 rounded-full border border-(--color-brand) flex items-center justify-center">
             <FontAwesomeIcon icon={icon} className="text-(--color-brand) text-xl" />
         </div>
