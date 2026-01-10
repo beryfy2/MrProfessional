@@ -65,11 +65,7 @@ export default function Achievements() {
                   <Link to={`/achievements/${item._id}`} className="achievement-title-link">
                     <h3 className="achievement-title">{item.title}</h3>
                   </Link>
-                  <p className="achievement-desc">
-                    {item.content.length > 150 
-                      ? item.content.substring(0, 150) + "..." 
-                      : item.content}
-                  </p>
+                
                 </div>
               </div>
             ))}
