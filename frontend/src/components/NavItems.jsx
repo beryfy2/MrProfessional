@@ -14,7 +14,7 @@ const STATIC_NAV = [
     { label: "Blog", path: "/blogs" },
 ];
 
-export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
+export default function NavItems({ sticky }) {
 
     const navigate = useNavigate();
     const finalBg = "bg-[var(--bg-secondary)]";
@@ -25,6 +25,10 @@ export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
     const [hoverTitleId, setHoverTitleId] = useState(null);
     const [subtitlesByTitle, setSubtitlesByTitle] = useState({});
     const navCenterRef = useRef(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [activeNav, setActiveNav] = useState(null);
+    const [activeTitle, setActiveTitle] = useState(null);
+
 
 
     const closeTimer = useRef(null);
@@ -220,60 +224,157 @@ export default function NavItems({ sticky, mobileOpen, setMobileOpen }) {
             </div>
 
             {/* ================= MOBILE DRAWER ================= */}
-            {mobileOpen && (
-                <div className="lg:hidden bg-(--bg-secondary) shadow-xl">
+            {/* MOBILE SIDEBAR */}
+            <div
+                className={`fixed inset-0 z-999 lg:hidden transition-all duration-300
+                ${mobileOpen ? "visible" : "invisible"}`}
+            >
 
-                    <ul className="flex flex-col p-6 gap-4">
+                {/* OVERLAY */}
+                <div
+                    className={`absolute inset-0 bg-black/40 transition-opacity
+                    ${mobileOpen ? "opacity-100" : "opacity-0"}`}
+                    onClick={() => setMobileOpen(false)}
+                />
 
+                {/* SIDEBAR */}
+                <div
+                    className={`absolute left-0 top-0 h-full w-[85%] max-w-[360px]
+                    bg-[#0b2b4b] text-white shadow-2xl
+                    transition-transform duration-300
+                    ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+                >
+
+                    {/* HEADER */}
+                    <div className="p-5 flex items-center justify-between border-b border-white/10">
+                        <span className="font-semibold text-lg">Mr. Professional</span>
+                        <button
+                            className="text-2xl"
+                            onClick={() => setMobileOpen(false)}
+                        >
+                            ✕
+                        </button>
+                    </div>
+
+                    {/* SEARCH
+                    <div className="p-4">
+                        <div className="bg-white/10 rounded-xl px-4 py-3 flex items-center justify-between">
+                            <span className="text-sm text-white/60">Search Service</span>
+                            🎤
+                        </div>
+                    </div> */}
+
+                    {/* MENU */}
+                    <div className="overflow-y-auto h-[calc(100%-140px)] px-4">
+
+                        {/* STATIC LINKS */}
                         {STATIC_NAV.map(item => (
-                            <li key={item.label}>
-                                <button
-                                    className="w-full text-left text-lg"
-                                    onClick={() => {
-                                        navigate(item.path);
-                                        setMobileOpen(false);
-                                    }}
-                                >
-                                    {item.label}
-                                </button>
-                            </li>
+                            <button
+                                key={item.label}
+                                onClick={() => {
+                                    navigate(item.path);
+                                    setMobileOpen(false);
+                                }}
+                                className="w-full text-left py-3 border-b border-white/10"
+                            >
+                                {item.label}
+                            </button>
                         ))}
 
-                        {/* DYNAMIC */}
+                        {/* DYNAMIC NAV */}
                         {navItems.map(nav => (
-                            <li key={nav._id}>
+                            <div key={nav._id} className="border-b border-white/10">
 
+                                {/* NAV HEAD */}
                                 <button
-                                    className="flex justify-between w-full text-lg"
-                                    onClick={() =>
-                                        setOpenMenu(openMenu === nav._id ? null : nav._id)
-                                    }
+                                    className="w-full flex justify-between py-3"
+                                    onClick={() => {
+                                        setActiveNav(activeNav === nav._id ? null : nav._id);
+
+                                        // FETCH TITLES
+                                        if (!titlesByNav[nav._id]) {
+                                            fetch(`${API_BASE}/nav-items/${nav._id}/titles`)
+                                                .then(r => r.json())
+                                                .then(titles => {
+                                                    setTitlesByNav(prev => ({
+                                                        ...prev,
+                                                        [nav._id]: titles || []
+                                                    }));
+                                                });
+                                        }
+                                    }}
+
                                 >
                                     {nav.name}
-                                    ▼
+                                    <span>{activeNav === nav._id ? "▲" : "▼"}</span>
                                 </button>
 
-                                {openMenu === nav._id && (
-                                    <div className="pl-4 mt-2 space-y-2">
+                                {/* TITLES */}
+                                {activeNav === nav._id && (
+                                    <div className="pl-3">
 
                                         {(titlesByNav[nav._id] || []).map(t => (
-                                            <button
-                                                key={t._id}
-                                                className="block text-sm"
-                                                onClick={() => navigateToService(t.title, nav.name)}
-                                            >
-                                                {t.title}
-                                            </button>
+                                            <div key={t._id}>
+
+                                                {/* TITLE */}
+                                                <button
+                                                    className="w-full flex justify-between py-2 text-sm"
+                                                    onClick={() => {
+                                                        setActiveTitle(activeTitle === t._id ? null : t._id);
+
+                                                        // FETCH SUBTITLES
+                                                        if (!subtitlesByTitle[t._id]) {
+                                                            fetch(`${API_BASE}/titles/${t._id}/subtitles`)
+                                                                .then(r => r.json())
+                                                                .then(subs => {
+                                                                    setSubtitlesByTitle(prev => ({
+                                                                        ...prev,
+                                                                        [t._id]: subs || []
+                                                                    }));
+                                                                });
+                                                        }
+                                                    }}
+
+                                                >
+                                                    {t.title}
+                                                    <span>
+                                                        {activeTitle === t._id ? "▲" : "▼"}
+                                                    </span>
+                                                </button>
+
+                                                {/* SUB TITLES */}
+                                                {activeTitle === t._id && (
+                                                    <div className="pl-3">
+
+                                                        {(subtitlesByTitle[t._id] || []).map(s => (
+                                                            <button
+                                                                key={s._id}
+                                                                className="block w-full text-left py-2 text-xs text-white/80"
+                                                                onClick={() => {
+                                                                    navigateToService(s.title, nav.name);
+                                                                    setMobileOpen(false);
+                                                                }}
+                                                            >
+                                                                {s.title}
+                                                            </button>
+                                                        ))}
+
+                                                    </div>
+                                                )}
+
+                                            </div>
                                         ))}
 
                                     </div>
                                 )}
-                            </li>
+
+                            </div>
                         ))}
 
-                    </ul>
+                    </div>
                 </div>
-            )}
+            </div>
+
         </div>
     );
 }
