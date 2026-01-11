@@ -35,7 +35,7 @@ export default function HeroPage() {
                     fixed 
                     right-3 sm:right-6 
                     bottom-3 sm:bottom-6 
-                    z-[900] 
+                    z-900 
                     flex flex-col gap-3 sm:gap-4
                 "
             >
@@ -45,7 +45,7 @@ export default function HeroPage() {
                     className="
                         h-12 w-12 sm:h-14 sm:w-14 
                         rounded-full 
-                        bg-[var(--color-brand)] 
+                        bg-(--color-brand) 
                         flex items-center justify-center 
                         text-white 
                         shadow-lg 

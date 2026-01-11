@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faRocket,
@@ -89,18 +89,18 @@ const SolutionSection = () => {
     const activeCategory = CATEGORIES.find((c) => c.id === activeId);
 
     return (
-        <section className="bg-[var(--bg-main)] py-16">
+        <section className="bg-(--bg-main) py-16">
             <div className="max-w-6xl mx-auto px-4">
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+                    <h2 className="text-3xl md:text-4xl font-bold text-(--text-primary)">
                         One-Stop Corporate Solution
                     </h2>
-                    <p className="mt-3 text-[var(--text-secondary)] max-w-3xl mx-auto">
+                    <p className="mt-3 text-(--text-secondary) max-w-3xl mx-auto">
                         Startup or an established business, you'll find Mr Professional services{" "}
-                        <span className="text-[var(--color-brand)] font-semibold">fast</span>,{" "}
-                        <span className="text-[var(--color-brand)] font-semibold">affordable</span> and{" "}
-                        <span className="text-[var(--color-brand)] font-semibold">hassle-free</span>.
+                        <span className="text-(--color-brand) font-semibold">fast</span>,{" "}
+                        <span className="text-(--color-brand) font-semibold">affordable</span> and{" "}
+                        <span className="text-(--color-brand) font-semibold">hassle-free</span>.
                     </p>
                 </div>
 
@@ -116,8 +116,8 @@ const SolutionSection = () => {
                                     type="button"
                                     onClick={() => setActiveId(cat.id)}
                                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition shadow-sm
-                    ${isActive ? "bg-[var(--color-brand)] border-[var(--color-brand)] text-white" : "bg-[var(--bg-secondary)] border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--color-brand)]"}`}><span className={`flex h-9 w-9 items-center justify-center rounded-full border-2
-                    ${isActive ? "bg-[var(--bg-secondary)] border-[var(--color-brand)] text-[var(--text-primary)]" : "bg-[var(--color-brand)]/10 border-[var(--color-brand)] text-[var(--color-brand)]" }`}>
+                    ${isActive ? "bg-(--color-brand) border-(--color-brand) text-white" : "bg-(--bg-secondary) border-(--border-color) text-(--text-primary) hover:border-(--color-brand)"}`}><span className={`flex h-9 w-9 items-center justify-center rounded-full border-2
+                    ${isActive ? "bg-(--bg-secondary) border-(--color-brand) text-(--text-primary)" : "bg-(--color-brand)/10 border-(--color-brand) text-(--color-brand)"}`}>
                                         <FontAwesomeIcon icon={cat.icon} className="text-sm" />
                                     </span>
                                     <span className="font-semibold text-sm md:text-[15px]">
@@ -130,28 +130,28 @@ const SolutionSection = () => {
 
                     {/* Services List */}
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2">
+                        <h3 className="text-2xl md:text-3xl font-bold text-(--text-primary) mb-2">
                             {activeCategory.question}
                         </h3>
-                        <p className="text-[var(--text-secondary)] mb-5">{activeCategory.subtitle}</p>
+                        <p className="text-(--text-secondary) mb-5">{activeCategory.subtitle}</p>
 
                         <div className="space-y-3">
                             {activeCategory.services.map((service) => (
                                 <div
                                     key={service}
-                                    className="flex items-center justify-between bg-[var(--bg-secondary)] rounded-full px-4 py-3 hover:opacity-90 transition cursor-pointer shadow-sm"
+                                    className="flex items-center justify-between bg-(--bg-secondary) rounded-full px-4 py-3 hover:opacity-90 transition cursor-pointer shadow-sm"
                                 >
                                     <div className="flex items-center gap-3">
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-brand)] text-white">
+                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-(--color-brand) text-white">
                                             <FontAwesomeIcon icon={faCircleCheck} />
                                         </span>
-                                        <span className="text-sm md:text-[15px] text-[var(--text-primary)] font-medium">
+                                        <span className="text-sm md:text-[15px] text-(--text-primary) font-medium">
                                             {service}
                                         </span>
                                     </div>
                                     <FontAwesomeIcon
                                         icon={faArrowRight}
-                                        className="text-[var(--color-brand)] text-sm"
+                                        className="text-(--color-brand) text-sm"
                                     />
                                 </div>
                             ))}
@@ -167,48 +167,88 @@ const SolutionSection = () => {
 
                 {/* stats bar */}
                 <div className="mt-14">
-                    <div className="rounded-3xl bg-[var(--bg-secondary)] text-white px-8 py-8 md:py-10 shadow-lg border border-[var(--border-color)]">
+                    <div className="rounded-3xl bg-(--bg-secondary) text-white px-8 py-8 md:py-10 shadow-lg border border-(--border-color)">
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-                            <StatItem
-                                icon={faSmile}
-                                value="5K+"
-                                label="Happy Clients"
-                                accent="text-[var(--color-brand)]"
-                            />
-                            <StatItem
-                                icon={faSuitcase}
-                                value="250+"
-                                label="Professional Services"
-                                accent="text-[var(--color-brand)]"
-                            />
-                            <StatItem
-                                icon={faStar}
-                                value="500+"
-                                label="5 Star Reviews"
-                                accent="text-[var(--color-brand)]"
-                            />
-                            <StatItem
-                                icon={faHandshake}
-                                value="20K+"
-                                label="Questions Solved"
-                                accent="text-[var(--color-brand)]"
-                            />
+
+                            <StatItem icon={faSmile} value="5K+" label="Happy Clients" />
+                            <StatItem icon={faSuitcase} value="250+" label="Professional Services" />
+                            <StatItem icon={faStar} value="500+" label="5 Star Reviews" />
+                            <StatItem icon={faHandshake} value="20K+" label="Questions Solved" />
+
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     );
 };
 
-const StatItem = ({ icon, value, label, accent = "text-[var(--color-brand)]" }) => (
-    <div className="flex flex-col items-center gap-3">
-        <div className="h-12 w-12 rounded-full bg-[var(--bg-hover)] flex items-center justify-center">
-            <FontAwesomeIcon icon={icon} className="text-white text-lg" />
+
+const StatItem = ({ icon, value, label }) => {
+    const number = parseInt(value.replace(/\D/g, ""));
+    const suffix = value.replace(/[0-9]/g, "");
+
+    const [count, setCount] = useState(0);
+    const [started, setStarted] = useState(false);
+    const ref = React.useRef(null);
+
+    /* Detect when visible */
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setStarted(true);
+                }
+            },
+            { threshold: 0.4 }
+        );
+
+        if (ref.current) observer.observe(ref.current);
+
+        return () => observer.disconnect();
+    }, []);
+
+    /* Run counter */
+    useEffect(() => {
+        if (!started) return;
+
+        let start = 0;
+        const duration = 1500;
+        const step = 20;
+        const increment = number / (duration / step);
+
+        const timer = setInterval(() => {
+            start += increment;
+
+            if (start >= number) {
+                setCount(number);
+                clearInterval(timer);
+            } else {
+                setCount(Math.floor(start));
+            }
+        }, step);
+
+        return () => clearInterval(timer);
+    }, [started, number]);
+
+    return (
+        <div ref={ref} className="flex flex-col items-center gap-3">
+            <div className="h-12 w-12 rounded-full bg-(--bg-hover) flex items-center justify-center">
+                <FontAwesomeIcon icon={icon} className="text-white text-lg" />
+            </div>
+
+            <div className="text-3xl font-bold text-(--color-brand)">
+                {count}{suffix}
+            </div>
+
+            <div className="text-sm md:text-base font-semibold">
+                {label}
+            </div>
         </div>
-        <div className={`text-3xl font-bold ${accent}`}>{value}</div>
-        <div className="text-sm md:text-base font-semibold">{label}</div>
-    </div>
-);
+    );
+};
+
+
 
 export default SolutionSection;
