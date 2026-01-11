@@ -24,7 +24,6 @@ export default function HeroPage() {
             w-screen 
             -mx-[calc((100vw-100%)/2)] 
             h-[60svh] sm:h-[calc(100svh-72px)] 
-            sm:h-screen 
             overflow-hidden
             sm:bg-black
         ">
@@ -59,7 +58,7 @@ export default function HeroPage() {
                 fixed 
                 right-3 sm:right-6 
                 bottom-3 sm:bottom-6 
-                z-[900] 
+                z-900 
                 flex flex-col gap-3 sm:gap-4
             ">
 
