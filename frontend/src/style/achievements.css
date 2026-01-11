@@ -1,111 +1,151 @@
 /* ================= ACHIEVEMENTS HERO ================= */
 
 .achievements-hero {
-  background: #0b3a66;
-  color: white;
-  padding: 80px 20px;
+  background: linear-gradient(180deg, #0a1020 0%, #0f1b34 100%);
+  color: #e8ecf3;
+  padding: 140px 20px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievements-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(0, 163, 170, 0.15),
+    transparent 60%
+  );
 }
 
 .achievements-hero h1 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 16px;
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
 }
 
 .achievements-hero p {
   font-size: 18px;
-  opacity: 0.9;
-  max-width: 600px;
+  opacity: 0.85;
+  max-width: 680px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* ================= GRID ================= */
 
 .achievements-section {
-  padding: 60px 20px;
+  padding: 72px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 32px;
 }
 
+/* ================= CARD ================= */
+
 .achievement-card {
-  background: white;
-  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    #131b2e 0%,
+    #0f172a 100%
+  );
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .achievement-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.65);
 }
+
+/* ================= IMAGE ================= */
 
 .achievement-image-wrapper {
   height: 240px;
   overflow: hidden;
+  position: relative;
+}
+
+.achievement-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 16, 32, 0.9),
+    transparent 60%
+  );
 }
 
 .achievement-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
 .achievement-card:hover .achievement-image {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
+/* ================= CONTENT ================= */
+
 .achievement-content {
-  padding: 24px;
+  padding: 28px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .achievement-date {
-  font-size: 13px;
-  color: #64748b;
-  margin-bottom: 8px;
-  font-weight: 500;
+  font-size: 12px;
+  color: #7dd3fc;
+  margin-bottom: 10px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .achievement-title {
   font-size: 20px;
   font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 12px;
-  line-height: 1.4;
+  color: #e8ecf3;
+  margin-bottom: 14px;
+  line-height: 1.45;
   transition: color 0.3s ease;
 }
 
 .achievement-desc {
   font-size: 15px;
-  color: #475569;
-  line-height: 1.6;
-  margin-bottom: 0;
+  color: #a0aec0;
+  line-height: 1.7;
   flex: 1;
 }
 
-/* Links in List */
+/* ================= LINKS ================= */
+
 .achievement-title-link {
   text-decoration: none;
   color: inherit;
 }
 
 .achievement-title-link:hover .achievement-title {
-  color: #0b3a66;
+  color: #00a3aa;
 }
 
 .achievement-link-wrapper {
@@ -116,17 +156,22 @@
 /* ================= DETAIL PAGE ================= */
 
 .achievement-detail-container {
-  background: white;
-  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    #131b2e 0%,
+    #0f172a 100%
+  );
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  max-width: 900px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  max-width: 920px;
   margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .achievement-detail-image-wrapper {
   width: 100%;
-  max-height: 500px;
+  max-height: 480px;
   overflow: hidden;
 }
 
@@ -138,35 +183,154 @@
 }
 
 .achievement-detail-content {
-  padding: 40px;
+  padding: 44px;
 }
 
 .achievement-text {
   font-size: 18px;
-  line-height: 1.8;
-  color: #334155;
+  line-height: 1.85;
+  color: #cbd5e1;
 }
 
 .achievement-text p {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
   .achievements-hero h1 {
-    font-size: 32px;
+    font-size: 34px;
   }
-  
+
+  .achievements-hero {
+    padding: 72px 20px;
+  }
+
   .achievement-detail-content {
-    padding: 24px;
+    padding: 26px;
   }
-  
+
   .achievement-detail-image-wrapper {
-    max-height: 300px;
+    max-height: 320px;
   }
-  
+
   .achievement-text {
     font-size: 16px;
+  }
+}
+
+
+/* ================= HERO ANIMATIONS ================= */
+
+.animated-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: heroFadeUp 0.9s ease forwards;
+}
+
+.hero-title {
+  animation: heroSlide 0.9s ease forwards;
+}
+
+.hero-meta {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #7dd3fc;
+  opacity: 0;
+  animation: heroFadeUp 0.9s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* glow effect */
+.hero-glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at top,
+    rgba(0, 163, 170, 0.22),
+    transparent 60%
+  );
+  animation: glowPulse 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* floating dots */
+.hero-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(0, 163, 170, 0.6);
+  border-radius: 50%;
+  animation: floatDot 8s ease-in-out infinite;
+}
+
+.hero-dot.d1 {
+  top: 30%;
+  left: 20%;
+}
+
+.hero-dot.d2 {
+  top: 55%;
+  right: 25%;
+  animation-delay: 2s;
+}
+
+.hero-dot.d3 {
+  bottom: 20%;
+  left: 45%;
+  animation-delay: 4s;
+}
+
+/* ================= KEYFRAMES ================= */
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroSlide {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes floatDot {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-18px);
+    opacity: 1;
   }
 }

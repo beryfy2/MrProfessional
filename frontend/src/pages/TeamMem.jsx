@@ -1,37 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
-import '../style/teamMem.css';
+import React, { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+import "../style/teamMem.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
-const IMG_BASE = API_BASE.replace('/api', '');
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const IMG_BASE = API_BASE.replace("/api", "");
 
 export default function TeamMem() {
   const [employees, setEmployees] = useState([]);
-  const [selected, setSelected] = useState(null);
+
   useEffect(() => {
     fetch(`${API_BASE}/employees`)
       .then((res) => res.json())
       .then(setEmployees)
       .catch(() => setEmployees([]));
   }, []);
+
   function displayPhoto(emp) {
-    const url = emp.photoUrl ? `${IMG_BASE}${emp.photoUrl}` : `https://i.pravatar.cc/400?u=${encodeURIComponent(emp.email || emp.name)}`;
-    return url;
+    return emp.photoUrl
+      ? `${IMG_BASE}${emp.photoUrl}`
+      : `https://i.pravatar.cc/400?u=${encodeURIComponent(
+          emp.email || emp.name
+        )}`;
   }
+
   function displayRole(emp) {
-    return emp.designation || emp.position || '';
+    return emp.designation || emp.position || "";
   }
 
   return (
     <div>
       <NavBar />
 
-      {/* HERO SECTION */}
+      {/* ================= HERO SECTION ================= */}
       <section className="team-hero">
         <div className="team-hero-container">
-
-          {/* LEFT CONTENT */}
           <div className="team-hero-left">
             <h1>Mr Professional Team</h1>
             <p>
@@ -40,27 +43,24 @@ export default function TeamMem() {
             </p>
           </div>
 
-          {/* RIGHT CARD */}
           <div className="team-hero-card">
             <div className="team-card-text">
               <h3>Come work with us</h3>
               <p>
                 We are an organisation of young & vibrant professionals,
-                looking for candidates who are passionate about India's
-                growth story.
+                looking for candidates who are passionate about India's growth
+                story.
               </p>
             </div>
-
-            <div className="team-card-icon">
-              💼
-            </div>
+            <div className="team-card-icon">💼</div>
           </div>
-
         </div>
       </section>
 
+      {/* ================= TEAM MEMBERS ================= */}
       <section className="leaders-section">
         <h2 className="leaders-title">Our Team</h2>
+
         <div className="leaders-container">
           {employees.map((emp) => (
             <div key={emp._id} className="leader-block">
@@ -71,17 +71,82 @@ export default function TeamMem() {
                   className="leader-img"
                 />
               </div>
+
               <div className="leader-info">
                 <h4>{emp.name}</h4>
                 <span>{displayRole(emp)}</span>
-                <h3>({emp.degree })</h3>
-                
+                {emp.degree && <h3>({emp.degree})</h3>}
               </div>
             </div>
           ))}
         </div>
       </section>
-        <Footer />
+
+      {/* ================= ADVISORY COUNCIL ================= */}
+      <section className="leaders-section">
+        <h2 className="leaders-title">Advisory Council Members</h2>
+        <p className="leaders-subtitle">
+          Our source of guidance and motivation
+        </p>
+
+        <div className="leaders-container advisory-grid">
+          {/* Advisor 1 */}
+          <div className="leader-block">
+            <div className="leader-card">
+              <img
+                src="/assets/advisors/11.jpg"
+                alt="Anand Prakash Rathore"
+                className="leader-img"
+              />
+            </div>
+            <div className="leader-info">
+              <h4>Anand Prakash Rathore</h4>
+              <span>
+                Head Finance and Accounts, <br />
+                18+ Years Experience
+              </span>
+            </div>
+          </div>
+
+          {/* Advisor 2 */}
+          <div className="leader-block">
+            <div className="leader-card">
+              <img
+                src="/assets/advisors/12.jpg"
+                alt="Manoj Kumar"
+                className="leader-img"
+              />
+            </div>
+            <div className="leader-info">
+              <h4>Manoj Kumar</h4>
+              <span>
+                Cost Accountant <br />
+                Working in Coal India Limited
+              </span>
+            </div>
+          </div>
+
+          {/* Advisor 3 */}
+          <div className="leader-block">
+            <div className="leader-card">
+              <img
+                src="/assets/advisors/13.jpg"
+                alt="Yati Nijhawan"
+                className="leader-img"
+              />
+            </div>
+            <div className="leader-info">
+              <h4>Yati Nijhawan</h4>
+              <span>
+                B.Com, LLB, CS Executive <br />
+                Legal practitioner – IPR, IBC & Corporate Law
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
