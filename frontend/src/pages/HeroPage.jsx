@@ -20,15 +20,11 @@ export default function HeroPage() {
         >
             {/* IMAGE */}
             <img
-                src={heroImage}
-                alt="Hero background"
-                className="
-                    absolute inset-0
-                    w-full h-full
-                    object-cover
-                    transition-all duration-500
-                "
+            src={heroImage}
+            alt="Hero background"
+            className="hero-image absolute inset-0 w-full h-full"
             />
+
 
             {/* DARK OVERLAY */}
             <div className="absolute inset-0 bg-black/40 hidden sm:block" />

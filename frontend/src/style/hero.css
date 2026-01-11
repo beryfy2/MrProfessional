@@ -1,69 +1,60 @@
-/* Responsive video shape adjustments for HeroPage */
-.hero-video {
+/* Responsive image shape adjustments for HeroPage */
+.hero-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  /* Default: cover for larger screens */
   object-fit: cover;
-  transition: transform .5s ease, border-radius .5s ease, clip-path .5s ease, object-position .5s ease;
-  object-position: center 40%;
-  transform: scale(1);
+  transition: transform .5s ease,
+              border-radius .5s ease,
+              clip-path .5s ease,
+              object-position .5s ease;
+  object-position: center 45%;
+  transform: scale(0.95); /* ✅ zoom OUT */
   border-radius: 0;
   clip-path: none;
   max-height: 100%;
+  display: block;
 }
 
-/* Small screens - use cover so video fills hero without letterbox */
+/* Extra zoom out for small screens */
 @media (max-width: 639px) {
-  .hero-video {
-    object-fit: cover;
-    object-position: center 35%;
-    width: 100%;
-    height: 100%;
-    /* slightly more zoom out so less of the frame is cropped */
-    transform: scale(0.92);
-    transform-origin: center center;
-    border-radius: 0;
-    clip-path: none;
+  .hero-image {
+    object-position: center 40%;
+    transform: scale(0.88); /* ✅ more zoom out */
   }
 }
 
-/* Small screens >= 640px (sm) - apply a subtle rounded/elliptical crop */
+/* sm screens */
 @media (min-width: 640px) {
-  .hero-video {
-    /* keep cover for tablets/desktops too, but allow special shaping */
-    object-fit: cover;
-    object-position: center 30%;
-    transform: scale(1);
+  .hero-image {
+    transform: scale(0.92);
     border-radius: 16px;
     clip-path: ellipse(80% 90% at 50% 12%);
   }
 }
 
-/* Medium screens >= 768px (md) - near full-screen with slight radius */
+/* md screens */
 @media (min-width: 768px) {
-  .hero-video {
-    object-position: center 40%;
-    transform: scale(1.03);
+  .hero-image {
+    transform: scale(0.95);
     border-radius: 0 0 28% 28% / 0 0 8% 8%;
     clip-path: none;
   }
 }
 
-/* Large screens >= 1024px (lg) - full bleed video */
+/* lg screens */
 @media (min-width: 1024px) {
-  .hero-video {
-    transform: scale(1.05);
+  .hero-image {
+    transform: scale(0.97);
     object-position: center center;
     border-radius: 0;
-    clip-path: none;
   }
 }
 
-/* Optional: reduce scale slightly on very large displays to avoid over-zoom */
+/* very large screens */
 @media (min-width: 1600px) {
-  .hero-video {
-    transform: scale(1.02);
+  .hero-image {
+    transform: scale(0.98);
   }
 }
