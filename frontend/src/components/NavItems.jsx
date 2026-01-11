@@ -11,7 +11,6 @@ const STATIC_NAV = [
     { label: "About Us", path: "/about" },
     { label: "Team", path: "/team" },
     { label: "Contact", path: "/contact" },
-    { label: "Blog", path: "/blogs" },
     { label: "Achievements", path: "/achievements" },
 ];
 
@@ -227,7 +226,7 @@ export default function NavItems({ sticky }) {
             {/* ================= MOBILE DRAWER ================= */}
             {/* MOBILE SIDEBAR */}
             <div
-                className={`fixed inset-0 z-999 lg:hidden transition-all duration-300
+                className={`fixed inset-0 z-[1000] lg:hidden transition-all duration-300
                 ${mobileOpen ? "visible" : "invisible"}`}
             >
 

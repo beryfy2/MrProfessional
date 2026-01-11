@@ -22,8 +22,8 @@ const NavBar = () => {
             <div
                 className={`w-full transition-all duration-300
         ${sticky
-                        ? "fixed top-0 left-0 right-0 z-1000"
-                        : "absolute top-14 left-0 right-0 z-400"
+                        ? "fixed top-0 left-0 right-0 z-[1100]"
+                        : "absolute top-14 left-0 right-0 z-[400]"
                     }`}
             >
                 <NavItems

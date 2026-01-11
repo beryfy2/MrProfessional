@@ -65,10 +65,6 @@ export default function Dashboard() {
                 <Mail size={28} />
                 <span>View Enquiries</span>
               </button>
-              <button className="action-card" onClick={() => navigate('/admin/blogs')}>
-                <Activity size={28} />
-                <span>Manage Blogs</span>
-              </button>
               <button className="action-card" onClick={() => navigate('/admin/careers')}>
                 <TrendingUp size={28} />
                 <span>Job Postings</span>

@@ -77,7 +77,7 @@ export default function Achievements() {
                       />
                     </td>
                     <td className="td">
-                      <div className="blog-title-cell">
+                      <div className="achievement-title-cell">
                         <strong>{item.title}</strong>
                         <p style={{ fontSize: 12, color: '#666', marginTop: 4 }}>
                           {item.content.substring(0, 50)}...

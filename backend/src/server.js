@@ -43,8 +43,6 @@ import Subtitle from './models/Subtitle.js';
 import Job from './models/Job.js';
 import AdminConfig from './models/AdminConfig.js';
 import ResetToken from './models/ResetToken.js';
-import Category from "./models/Category.js";
-import Blog from "./models/Blog.js";
 import Achievement from "./models/Achievement.js";
 import phonepeRouter from './routes/phonepe.routes.js';
 
@@ -194,256 +192,56 @@ app.post('/api/auth/reset', async (req, res) => {
   res.json({ ok: true });
 });
 
-// ================= BLOG CATEGORIES =================
+// ================= EMPLOYEES =================
 
-// Utility
-function slugify(text = "") {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "");
-}
-
-// GET all categories
-app.get("/api/categories", async (req, res) => {
-  try {
-    const categories = await Category.find().sort({ createdAt: -1 });
-    res.json(categories);
-  } catch (e) {
-    res.status(500).json({ error: "Failed to load categories" });
-  }
-});
-
-// CREATE category (ADMIN)
-app.post("/api/categories", auth, async (req, res) => {
-  try {
-    const { name } = req.body || {};
-    if (!name) {
-      return res.status(400).json({ error: "Category name required" });
-    }
-
-    const exists = await Category.findOne({ name });
-    if (exists) {
-      return res.status(409).json({ error: "Category already exists" });
-    }
-
-    const category = await Category.create({
-      name,
-      slug: slugify(name),
-    });
-
-    res.status(201).json(category);
-  } catch (e) {
-    res.status(500).json({ error: "Failed to create category" });
-  }
-});
-
-// DELETE category (ADMIN)
-app.delete("/api/categories/:id", auth, async (req, res) => {
-  try {
-    await Category.findByIdAndDelete(req.params.id);
-    res.json({ ok: true });
-  } catch (e) {
-    res.status(400).json({ error: "Failed to delete category" });
-  }
-});
-
-function slugifyBlog(text = "") {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
-app.get("/api/blogs", auth, async (req, res) => {
-  try {
-    const blogs = await Blog.find()
-      .populate("category", "name")
-      .sort({ createdAt: -1 });
-
-    res.json(blogs);
-  } catch (e) {
-    res.status(500).json({ error: "Failed to load blogs" });
-  }
-});
-app.get("/api/blogs/by-id/:id", auth, async (req, res) => {
-  try {
-    const blog = await Blog.findById(req.params.id).populate("category");
-    if (!blog) return res.status(404).json({ error: "Not found" });
-    res.json(blog);
-  } catch (e) {
-    res.status(404).json({ error: "Invalid blog ID" });
-  }
-});
-app.post("/api/blogs", auth, async (req, res) => {
-  try {
-    const { title, content, category, status, sections } = req.body || {};
-
-    const hasSections =
-      Array.isArray(sections) && sections.some((s) => String(s?.heading || s?.content || "").trim());
-    if (!title || !category || (!content && !hasSections)) {
-      return res.status(400).json({ error: "Missing fields" });
-    }
-
-    const slugBase = slugifyBlog(title);
-    let slug = slugBase;
-    let count = 1;
-
-    while (await Blog.findOne({ slug })) {
-      slug = `${slugBase}-${count++}`;
-    }
-
-    const blog = await Blog.create({
-      title,
-      slug,
-      content,
-      sections: hasSections
-        ? sections
-            .map((s) => ({
-              heading: String(s?.heading || "").trim(),
-              content: String(s?.content || "").trim(),
-            }))
-            .filter((s) => s.heading || s.content)
-        : [],
-      category,
-      status: status || "draft",
-    });
-
-    res.status(201).json(blog);
-  } catch (e) {
-    res.status(400).json({ error: "Failed to create blog" });
-  }
-});
-app.put("/api/blogs/:id", auth, async (req, res) => {
-  try {
-    const { title, content, category, status, sections } = req.body || {};
-
-    const update = { title, content, category, status };
-    if (Array.isArray(sections)) {
-      const cleaned = sections
-        .map((s) => ({
-          heading: String(s?.heading || "").trim(),
-          content: String(s?.content || "").trim(),
-        }))
-        .filter((s) => s.heading || s.content);
-      update.sections = cleaned;
-    }
-
-    if (title) {
-      const slugBase = slugifyBlog(title);
-      let slug = slugBase;
-      let count = 1;
-
-      while (
-        await Blog.findOne({
-          slug,
-          _id: { $ne: req.params.id },
-        })
-      ) {
-        slug = `${slugBase}-${count++}`;
-      }
-
-      update.slug = slug;
-    }
-
-    const blog = await Blog.findByIdAndUpdate(
-      req.params.id,
-      update,
-      { new: true }
-    );
-
-    if (!blog) return res.status(404).json({ error: "Not found" });
-
-    res.json(blog);
-  } catch (e) {
-    res.status(400).json({ error: "Failed to update blog" });
-  }
-});
-app.delete("/api/blogs/:id", auth, async (req, res) => {
-  try {
-    await Blog.findByIdAndDelete(req.params.id);
-    res.json({ ok: true });
-  } catch (e) {
-    res.status(400).json({ error: "Failed to delete blog" });
-  }
-});
-
-
-// ================= BLOG (PUBLIC) =================
-
-// Get all published blogs (for frontend)
-app.get("/api/public/blogs", async (req, res) => {
-  try {
-    const includeDrafts = ["1", "true", "yes"].includes(
-      String(req.query.includeDrafts || "").toLowerCase()
-    );
-    const filter = includeDrafts ? {} : { status: "published" };
-
-    const blogs = await Blog.find(filter)
-      .populate("category", "_id name slug")
-      .sort({ createdAt: -1 });
-
-    res.json(blogs);
-  } catch (e) {
-    res.status(500).json({ error: "Failed to load blogs" });
-  }
-});
-
-// Get single blog by slug (SEO page)
-app.get("/api/public/blogs/:slug", async (req, res) => {
-  try {
-    const includeDrafts = ["1", "true", "yes"].includes(
-      String(req.query.includeDrafts || "").toLowerCase()
-    );
-    const match = includeDrafts
-      ? { slug: req.params.slug }
-      : { slug: req.params.slug, status: "published" };
-    const blog = await Blog.findOne(match).populate(
-      "category",
-      "_id name slug"
-    );
-
-    if (!blog) return res.status(404).json({ error: "Not found" });
-
-    res.json(blog);
-  } catch (e) {
-    res.status(500).json({ error: "Failed to load blog" });
-  }
-});
-
-
-// Employees
 app.get('/api/employees', async (req, res) => {
-  const list = await Employee.find().sort({ name: 1 });
-  res.json(list);
+  try {
+    const list = await Employee.find().sort({ createdAt: -1 });
+    res.json(list);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load employees' });
+  }
 });
 
 app.get('/api/employees/:id', async (req, res) => {
-  const emp = await Employee.findById(req.params.id);
-  if (!emp) return res.status(404).json({ error: 'Not found' });
-  res.json(emp);
+  try {
+    const item = await Employee.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Employee not found' });
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load employee' });
+  }
 });
 
 app.post('/api/employees', auth, upload.single('photo'), async (req, res) => {
   try {
-    const data = req.body;
-    const photoUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
-    const emp = await Employee.create({ ...data, photoUrl });
-    res.status(201).json(emp);
+    const data = { ...req.body };
+    if (req.file) {
+      data.photoUrl = `/uploads/${req.file.filename}`;
+    }
+    // Ensure array fields are handled if they come as strings? 
+    // The model has mostly strings, but let's check validation.
+    // Mongoose handles type casting usually.
+    
+    const item = await Employee.create(data);
+    res.status(201).json(item);
   } catch (e) {
+    console.error('Create Employee Error:', e);
     res.status(400).json({ error: 'Failed to create employee' });
   }
 });
 
 app.put('/api/employees/:id', auth, upload.single('photo'), async (req, res) => {
   try {
-    const data = req.body;
-    if (req.file) data.photoUrl = `/uploads/${req.file.filename}`;
-    const emp = await Employee.findByIdAndUpdate(req.params.id, data, { new: true });
-    res.json(emp);
+    const data = { ...req.body };
+    if (req.file) {
+      data.photoUrl = `/uploads/${req.file.filename}`;
+    }
+
+    const item = await Employee.findByIdAndUpdate(req.params.id, data, { new: true });
+    res.json(item);
   } catch (e) {
+    console.error('Update Employee Error:', e);
     res.status(400).json({ error: 'Failed to update employee' });
   }
 });

@@ -11,9 +11,6 @@ import TitleDetail from "./pages/TitleDetail";
 import SubtitleDetail from "./pages/SubtitleDetail";
 import AdminLayout from "./layouts/AdminLayout";
 import Careers from "./pages/Careers";
-import BlogCategories from "./pages/BlogCategories";
-import Blogs from "./pages/Blogs";
-import BlogForm from "./pages/BlogForm";
 import Achievements from "./pages/Achievements";
 import AchievementForm from "./pages/AchievementForm";
 
@@ -38,10 +35,6 @@ function App() {
           <Route path="titles/:id" element={<TitleDetail />} />
           <Route path="subtitles/:id" element={<SubtitleDetail />} />
           <Route path="admin-settings" element={<AdminSettings />} />
-          <Route path="blog-categories" element={<BlogCategories />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="blogs/new" element={<BlogForm />} />
-          <Route path="blogs/:id" element={<BlogForm />} />
           <Route path="achievements" element={<Achievements />} />
           <Route path="achievements/new" element={<AchievementForm />} />
           <Route path="achievements/:id" element={<AchievementForm />} />

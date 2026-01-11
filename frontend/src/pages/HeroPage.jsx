@@ -60,7 +60,7 @@ export default function HeroPage() {
                 fixed 
                 right-3 sm:right-6 
                 bottom-3 sm:bottom-6 
-                z-999 
+                z-[900] 
                 flex flex-col gap-3 sm:gap-4
             ">
 
