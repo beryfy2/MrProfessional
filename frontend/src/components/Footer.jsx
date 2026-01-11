@@ -21,20 +21,12 @@ import googleImg from "../assets/images/google.svg";
 /* ---------------- DATA ---------------- */
 
 const ORG_LINKS = [
-<<<<<<< HEAD
   { label: "About Us", path: "/about" },
   { label: "Careers", path: "/careers" },
   { label: "The Team", path: "/team" },
   { label: "Contact Us", path: "/contact" },
   { label: "Blogs", path: "/blogs" },
   { label: "Privacy Policy", path: "/privacy-policy" },
-=======
-    { label: "About Us", path: "/about" },
-    { label: "Careers", path: "/careers" },
-    { label: "The Team", path: "/team" },
-    { label: "Contact Us", path: "/contact" },
-    { label: "Privacy Policy", path: "/privacy-policy" },
->>>>>>> 595ad2841fc5d03f2dc3cd9643aba8e29ba10aa6
 ];
 
 const USEFUL_TOOLS = [
