@@ -2,13 +2,6 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faRocket,
-    faIndustry,
-    faRightLeft,
-    faGears,
-    faCertificate,
-    faTrademark,
-    faBriefcase,
-    faCalculator,
     faCircleCheck,
     faArrowRight,
     faSmile,
@@ -18,14 +11,6 @@ import {
     faFileInvoiceDollar,
     faScaleBalanced
 } from "@fortawesome/free-solid-svg-icons";
-
-import startBusinessImg from "../assets/solutions/start-business.svg";
-import manufacturingImg from "../assets/solutions/manufacturing.svg";
-import importExportImg from "../assets/solutions/import-export.svg";
-import gemImg from "../assets/solutions/gem.svg";
-import eprBisImg from "../assets/solutions/epr-bis.svg";
-import trademarkImg from "../assets/solutions/trademark.svg";
-import taxAccountingImg from "../assets/solutions/tax-accounting.svg";
 
 
 const CATEGORIES = [

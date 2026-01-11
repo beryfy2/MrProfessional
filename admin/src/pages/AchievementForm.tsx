@@ -54,8 +54,10 @@ export default function AchievementForm() {
         await createAchievement(formData);
       }
       navigate("/admin/achievements");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      alert(err.message || "Failed to save achievement");
+      const message = err?.message || "Failed to save achievement";
+      alert(message);
     } finally {
       setLoading(false);
     }
