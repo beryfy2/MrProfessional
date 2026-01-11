@@ -18,7 +18,7 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
         height: "56px",
         transform: hidden ? "translateY(-100%)" : "translateY(0)",
         transition: "transform 300ms ease, background-color 300ms ease",
-        zIndex: 70,
+        zIndex: 1200,
         backdropFilter: transparent ? "saturate(180%) blur(6px)" : "none",
       }}
     >

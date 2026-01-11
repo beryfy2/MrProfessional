@@ -96,7 +96,7 @@ const Careers = () => {
       urgent: true,
       type: 'Full-time',
       experience: '1-3 years',
-      description: 'Create engaging content for websites, blogs, social media, and marketing materials. Research topics, write compelling copy, and optimize content for SEO.',
+      description: 'Create engaging content for websites, articles, social media, and marketing materials. Research topics, write compelling copy, and optimize content for SEO.',
       responsibilities: [
         'Research and write engaging content for various platforms',
         'Create blog posts, articles, and website content',
@@ -282,7 +282,7 @@ const Careers = () => {
       experience: '0-1 year',
       description: 'Learn content writing skills, create engaging content, and gain experience in digital marketing and content creation.',
       responsibilities: [
-        'Write blog posts and articles',
+        'Write articles and website content',
         'Create social media content',
         'Learn SEO and content marketing principles',
         'Research and fact-check information',

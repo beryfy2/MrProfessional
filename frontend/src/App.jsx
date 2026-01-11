@@ -30,8 +30,6 @@ import Careers from "./pages/Careers";
 import ServicePage from "./pages/ServicePage";
 import AboutUs from "./pages/AboutUs";
 import TeamMem from "./pages/TeamMem";
-import Blogs from "./pages/Blogs";
-import BlogPage from "./pages/BlogPage";
 import Achievements from "./pages/Achievements";
 import AchievementPage from "./pages/AchievementPage";
 import Contact from "./pages/Contact";
@@ -140,8 +138,6 @@ const App = () => {
         {/* COMPANY */}
         <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogs/:slug" element={<BlogPage />} />
         <Route path="/achievements" element={<Achievements />} />
         <Route path="/achievements/:id" element={<AchievementPage />} />
         <Route path="/contact" element={<Contact />} />

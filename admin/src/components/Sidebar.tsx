@@ -39,19 +39,6 @@ export default function Sidebar() {
           </NavLink>
         </div>
 
-        <div className="nav-section">
-          <div className="section-label">
-            <span>BLOGS</span>
-          </div>
-          <NavLink to="/admin/blogs" className="nav-item">
-            <span className="nav-icon">📝</span>
-            <span className="nav-text">All Blogs</span>
-          </NavLink>
-          <NavLink to="/admin/blog-categories" className="nav-item">
-            <span className="nav-icon">📂</span>
-            <span className="nav-text">Categories</span>
-          </NavLink>
-        </div>
       </div>
 
       <div className="sidebar-footer">

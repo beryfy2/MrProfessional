@@ -5,7 +5,7 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 const FloatingContactButtons = () => {
     return (
-        <div className="fixed right-6 bottom-6 z-999 flex flex-col gap-4">
+        <div className="fixed right-6 bottom-6 z-[900] flex flex-col gap-4">
             <a
                 href="tel:+918800932090"
                 className="h-14 w-14 rounded-full bg-[#0b5e92] flex items-center justify-center text-white shadow-lg hover:scale-110 transition"
