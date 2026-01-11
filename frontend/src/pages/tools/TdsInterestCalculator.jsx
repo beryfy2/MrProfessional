@@ -44,71 +44,71 @@ const TdsInterestCalculator = () => {
 
   // Auto-calc on change
   useEffect(() => {
+    const calculateInterest = () => {
+      const amount = Number(tdsAmount) || 0;
+      const dueDeduction = new Date(dueDeductionDate);
+      const actualDeduction = new Date(actualDeductionDate);
+      const actualDeposit = new Date(actualDepositDate);
+
+      if (amount <= 0 || isNaN(dueDeduction.getTime()) || isNaN(actualDeduction.getTime()) || isNaN(actualDeposit.getTime())) {
+        setLateDeductionInterest(0);
+        setLateDepositInterest(0);
+        setTotalInterest(0);
+        setDeductionDelayMonths(0);
+        setDepositDelayMonths(0);
+        return;
+      }
+
+      // Calculate due deposit date
+      let dueDeposit;
+      if (isPropertyTds) {
+        // For property TDS: 30 days from end of month of deduction
+        const deductionMonthEnd = new Date(actualDeduction.getFullYear(), actualDeduction.getMonth() + 1, 0);
+        dueDeposit = new Date(deductionMonthEnd);
+        dueDeposit.setDate(deductionMonthEnd.getDate() + 30);
+      } else {
+        // For other TDS: 7th of next month after deduction
+        dueDeposit = new Date(actualDeduction.getFullYear(), actualDeduction.getMonth() + 1, 7);
+      }
+
+      // Calculate delay months for deduction
+      const deductionDelayMs = actualDeduction - dueDeduction;
+      let deductionMonths = 0;
+      if (deductionDelayMs > 0) {
+        // Calculate months difference
+        const years = actualDeduction.getFullYear() - dueDeduction.getFullYear();
+        const months = actualDeduction.getMonth() - dueDeduction.getMonth();
+        const days = actualDeduction.getDate() - dueDeduction.getDate();
+        
+        deductionMonths = years * 12 + months + (days > 0 ? 1 : 0);
+        if (deductionMonths < 0) deductionMonths = 0;
+      }
+
+      // Calculate delay months for deposit
+      const depositDelayMs = actualDeposit - dueDeposit;
+      let depositMonths = 0;
+      if (depositDelayMs > 0) {
+        const years = actualDeposit.getFullYear() - dueDeposit.getFullYear();
+        const months = actualDeposit.getMonth() - dueDeposit.getMonth();
+        const days = actualDeposit.getDate() - dueDeposit.getDate();
+        
+        depositMonths = years * 12 + months + (days > 0 ? 1 : 0);
+        if (depositMonths < 0) depositMonths = 0;
+      }
+
+      // Calculate interests
+      const deductionInterest = (amount * 0.01) * deductionMonths; // 1% per month
+      const depositInterest = (amount * 0.015) * depositMonths; // 1.5% per month
+
+      setLateDeductionInterest(deductionInterest);
+      setLateDepositInterest(depositInterest);
+      setTotalInterest(deductionInterest + depositInterest);
+      setDeductionDelayMonths(deductionMonths);
+      setDepositDelayMonths(depositMonths);
+    };
+
     calculateInterest();
   }, [tdsAmount, dueDeductionDate, actualDeductionDate, actualDepositDate, isPropertyTds]);
-
-  const calculateInterest = () => {
-    const amount = Number(tdsAmount) || 0;
-    const dueDeduction = new Date(dueDeductionDate);
-    const actualDeduction = new Date(actualDeductionDate);
-    const actualDeposit = new Date(actualDepositDate);
-
-    if (amount <= 0 || isNaN(dueDeduction.getTime()) || isNaN(actualDeduction.getTime()) || isNaN(actualDeposit.getTime())) {
-      setLateDeductionInterest(0);
-      setLateDepositInterest(0);
-      setTotalInterest(0);
-      setDeductionDelayMonths(0);
-      setDepositDelayMonths(0);
-      return;
-    }
-
-    // Calculate due deposit date
-    let dueDeposit;
-    if (isPropertyTds) {
-      // For property TDS: 30 days from end of month of deduction
-      const deductionMonthEnd = new Date(actualDeduction.getFullYear(), actualDeduction.getMonth() + 1, 0);
-      dueDeposit = new Date(deductionMonthEnd);
-      dueDeposit.setDate(deductionMonthEnd.getDate() + 30);
-    } else {
-      // For other TDS: 7th of next month after deduction
-      dueDeposit = new Date(actualDeduction.getFullYear(), actualDeduction.getMonth() + 1, 7);
-    }
-
-    // Calculate delay months for deduction
-    const deductionDelayMs = actualDeduction - dueDeduction;
-    let deductionMonths = 0;
-    if (deductionDelayMs > 0) {
-      // Calculate months difference
-      const years = actualDeduction.getFullYear() - dueDeduction.getFullYear();
-      const months = actualDeduction.getMonth() - dueDeduction.getMonth();
-      const days = actualDeduction.getDate() - dueDeduction.getDate();
-      
-      deductionMonths = years * 12 + months + (days > 0 ? 1 : 0);
-      if (deductionMonths < 0) deductionMonths = 0;
-    }
-
-    // Calculate delay months for deposit
-    const depositDelayMs = actualDeposit - dueDeposit;
-    let depositMonths = 0;
-    if (depositDelayMs > 0) {
-      const years = actualDeposit.getFullYear() - dueDeposit.getFullYear();
-      const months = actualDeposit.getMonth() - dueDeposit.getMonth();
-      const days = actualDeposit.getDate() - dueDeposit.getDate();
-      
-      depositMonths = years * 12 + months + (days > 0 ? 1 : 0);
-      if (depositMonths < 0) depositMonths = 0;
-    }
-
-    // Calculate interests
-    const deductionInterest = (amount * 0.01) * deductionMonths; // 1% per month
-    const depositInterest = (amount * 0.015) * depositMonths; // 1.5% per month
-
-    setLateDeductionInterest(deductionInterest);
-    setLateDepositInterest(depositInterest);
-    setTotalInterest(deductionInterest + depositInterest);
-    setDeductionDelayMonths(deductionMonths);
-    setDepositDelayMonths(depositMonths);
-  };
 
   return (
     <div className="has-fixed-navbar">

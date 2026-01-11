@@ -1,85 +1,59 @@
 // src/components/MediaCoverage.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-const MEDIA_ITEMS = [
-    {
-        id: "entrepreneur-hunt",
-        outlet: "Entrepreneur Hunt",
-        logo: "/media/entrepreneur-hunt.png",
-        heading:
-            "Filing GST-R and ITR Made Easy With Company",
-        body: [
-            "GST and ITR filing seems like a nightmare to a person who has never filed GST and ITR returns ever before and those who have already filed GST and ITR returns find it an annoying, cumbersome task and just feel it would be better to rather outsource it, relax than to stress over deadlines and there comes Company to help you file your tax returns at a very affordable cost so that you can relax and not stress over it."
-        ],
-        link: "#",
-    },
-    {
-        id: "press-trust-india",
-        outlet: "Press Trust Of India",
-        logo: "/media/pti.png",
-        heading:
-            "Why Company Is Your Best Choice for EPR Registration & Compliance",
-        body: [
-            "Company is a reliable partner for EPR registration. If you import products in India, registering under the Extended Producer Responsibility (EPR) rules is now a mandatory requirement.",
-            "It is also a step toward reducing environmental impact and promoting sustainable business practices. EPR registration for importers can be confusing, especially with changing guidelines and documentation involved.",
-            "That is where we come in. At Company, we take care of the entire process from preparing documents and filing applications to regular follow-ups with the authorities."
-        ],
-        link: "#",
-    },
-    {
-        id: "hindustan-times",
-        outlet: "Hindustan Times",
-        logo: "/media/hindustan-times.png",
-        heading:
-            "Company is making professional services affordable and simple",
-        body: [
-            "Company is a Delhi-based FinTech startup offering a wide range of professional services to thousands of businesses and individuals across Pan-India.",
-            "It was founded by two friends – Abhishek Yadav and Sahil Singh – to bring all professional services onto a single platform. The duo focused on developing a service experience that allowed entrepreneurs to start and manage a business easily."
-        ],
-        link: "#",
-    },
-    {
-        id: "influencive-india",
-        outlet: "Influencive India",
-        logo: "/media/influencive-india.png",
-        heading:
-            "Company – Simplifying the complex Business Problems",
-        body: [
-            "Did you know that 92% of startups fail within the first three years due to challenges with tax, accounting, and regulatory compliance?",
-            "At Company, we're determined to reverse this trend and empower businesses with simplified solutions. Dedicated to revolutionizing the professional services landscape, Company is a Delhi-based FinTech startup."
-        ],
-        link: "#",
-    },
-];
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const BASE_URL = API_BASE.replace('/api', '');
 
 const MediaCoverage = () => {
+    const [mediaItems, setMediaItems] = useState([]);
     const [current, setCurrent] = useState(0);
     const [hover, setHover] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const touchStart = useRef(null);
 
     useEffect(() => {
+        const fetchMedia = async () => {
+            try {
+                const res = await fetch(`${API_BASE}/public/media`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setMediaItems(data.map(item => ({
+                        id: item._id,
+                        outlet: item.publication,
+                        logo: item.photo ? `${BASE_URL}${item.photo}` : null,
+                        heading: item.title,
+                        body: [item.content], // Wrap in array to match existing structure
+                        link: item.link
+                    })));
+                }
+            } catch (e) {
+                console.error("Failed to fetch media", e);
+            }
+        };
+        fetchMedia();
+
         const resize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener("resize", resize);
         return () => window.removeEventListener("resize", resize);
     }, []);
 
     const slides = useMemo(() => {
+        if (mediaItems.length === 0) return [];
         if (isMobile) {
-            return MEDIA_ITEMS.map(i => [i]);
+            return mediaItems.map(i => [i]);
         }
         const arr = [];
-        for (let i = 0; i < MEDIA_ITEMS.length; i++) {
+        for (let i = 0; i < mediaItems.length; i++) {
             arr.push([
-                MEDIA_ITEMS[i],
-                MEDIA_ITEMS[(i + 1) % MEDIA_ITEMS.length],
+                mediaItems[i],
+                mediaItems[(i + 1) % mediaItems.length],
             ]);
         }
         return arr;
-    }, [isMobile]);
+    }, [isMobile, mediaItems]);
 
     useEffect(() => {
-        if (hover) return;
+        if (hover || slides.length === 0) return;
         const id = setInterval(() => {
             setCurrent(p => (p + 1) % slides.length);
         }, 4500);
@@ -90,6 +64,20 @@ const MediaCoverage = () => {
         setCurrent(p => (p === 0 ? slides.length - 1 : p - 1));
     const next = () =>
         setCurrent(p => (p === slides.length - 1 ? 0 : p + 1));
+
+    if (mediaItems.length === 0) {
+        return (
+            <section className="bg-(--bg-main) py-16">
+                <div className="max-w-7xl mx-auto px-4 text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold text-(--text-primary)">
+                        Media Coverage
+                    </h2>
+                    <div className="h-1 w-24 bg-(--color-brand) mx-auto mt-3 rounded-full" />
+                    <p className="mt-6 text-(--text-secondary)">No media coverage available at the moment. Check back later.</p>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="bg-(--bg-main) py-16">
@@ -187,6 +175,8 @@ const MediaCard = ({ item }) => (
 
         <a
             href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-6 inline-flex items-center justify-center
       px-5 py-2.5 rounded-lg bg-(--color-brand)
       text-white text-sm font-semibold shadow

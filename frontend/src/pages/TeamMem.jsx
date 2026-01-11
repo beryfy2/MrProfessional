@@ -3,6 +3,10 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../style/teamMem.css";
 
+import adv11 from "../assets/advisors/11.jpg";
+import adv12 from "../assets/advisors/12.jpg";
+import adv13 from "../assets/advisors/13.jpg";
+
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 const IMG_BASE = API_BASE.replace("/api", "");
 
@@ -94,7 +98,7 @@ export default function TeamMem() {
           <div className="leader-block">
             <div className="leader-card">
               <img
-                src="/assets/advisors/11.jpg"
+                src={adv11}
                 alt="Anand Prakash Rathore"
                 className="leader-img"
               />
@@ -112,7 +116,7 @@ export default function TeamMem() {
           <div className="leader-block">
             <div className="leader-card">
               <img
-                src="/assets/advisors/12.jpg"
+                src={adv12}
                 alt="Manoj Kumar"
                 className="leader-img"
               />
@@ -130,7 +134,7 @@ export default function TeamMem() {
           <div className="leader-block">
             <div className="leader-card">
               <img
-                src="/assets/advisors/13.jpg"
+                src={adv13}
                 alt="Yati Nijhawan"
                 className="leader-img"
               />

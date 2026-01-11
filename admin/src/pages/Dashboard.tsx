@@ -1,4 +1,4 @@
-import { Users, Mail, TrendingUp, Activity } from 'lucide-react';
+import { Users, Mail, TrendingUp } from 'lucide-react';
 import KpiCard from '../components/KpiCard';
 import { useEffect, useState } from 'react';
 import { getJSON } from '../lib/api';

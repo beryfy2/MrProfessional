@@ -10,6 +10,7 @@ const STATIC_NAV = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about" },
     { label: "Team", path: "/team" },
+    { label: "Our Works", path: "/works" },
     { label: "Contact", path: "/contact" },
     { label: "Achievements", path: "/achievements" },
 ];

@@ -43,7 +43,9 @@ import Subtitle from './models/Subtitle.js';
 import Job from './models/Job.js';
 import AdminConfig from './models/AdminConfig.js';
 import ResetToken from './models/ResetToken.js';
+import Media from './models/Media.js';
 import Achievement from "./models/Achievement.js";
+import Work from "./models/Work.js";
 import phonepeRouter from './routes/phonepe.routes.js';
 
 import jwt from 'jsonwebtoken';
@@ -192,6 +194,80 @@ app.post('/api/auth/reset', async (req, res) => {
   res.json({ ok: true });
 });
 
+// ================= MEDIA COVERAGE (ADMIN) =================
+
+app.get('/api/media', async (req, res) => {
+  const list = await Media.find().sort({ date: -1 });
+  res.json(list);
+});
+
+app.get('/api/media/:id', async (req, res) => {
+  try {
+    const item = await Media.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Not found' });
+    res.json(item);
+  } catch {
+    res.status(404).json({ error: 'Not found' });
+  }
+});
+
+app.post('/api/media', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const { publication, title, content, link, date } = req.body;
+    const photo = req.file ? `/uploads/${req.file.filename}` : undefined;
+    
+    if (!photo) return res.status(400).json({ error: 'Photo/Logo is required' });
+
+    const item = await Media.create({ 
+      publication,
+      title, 
+      content, 
+      link,
+      photo,
+      date: date || new Date()
+    });
+    res.status(201).json(item);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to create media item' });
+  }
+});
+
+app.put('/api/media/:id', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const { publication, title, content, link, date } = req.body;
+    const updateData = { publication, title, content, link, date };
+    
+    if (req.file) {
+      updateData.photo = `/uploads/${req.file.filename}`;
+    }
+
+    const item = await Media.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    res.json(item);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to update media item' });
+  }
+});
+
+app.delete('/api/media/:id', auth, async (req, res) => {
+  try {
+    await Media.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete media item' });
+  }
+});
+
+// ================= MEDIA COVERAGE (PUBLIC) =================
+
+app.get('/api/public/media', async (req, res) => {
+  try {
+    const list = await Media.find().sort({ date: -1 });
+    res.json(list);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load media items' });
+  }
+});
+
 // ================= EMPLOYEES =================
 
 app.get('/api/employees', async (req, res) => {
@@ -334,6 +410,88 @@ app.get('/api/public/achievements/:id', async (req, res) => {
     res.json(item);
   } catch (e) {
     res.status(500).json({ error: 'Failed to load achievement' });
+  }
+});
+
+// ================= WORKS (ADMIN) =================
+
+app.get('/api/works', async (req, res) => {
+  const list = await Work.find().sort({ date: -1 });
+  res.json(list);
+});
+
+app.get('/api/works/:id', async (req, res) => {
+  try {
+    const item = await Work.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Not found' });
+    res.json(item);
+  } catch {
+    res.status(404).json({ error: 'Not found' });
+  }
+});
+
+app.post('/api/works', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const { title, content, date } = req.body;
+    const photo = req.file ? `/uploads/${req.file.filename}` : undefined;
+
+    if (!photo) return res.status(400).json({ error: 'Photo is required' });
+
+    const item = await Work.create({
+      title,
+      content,
+      photo,
+      date: date || new Date()
+    });
+    res.status(201).json(item);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to create work' });
+  }
+});
+
+app.put('/api/works/:id', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const { title, content, date } = req.body;
+    const updateData = { title, content, date };
+
+    if (req.file) {
+      updateData.photo = `/uploads/${req.file.filename}`;
+    }
+
+    const item = await Work.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    res.json(item);
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to update work' });
+  }
+});
+
+app.delete('/api/works/:id', auth, async (req, res) => {
+  try {
+    await Work.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete work' });
+  }
+});
+
+// ================= WORKS (PUBLIC) =================
+
+app.get('/api/public/works', async (req, res) => {
+  try {
+    const list = await Work.find().sort({ date: -1 });
+    res.json(list);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load works' });
+  }
+});
+
+app.get('/api/public/works/:id', async (req, res) => {
+  try {
+    const item = await Work.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Work not found' });
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load work' });
   }
 });
 

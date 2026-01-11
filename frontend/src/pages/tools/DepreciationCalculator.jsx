@@ -44,68 +44,67 @@ const DepreciationCalculator = () => {
 
   // Auto-calc on change
   useEffect(() => {
+    const calculateDepreciation = () => {
+      const cost = Number(purchaseAmount) || 0;
+      const rate = Number(depreciationRate) / 100;
+      const years = Number(duration) || 1;
+
+      if (cost <= 0 || rate <= 0) {
+        setDepreciationSchedule([]);
+        setTotalDepreciation(0);
+        setFinalValue(cost);
+        return;
+      }
+
+      const schedule = [];
+      let currentValue = cost;
+      let totalDep = 0;
+
+      for (let year = 1; year <= years; year++) {
+        let yearlyDep = 0;
+
+        if (depreciationMethod === 'SLM') {
+          // Straight Line Method: (Original Cost × Rate) / 100
+          yearlyDep = cost * rate;
+        } else {
+          // Written Down Value Method: (Opening WDV × Rate) / 100
+          yearlyDep = currentValue * rate;
+        }
+
+        // Apply half-year rule for first year (assuming asset used < 180 days)
+        if (year === 1) {
+          yearlyDep = yearlyDep / 2;
+        }
+
+        // Additional depreciation for first year (if applicable)
+        let additionalDep = 0;
+        if (additionalDepreciation && year === 1) {
+          additionalDep = (cost * 0.20); // 20% additional depreciation
+        }
+
+        const totalYearlyDep = yearlyDep + additionalDep;
+        const closingValue = Math.max(currentValue - totalYearlyDep, 1); // Minimum ₹1 residual value
+
+        schedule.push({
+          year,
+          openingValue: currentValue,
+          depreciation: yearlyDep,
+          additionalDepreciation: additionalDep,
+          totalDepreciation: totalYearlyDep,
+          closingValue: closingValue
+        });
+
+        currentValue = closingValue;
+        totalDep += totalYearlyDep;
+      }
+
+      setDepreciationSchedule(schedule);
+      setTotalDepreciation(totalDep);
+      setFinalValue(currentValue);
+    };
+
     calculateDepreciation();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [purchaseAmount, depreciationRate, depreciationMethod, duration, additionalDepreciation]);
-
-  const calculateDepreciation = () => {
-    const cost = Number(purchaseAmount) || 0;
-    const rate = Number(depreciationRate) / 100;
-    const years = Number(duration) || 1;
-
-    if (cost <= 0 || rate <= 0) {
-      setDepreciationSchedule([]);
-      setTotalDepreciation(0);
-      setFinalValue(cost);
-      return;
-    }
-
-    const schedule = [];
-    let currentValue = cost;
-    let totalDep = 0;
-
-    for (let year = 1; year <= years; year++) {
-      let yearlyDep = 0;
-
-      if (depreciationMethod === 'SLM') {
-        // Straight Line Method: (Original Cost × Rate) / 100
-        yearlyDep = cost * rate;
-      } else {
-        // Written Down Value Method: (Opening WDV × Rate) / 100
-        yearlyDep = currentValue * rate;
-      }
-
-      // Apply half-year rule for first year (assuming asset used < 180 days)
-      if (year === 1) {
-        yearlyDep = yearlyDep / 2;
-      }
-
-      // Additional depreciation for first year (if applicable)
-      let additionalDep = 0;
-      if (additionalDepreciation && year === 1) {
-        additionalDep = (cost * 0.20); // 20% additional depreciation
-      }
-
-      const totalYearlyDep = yearlyDep + additionalDep;
-      const closingValue = Math.max(currentValue - totalYearlyDep, 1); // Minimum ₹1 residual value
-
-      schedule.push({
-        year,
-        openingValue: currentValue,
-        depreciation: yearlyDep,
-        additionalDepreciation: additionalDep,
-        totalDepreciation: totalYearlyDep,
-        closingValue: closingValue
-      });
-
-      currentValue = closingValue;
-      totalDep += totalYearlyDep;
-    }
-
-    setDepreciationSchedule(schedule);
-    setTotalDepreciation(totalDep);
-    setFinalValue(currentValue);
-  };
 
   const handleRateSelect = (rate) => {
     setDepreciationRate(rate);

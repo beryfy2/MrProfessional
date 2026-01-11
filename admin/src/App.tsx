@@ -13,6 +13,10 @@ import AdminLayout from "./layouts/AdminLayout";
 import Careers from "./pages/Careers";
 import Achievements from "./pages/Achievements";
 import AchievementForm from "./pages/AchievementForm";
+import Works from "./pages/Works";
+import WorkForm from "./pages/WorkForm";
+import Media from "./pages/Media";
+import MediaForm from "./pages/MediaForm";
 
 function App() {
   return (
@@ -38,6 +42,12 @@ function App() {
           <Route path="achievements" element={<Achievements />} />
           <Route path="achievements/new" element={<AchievementForm />} />
           <Route path="achievements/:id" element={<AchievementForm />} />
+          <Route path="works" element={<Works />} />
+          <Route path="works/new" element={<WorkForm />} />
+          <Route path="works/:id" element={<WorkForm />} />
+          <Route path="media" element={<Media />} />
+          <Route path="media/new" element={<MediaForm />} />
+          <Route path="media/:id" element={<MediaForm />} />
 
 
         </Route>

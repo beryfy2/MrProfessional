@@ -20,7 +20,6 @@ export default function useScrollState({
     const [isAtTop, setIsAtTop] = useState(true);
     const lastY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
     const ticking = useRef(false);
-    const scrollTimeout = useRef(null);
 
     useEffect(() => {
         function onScroll() {
@@ -67,9 +66,6 @@ export default function useScrollState({
         window.addEventListener("scroll", throttledScroll, { passive: true });
         return () => {
             window.removeEventListener("scroll", throttledScroll);
-            if (scrollTimeout.current) {
-                clearTimeout(scrollTimeout.current);
-            }
         };
     }, [lowerStickyThreshold, scrollThreshold, topOffset]);
 
