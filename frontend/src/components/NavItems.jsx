@@ -226,7 +226,7 @@ export default function NavItems({ sticky }) {
             {/* ================= MOBILE DRAWER ================= */}
             {/* MOBILE SIDEBAR */}
             <div
-                className={`fixed inset-0 z-[1000] lg:hidden transition-all duration-300
+                className={`fixed inset-0 z-1000 lg:hidden transition-all duration-300
                 ${mobileOpen ? "visible" : "invisible"}`}
             >
 
