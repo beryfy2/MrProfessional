@@ -192,6 +192,69 @@ app.post('/api/auth/reset', async (req, res) => {
   res.json({ ok: true });
 });
 
+// ================= EMPLOYEES =================
+
+app.get('/api/employees', async (req, res) => {
+  try {
+    const list = await Employee.find().sort({ createdAt: -1 });
+    res.json(list);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load employees' });
+  }
+});
+
+app.get('/api/employees/:id', async (req, res) => {
+  try {
+    const item = await Employee.findById(req.params.id);
+    if (!item) return res.status(404).json({ error: 'Employee not found' });
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load employee' });
+  }
+});
+
+app.post('/api/employees', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const data = { ...req.body };
+    if (req.file) {
+      data.photoUrl = `/uploads/${req.file.filename}`;
+    }
+    // Ensure array fields are handled if they come as strings? 
+    // The model has mostly strings, but let's check validation.
+    // Mongoose handles type casting usually.
+    
+    const item = await Employee.create(data);
+    res.status(201).json(item);
+  } catch (e) {
+    console.error('Create Employee Error:', e);
+    res.status(400).json({ error: 'Failed to create employee' });
+  }
+});
+
+app.put('/api/employees/:id', auth, upload.single('photo'), async (req, res) => {
+  try {
+    const data = { ...req.body };
+    if (req.file) {
+      data.photoUrl = `/uploads/${req.file.filename}`;
+    }
+
+    const item = await Employee.findByIdAndUpdate(req.params.id, data, { new: true });
+    res.json(item);
+  } catch (e) {
+    console.error('Update Employee Error:', e);
+    res.status(400).json({ error: 'Failed to update employee' });
+  }
+});
+
+app.delete('/api/employees/:id', auth, async (req, res) => {
+  try {
+    await Employee.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to delete employee' });
+  }
+});
+
 // ================= ACHIEVEMENTS (ADMIN) =================
 
 app.get('/api/achievements', async (req, res) => {

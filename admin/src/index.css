@@ -1347,8 +1347,16 @@ body, html, #root {
 }
 
 .btn-view {
-  color: var(--navy);
+  color: white;
   border-color: var(--navy);
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.btn-view:hover {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  color: white;
+  border-color: #1e3a8a;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .btn-edit {
@@ -1365,16 +1373,16 @@ body, html, #root {
 }
 
 .btn-delete {
-  color: var(--danger);
+  color: white;
   border-color: var(--danger);
-  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
 .btn-delete:hover {
-  background: linear-gradient(135deg, #fee2e2, #fecaca);
-  color: #dc2626;
-  border-color: #dc2626;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: white;
+  border-color: #b91c1c;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
 }
 
 .btn-danger {
@@ -3098,6 +3106,31 @@ body, html, #root {
 .action-buttons .btn span {
   margin-right: 6px;
   font-size: 16px;
+}
+
+/* Force icons and text in action buttons to white for contrast */
+.action-buttons .btn-view,
+.action-buttons .btn-delete,
+.action-buttons .btn-view span,
+.action-buttons .btn-delete span {
+  color: white;
+  opacity: 1;
+}
+
+/* Ensure delete button appears active and readable even if a general disabled rule applies */
+.action-buttons .btn-delete:disabled,
+.action-buttons .btn-delete[disabled] {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* Override table-level delete button rule so the label and icon are always white */
+.table td button.btn-delete,
+.table td button.btn-delete span,
+.table td button.btn-delete:disabled,
+.table td button.btn-delete[disabled] {
+  color: white !important;
+  opacity: 1 !important;
 }
 
 /* Page header enhancement */
