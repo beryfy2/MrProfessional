@@ -4,6 +4,7 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 import heroVideo from "../assets/HeroPage.mp4";
+import "../style/hero.css";
 
 export default function HeroPage() {
     const videoRef = useRef(null);
@@ -22,9 +23,10 @@ export default function HeroPage() {
             relative 
             w-screen 
             -mx-[calc((100vw-100%)/2)] 
-            h-[calc(100svh-72px)] 
+            h-[60svh] sm:h-[calc(100svh-72px)] 
             sm:h-screen 
             overflow-hidden
+            sm:bg-black
         ">
 
 
@@ -34,15 +36,12 @@ export default function HeroPage() {
                 ref={videoRef}
                 src={heroVideo}
                 className="
+                    hero-video
                     absolute inset-0
                     w-full h-full
                     object-cover
-                    scale-95 sm:scale-100
-                    object-[center_40%]
-                    sm:object-center
-                    transition-transform duration-500
+                    transition-all duration-500
                 "
-
 
                 autoPlay
                 muted
@@ -53,7 +52,7 @@ export default function HeroPage() {
 
 
             {/* DARK OVERLAY */}
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-black/40 hidden sm:block" />
 
             {/* FLOATING BUTTONS */}
             <div className="
