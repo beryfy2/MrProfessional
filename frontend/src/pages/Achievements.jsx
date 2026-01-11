@@ -27,11 +27,13 @@ export default function Achievements() {
     <>
       <NavBar />
 
+      {/* HERO */}
       <section className="achievements-hero">
         <h1>Our Achievements</h1>
         <p>Celebrating success stories and milestones from our community.</p>
       </section>
 
+      {/* LIST */}
       <section className="achievements-section">
         {loading ? (
           <div style={{ textAlign: "center", padding: "40px", color: "#666" }}>
@@ -45,15 +47,8 @@ export default function Achievements() {
           <div className="achievements-grid">
             {list.map((item) => (
               <div key={item._id} className="achievement-card">
-                <Link to={`/achievements/${item._id}`} className="achievement-link-wrapper">
-                  <div className="achievement-image-wrapper">
-                    <img
-                      src={`http://localhost:5000${item.photo}`}
-                      alt={item.title}
-                      className="achievement-image"
-                    />
-                  </div>
-                </Link>
+
+                {/* LEFT CONTENT */}
                 <div className="achievement-content">
                   <div className="achievement-date">
                     {new Date(item.date).toLocaleDateString(undefined, {
@@ -62,11 +57,31 @@ export default function Achievements() {
                       day: "numeric",
                     })}
                   </div>
-                  <Link to={`/achievements/${item._id}`} className="achievement-title-link">
+
+                  <Link
+                    to={`/achievements/${item._id}`}
+                    className="achievement-title-link"
+                  >
                     <h3 className="achievement-title">{item.title}</h3>
                   </Link>
-                
+
+                  <Link
+                    to={`/achievements/${item._id}`}
+                    className="read-more"
+                  >
+                    Read more →
+                  </Link>
                 </div>
+
+                {/* RIGHT IMAGE */}
+                <div className="achievement-image-wrapper">
+                  <img
+                    src={`http://localhost:5000${item.photo}`}
+                    alt={item.title}
+                    className="achievement-image"
+                  />
+                </div>
+
               </div>
             ))}
           </div>

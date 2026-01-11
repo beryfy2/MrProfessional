@@ -14,30 +14,21 @@ export default function AchievementPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    let cancelled = false;
-
-    setLoading(true);
     fetch(`${API_BASE}/public/achievements/${id}`)
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        if (!cancelled && data?._id) setAchievement(data);
-        else if (!cancelled) setError("Achievement not found");
+        if (data?._id) setAchievement(data);
+        else setError("Achievement not found");
       })
-      .catch(() => !cancelled && setError("Failed to load achievement"))
-      .finally(() => !cancelled && setLoading(false));
-
-    return () => {
-      cancelled = true;
-    };
+      .catch(() => setError("Failed to load achievement"))
+      .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) {
     return (
       <>
         <NavBar />
-        <div style={{ textAlign: "center", padding: "100px", minHeight: "60vh" }}>
-          <h2>Loading...</h2>
-        </div>
+        <div className="loader-page">Loading...</div>
         <Footer />
       </>
     );
@@ -47,64 +38,39 @@ export default function AchievementPage() {
     return (
       <>
         <NavBar />
-        <div
-          style={{
-            textAlign: "center",
-            padding: "100px",
-            color: "red",
-            minHeight: "60vh",
-          }}
-        >
-          <h2>{error}</h2>
-        </div>
+        <div className="error-page">{error}</div>
         <Footer />
       </>
     );
   }
 
-  if (!achievement) return null;
-
   return (
     <>
       <NavBar />
 
-      {/* ================= HERO WITH ANIMATION ================= */}
+      {/* HERO */}
       <section className="achievements-hero animated-hero">
-        <div className="hero-glow" />
-
         <div className="hero-content">
           <h1 className="hero-title">{achievement.title}</h1>
 
-          <div className="hero-meta">
+          {/* <div className="hero-meta">
             {new Date(achievement.date).toLocaleDateString(undefined, {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
-          </div>
+          </div> */}
+          
         </div>
-
-        {/* subtle floating accents */}
-        <span className="hero-dot d1" />
-        <span className="hero-dot d2" />
-        <span className="hero-dot d3" />
       </section>
 
+      {/* DETAIL */}
       <section className="achievements-section">
         <div className="achievement-detail-container">
-          <div className="achievement-detail-image-wrapper">
-            <img
-              src={`${UPLOAD_BASE}${achievement.photo}`}
-              alt={achievement.title}
-              className="achievement-detail-image"
-            />
-          </div>
 
+          {/* LEFT CONTENT */}
           <div className="achievement-detail-content">
-            <div
-              className="achievement-date"
-              style={{ marginBottom: "20px", fontSize: "16px" }}
-            >
+            <div className="achievement-date">
               {new Date(achievement.date).toLocaleDateString(undefined, {
                 year: "numeric",
                 month: "long",
@@ -118,6 +84,16 @@ export default function AchievementPage() {
               ))}
             </div>
           </div>
+
+          {/* RIGHT IMAGE */}
+          <div className="achievement-detail-image-wrapper">
+            <img
+              src={`${UPLOAD_BASE}${achievement.photo}`}
+              alt={achievement.title}
+              className="achievement-detail-image"
+            />
+          </div>
+
         </div>
       </section>
 
