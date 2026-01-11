@@ -25,10 +25,7 @@ const ORG_LINKS = [
   { label: "Careers", path: "/careers" },
   { label: "The Team", path: "/team" },
   { label: "Contact Us", path: "/contact" },
-<<<<<<< HEAD
   { label: "Blogs", path: "/blogs" },
-=======
->>>>>>> 749a80623f4e6853e889be7e8b3be1ea969c4aa3
   { label: "Privacy Policy", path: "/privacy-policy" },
 ];
 
