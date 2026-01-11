@@ -12,32 +12,45 @@ export default function HeroPage() {
         const video = videoRef.current;
         if (!video) return;
 
-        // Force play on mobile (iOS fix)
         video.muted = true;
         video.setAttribute("playsinline", true);
-        video.play().catch(() => {});
+        video.play().catch(() => { });
     }, []);
 
     return (
-        <div className="relative w-full min-h-svh overflow-hidden">
+        <div className="
+            relative 
+            w-screen 
+            -mx-[calc((100vw-100%)/2)] 
+            h-[calc(100svh-72px)] 
+            sm:h-screen 
+            overflow-hidden
+        ">
+
+
 
             {/* VIDEO */}
             <video
                 ref={videoRef}
                 src={heroVideo}
                 className="
-                    absolute inset-0 
-                    w-full h-full 
-                    object-cover 
-                    object-center
-                    scale-[1.02]
+                    absolute inset-0
+                    w-full h-full
+                    object-cover
+                    scale-95 sm:scale-100
+                    object-[center_40%]
+                    sm:object-center
+                    transition-transform duration-500
                 "
+
+
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="metadata"
             />
+
 
             {/* DARK OVERLAY */}
             <div className="absolute inset-0 bg-black/40" />
