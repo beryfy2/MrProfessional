@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getJSON, delJSON } from "../lib/api";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const API_BASE =
+  import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 interface MediaItem {
   _id: string;
@@ -17,7 +18,8 @@ interface MediaItem {
 export default function Media() {
   const navigate = useNavigate();
   const [list, setList] = useState<MediaItem[]>([]);
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -25,6 +27,8 @@ export default function Media() {
         setList(data);
       } catch {
         setList([]);
+      } finally {
+        setLoading(false);
       }
     };
     loadData();
@@ -33,33 +37,59 @@ export default function Media() {
   const removeItem = async (id: string) => {
     if (!confirm("Delete this media item?")) return;
     await delJSON(`/media/${id}`);
-    setList(prev => prev.filter(item => item._id !== id));
+    setList((prev) => prev.filter((item) => item._id !== id));
   };
 
   return (
     <div className="page">
+      {/* HEADER */}
       <div className="page-header">
         <div>
           <h1>Media Coverage</h1>
-          <p className="page-subtitle">Manage press and media mentions</p>
+          <p className="page-subtitle">
+            Manage press and media mentions
+          </p>
         </div>
-        <button className="btn primary" onClick={() => navigate("/admin/media/new")}>
+
+        <button
+          className="btn primary"
+          onClick={() => navigate("/admin/media/new")}
+        >
           <span className="btn-icon">+</span>
           Add Media
         </button>
       </div>
 
-      {list.length === 0 ? (
+      {/* LOADING */}
+      {loading && (
+        <div className="card">
+          <div className="loading-state">
+            <div className="spinner"></div>
+            <p>Loading media...</p>
+          </div>
+        </div>
+      )}
+
+      {/* EMPTY STATE */}
+      {!loading && list.length === 0 && (
         <div className="card">
           <div className="empty-state">
             <div className="empty-icon">📰</div>
-            <p className="empty-text">No media items added yet</p>
-            <button className="btn primary" onClick={() => navigate("/admin/media/new")}>
+            <p className="empty-text">
+              No media items added yet
+            </p>
+            <button
+              className="btn primary"
+              onClick={() => navigate("/admin/media/new")}
+            >
               Add Media
             </button>
           </div>
         </div>
-      ) : (
+      )}
+
+      {/* TABLE */}
+      {!loading && list.length > 0 && (
         <div className="card table-card">
           <div className="table-wrapper">
             <table className="table">
@@ -76,38 +106,62 @@ export default function Media() {
               <tbody>
                 {list.map((item) => (
                   <tr key={item._id}>
+                    {/* LOGO */}
                     <td className="td">
-                      <img 
-                        src={`${API_BASE.replace('/api', '')}${item.photo}`} 
-                        alt={item.publication} 
-                        style={{ width: 48, height: 48, objectFit: 'contain', borderRadius: 4, background: '#f8f9fa' }}
+                      <img
+                        src={`${API_BASE.replace(
+                          "/api",
+                          ""
+                        )}${item.photo}`}
+                        alt={item.publication}
+                        className="media-logo"
                       />
                     </td>
+
+                    {/* PUBLICATION */}
                     <td className="td">
                       <strong>{item.publication}</strong>
                     </td>
+
+                    {/* TITLE */}
                     <td className="td">
                       <div className="media-title-cell">
                         <span>{item.title}</span>
                       </div>
                     </td>
+
+                    {/* LINK */}
                     <td className="td">
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--navy)', textDecoration: 'underline' }}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="media-link"
+                      >
                         View Link
                       </a>
                     </td>
+
+                    {/* ACTIONS */}
                     <td className="td">
                       <div className="action-buttons">
                         <button
                           className="btn btn-edit"
-                          onClick={() => navigate(`/admin/media/${item._id}`)}
+                          onClick={() =>
+                            navigate(
+                              `/admin/media/${item._id}`
+                            )
+                          }
                         >
                           <span>✏️</span>
                           Edit
                         </button>
-                        <button 
+
+                        <button
                           className="btn btn-delete"
-                          onClick={() => removeItem(item._id)}
+                          onClick={() =>
+                            removeItem(item._id)
+                          }
                         >
                           <span>🗑️</span>
                           Delete
