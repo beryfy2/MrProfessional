@@ -7,96 +7,58 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 library.add(fas, fab);
 
 const TESTIMONIALS = [
-    {
-        id: 1,
-        name: "Prashant Agawekar",
-        platform: "Google",
-        rating: 5,
-        initials: "P",
-        text: `Great & helpful support by everyone. I got response & support whenever I called to your system. Heartly thanx for Great & Super Service. Have a Great & Bright future of team & your company.`,
-    },
-    {
-        id: 2,
-        name: "Abhishek Kumar",
-        platform: "Google",
-        rating: 5,
-        initials: "A",
-        text: `Thank you so much Mr Professional team for their wonderful help. I really appreciate your efforts in getting start business. Pvt Ltd company registration was smooth yet quick.`,
-    },
-    {
-        id: 3,
-        name: "Vidushi Saini",
-        platform: "Google",
-        rating: 5,
-        initials: "V",
-        text: `I applied for Drug licence and company registration and their follow-up for work and regular updates helped me a lot. They are happily available for any kind of business consultancy.`,
-    },
-    {
-        id: 4,
-        name: "Rahul Sharma",
-        platform: "Google",
-        rating: 5,
-        initials: "R",
-        text: `Very professional and prompt service. All my queries were answered and company incorporation was done on time as promised.`,
-    },
-    {
-        id: 5,
-        name: "Sneha Gupta",
-        platform: "Google",
-        rating: 5,
-        initials: "S",
-        text: `Highly recommended for startups. Team guided us from registration to compliance in a very simple way.`,
-    },
-    {
-        id: 6,
-        name: "Atish Singh",
-        initials: "A",
-        rating: 5,
-        text: "It was a great experience working with Company. They have provided the smoothly. It shows the amount of confidence they are having in their field of work.",
-    },
-    {
-        id: 7,
-        name: "Ravi Kumar",
-        initials: "R",
-        rating: 5,
-        text: "It was professional and friendly experience quick response and remarkable assistance. I loved PU service for section 8 company registration for our Vidyadhare Foundation.",
-    },
-    {
-        id: 8,
-        name: "Ananya Sharma",
-        initials: "A",
-        rating: 5,
-        text: "I needed a material safety data sheet for my product and they got it delivered in just 3 days. I am very happy with their professional and timely service. Trust me you can count on them.",
-    },
-    {
-        id: 9,
-        name: "Prashant Agawekar",
-        initials: "P",
-        rating: 5,
-        text: "Great & helpful support by everyone. I got response & support whenever I called to your system. Heartly thanx for Great & Super Service. Have a Great & Bright future of team & your company.",
-    },
-    {
-        id: 10,
-        name: "Abhishek Kumar",
-        initials: "A",
-        rating: 5,
-        text: "Thank you so much Company team for their wonderful help. I really appreciate your efforts in getting start business. Pvt Ltd company registration was smooth yet quick.",
-    },
-    {
-        id: 11,
-        name: "Vidushi Saini",
-        initials: "V",
-        rating: 5,
-        text: "I applied for Drug licence and company registration and their follow-up for work and regular updates helped me a lot. They are happily available for any kind of business consultancy.",
-    },
-    {
-        id: 12,
-        name: "Taniya Garyali",
-        initials: "T",
-        rating: 5,
-        text: "Great experience went to get my ITR done, process was quite convenient and fast. Had a few queries, am happy about the fact those people explained me all things I wanted to know.",
-    },
+  {
+    id: 1,
+    name: "Himanshu Karia",
+    designation: "Director",
+    company: "Autogrid Mobility Pvt Ltd",
+    initials: "H",
+    rating: 5,
+    text:
+      "The people in the organization are highly professional and helped me throughout the work in the best possible manner.",
+  },
+  {
+    id: 2,
+    name: "Lalla Singh",
+    designation: "Director",
+    company: "Arifin India Nidhi Limited",
+    initials: "L",
+    rating: 5,
+    text:
+      "The best consultants I’ve worked with. The approach towards work is highly professional and effective. An energetic team.",
+  },
+  {
+    id: 3,
+    name: "Amit Keshari",
+    designation: "Director",
+    company: "Trueon Lifesciences (OPC) Pvt Ltd",
+    initials: "A",
+    rating: 5,
+    text:
+      "The services from Mr. Professional are best in class. The support they provide throughout the work is best in the segment.",
+  },
+  {
+    id: 4,
+    name: "Deepesh Kurupath",
+    designation: "Founder & CEO",
+    company: "CargoFL (Innovative Technologies Pvt Ltd)",
+    initials: "D",
+    rating: 5,
+    text:
+      "The best in class service provider in the segment. A very cooperative and understanding team which assists and helps to understand all technicalities very effectively.",
+  },
+  {
+    id: 5,
+    name: "Arya Chaurasia",
+    designation: "CEO",
+    company: "Profitance Pvt Ltd",
+    initials: "A",
+    rating: 5,
+    text:
+      "The team work is best as I know this team had done my work well before time. I am glad to work with this organization. The team is so supportive and helpful. The best chartered accountant team you have.",
+  },
 ];
+
 
 const PER_PAGE_DESKTOP = 3;
 const PER_PAGE_MOBILE = 1;
