@@ -16,8 +16,6 @@ export default function HeroPage() {
   autoPlay
   muted
   loop
-  playsInline
-  controls
 />
 
       {/* Overlay */}
