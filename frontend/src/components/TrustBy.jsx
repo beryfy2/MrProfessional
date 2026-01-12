@@ -16,7 +16,7 @@ const TrustedBy = () => {
         {/* Heading */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-(--text-primary)">
-            Trusted By
+            Our Partners
           </h2>
           <div className="h-1 w-20 bg-(--color-brand) mx-auto mt-2 rounded-full" />
         </div>

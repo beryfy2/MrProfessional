@@ -3,32 +3,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
-import heroImage from "../assets/hero.jpg"; // ✅ ADD IMAGE
+import heroVideo from "../assets/hero-video.mp4";
 import "../style/hero.css";
 
 export default function HeroPage() {
-    return (
-        <div
-            className="
-                relative 
-                w-screen 
-                -mx-[calc((100vw-100%)/2)] 
-                h-[60svh] sm:h-[calc(100svh-72px)] 
-                overflow-hidden
-                sm:bg-black
-            "
-        >
-            {/* IMAGE */}
-            <img
-            src={heroImage}
-            alt="Hero background"
-            className="hero-image absolute inset-0 w-full h-full"
-            />
+  return (
+    <section className="hero-wrapper">
+      {/* Background Video */}
+     <video
+  className="hero-video"
+  src={heroVideo}
+  autoPlay
+  muted
+  loop
+  playsInline
+  controls
+/>
 
+      {/* Overlay */}
+      <div className="hero-overlay" />
 
-            {/* DARK OVERLAY */}
-            <div className="absolute inset-0 bg-black/40 hidden sm:block" />
+      {/* Content */}
+      <div className="hero-content">
+        <span className="hero-tagline">
+          FRESH IDEAS, BUILT TO GROW WITH YOU
+        </span>
 
+<<<<<<< HEAD
             {/* FLOATING BUTTONS */}
             <div
                 className="
@@ -56,25 +57,38 @@ export default function HeroPage() {
                 >
                     <FontAwesomeIcon icon={faPhone} />
                 </a>
+=======
+        <h1 className="hero-title">
+          Bring your vision <br />
+          to life with <span>Mr.Professional</span>
+        </h1>
+>>>>>>> 15d094f91c9ebb819ec3d47c77053f64251b92a9
 
-                {/* WHATSAPP */}
-                <a
-                    href="https://wa.me/918800932090"
-                    className="
-                        h-12 w-12 sm:h-14 sm:w-14 
-                        rounded-full 
-                        bg-[#25D366] 
-                        flex items-center justify-center 
-                        text-white 
-                        shadow-lg 
-                        hover:scale-110 
-                        transition
-                    "
-                    aria-label="Chat on WhatsApp"
-                >
-                    <FontAwesomeIcon icon={faWhatsapp} />
-                </a>
-            </div>
+        <p className="hero-description">
+          We help startups and growing businesses with professional services,
+          compliance, legal support, and digital solutions — all under one roof.
+        </p>
+
+        <div className="hero-actions">
+          <a href="/about" className="hero-btn primary">
+            Learn More
+          </a>
+          <a href="/contact" className="hero-btn secondary">
+            Contact Us
+          </a>
         </div>
-    );
+      </div>
+
+      {/* Floating Buttons */}
+      <div className="floating-actions">
+        <a href="tel:8800932090" className="float-btn call">
+          <FontAwesomeIcon icon={faPhone} />
+        </a>
+
+        <a href="https://wa.me/918800932090" className="float-btn whatsapp">
+          <FontAwesomeIcon icon={faWhatsapp} />
+        </a>
+      </div>
+    </section>
+  );
 }

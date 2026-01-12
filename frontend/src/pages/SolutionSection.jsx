@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -83,12 +84,13 @@ const CATEGORIES = [
 ];
 
 
+=======
+import React from "react";
+>>>>>>> 15d094f91c9ebb819ec3d47c77053f64251b92a9
 
 const SolutionSection = () => {
-    const [activeId, setActiveId] = useState(CATEGORIES[0].id);
-    const activeCategory = CATEGORIES.find((c) => c.id === activeId);
-
     return (
+<<<<<<< HEAD
         <section className="bg-(--bg-main) py-16">
             <div className="max-w-6xl mx-auto px-4">
                 {/* Heading */}
@@ -177,6 +179,55 @@ const SolutionSection = () => {
 
                         </div>
                     </div>
+=======
+        <section className="bg-[var(--bg-main)] py-14">
+            <div className="max-w-4xl mx-auto px-4">
+                {/* Heading */}
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+                        Mr.Professional
+                    </h2>
+                    <p className="mt-3 text-[var(--text-secondary)] max-w-2xl mx-auto">
+                        Incubation-driven professional services for India’s startup ecosystem
+                    </p>
+                </div>
+
+                {/* Content */}
+                <div className="bg-[var(--bg-secondary)] rounded-2xl p-6 md:p-8 shadow-md border border-[var(--border-color)] text-[var(--text-secondary)] text-[15px] md:text-base leading-relaxed space-y-4">
+                    <p>
+                        <span className="font-semibold text-[var(--text-primary)]">
+                            Mr.Professional
+                        </span>{" "}
+                        is a fast-growing incubation-driven professional services brand established
+                        by <span className="font-semibold text-[var(--text-primary)]">
+                            M/s Aaramo Private Limited
+                        </span>, headquartered in Ghaziabad, Uttar Pradesh. The organization provides
+                        technology-enabled incubation and professional services to entrepreneurs
+                        across India, both online and offline.
+                    </p>
+
+                    <p>
+                        With <span className="font-semibold text-[var(--text-primary)]">8 offices nationwide</span>,
+                        a young team of Chartered Accountants, Company Secretaries, legal experts,
+                        and IIM-trained professionals, Mr.Professional supports startups from
+                        ideation to growth by simplifying business setup, compliance, and legal
+                        processes.
+                    </p>
+
+                    <p>
+                        Recognized among the{" "}
+                        <span className="font-semibold text-[var(--text-primary)]">
+                            Top 400 Startups in India
+                        </span>{" "}
+                        with Angel Tax Exemption approval, Mr.Professional works closely with GoUP
+                        Innovation Hub (AKTU), supports startups across leading institutions, and
+                        currently empowers{" "}
+                        <span className="font-semibold text-[var(--text-primary)]">
+                            2,500+ B2B startups
+                        </span>{" "}
+                        nationwide as a partner of the Government of Uttar Pradesh, BSE, and Amazon.
+                    </p>
+>>>>>>> 15d094f91c9ebb819ec3d47c77053f64251b92a9
                 </div>
 
             </div>
@@ -184,6 +235,7 @@ const SolutionSection = () => {
     );
 };
 
+<<<<<<< HEAD
 
 const StatItem = ({ icon, value, label }) => {
     const number = parseInt(value.replace(/\D/g, ""));
@@ -251,4 +303,6 @@ const StatItem = ({ icon, value, label }) => {
 
 
 
+=======
+>>>>>>> 15d094f91c9ebb819ec3d47c77053f64251b92a9
 export default SolutionSection;
