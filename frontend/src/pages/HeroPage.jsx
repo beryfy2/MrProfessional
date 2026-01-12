@@ -29,7 +29,7 @@ export default function HeroPage() {
 
         <h1 className="hero-title">
           Bring your vision <br />
-          to life with <span>Mr.Professional</span>
+          to life .
         </h1>
 
         <p className="hero-description">
