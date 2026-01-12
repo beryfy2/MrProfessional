@@ -29,40 +29,10 @@ export default function HeroPage() {
           FRESH IDEAS, BUILT TO GROW WITH YOU
         </span>
 
-<<<<<<< HEAD
-            {/* FLOATING BUTTONS */}
-            <div
-                className="
-                    fixed 
-                    right-3 sm:right-6 
-                    bottom-3 sm:bottom-6 
-                    z-900 
-                    flex flex-col gap-3 sm:gap-4
-                "
-            >
-                {/* CALL */}
-                <a
-                    href="tel:8800932090"
-                    className="
-                        h-12 w-12 sm:h-14 sm:w-14 
-                        rounded-full 
-                        bg-(--color-brand) 
-                        flex items-center justify-center 
-                        text-white 
-                        shadow-lg 
-                        hover:scale-110 
-                        transition
-                    "
-                    aria-label="Call us"
-                >
-                    <FontAwesomeIcon icon={faPhone} />
-                </a>
-=======
         <h1 className="hero-title">
           Bring your vision <br />
           to life with <span>Mr.Professional</span>
         </h1>
->>>>>>> 15d094f91c9ebb819ec3d47c77053f64251b92a9
 
         <p className="hero-description">
           We help startups and growing businesses with professional services,
