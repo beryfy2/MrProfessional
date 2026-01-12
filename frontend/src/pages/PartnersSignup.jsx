@@ -313,7 +313,7 @@ const PartnersSignup = () => {
                                                 ])}
                                             </div>
                                             
-                                            {renderFormField('Area of Expertise', 'expertise', 'select', true, faStar, [
+                                            {renderFormField('Help in Area', 'expertise', 'select', true, faStar, [
                                                 { value: 'taxation', label: 'Taxation' },
                                                 { value: 'audit', label: 'Audit & Assurance' },
                                                 { value: 'company_law', label: 'Company Law' },
