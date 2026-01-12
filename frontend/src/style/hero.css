@@ -1,60 +1,75 @@
-/* Responsive image shape adjustments for HeroPage */
+/* ================================
+   HERO SECTION – 3:2 IMAGE RATIO
+   Image size: 1536 × 1024
+   No cropping on any screen
+================================ */
+
+/* Hero container */
+.hero-section {
+  position: relative;
+  width: 100%;
+  background: #000; /* fallback background */
+  overflow: hidden;
+}
+
+/* Ratio wrapper */
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;     /* ✅ 1536 × 1024 */
+  overflow: hidden;
+}
+
+/* Hero image */
 .hero-image {
   position: absolute;
   inset: 0;
+
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform .5s ease,
-              border-radius .5s ease,
-              clip-path .5s ease,
-              object-position .5s ease;
-  object-position: center 45%;
-  transform: scale(0.95); /* ✅ zoom OUT */
-  border-radius: 0;
-  clip-path: none;
-  max-height: 100%;
+
+  object-fit: contain;     /* ✅ full image, no cut */
+  object-position: center;
+
   display: block;
+  transform: scale(1);
+  transition: transform 0.5s ease;
 }
 
-/* Extra zoom out for small screens */
+/* Optional hover effect */
+.hero-image-wrapper:hover .hero-image {
+  transform: scale(1.02);
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+================================ */
+
+/* Mobile screens */
 @media (max-width: 639px) {
-  .hero-image {
-    object-position: center 40%;
-    transform: scale(0.88); /* ✅ more zoom out */
+  .hero-image-wrapper {
+    aspect-ratio: 4 / 3;   /* better vertical space on mobile */
   }
 }
 
-/* sm screens */
-@media (min-width: 640px) {
-  .hero-image {
-    transform: scale(0.92);
-    border-radius: 16px;
-    clip-path: ellipse(80% 90% at 50% 12%);
+/* Tablet screens */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-image-wrapper {
+    aspect-ratio: 3 / 2;
   }
 }
 
-/* md screens */
-@media (min-width: 768px) {
-  .hero-image {
-    transform: scale(0.95);
-    border-radius: 0 0 28% 28% / 0 0 8% 8%;
-    clip-path: none;
-  }
-}
-
-/* lg screens */
+/* Desktop screens */
 @media (min-width: 1024px) {
-  .hero-image {
-    transform: scale(0.97);
-    object-position: center center;
-    border-radius: 0;
+  .hero-image-wrapper {
+    aspect-ratio: 3 / 2;
   }
 }
 
-/* very large screens */
+/* Ultra-wide screens */
 @media (min-width: 1600px) {
   .hero-image {
-    transform: scale(0.98);
+    max-width: 1536px;
+    margin: 0 auto;
   }
 }
