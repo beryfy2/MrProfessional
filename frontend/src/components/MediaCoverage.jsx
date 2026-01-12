@@ -38,19 +38,21 @@ const MediaCoverage = () => {
     }, []);
 
     const slides = useMemo(() => {
-        if (mediaItems.length === 0) return [];
-        if (isMobile) {
-            return mediaItems.map(i => [i]);
-        }
-        const arr = [];
-        for (let i = 0; i < mediaItems.length; i++) {
-            arr.push([
-                mediaItems[i],
-                mediaItems[(i + 1) % mediaItems.length],
-            ]);
-        }
-        return arr;
-    }, [isMobile, mediaItems]);
+  if (mediaItems.length === 0) return [];
+
+  // Mobile → 1 card per slide
+  if (isMobile) {
+    return mediaItems.map(item => [item]);
+  }
+
+  // Desktop → 2 UNIQUE cards per slide
+  const arr = [];
+  for (let i = 0; i < mediaItems.length; i += 2) {
+    arr.push(mediaItems.slice(i, i + 2));
+  }
+  return arr;
+}, [isMobile, mediaItems]);
+
 
     useEffect(() => {
         if (hover || slides.length === 0) return;
