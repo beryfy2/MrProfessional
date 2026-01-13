@@ -53,7 +53,8 @@ export default function NavItems({ sticky }) {
     useEffect(() => {
         fetch(`${API_BASE}/nav-items`)
             .then(r => r.json())
-            .then(items => setNavItems(items || []));
+            .then(items => setNavItems(items || []))
+            .catch(err => console.error("Nav fetch error:", err));
     }, []);
 
     /* -------------------- CLOSE ON SCROLL -------------------- */
