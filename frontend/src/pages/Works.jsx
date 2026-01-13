@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import indiaMap from "../assets/images/india-political-map.png";
 import "../style/work.css";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../style/achievements.css";
 

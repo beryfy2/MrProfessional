@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import servicesData from "../data/servicesData";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import FloatingContactButtons from "../components/FloatingContactButtons";
 import HeroBg from "../assets/hero-bg.png";
 import TocImg from "../assets/toc-illustration.png";
