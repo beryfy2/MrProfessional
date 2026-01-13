@@ -31,7 +31,7 @@ export default function NavItems() {
       return;
     }
     const order = typeof newOrder === 'number' && !Number.isNaN(newOrder) ? newOrder : items.length + 1;
-    const slug = name.toLowerCase().replace(/\\s+/g, '-');
+    const slug = name.toLowerCase().replace(/\s+/g, '-');
     if (items.some((i) => i.slug === slug)) {
       alert('A nav item with the same slug already exists.');
       return;

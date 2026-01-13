@@ -18,7 +18,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://beryfy2-mrpro.vercel.app",
+    "https://beryfy2-professional.vercel.app/"
+  ],
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(morgan('dev'));
 
