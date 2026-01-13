@@ -6,12 +6,12 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fas);
 
 const FEATURES = [
-    { icon: "fa-solid fa-users", title: "One Stop Corporate", subtitle: "Solution" },
-    { icon: "fa-solid fa-indian-rupee-sign", title: "PAN India", subtitle: "Services" },
-    { icon: "fa-solid fa-user-tie", title: "Free Expert", subtitle: "Assistance" },
-    { icon: "fa-solid fa-check-circle", title: "Google Verified", subtitle: "Business" },
-    { icon: "fa-solid fa-headset", title: "Dedicated Support", subtitle: "Staff" },
-    { icon: "fa-solid fa-rotate-left", title: "Money-Back", subtitle: "Guarantee" },
+    { icon: ["fas", "users"], title: "One Stop Corporate", subtitle: "Solution" },
+    { icon: ["fas", "indian-rupee-sign"], title: "PAN India", subtitle: "Services" },
+    { icon: ["fas", "user-tie"], title: "Free Expert", subtitle: "Assistance" },
+    { icon: ["fas", "check-circle"], title: "Google Verified", subtitle: "Business" },
+    { icon: ["fas", "headset"], title: "Dedicated Support", subtitle: "Staff" },
+    { icon: ["fas", "rotate-left"], title: "Money-Back", subtitle: "Guarantee" },
 ];
 
 const WhyCompanySection = () => {

@@ -1,3 +1,5 @@
+import React from "react";
+
 const SolutionSection = () => {
     return (
         <section className="bg-(--bg-main) py-20">
