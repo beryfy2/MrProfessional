@@ -17,37 +17,37 @@ const WorkPage = () => {
         const response = await axios.get(`${API_BASE}/public/works/${id}`);
         setWork(response.data);
       } catch (error) {
-        console.error("Error fetching work:", error);
         setError("Work not found");
       } finally {
         setLoading(false);
       }
     };
-
-    if (id) {
-      fetchWork();
-    }
+    if (id) fetchWork();
   }, [id]);
 
+  /* ---------------- Loading ---------------- */
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen flex items-center justify-center bg-[#0b1220]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading work...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-400 mx-auto"></div>
+          <p className="mt-4 text-gray-400">Loading work...</p>
         </div>
       </div>
     );
   }
 
+  /* ---------------- Error ---------------- */
   if (error || !work) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen flex items-center justify-center bg-[#0b1220]">
         <div className="text-center">
-          <div className="text-6xl mb-4">❌</div>
-          <h3 className="text-2xl font-semibold text-gray-900 mb-2">Work Not Found</h3>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <Link to="/works" className="text-blue-600 hover:text-blue-800 font-medium">
+          <h3 className="text-2xl font-semibold text-white mb-2">Work Not Found</h3>
+          <p className="text-gray-400 mb-4">{error}</p>
+          <Link
+            to="/works"
+            className="text-teal-400 hover:text-teal-300 font-medium"
+          >
             ← Back to Works
           </Link>
         </div>
@@ -56,32 +56,44 @@ const WorkPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <Link to="/works" className="text-blue-600 hover:text-blue-800 font-medium mb-6 inline-block">
+    <div className="min-h-screen bg-[#0b1220] px-4 py-10">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Back link */}
+        <Link
+          to="/works"
+          className="inline-block mb-6 text-teal-400 hover:text-teal-300 font-medium"
+        >
           ← Back to Works
         </Link>
 
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Main Card */}
+        <div className="bg-[#101a2e] rounded-2xl shadow-xl overflow-hidden border border-[#1f2a44]">
+
+          {/* Image */}
           <img
             src={`${IMG_BASE}${work.photo}`}
             alt={work.title}
-            className="w-full h-64 md:h-96 object-cover"
+            className="w-full h-72 md:h-[420px] object-cover"
           />
-          <div className="p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{work.title}</h1>
-            <div className="text-sm text-gray-500 mb-6">
-              {new Date(work.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
+
+          {/* Content */}
+          <div className="p-8 md:p-12">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+              {work.title}
+            </h1>
+
+            <p className="text-sm text-gray-400 mb-6">
+              {new Date(work.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })}
-            </div>
-            <div className="prose prose-lg max-w-none">
-              {work.content.split('\n').map((paragraph, index) => (
-                <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                  {paragraph}
-                </p>
+            </p>
+
+            <div className="space-y-5 text-gray-300 leading-relaxed text-lg">
+              {work.content.split("\n").map((para, i) => (
+                <p key={i}>{para}</p>
               ))}
             </div>
           </div>
