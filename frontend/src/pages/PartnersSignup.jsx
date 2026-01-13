@@ -172,7 +172,7 @@ const PartnersSignup = () => {
       <div className="partner-rating">
         <FontAwesomeIcon icon={faGoogle} className="google-icon" />
         <span className="rating-text">
-          Google Customer Rating <strong>4.9</strong>
+          Google Customer Rating <strong>4.7</strong>
         </span>
         <div className="stars">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -181,15 +181,7 @@ const PartnersSignup = () => {
         </div>
       </div>
     </div>
-
-    {/* RIGHT IMAGE */}
-    <div className="partner-hero-image">
-      <img
-        src="https://professionalutilities.com/assets/images/partner-illustration.png"
-        alt="Partner Illustration"
-      />
     </div>
-  </div>
 </section>
 
 
