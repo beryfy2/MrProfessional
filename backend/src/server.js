@@ -44,7 +44,6 @@ mongoose
 import Employee from './models/Employee.js';
 import Enquiry from './models/Enquiry.js';
 import NavItem from './models/NavItem.js';
-import Title from './models/Title.js';
 import Subtitle from './models/Subtitle.js';
 import Job from './models/Job.js';
 import AdminConfig from './models/AdminConfig.js';
