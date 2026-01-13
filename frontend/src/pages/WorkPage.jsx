@@ -61,10 +61,10 @@ export default function WorkPage() {
 
       {/* ================= DETAIL ================= */}
       <section className="achievements-section">
-        <div className="achievement-detail-container">
+        <div className="work-detail-wrapper">
 
           {/* LEFT CONTENT */}
-          <div className="achievement-detail-content">
+          <div className="work-detail-content">
             <div className="achievement-date">
               {new Date(work.date).toLocaleDateString(undefined, {
                 year: "numeric",
@@ -81,16 +81,16 @@ export default function WorkPage() {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="achievement-detail-image-wrapper">
+          <div className="work-detail-image">
             <img
               src={`${UPLOAD_BASE}${work.photo}`}
               alt={work.title}
-              className="achievement-detail-image"
             />
           </div>
 
         </div>
       </section>
+
 
       <Footer />
     </>
