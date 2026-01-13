@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import HeroPage from "./pages/HeroPage";
 import SolutionSection from "./pages/SolutionSection";
 import TestimonialsSection from "./pages/TestimonialsSection";
-import TypingBanner from "./components/TypingBanner";
+
 import Team from "./components/Team";
 import Map from "./components/Map";
 import WhyUs from "./pages/WhyUs";
@@ -53,7 +53,7 @@ const Home = () => (
     <HeroPage />
     <SolutionSection />
     <TestimonialsSection />
-    <TypingBanner />
+   
     <Team />
     <IndustriesSection />
     <TrustedBy />
