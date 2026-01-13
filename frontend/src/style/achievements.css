@@ -2,7 +2,7 @@
 
 .achievements-hero{
   background:linear-gradient(135deg,#081c33,#0b2b4b);
-  padding:90px 20px 70px;
+  padding:60px 20px 55px;
   text-align:center;
   color:#fff;
   position:relative;
@@ -15,12 +15,13 @@
 }
 
 .achievements-hero p{
-  font-size:16px;
-  opacity:.9;
-  max-width:680px;
-  margin:auto;
-}
+  background: linear-gradient(135deg,#081c33,#0b2b4b);
+  padding: px 20px 70px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
 
+}
 /* animated */
 .animated-hero .hero-glow{
   position:absolute;
@@ -29,7 +30,14 @@
   animation:glowPulse 6s infinite;
 }
 
-.hero-content{position:relative;z-index:2}
+.hero-content{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
 .hero-title{font-size:46px;font-weight:800}
 .hero-meta{margin-top:10px;font-size:14px;color:#7dd3fc}
 
