@@ -21,7 +21,7 @@ const app = express();
 app.use(cors({
   origin: [
     "https://beryfy2-mrpro.vercel.app",
-    "https://beryfy2-professional.vercel.app/"
+    "https://beryfy2-mrprofession.vercel.app"
   ],
   credentials: true
 }));
