@@ -18,6 +18,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+// Disable ETag to avoid 304 Not Modified on JSON APIs
+app.set('etag', false);
 app.use(cors({
   origin: [
     'http://localhost:5173',
@@ -48,6 +50,7 @@ mongoose
 import Employee from './models/Employee.js';
 import Enquiry from './models/Enquiry.js';
 import NavItem from './models/NavItem.js';
+import Title from './models/Title.js';
 import Subtitle from './models/Subtitle.js';
 import Job from './models/Job.js';
 import AdminConfig from './models/AdminConfig.js';
