@@ -7,7 +7,7 @@ import "../style/achievements.css";
 
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
-const UPLOAD_BASE = "http://localhost:5000";
+const BASE_URL = API_BASE.replace("/api", "");
 
 export default function WorkPage() {
   const { id } = useParams();
@@ -82,10 +82,7 @@ export default function WorkPage() {
 
           {/* RIGHT IMAGE */}
           <div className="work-detail-image">
-            <img
-              src={`${UPLOAD_BASE}${work.photo}`}
-              alt={work.title}
-            />
+            <img src={`${BASE_URL}${work.photo}`} alt={work.title} />
           </div>
 
         </div>

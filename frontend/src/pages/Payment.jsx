@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/payment.css";
 import logo from "../assets/images/logo.png";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 export default function Payment() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Payment() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/phonepe/pay", {
+      const response = await fetch(`${API_BASE}/phonepe/pay`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
