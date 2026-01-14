@@ -122,7 +122,7 @@ const TestimonialsSection = () => {
                         </h3>
 
                         <RatingRow
-                            iconClass="fa-brands fa-google"
+                            iconClass={['fab', 'google']}
                             iconBg="bg-[var(--bg-main)]"
                             iconColor="text-[#4285F4]"
                             label="Google Customer Rating"
@@ -135,13 +135,13 @@ const TestimonialsSection = () => {
                                 onClick={goPrev}
                                 className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e] flex items-center justify-center shadow"
                             >
-                                <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+                                <FontAwesomeIcon icon={['fas', 'chevron-left']} />
                             </button>
                             <button
                                 onClick={goNext}
                                 className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e] flex items-center justify-center shadow"
                             >
-                                <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+                                <FontAwesomeIcon icon={['fas', 'chevron-right']} />
                             </button>
                         </div>
                     </div>
@@ -157,7 +157,7 @@ const TestimonialsSection = () => {
                                 >
                                     <div>
                                         <FontAwesomeIcon
-                                            icon="fa-solid fa-quote-left"
+                                            icon={['fas', 'quote-left']}
                                             className="text-(--color-brand) mb-3"
                                         />
                                         <p className="text-sm leading-relaxed text-(--text-secondary)">
@@ -175,7 +175,7 @@ const TestimonialsSection = () => {
                                             </span>
                                             <div className="flex items-center gap-2 text-xs">
                                                 <FontAwesomeIcon
-                                                    icon="fa-brands fa-google"
+                                                    icon={['fab', 'google']}
                                                     className="text-[#4285F4]"
                                                 />
                                                 <Stars count={t.rating} />
@@ -206,7 +206,7 @@ const TestimonialsSection = () => {
                                 className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e]
       flex items-center justify-center shadow hover:bg-(--bg-hover)"
                             >
-                                <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
+                                <FontAwesomeIcon icon={['fas', 'chevron-left']} />
                             </button>
 
                             <button
@@ -214,7 +214,7 @@ const TestimonialsSection = () => {
                                 className="h-9 w-9 rounded-full bg-(--bg-main) text-[#03538e]
       flex items-center justify-center shadow hover:bg-(--bg-hover)"
                             >
-                                <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
+                                <FontAwesomeIcon icon={['fas', 'chevron-right']} />
                             </button>
                         </div>
 
@@ -258,7 +258,7 @@ const Stars = ({ count = 5 }) => (
         {Array.from({ length: 5 }).map((_, i) => (
             <FontAwesomeIcon
                 key={i}
-                icon="fa-solid fa-star"
+                icon={['fas', 'star']}
                 className={i < count ? "opacity-100" : "opacity-30"}
             />
         ))}

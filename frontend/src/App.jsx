@@ -2,7 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import ScrollToTop from "./components/ScrollToTop";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Navbar";
+
 import Footer from "./components/Footer";
 
 /* ================= HOME SECTIONS ================= */
