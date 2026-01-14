@@ -20,6 +20,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(cors({
   origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
+    'http://localhost:5000',
     "https://beryfy2-mrpro.vercel.app",
     "https://beryfy2-mrprofession.vercel.app"
   ],
@@ -93,13 +97,15 @@ function signToken(payload) {
 
 async function getAdminPasswordOk(email, plain) {
   const allowed = process.env.ADMIN_EMAIL || 'beryfy2@gmail.com';
-  if (email !== allowed) return false;
-  const cfg = await AdminConfig.findOne({ email: allowed });
-  if (cfg) return bcrypt.compare(plain || '', cfg.passwordHash);
   const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
-  if (adminPasswordHash) return bcrypt.compare(plain || '', adminPasswordHash);
   const adminPassword = process.env.ADMIN_PASSWORD;
-  if (adminPassword) return plain === adminPassword;
+  if (email === allowed) {
+    if (adminPasswordHash) return bcrypt.compare(plain || '', adminPasswordHash);
+    if (adminPassword) return plain === adminPassword;
+  }
+  const cfg = await AdminConfig.findOne({ email });
+  if (cfg) return bcrypt.compare(plain || '', cfg.passwordHash);
+  if (email !== allowed) return false;
   return plain === 'admin123';
 }
 
