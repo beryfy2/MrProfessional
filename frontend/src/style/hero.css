@@ -58,6 +58,17 @@
   text-align: left;    /* 👈 LEFT TEXT */
 }
 
+/* FORCE OVERRIDE PARENT CENTERING */
+.hero-wrapper,
+.hero-wrapper * {
+  text-align: left !important;
+}
+
+.hero-content {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
 .hero-tagline {
   font-size: 13px;
   font-weight: 600;
