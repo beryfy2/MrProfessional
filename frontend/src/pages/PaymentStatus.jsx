@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/payment.css";
 import logo from "../assets/images/logo.png";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
 export default function PaymentStatus() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function PaymentStatus() {
       return;
     }
 
-    fetch(`http://localhost:5000/api/phonepe/status/${txnId}`)
+    fetch(`${API_BASE}/phonepe/status/${txnId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "SUCCESS") {

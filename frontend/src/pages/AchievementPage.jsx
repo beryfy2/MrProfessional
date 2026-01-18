@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import "../style/achievements.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
-const UPLOAD_BASE = "http://localhost:5000";
+const BASE_URL = API_BASE.replace("/api", "");
 
 export default function AchievementPage() {
   const { id } = useParams();
@@ -88,7 +88,7 @@ export default function AchievementPage() {
           {/* RIGHT IMAGE */}
           <div className="achievement-detail-image-wrapper">
             <img
-              src={`${UPLOAD_BASE}${achievement.photo}`}
+              src={`${BASE_URL}${achievement.photo}`}
               alt={achievement.title}
               className="achievement-detail-image"
             />
