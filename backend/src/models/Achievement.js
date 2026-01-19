@@ -8,6 +8,9 @@ const achievementSchema = new mongoose.Schema(
       trim: true
     },
     content: {
+      type: String
+    },
+    link: {
       type: String,
       required: true
     },

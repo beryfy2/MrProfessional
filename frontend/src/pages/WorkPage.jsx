@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../style/achievements.css";
 
 
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
-const UPLOAD_BASE = "http://localhost:5000";
+const BASE_URL = API_BASE.replace("/api", "");
 
 export default function WorkPage() {
   const { id } = useParams();
@@ -61,10 +61,10 @@ export default function WorkPage() {
 
       {/* ================= DETAIL ================= */}
       <section className="achievements-section">
-        <div className="achievement-detail-container">
+        <div className="work-detail-wrapper">
 
           {/* LEFT CONTENT */}
-          <div className="achievement-detail-content">
+          <div className="work-detail-content">
             <div className="achievement-date">
               {new Date(work.date).toLocaleDateString(undefined, {
                 year: "numeric",
@@ -81,16 +81,13 @@ export default function WorkPage() {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="achievement-detail-image-wrapper">
-            <img
-              src={`${UPLOAD_BASE}${work.photo}`}
-              alt={work.title}
-              className="achievement-detail-image"
-            />
+          <div className="work-detail-image">
+            <img src={`${BASE_URL}${work.photo}`} alt={work.title} />
           </div>
 
         </div>
       </section>
+
 
       <Footer />
     </>

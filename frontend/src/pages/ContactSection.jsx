@@ -67,33 +67,33 @@ const ContactSection = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Address */}
                         <InfoCard
-                            icon="fa-solid fa-location-dot"
+                            icon={['fas', 'location-dot']}
                             title="Our Address"
                             lines={[
-                                "XYZ, Xth Floor, ABC House,",
-                                "Nehru Place, New Delhi XXXXXX",
+                                "SF-1, Reliable City Center, Sector-6, Vasundhara",
+                                "Ghaziabad, Uttar Pradesh, India – 201014",
                             ]}
                         />
 
                         {/* Working hours */}
                         <InfoCard
-                            icon="fa-solid fa-clock"
+                            icon={['fas', 'clock']}
                             title="Working Hours"
-                            lines={["Monday - Saturday", "10:00AM - 07:00PM (IST)"]}
+                            lines={["Monday - Saturday", "9 AM - 6:30 PM (IST)"]}
                         />
 
                         {/* Email */}
                         <InfoCard
-                            icon="fa-solid fa-envelope"
+                            icon={['fas', 'envelope']}
                             title="Email Us"
-                            lines={["support@example.com"]}
+                            lines={["info@mrprofessional.co.in"]}
                         />
 
                         {/* Call */}
                         <InfoCard
-                            icon="fa-solid fa-phone"
+                            icon={['fas', 'phone']}
                             title="Call Us"
-                            lines={["+91 XXXXXXXXXX"]}
+                            lines={["+918800932090","+919415718705"]}
                         />
                     </div>
 

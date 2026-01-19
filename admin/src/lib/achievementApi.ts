@@ -3,7 +3,8 @@ import { getJSON, sendForm, delJSON } from "./api";
 export type Achievement = {
   _id: string;
   title: string;
-  content: string;
+  content?: string;
+  link: string;
   photo: string;
   date: string;
   createdAt?: string;

@@ -2,7 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import ScrollToTop from "./components/ScrollToTop";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Navbar";
+
 import Footer from "./components/Footer";
 
 /* ================= HOME SECTIONS ================= */
@@ -31,7 +32,6 @@ import ServicePage from "./pages/ServicePage";
 import AboutUs from "./pages/AboutUs";
 import TeamMem from "./pages/TeamMem";
 import Achievements from "./pages/Achievements";
-import AchievementPage from "./pages/AchievementPage";
 import Works from "./pages/Works";
 import WorkPage from "./pages/WorkPage";
 import Contact from "./pages/Contact";
@@ -141,7 +141,6 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<TeamMem />} />
         <Route path="/achievements" element={<Achievements />} />
-        <Route path="/achievements/:id" element={<AchievementPage />} />
         <Route path="/works" element={<Works />} />
         <Route path="/works/:id" element={<WorkPage />} />
         <Route path="/contact" element={<Contact />} />

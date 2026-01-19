@@ -18,7 +18,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
+// Disable ETag to avoid 304 Not Modified on JSON APIs
+app.set('etag', false);
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
+    'http://localhost:5000',
+    "https://beryfy2-mrpro.vercel.app",
+    "https://beryfy2-mrprofession.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(morgan('dev'));
 
@@ -28,7 +40,7 @@ fs.mkdirSync(uploadsDir, { recursive: true });
 app.use('/uploads', express.static(uploadsDir));
 
 // Mongo setup
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://aditya_singh:Aditya$%40343@addi.0jj4bvg.mongodb.net/mrpro';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://beryfy2_db_user:0mdfcLyF1Wsbl3N4@cluster0.w6qz1iy.mongodb.net/mrpro';
 mongoose
   .connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
   .then(() => console.log('MongoDB connected'))
@@ -88,13 +100,15 @@ function signToken(payload) {
 
 async function getAdminPasswordOk(email, plain) {
   const allowed = process.env.ADMIN_EMAIL || 'beryfy2@gmail.com';
-  if (email !== allowed) return false;
-  const cfg = await AdminConfig.findOne({ email: allowed });
-  if (cfg) return bcrypt.compare(plain || '', cfg.passwordHash);
   const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
-  if (adminPasswordHash) return bcrypt.compare(plain || '', adminPasswordHash);
   const adminPassword = process.env.ADMIN_PASSWORD;
-  if (adminPassword) return plain === adminPassword;
+  if (email === allowed) {
+    if (adminPasswordHash) return bcrypt.compare(plain || '', adminPasswordHash);
+    if (adminPassword) return plain === adminPassword;
+  }
+  const cfg = await AdminConfig.findOne({ email });
+  if (cfg) return bcrypt.compare(plain || '', cfg.passwordHash);
+  if (email !== allowed) return false;
   return plain === 'admin123';
 }
 
@@ -350,14 +364,15 @@ app.get('/api/achievements/:id', async (req, res) => {
 
 app.post('/api/achievements', auth, upload.single('photo'), async (req, res) => {
   try {
-    const { title, content, date } = req.body;
+    const { title, content, link, date } = req.body;
     const photo = req.file ? `/uploads/${req.file.filename}` : undefined;
-    
     if (!photo) return res.status(400).json({ error: 'Photo is required' });
+    if (!link) return res.status(400).json({ error: 'Link is required' });
 
-    const item = await Achievement.create({ 
-      title, 
-      content, 
+    const item = await Achievement.create({
+      title,
+      content,
+      link,
       photo,
       date: date || new Date()
     });
@@ -369,9 +384,9 @@ app.post('/api/achievements', auth, upload.single('photo'), async (req, res) => 
 
 app.put('/api/achievements/:id', auth, upload.single('photo'), async (req, res) => {
   try {
-    const { title, content, date } = req.body;
-    const updateData = { title, content, date };
-    
+    const { title, content, link, date } = req.body;
+    const updateData = { title, content, link, date };
+
     if (req.file) {
       updateData.photo = `/uploads/${req.file.filename}`;
     }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 library.add(fas);
@@ -72,7 +72,7 @@ const ContactSection = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Address */}
                         <InfoCard
-                            icon="fa-solid fa-location-dot"
+                            icon={['fas', 'location-dot']}
                             title="Our Address"
                             lines={[
                                 "SF-1, Reliable City Center, Sector-6, Vasundhara",
@@ -82,21 +82,21 @@ const ContactSection = () => {
 
                         {/* Working hours */}
                         <InfoCard
-                            icon="fa-solid fa-clock"
+                            icon={['fas', 'clock']}
                             title="Working Hours"
                             lines={["Monday - Saturday", "9 AM - 6:30 PM (IST)"]}
                         />
 
                         {/* Email */}
                         <InfoCard
-                            icon="fa-solid fa-envelope"
+                            icon={['fas', 'envelope']}
                             title="Email Us"
                             lines={["info@mrprofessional.co.in"]}
                         />
 
                         {/* Call */}
                         <InfoCard
-                            icon="fa-solid fa-phone"
+                            icon={['fas', 'phone']}
                             title="Call Us"
                             lines={["+918800932090","+919415718705"]}
                         />
