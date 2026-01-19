@@ -113,7 +113,7 @@ const ContactSection = () => {
                                     placeholder="Name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
+                                    className="bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-[19px] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                     required
                                 />
                                 <input
@@ -122,7 +122,7 @@ const ContactSection = () => {
                                     placeholder="Mobile No."
                                     value={formData.mobile}
                                     onChange={handleChange}
-                                    className="bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
+                                    className="bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-[19px] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                     required
                                 />
                             </div>
@@ -134,7 +134,7 @@ const ContactSection = () => {
                                 placeholder="Email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
+                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-[19px] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                 required
                             />
 
@@ -145,7 +145,7 @@ const ContactSection = () => {
                                 placeholder="Subject"
                                 value={formData.subject}
                                 onChange={handleChange}
-                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
+                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-[19px] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                                 required
                             />
 
@@ -156,7 +156,7 @@ const ContactSection = () => {
                                 placeholder="Message"
                                 value={formData.message}
                                 onChange={handleChange}
-                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
+                                className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-md px-3 py-2 text-[19px] resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent"
                             />
 
                             {/* Submit button */}
@@ -177,11 +177,11 @@ const ContactSection = () => {
 const InfoCard = ({ icon, title, lines }) => (
     <div className="bg-[var(--bg-main)] border border-[var(--border-color)] rounded shadow-lg px-8 py-8 flex flex-col items-center text-center">
         <div className="h-10 w-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center mb-4">
-            <FontAwesomeIcon icon={icon} className="text-white text-lg" />
+            <FontAwesomeIcon icon={icon} className="text-white text-[23px]" />
         </div>
         <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2">{title}</h4>
         {lines.map((line, idx) => (
-            <p key={idx} className="text-sm text-[var(--text-secondary)]">
+            <p key={idx} className="text-[19px] text-[var(--text-secondary)]">
                 {line}
             </p>
         ))}
@@ -189,3 +189,4 @@ const InfoCard = ({ icon, title, lines }) => (
 );
 
 export default ContactSection;
+

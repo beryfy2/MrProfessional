@@ -25,18 +25,13 @@ const WhyCompanySection = () => {
                         Why Us?
                     </h2>
 
-                    <p className="text-(--text-secondary) text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
+                    <p className="text-(--text-secondary) text-[17px] md:text-[19px] leading-relaxed max-w-3xl mx-auto">
                         At Mr Professional, we leverage our industry knowledge and
                         expertise to help businesses navigate complex regulations, minimize
                         risks, and optimize operations for maximum efficiency and
                         profitability.
                         <br />
-                        <a
-                            href="#reviews"
-                            className="text-(--color-brand) font-semibold hover:underline inline-block mt-2"
-                        >
-                            Read our reviews.
-                        </a>
+                       
                     </p>
                 </div>
 
@@ -54,13 +49,13 @@ const WhyCompanySection = () => {
                             {/* ICON */}
                             <div className="relative shrink-0">
                                 <div className="h-12 w-12 md:h-14 md:w-14 rounded-full 
-                                    bg-linear-to-b from-[#63d62c] to-[#0ba341]
+                                    bg-linear-to-b from-[#007C82] to-[#007C82]
                                     flex items-center justify-center
                                     shadow-[0_10px_25px_rgba(0,150,0,0.4)]">
 
                                     <FontAwesomeIcon
                                         icon={item.icon}
-                                        className="text-white text-base md:text-lg"
+                                        className="text-white text-[21px] md:text-[23px]"
                                     />
                                 </div>
 
@@ -68,7 +63,7 @@ const WhyCompanySection = () => {
                             </div>
 
                             {/* Text */}
-                            <div className="text-(--text-primary) text-sm md:text-base font-semibold leading-snug">
+                            <div className="text-(--text-primary) text-[17px] md:text-[19px] font-semibold leading-snug">
                                 <div>{item.title}</div>
                                 {item.subtitle && <div>{item.subtitle}</div>}
                             </div>
@@ -82,3 +77,4 @@ const WhyCompanySection = () => {
 };
 
 export default WhyCompanySection;
+

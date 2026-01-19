@@ -96,3 +96,4 @@ const IndustryTile = ({ label, icon }) => (
 );
 
 export default IndustriesSection;
+

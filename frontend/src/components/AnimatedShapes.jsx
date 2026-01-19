@@ -56,3 +56,4 @@ export default function AnimatedShapes({ count = 12, className = '' }) {
     </div>
   );
 }
+

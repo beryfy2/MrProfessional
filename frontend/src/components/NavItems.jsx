@@ -133,7 +133,7 @@ export default function NavItems() {
               <li key={item.label}>
                 <button
                   onClick={() => navigate(item.path)}
-                  className="hover:text-(--color-brand-hover)"
+                  className="hover:text-(--color-brand-hover) text-[18px]"
                 >
                   {item.label}
                 </button>
@@ -150,11 +150,11 @@ export default function NavItems() {
                   onMouseEnter={() => handleItemEnter(nav._id)}
                   onMouseLeave={handleItemLeave}
                 >
-                  <button className="flex items-center gap-1">
+                  <button className="flex items-center gap-1 text-[18px]">
                     {nav.name}
                     <FontAwesomeIcon
                       icon={faChevronDown}
-                      className={`text-xs transition ${isOpen ? "rotate-180" : ""}`}
+                      className={`text-[17px] transition ${isOpen ? "rotate-180" : ""}`}
                     />
                   </button>
 
@@ -193,7 +193,7 @@ export default function NavItems() {
           <Link
             to="/partners-signup"
             className="px-8 py-2 rounded-full bg-(--color-brand)
-                       text-white text-sm font-semibold
+                       text-white text-[19px] font-semibold
                        hover:opacity-90 transition
                        whitespace-nowrap"
           >
@@ -220,7 +220,7 @@ export default function NavItems() {
             {STATIC_NAV.map(i => (
               <button
                 key={i.label}
-                className="block w-full py-3 border-b border-white/10"
+                className="block w-full py-3 border-b border-white/10 text-[18px]"
                 onClick={() => {
                   navigate(i.path);
                   setMobileOpen(false);
@@ -306,11 +306,11 @@ function DynamicMenu({
               <button
                 key={s._id}
                 onClick={() => onSelectService(s.title)}
-                className="flex gap-2 text-sm hover:text-(--color-brand-hover)"
+                className="flex gap-2 text-[19px] hover:text-(--color-brand-hover)"
               >
                 {s.title}
                 {i < 2 && (
-                  <FontAwesomeIcon icon={faFire} className="text-xs" />
+                  <FontAwesomeIcon icon={faFire} className="text-[17px]" />
                 )}
               </button>
             ))}
@@ -320,3 +320,4 @@ function DynamicMenu({
     </div>
   );
 }
+

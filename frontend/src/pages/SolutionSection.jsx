@@ -13,15 +13,12 @@ const SolutionSection = () => {
                 </div>
 
                 {/* Content */}
-                <div className="bg-(--bg-secondary) rounded-2xl p-8 md:p-12 shadow-md border border-(--border-color) text-(--text-secondary) text-justify text-[15px] md:text-base leading-relaxed space-y-4">
+                <div className="bg-(--bg-secondary) rounded-2xl p-8 md:p-12 shadow-md border border-(--border-color) text-(--text-secondary) text-justify text-[15px] md:text-[21px] leading-relaxed space-y-4">
                     <p>
                         <span className="font-semibold text-(--text-primary)">
                             Mr.Professional
                         </span>{" "}
-                        is a fast-growing incubation-driven professional services brand established
-                        by <span className="font-semibold text-(--text-primary)">
-                            M/s Aaramo Private Limited
-                        </span>, headquartered in Ghaziabad, Uttar Pradesh. The organization provides
+                        is a fast-growing incubation-driven professional services brand.Headquartered in Ghaziabad, Uttar Pradesh. The organization provides
                         technology-enabled incubation and professional services to entrepreneurs
                         across India, both online and offline.
                     </p>
@@ -43,7 +40,7 @@ const SolutionSection = () => {
                         Innovation Hub (AKTU), supports startups across leading institutions, and
                         currently empowers{" "}
                         <span className="font-semibold text-(--text-primary)">
-                            2,500+ B2B startups
+                            2,510+ B2B startups
                         </span>{" "}
                         nationwide as a partner of the Government of Uttar Pradesh, BSE, and Amazon.
                     </p>
@@ -55,3 +52,4 @@ const SolutionSection = () => {
 };
 
 export default SolutionSection;
+

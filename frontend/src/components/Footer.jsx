@@ -110,10 +110,10 @@ const Footer = () => {
           </FooterColumn>
 
           {/* CONTACT */}
-          <div className="space-y-4 text-sm text-center lg:text-left lg:col-start-4">
+          <div className="space-y-4 text-[19px] text-center lg:text-left lg:col-start-4">
 
             <div>
-              <p className="text-(--color-brand) font-semibold text-xs mb-1">
+              <p className="text-(--color-brand) font-semibold text-[17px] mb-1">
                 Call us on
               </p>
               <div className="text-3xl font-bold">
@@ -122,18 +122,18 @@ const Footer = () => {
                   +91 94157 18705
                 </div>
               </div>
-              <p className="text-xs mt-1">[Mon - Sat, 9am - 6:30pm]</p>
+              <p className="text-[17px] mt-1">[Mon - Sat, 9am - 6:30pm]</p>
             </div>
 
             <div>
-              <p className="text-(--color-brand) font-semibold text-xs mb-1">
+              <p className="text-(--color-brand) font-semibold text-[17px] mb-1">
                 Write to us
               </p>
               <p>info@mrprofessional.co.in</p>
             </div>
 
             <div>
-              <p className="text-(--color-brand) font-semibold text-xs mb-1">
+              <p className="text-(--color-brand) font-semibold text-[17px] mb-1">
                 Follow us on
               </p>
               <div className="flex gap-3 mt-2 justify-center lg:justify-start">
@@ -192,7 +192,7 @@ const Footer = () => {
             {/* RIGHT — GOOGLE REVIEW CARD */}
             <div className="bg-(--bg-main) rounded-2xl px-6 py-6 border border-(--border-color) flex flex-col gap-4">
 
-              <p className="text-sm md:text-[15px] leading-relaxed">
+              <p className="text-[19px] md:text-[15px] leading-relaxed">
                 {activeReview.text}
               </p>
 
@@ -206,7 +206,7 @@ const Footer = () => {
                   className="flex items-center gap-2 hover:opacity-90 transition"
                 >
                   <img src={googleImg} alt="Google Reviews" className="h-8" />
-                  <span className="font-semibold text-sm">
+                  <span className="font-semibold text-[19px]">
                     4.7 <span className="text-yellow-400">★★★★★</span>
                   </span>
                 </a>
@@ -229,7 +229,7 @@ const Footer = () => {
         </div>
 
         {/* ---------------- BOTTOM BAR ---------------- */}
-        <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-center md:text-left">
+        <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row gap-3 justify-between items-center text-[17px] text-center md:text-left">
           <span>Mr.Professional</span>
 
           <div className="flex gap-4">
@@ -248,14 +248,14 @@ const Footer = () => {
 
 const FooterColumn = ({ title, children }) => (
   <div>
-    <h4 className="text-(--color-brand) font-semibold mb-3">{title}</h4>
+    <h4 className="text-(--color-brand) font-semibold mb-3 text-[21px]">{title}</h4>
     <ul className="space-y-2">{children}</ul>
   </div>
 );
 
 const FooterItem = ({ to, children }) => (
   <li>
-    <Link to={to} className="hover:text-(--color-brand-hover)">
+    <Link to={to} className="hover:text-(--color-brand-hover) text-[19px]">
       {children}
     </Link>
   </li>
@@ -287,3 +287,4 @@ const FooterLink = ({ to, children }) => (
 );
 
 export default Footer;
+

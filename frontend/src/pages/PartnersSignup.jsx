@@ -92,7 +92,7 @@ const PartnersSignup = () => {
 
     const renderFormField = (label, name, type = 'text', required = true, icon = null, options = []) => (
         <div className="mb-6">
-            <label className="block text-[var(--text-secondary)] text-sm font-semibold mb-2 uppercase tracking-wider">
+            <label className="block text-[var(--text-secondary)] text-[19px] font-semibold mb-2 uppercase tracking-wider">
                 {label} {required && <span className="text-[var(--color-danger)]">*</span>}
             </label>
             <div className="relative">
@@ -120,7 +120,7 @@ const PartnersSignup = () => {
                     <div className="flex items-center">
                         <label className="flex flex-col items-center px-4 py-2 bg-[var(--bg-main)] text-[var(--color-brand)] rounded-lg tracking-wide uppercase border border-[var(--color-brand)] cursor-pointer hover:bg-[var(--bg-secondary)]">
                             <FontAwesomeIcon icon={faUpload} className="w-4 h-4 mr-2" />
-                            <span className="text-xs">Choose File</span>
+                            <span className="text-[17px]">Choose File</span>
                             <input 
                                 type="file" 
                                 name={name}
@@ -130,7 +130,7 @@ const PartnersSignup = () => {
                             />
                         </label>
                         {formData[name] && (
-                            <span className="ml-2 text-sm text-[var(--text-secondary)]">
+                            <span className="ml-2 text-[19px] text-[var(--text-secondary)]">
                                 <FontAwesomeIcon icon={faFileAlt} className="mr-1" />
                                 {formData[name].name}
                             </span>
@@ -147,7 +147,7 @@ const PartnersSignup = () => {
                     />
                 )}
                 {formErrors[name] && (
-                    <p className="mt-1 text-sm text-[var(--color-danger)]">{formErrors[name]}</p>
+                    <p className="mt-1 text-[19px] text-[var(--color-danger)]">{formErrors[name]}</p>
                 )}
             </div>
         </div>
@@ -201,7 +201,7 @@ const PartnersSignup = () => {
                                             <FontAwesomeIcon icon={faFileAlt} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold text-[var(--text-primary)]">Legal</h4>
+                                            <h4 className="text-[23px] font-semibold text-[var(--text-primary)]">Legal</h4>
                                             <p className="mt-1 text-[var(--text-secondary)]">Expert legal services for all your business needs</p>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@ const PartnersSignup = () => {
                                             <FontAwesomeIcon icon={faGlobe} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold text-[var(--text-primary)]">Digital Presence</h4>
+                                            <h4 className="text-[23px] font-semibold text-[var(--text-primary)]">Digital Presence</h4>
                                             <p className="mt-1 text-[var(--text-secondary)]">Enhance your online visibility and reach</p>
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@ const PartnersSignup = () => {
                                             <FontAwesomeIcon icon={faChartLine} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div className="ml-4">
-                                            <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fundraising</h4>
+                                            <h4 className="text-[23px] font-semibold text-[var(--text-primary)]">Fundraising</h4>
                                             <p className="mt-1 text-[var(--text-secondary)]">Strategic financial solutions for growth</p>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@ const PartnersSignup = () => {
                                                     <FontAwesomeIcon icon={faCheck} className="h-2.5 w-2.5 text-[var(--color-brand)]" />
                                                 </div>
                                             </div>
-                                            <span className="text-sm text-[var(--text-secondary)]">{item}</span>
+                                            <span className="text-[19px] text-[var(--text-secondary)]">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -258,8 +258,8 @@ const PartnersSignup = () => {
                                             <FontAwesomeIcon icon={faGoogle} className="h-5 w-5 text-[var(--color-brand)]" />
                                         </div>
                                         <div>
-                                            <p className="text-sm font-medium text-[var(--text-primary)]">Google Partner</p>
-                                            <p className="text-xs text-[var(--text-secondary)]">Certified Company</p>
+                                            <p className="text-[19px] font-medium text-[var(--text-primary)]">Google Partner</p>
+                                            <p className="text-[17px] text-[var(--text-secondary)]">Certified Company</p>
                                         </div>
                                     </div>
                                 </div>
@@ -317,7 +317,7 @@ const PartnersSignup = () => {
                                             ])}
                                             
                                             <div className="mb-4">
-                                                <label className="block text-[var(--text-secondary)] text-sm font-medium mb-1">
+                                                <label className="block text-[var(--text-secondary)] text-[19px] font-medium mb-1">
                                                     Message <span className="text-red-500">*</span>
                                                 </label>
                                                 <textarea
@@ -335,11 +335,11 @@ const PartnersSignup = () => {
                                                 type="submit"
                                                 onClick={handleSubmit}
                                                 disabled={sending}
-                                                className="w-full bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] disabled:bg-opacity-50 text-white font-semibold py-4 px-6 rounded-md text-lg transition duration-200 flex items-center justify-center"
+                                                className="w-full bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] disabled:bg-opacity-50 text-white font-semibold py-4 px-6 rounded-md text-[23px] transition duration-200 flex items-center justify-center"
                                             >
                                                 {sending ? 'Submitting...' : 'GET PROPOSAL'}
                                             </button>
-                                            {notice && <div className="text-center text-sm mt-3 text-[var(--text-primary)]">{notice}</div>}
+                                            {notice && <div className="text-center text-[19px] mt-3 text-[var(--text-primary)]">{notice}</div>}
                                         </div>
                                     </form>
                                 </div>
@@ -361,12 +361,12 @@ const PartnersSignup = () => {
                     <div className="max-w-4xl mx-auto bg-[var(--bg-secondary)] p-8 rounded-lg shadow-md border border-[var(--border-color)]">
                         <div className="text-center">
                             <div className="text-yellow-400 text-4xl mb-4">"</div>
-                            <p className="text-lg text-white italic mb-6">
+                            <p className="text-[23px] text-white italic mb-6">
                                 Partnering with Mr Professional has been a game-changer for my practice. 
                                 Their support and resources have helped me serve my clients better and grow my business.
                             </p>
                             <div className="font-semibold text-white">Rahul Sharma</div>
-                            <div className="text-sm text-white">Chartered Accountant, Mumbai</div>
+                            <div className="text-[19px] text-white">Chartered Accountant, Mumbai</div>
                         </div>
                     </div>
                 </div>
@@ -382,3 +382,4 @@ const PartnersSignup = () => {
 };
 
 export default PartnersSignup;
+
