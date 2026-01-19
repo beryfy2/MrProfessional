@@ -12,7 +12,7 @@ library.add(fas, far, fab);
 const NavProfile = ({ hidden = false, transparent = false }) => {
   return (
     <div
-      className="w-full text-(--text-primary) text-sm px-6 flex items-center justify-between"
+      className="w-full text-(--text-primary) text-[19px] px-6 flex items-center justify-between"
       style={{
         background: transparent ? "transparent" : "var(--bg-secondary)",
         height: "56px",
@@ -38,7 +38,7 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
     
 
       {/* Socials media */}
-      <div className="hidden md:flex items-center gap-4 text-lg">
+      <div className="hidden md:flex items-center gap-4 text-[23px]">
         <a
           href="https://wa.me/+918800932090"
           target="_blank"
@@ -104,3 +104,4 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
 };
 
 export default NavProfile;
+

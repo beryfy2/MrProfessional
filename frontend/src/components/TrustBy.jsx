@@ -1,11 +1,24 @@
 import React from "react";
 import "../style/trustby.css";
 
-const BRANDS = Array.from({ length: 14 }, (_, i) =>
-  new URL(`../assets/brands/${i + 1}.png`, import.meta.url).href
-);
+const BRANDS = [
+  { logo: new URL(`../assets/brands/1.png`, import.meta.url).href, name: "Delhi University" },
+  { logo: new URL(`../assets/brands/2.png`, import.meta.url).href, name: "Gurugram" },
+  { logo: new URL(`../assets/brands/3.png`, import.meta.url).href, name: "Gautam Buddha University" },
+  { logo: new URL(`../assets/brands/5.png`, import.meta.url).href, name: "HBTU" },
+  { logo: new URL(`../assets/brands/6.png`, import.meta.url).href, name: "UPDI" },
+  { logo: new URL(`../assets/brands/7.png`, import.meta.url).href, name: "GL Bajaj" },
+  { logo: new URL(`../assets/brands/8.png`, import.meta.url).href, name: "FOAP" },
+  { logo: new URL(`../assets/brands/9.png`, import.meta.url).href, name: "IIT Bombay" },
+  { logo: new URL(`../assets/brands/10.png`, import.meta.url).href, name: "IIM" },
+  { logo: new URL(`../assets/brands/11.png`, import.meta.url).href, name: "NIT Manipur" },
+  { logo: new URL(`../assets/brands/12.png`, import.meta.url).href, name: "Amity University" },
+  { logo: new URL(`../assets/brands/13.png`, import.meta.url).href, name: "NIET" },
+  { logo: new URL(`../assets/brands/14.png`, import.meta.url).href, name: "ITS" },
+];
 
-const TrustedBy = () => {
+
+const TrustBy = () => {
   return (
     <section className="bg-(--bg-main) py-14">
       <div className="max-w-8xl mx-auto px-4">
@@ -24,15 +37,15 @@ const TrustedBy = () => {
 
             {/* First strip */}
             <div className="trusted-strip">
-              {BRANDS.map((logo, i) => (
-                <BrandCard key={`brand-1-${i}`} logo={logo} />
+              {BRANDS.map((brand, i) => (
+                <BrandCard key={`brand-1-${i}`} logo={brand.logo} name={brand.name} />
               ))}
             </div>
 
             {/* Duplicate strip for seamless loop */}
             <div className="trusted-strip">
-              {BRANDS.map((logo, i) => (
-                <BrandCard key={`brand-2-${i}`} logo={logo} />
+              {BRANDS.map((brand, i) => (
+                <BrandCard key={`brand-2-${i}`} logo={brand.logo} name={brand.name} />
               ))}
             </div>
 
@@ -44,10 +57,13 @@ const TrustedBy = () => {
   );
 };
 
-const BrandCard = ({ logo }) => (
-  <div className="brand-card">
-    <img src={logo} alt="brand" className="brand-logo" />
+const BrandCard = ({ logo, name }) => (
+  <div className="brand-item">
+    <div className="brand-card">
+      <img src={logo} alt={name} className="brand-logo" />
+    </div>
+    <div className="brand-name-box">{name}</div>
   </div>
 );
 
-export default TrustedBy;
+export default TrustBy;

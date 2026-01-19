@@ -462,7 +462,7 @@ const Careers = () => {
     <div className="bg-(--bg-main)">
       {/* Top Blue Banner */}
       <div className="w-full bg-(--color-brand) py-2 px-4">
-        <div className="container mx-auto text-center text-white text-sm md:text-base">
+        <div className="container mx-auto text-center text-white text-[19px] md:text-[21px]">
           <p>We're hiring at <span className="font-bold">Mr.Pro</span>! Explore our current job openings and join our growing team.</p>
         </div>
       </div>
@@ -480,7 +480,7 @@ const Careers = () => {
             <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-8">Build your career with Mr.Pro and be part of something great</p>
             <a 
               href="#job-form" 
-              className="bg-(--color-brand) hover:bg-(--color-brand-hover) text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-300 inline-block"
+              className="bg-(--color-brand) hover:bg-(--color-brand-hover) text-white font-bold py-3 px-8 rounded-full text-[23px] md:text-xl transition-colors duration-300 inline-block"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('job-form').scrollIntoView({ behavior: 'smooth' });
@@ -500,7 +500,7 @@ const Careers = () => {
               Career at <span className="text-(--color-brand)">Mr.Professional</span>
             </h1>
             <div className="w-20 h-1 bg-(--color-brand) mx-auto mb-6"></div>
-            <p className="text-lg text-(--text-secondary) max-w-3xl mx-auto">
+            <p className="text-[23px] text-(--text-secondary) max-w-3xl mx-auto">
               Join our team of experts and be part of a company that values innovation, excellence, and professional growth.
             </p>
           </div>
@@ -550,7 +550,7 @@ const Careers = () => {
               Why Work at <span className="text-(--color-brand)">Mr Professional</span>
             </h2>
             <div className="w-20 h-1 bg-(--color-brand) mx-auto mb-6"></div>
-            <p className="text-lg text-(--text-secondary) max-w-3xl mx-auto">
+            <p className="text-[23px] text-(--text-secondary) max-w-3xl mx-auto">
               Join our team and be part of a company that values innovation, collaboration, and professional growth.
             </p>
           </div>
@@ -606,7 +606,7 @@ const Careers = () => {
               Current Job Openings
             </h2>
             <div className="w-20 h-1 bg-(--color-brand) mx-auto mb-6"></div>
-            <p className="text-lg text-(--text-secondary) max-w-3xl mx-auto">
+            <p className="text-[23px] text-(--text-secondary) max-w-3xl mx-auto">
               Explore exciting career opportunities and join our growing team.
             </p>
           </div>
@@ -627,12 +627,12 @@ const Careers = () => {
                         <div className="flex items-center space-x-3">
                           <h3 className="text-xl font-semibold text-(--text-primary)">{job.title}</h3>
                           {job.urgent && (
-                            <span className="bg-(--bg-secondary) text-(--color-danger) text-xs px-3 py-1 rounded-full font-bold border border-(--color-danger)">
+                            <span className="bg-(--bg-secondary) text-(--color-danger) text-[17px] px-3 py-1 rounded-full font-bold border border-(--color-danger)">
                               Urgent Hiring
                             </span>
                           )}
                         </div>
-                        <div className="flex flex-wrap gap-3 mt-2 text-sm text-(--text-secondary)">
+                        <div className="flex flex-wrap gap-3 mt-2 text-[19px] text-(--text-secondary)">
                           <span className="flex items-center">
                             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M12 18h.01M8 12h.01M12 12h.01M16 12h.01" />
@@ -670,7 +670,7 @@ const Careers = () => {
                     <div className="pt-6 space-y-8">
                       {/* Job Description */}
                       <div>
-                        <h4 className="text-lg font-semibold text-(--text-primary) mb-3 flex items-center">
+                        <h4 className="text-[23px] font-semibold text-(--text-primary) mb-3 flex items-center">
                           <svg className="w-5 h-5 mr-2 text-(--color-brand)" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                           </svg>
@@ -681,7 +681,7 @@ const Careers = () => {
 
                       {/* Key Responsibilities */}
                       <div>
-                        <h4 className="text-lg font-semibold text-(--text-primary) mb-3 flex items-center">
+                        <h4 className="text-[23px] font-semibold text-(--text-primary) mb-3 flex items-center">
                           <svg className="w-5 h-5 mr-2 text-(--color-brand)" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                           </svg>
@@ -700,7 +700,7 @@ const Careers = () => {
                       {/* Qualifications */}
                       {job.qualifications && job.qualifications.length > 0 && (
                         <div>
-                          <h4 className="text-lg font-semibold text-(--text-primary) mb-3 flex items-center">
+                          <h4 className="text-[23px] font-semibold text-(--text-primary) mb-3 flex items-center">
                             <svg className="w-5 h-5 mr-2 text-(--color-brand)" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -729,7 +729,7 @@ const Careers = () => {
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                                 <div>
-                                  <p className="text-sm font-medium text-(--text-secondary)">Location</p>
+                                  <p className="text-[19px] font-medium text-(--text-secondary)">Location</p>
                                   <p className="text-(--text-primary)">{job.location}</p>
                                 </div>
                               </div>
@@ -740,7 +740,7 @@ const Careers = () => {
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                                 <div>
-                                  <p className="text-sm font-medium text-(--text-secondary)">Working Days</p>
+                                  <p className="text-[19px] font-medium text-(--text-secondary)">Working Days</p>
                                   <p className="text-(--text-primary)">{job.workingDays}</p>
                                 </div>
                               </div>
@@ -928,10 +928,10 @@ const Careers = () => {
                   name="resume"
                   onChange={handleInputChange}
                   accept=".pdf,.doc,.docx"
-                  className="w-full border border-(--border-color) rounded-lg p-3 bg-(--bg-main) text-(--text-primary) file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-(--color-brand) file:text-white hover:file:bg-(--color-brand-hover)"
+                  className="w-full border border-(--border-color) rounded-lg p-3 bg-(--bg-main) text-(--text-primary) file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-[19px] file:font-semibold file:bg-(--color-brand) file:text-white hover:file:bg-(--color-brand-hover)"
                   required
                 />
-                <p className="text-(--text-secondary) text-sm mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
+                <p className="text-(--text-secondary) text-[19px] mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
               </div>
             </div>
 
@@ -965,3 +965,4 @@ const Careers = () => {
 };
 
 export default Careers;
+

@@ -14,7 +14,7 @@ const EmployeeSchema = new mongoose.Schema(
     dob: { type: Date },
     joinDate: { type: Date },
     manager: { type: String },
-  salary: { type: String },
+    salary: { type: String },
     isAdvisor: { type: Boolean, default: false }
   },
   { timestamps: true }

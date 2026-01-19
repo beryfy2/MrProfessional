@@ -157,7 +157,7 @@ const MediaCard = ({ item }) => (
         {/* HEADER */}
         <div className="flex items-center justify-between mb-3 gap-3">
             <div className="min-w-0">
-                <h3 className="text-lg font-semibold text-(--color-brand) truncate">
+                <h3 className="text-[23px] font-semibold text-(--color-brand) truncate">
                     {item.outlet}
                 </h3>
                 <div className="mt-1 h-1 w-14 bg-(--color-brand) rounded-full" />
@@ -173,13 +173,13 @@ const MediaCard = ({ item }) => (
         </div>
 
         {/* TITLE */}
-        <h4 className="text-base font-semibold text-(--text-primary) mb-2 wrap-break-word">
+        <h4 className="text-[21px] font-semibold text-(--text-primary) mb-2 wrap-break-word">
             {item.heading}
         </h4>
 
         {/* BODY */}
         <div
-            className="text-sm leading-relaxed text-(--text-secondary)
+            className="text-[19px] leading-relaxed text-(--text-secondary)
             space-y-2 flex-1 wrap-break-word"
         >
             {item.body.map((p, i) => (
@@ -196,7 +196,7 @@ const MediaCard = ({ item }) => (
             rel="noopener noreferrer"
             className="mt-5 inline-flex items-center justify-center
                 px-4 py-2 rounded-lg bg-(--color-brand)
-                text-white text-sm font-semibold shadow
+                text-white text-[19px] font-semibold shadow
                 hover:bg-(--color-brand-hover) transition"
         >
             Read More
@@ -205,3 +205,4 @@ const MediaCard = ({ item }) => (
 );
 
 export default MediaCoverage;
+
