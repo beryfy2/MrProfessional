@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/trustedby.css";
+import "../style/trustby.css";
 
 const BRANDS = Array.from({ length: 14 }, (_, i) =>
   new URL(`../assets/brands/${i + 1}.png`, import.meta.url).href

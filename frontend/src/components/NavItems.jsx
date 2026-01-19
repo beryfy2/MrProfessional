@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faFire, faBars } from "@fortawesome/free-solid-svg-icons";
+import logo from "../assets/images/logo.png";
+
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
@@ -114,14 +116,16 @@ export default function NavItems() {
       <div className="max-w-[1500px] mx-auto px-4 py-3 flex items-center">
 
         {/* LOGO */}
-        <div className="flex-shrink-0">
-          <span
-            className="text-xl font-semibold cursor-pointer text-(--text-primary)"
-            onClick={() => navigate("/")}
-          >
-            Mr.Professional
-          </span>
-        </div>
+      <div className="flex-shrink-0">
+  <img
+  src={logo}
+  alt="Mr.Professional Logo"
+  className="h-9 sm:h-10 lg:h-11 w-auto object-contain cursor-pointer"
+  onClick={() => navigate("/")}
+/>
+
+</div>
+
 
         {/* DESKTOP NAV */}
         <div
