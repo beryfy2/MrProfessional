@@ -172,12 +172,7 @@ const Footer = () => {
 
               <div className="md:col-span-5 flex justify-center">
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <Link
-                    to="/partners-signup"
-                    className="px-8 py-2 rounded-full bg-(--color-brand) text-white text-sm font-semibold hover:opacity-90 transition"
-                  >
-                    Partner With Us
-                  </Link>
+              
 
                   <Link to="/payment">
                     <img
@@ -235,7 +230,7 @@ const Footer = () => {
 
         {/* ---------------- BOTTOM BAR ---------------- */}
         <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-center md:text-left">
-          <span>© 2025 Mr Professional Pvt Ltd. All Rights Reserved.</span>
+          <span>Mr.Professional</span>
 
           <div className="flex gap-4">
             <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>

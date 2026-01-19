@@ -35,15 +35,7 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
         </span>
       </div>
 
-      {/* Search + PDF button */}
-      <div className="flex items-end-safe">
-        <a href="../../public/Mr_Professional.pdf" target="_blank" rel="noopener noreferrer">
-          <button className="flex items-center gap-2 bg-(--color-brand) hover:bg-(--color-brand-hover) text-white font-semibold px-3 py-1 rounded-xl shadow-md transition cursor-pointer">
-            <FontAwesomeIcon icon={["fas", "arrow-down"]} style={{ color: "#ffffff" }} />
-            <span className="hidden sm:inline-block">Company Profile</span>
-          </button>
-        </a>
-      </div>
+    
 
       {/* Socials media */}
       <div className="hidden md:flex items-center gap-4 text-lg">

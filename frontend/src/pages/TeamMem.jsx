@@ -40,7 +40,7 @@ export default function TeamMem() {
       <section className="team-hero">
         <div className="team-hero-container">
           <div className="team-hero-left">
-            <h1>Mr Professional Team</h1>
+            <h1>Mr.Professional Team</h1>
             <p>
               Young individuals who are passionate about helping <br />
               entrepreneurs of India
