@@ -230,7 +230,7 @@ const Footer = () => {
 
         {/* ---------------- BOTTOM BAR ---------------- */}
         <div className="border-t border-(--border-color) pt-4 flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-center md:text-left">
-          <span>Mr.Professional</span>
+          <span> © 2026 All Rights Reserved </span>
 
           <div className="flex gap-4">
             <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
