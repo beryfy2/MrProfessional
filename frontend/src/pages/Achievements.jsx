@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../style/achievements.css";
@@ -59,19 +58,23 @@ export default function Achievements() {
                     })}
                   </div>
 
-                  <Link
-                    to={`/achievements/${item._id}`}
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="achievement-title-link"
                   >
                     <h3 className="achievement-title">{item.title}</h3>
-                  </Link>
+                  </a>
 
-                  <Link
-                    to={`/achievements/${item._id}`}
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="read-more"
                   >
                     Read more →
-                  </Link>
+                  </a>
                 </div>
 
                 {/* RIGHT IMAGE */}

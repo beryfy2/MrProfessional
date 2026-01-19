@@ -34,6 +34,7 @@ export default function EmployeeDetail() {
           degree: '',
           institution: '',
           graduationYear: ''
+          , isAdvisor: false
         } as Employee)
       : null
   );
@@ -348,6 +349,21 @@ export default function EmployeeDetail() {
             value={emp.salary || ''}
             onChange={(e) => setEmp({ ...emp, salary: e.target.value })}
           />
+        </div>
+
+        {/* ADVISORY COUNCIL */}
+        <div className="card" style={{ display: 'grid', gap: 12 }}>
+          <div style={{ fontSize: 16, fontWeight: 600 }}>
+            Advisory Council
+          </div>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <input
+              type="checkbox"
+              checked={!!emp.isAdvisor}
+              onChange={(e) => setEmp({ ...emp, isAdvisor: e.target.checked })}
+            />
+            <span>Mark as Advisory Council Member</span>
+          </label>
         </div>
 
         {/* EDUCATION */}
