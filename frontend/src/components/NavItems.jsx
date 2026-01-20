@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faFire, faBars } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo1.png";
 
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
