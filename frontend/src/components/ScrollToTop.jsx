@@ -36,7 +36,7 @@ const ScrollToTop = () => {
     >
       <FontAwesomeIcon 
         icon={faArrowUp} 
-        className="text-lg group-hover:-translate-y-0.5 transition-transform duration-300"
+        className="text-[23px] group-hover:-translate-y-0.5 transition-transform duration-300"
       />
     </button>
   );

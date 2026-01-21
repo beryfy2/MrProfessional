@@ -79,9 +79,14 @@ export default function Achievements() {
                     <td className="td">
                       <div className="achievement-title-cell">
                         <strong>{item.title}</strong>
-                        <p style={{ fontSize: 12, color: '#666', marginTop: 4 }}>
-                          {item.content.substring(0, 50)}...
-                        </p>
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ fontSize: 12, color: '#0b3a66', marginTop: 4, display: 'inline-block' }}
+                        >
+                          Open link →
+                        </a>
                       </div>
                     </td>
                     <td className="td">
@@ -115,3 +120,4 @@ export default function Achievements() {
     </div>
   );
 }
+

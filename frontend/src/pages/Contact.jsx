@@ -117,7 +117,7 @@ const ContactSection = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Name */}
                                 <div>
-                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                    <label className="block text-[19px] font-medium text-[var(--text-primary)] mb-1">
                                         Full Name
                                     </label>
                                     <input
@@ -133,7 +133,7 @@ const ContactSection = () => {
 
                                 {/* Phone */}
                                 <div>
-                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                    <label className="block text-[19px] font-medium text-[var(--text-primary)] mb-1">
                                         Phone Number
                                     </label>
                                     <input
@@ -151,7 +151,7 @@ const ContactSection = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Email */}
                                 <div>
-                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                    <label className="block text-[19px] font-medium text-[var(--text-primary)] mb-1">
                                         Email Address
                                     </label>
                                     <input
@@ -167,7 +167,7 @@ const ContactSection = () => {
 
                                 {/* Subject */}
                                 <div>
-                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                    <label className="block text-[19px] font-medium text-[var(--text-primary)] mb-1">
                                         Subject
                                     </label>
                                     <select
@@ -189,7 +189,7 @@ const ContactSection = () => {
 
                             {/* Message */}
                             <div>
-                                <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                                <label className="block text-[19px] font-medium text-[var(--text-primary)] mb-1">
                                     Message
                                 </label>
                                 <textarea
@@ -225,11 +225,11 @@ const ContactSection = () => {
 const InfoCard = ({ icon, title, lines }) => (
     <div className="bg-[var(--bg-main)] border border-[var(--border-color)] rounded shadow-lg px-8 py-8 flex flex-col items-center text-center">
         <div className="h-10 w-10 rounded-full bg-[var(--color-brand)] flex items-center justify-center mb-4">
-            <FontAwesomeIcon icon={icon} className="text-white text-lg" />
+            <FontAwesomeIcon icon={icon} className="text-white text-[23px]" />
         </div>
         <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2">{title}</h4>
         {lines.map((line, idx) => (
-            <p key={idx} className="text-sm text-[var(--text-secondary)]">
+            <p key={idx} className="text-[19px] text-[var(--text-secondary)]">
                 {line}
             </p>
         ))}
@@ -237,3 +237,4 @@ const InfoCard = ({ icon, title, lines }) => (
 );
 
 export default ContactSection;
+

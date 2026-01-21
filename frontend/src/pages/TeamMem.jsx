@@ -3,15 +3,15 @@ import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../style/teamMem.css";
 
-import adv11 from "../assets/advisors/11.jpg";
-import adv12 from "../assets/advisors/12.jpg";
-import adv13 from "../assets/advisors/13.jpg";
+// advisory images removed; dynamic advisors from backend
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 const IMG_BASE = API_BASE.replace("/api", "");
 
 export default function TeamMem() {
   const [employees, setEmployees] = useState([]);
+  const team = employees.filter((e) => !e.isAdvisor);
+  const advisors = employees.filter((e) => e.isAdvisor);
 
   useEffect(() => {
     fetch(`${API_BASE}/employees`)
@@ -40,7 +40,7 @@ export default function TeamMem() {
       <section className="team-hero">
         <div className="team-hero-container">
           <div className="team-hero-left">
-            <h1>Mr Professional Team</h1>
+            <h1>Mr.Professional Team</h1>
             <p>
               Young individuals who are passionate about helping <br />
               entrepreneurs of India
@@ -66,7 +66,7 @@ export default function TeamMem() {
         <h2 className="leaders-title">Our Team</h2>
 
         <div className="leaders-container">
-          {employees.map((emp) => (
+          {team.map((emp) => (
             <div key={emp._id} className="leader-block">
               <div className="leader-card">
                 <img
@@ -94,59 +94,21 @@ export default function TeamMem() {
         </p>
 
         <div className="leaders-container advisory-grid">
-          {/* Advisor 1 */}
-          <div className="leader-block">
-            <div className="leader-card">
-              <img
-                src={adv11}
-                alt="Anand Prakash Rathore"
-                className="leader-img"
-              />
+          {advisors.map((adv) => (
+            <div key={adv._id} className="leader-block">
+              <div className="leader-card">
+                <img
+                  src={displayPhoto(adv)}
+                  alt={adv.name}
+                  className="leader-img"
+                />
+              </div>
+              <div className="leader-info">
+                <h4>{adv.name}</h4>
+                <span>{displayRole(adv)}</span>
+              </div>
             </div>
-            <div className="leader-info">
-              <h4>Anand Prakash Rathore</h4>
-              <span>
-                Head Finance and Accounts, <br />
-                18+ Years Experience
-              </span>
-            </div>
-          </div>
-
-          {/* Advisor 2 */}
-          <div className="leader-block">
-            <div className="leader-card">
-              <img
-                src={adv12}
-                alt="Manoj Kumar"
-                className="leader-img"
-              />
-            </div>
-            <div className="leader-info">
-              <h4>Manoj Kumar</h4>
-              <span>
-                Cost Accountant <br />
-                Working in Coal India Limited
-              </span>
-            </div>
-          </div>
-
-          {/* Advisor 3 */}
-          <div className="leader-block">
-            <div className="leader-card">
-              <img
-                src={adv13}
-                alt="Yati Nijhawan"
-                className="leader-img"
-              />
-            </div>
-            <div className="leader-info">
-              <h4>Yati Nijhawan</h4>
-              <span>
-                B.Com, LLB, CS Executive <br />
-                Legal practitioner – IPR, IBC & Corporate Law
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -154,3 +116,4 @@ export default function TeamMem() {
     </div>
   );
 }
+

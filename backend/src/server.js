@@ -364,14 +364,15 @@ app.get('/api/achievements/:id', async (req, res) => {
 
 app.post('/api/achievements', auth, upload.single('photo'), async (req, res) => {
   try {
-    const { title, content, date } = req.body;
+    const { title, content, link, date } = req.body;
     const photo = req.file ? `/uploads/${req.file.filename}` : undefined;
-    
     if (!photo) return res.status(400).json({ error: 'Photo is required' });
+    if (!link) return res.status(400).json({ error: 'Link is required' });
 
-    const item = await Achievement.create({ 
-      title, 
-      content, 
+    const item = await Achievement.create({
+      title,
+      content,
+      link,
       photo,
       date: date || new Date()
     });
@@ -383,9 +384,9 @@ app.post('/api/achievements', auth, upload.single('photo'), async (req, res) => 
 
 app.put('/api/achievements/:id', auth, upload.single('photo'), async (req, res) => {
   try {
-    const { title, content, date } = req.body;
-    const updateData = { title, content, date };
-    
+    const { title, content, link, date } = req.body;
+    const updateData = { title, content, link, date };
+
     if (req.file) {
       updateData.photo = `/uploads/${req.file.filename}`;
     }

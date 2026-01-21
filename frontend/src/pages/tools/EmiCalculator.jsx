@@ -135,43 +135,43 @@ export default function EmiCalculator() {
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 EMI Calculator
               </h1>
-              <p className="text-lg mb-4 text-[var(--text-secondary)]">
+              <p className="text-[23px] mb-4 text-[var(--text-secondary)]">
                 Calculate your Equated Monthly Installment (EMI) for home loans, personal loans, car loans, and more.
                 Get accurate EMI calculations instantly based on your loan amount, interest rate, and tenure.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="bg-green-600 text-white px-3 py-1 rounded text-sm">Accurate Calculations</span>
-                <span className="bg-green-600 text-white px-3 py-1 rounded text-sm">Instant Results</span>
-                <span className="bg-green-600 text-white px-3 py-1 rounded text-sm">Easy to Use</span>
+                <span className="bg-green-600 text-white px-3 py-1 rounded text-[19px]">Accurate Calculations</span>
+                <span className="bg-green-600 text-white px-3 py-1 rounded text-[19px]">Instant Results</span>
+                <span className="bg-green-600 text-white px-3 py-1 rounded text-[19px]">Easy to Use</span>
               </div>
             </div>
             
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
               <div className="expert-consultation-form bg-[var(--bg-main)] border-2 border-[var(--color-brand)] rounded-lg p-3 w-full max-w-xs shadow-2xl">
-                <h3 className="text-[var(--color-brand)] font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+                <h3 className="text-[var(--color-brand)] font-semibold text-center text-[19px] mb-2">Get Expert Consultation</h3>
                 <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-[var(--color-brand)] text-white text-xs py-1.5 rounded font-medium hover:opacity-90 transition-colors"
+                    className="w-full bg-[var(--color-brand)] text-white text-[17px] py-1.5 rounded font-medium hover:opacity-90 transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
@@ -336,3 +336,4 @@ export default function EmiCalculator() {
     </div>
   );
 }
+

@@ -106,7 +106,7 @@ const TestimonialsSection = () => {
 
                 {/* Heading */}
                 <div className="text-center mb-10">
-                    <p className="text-lg md:text-2xl font-semibold text-(--color-brand)">
+                    <p className="text-[23px] md:text-2xl font-semibold text-(--color-brand)">
                         "Explore how Company has helped businesses reach new heights as their trusted partner."
                     </p>
                     <div className="w-16 h-1 bg-green-400 mx-auto mt-4 rounded-full" />
@@ -160,7 +160,7 @@ const TestimonialsSection = () => {
                                             icon={['fas', 'quote-left']}
                                             className="text-(--color-brand) mb-3"
                                         />
-                                        <p className="text-sm leading-relaxed text-(--text-secondary)">
+                                        <p className="text-[19px] leading-relaxed text-(--text-secondary)">
                                             {t.text}
                                         </p>
                                     </div>
@@ -170,10 +170,10 @@ const TestimonialsSection = () => {
                                             {t.initials}
                                         </div>
                                         <div>
-                                            <span className="font-semibold text-sm">
+                                            <span className="font-semibold text-[19px]">
                                                 {t.name}
                                             </span>
-                                            <div className="flex items-center gap-2 text-xs">
+                                            <div className="flex items-center gap-2 text-[17px]">
                                                 <FontAwesomeIcon
                                                     icon={['fab', 'google']}
                                                     className="text-[#4285F4]"
@@ -238,7 +238,7 @@ const RatingRow = ({
             className={`flex items-center justify-center h-8 w-8 rounded-full ${iconBg} ${iconColor} text-xl`}
         >
             {customInner ? (
-                <span className="text-xs font-bold">{customInner}</span>
+                <span className="text-[17px] font-bold">{customInner}</span>
             ) : (
                 <FontAwesomeIcon icon={iconClass} />
             )}
@@ -266,3 +266,4 @@ const Stars = ({ count = 5 }) => (
 );
 
 export default TestimonialsSection;
+

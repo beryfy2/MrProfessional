@@ -121,42 +121,42 @@ const TdsInterestCalculator = () => {
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 TDS Late Payment Interest Calculator
               </h1>
-              <p className="text-lg mb-4 text-[var(--text-secondary)]">
+              <p className="text-[23px] mb-4 text-[var(--text-secondary)]">
                 Calculate interest payable on delayed TDS deductions and deposits as per Section 201(1A) of the Income Tax Act. Get accurate calculations for late deduction (1%) and late deposit (1.5%) interest.
               </p>
               <div className="flex items-center space-x-4 flex-wrap gap-2">
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Avoid Penalties</span>
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Accurate Calculations</span>
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Tax Compliance</span>
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Instant Results</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Avoid Penalties</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Accurate Calculations</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Tax Compliance</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Instant Results</span>
               </div>
             </div>
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
               <div className="expert-consultation-form bg-[var(--bg-main)] border-2 border-[var(--color-brand)] rounded-lg p-3 w-full max-w-xs shadow-2xl">
-                <h3 className="text-[var(--color-brand)] font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+                <h3 className="text-[var(--color-brand)] font-semibold text-center text-[19px] mb-2">Get Expert Consultation</h3>
                 <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-[var(--color-brand)] text-white text-xs py-1.5 rounded font-medium hover:opacity-90 transition-colors"
+                    className="w-full bg-[var(--color-brand)] text-white text-[17px] py-1.5 rounded font-medium hover:opacity-90 transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
@@ -178,7 +178,7 @@ const TdsInterestCalculator = () => {
                 <div className="space-y-6">
                   {/* TDS Amount */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       TDS Amount (₹)
                     </label>
                     <input
@@ -186,46 +186,46 @@ const TdsInterestCalculator = () => {
                       min="1"
                       value={tdsAmount}
                       onChange={(e) => setTdsAmount(Number(e.target.value))}
-                      className="w-full border border-[var(--border-color)] rounded-lg p-3 mb-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 mb-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                   </div>
 
                   {/* Due Date of Deduction */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       Date on which TDS is required to be deducted
                     </label>
                     <input
                       type="date"
                       value={dueDeductionDate}
                       onChange={(e) => setDueDeductionDate(e.target.value)}
-                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                   </div>
 
                   {/* Actual Deduction Date */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       Date on which TDS is deducted
                     </label>
                     <input
                       type="date"
                       value={actualDeductionDate}
                       onChange={(e) => setActualDeductionDate(e.target.value)}
-                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                   </div>
 
                   {/* Actual Date of TDS Deposit */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       Actual Date of TDS Deposit
                     </label>
                     <input
                       type="date"
                       value={actualDepositDate}
                       onChange={(e) => setActualDepositDate(e.target.value)}
-                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                   </div>
 
@@ -253,21 +253,21 @@ const TdsInterestCalculator = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                   <div className="bg-[var(--bg-primary)] p-4 rounded-lg border border-[var(--border-color)]">
                     <p className="text-[var(--text-secondary)] mb-1">Interest on Late Deduction</p>
-                    <span className="font-bold text-lg text-[var(--text-primary)]">{formatINR(lateDeductionInterest || 0)}</span>
+                    <span className="font-bold text-[23px] text-[var(--text-primary)]">{formatINR(lateDeductionInterest || 0)}</span>
                   </div>
                   <div className="bg-[var(--bg-primary)] p-4 rounded-lg border border-[var(--border-color)]">
                     <p className="text-[var(--text-secondary)] mb-1">Interest on Late Deposit</p>
-                    <span className="font-bold text-lg text-[var(--text-primary)]">{formatINR(lateDepositInterest || 0)}</span>
+                    <span className="font-bold text-[23px] text-[var(--text-primary)]">{formatINR(lateDepositInterest || 0)}</span>
                   </div>
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
-                  <p className="text-lg font-semibold text-[var(--text-primary)]">Total Interest Payable</p>
-                  <span className="font-bold text-lg text-[var(--color-brand)]">{formatINR(totalInterest || 0)}</span>
+                  <p className="text-[23px] font-semibold text-[var(--text-primary)]">Total Interest Payable</p>
+                  <span className="font-bold text-[23px] text-[var(--color-brand)]">{formatINR(totalInterest || 0)}</span>
                 </div>
 
                 <div className="bg-[var(--bg-main)] p-4 rounded-lg text-center border border-[var(--border-color)]">
-                  <p className="text-[var(--text-secondary)] text-sm">
+                  <p className="text-[var(--text-secondary)] text-[19px]">
                     {isPropertyTds 
                       ? 'Property TDS deposit due date: 30 days from end of deduction month.'
                       : 'Standard TDS deposit due date: 7th of the next month after deduction.'
@@ -279,10 +279,10 @@ const TdsInterestCalculator = () => {
                   <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-yellow-500">
                     <h4 className="text-yellow-500 font-semibold mb-2">Delay Summary</h4>
                     {deductionDelayMonths > 0 && (
-                      <p className="text-[var(--text-primary)] text-sm">Deduction Delay: {deductionDelayMonths} month(s)</p>
+                      <p className="text-[var(--text-primary)] text-[19px]">Deduction Delay: {deductionDelayMonths} month(s)</p>
                     )}
                     {depositDelayMonths > 0 && (
-                      <p className="text-[var(--text-primary)] text-sm">Deposit Delay: {depositDelayMonths} month(s)</p>
+                      <p className="text-[var(--text-primary)] text-[19px]">Deposit Delay: {depositDelayMonths} month(s)</p>
                     )}
                   </div>
                 )}
@@ -307,14 +307,14 @@ const TdsInterestCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Interest for Late TDS Deduction</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   If you fail to deduct TDS when it was due, interest is charged at 1% per month or part of a month on the TDS amount. The period of interest is calculated from the date the tax was originally deductible until the date you actually deduct the TDS.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Interest for Late TDS Deposit</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   If TDS was deducted but not deposited to the government by the due date, interest is charged at 1.5% per month or part thereof on the TDS amount. The interest is calculated from the date of actual deduction until the date of deposit.
                 </p>
               </div>
@@ -335,7 +335,7 @@ const TdsInterestCalculator = () => {
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
                 <div>
                   <h3 className="text-[var(--color-brand)] font-semibold mb-2">Enter TDS Amount</h3>
-                  <p className="text-[var(--text-secondary)] text-sm">Input the amount of tax that was deducted (or should have been deducted). This is the principal on which interest will be calculated.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">Input the amount of tax that was deducted (or should have been deducted). This is the principal on which interest will be calculated.</p>
                 </div>
               </div>
 
@@ -343,7 +343,7 @@ const TdsInterestCalculator = () => {
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
                 <div>
                   <h3 className="text-[var(--color-brand)] font-semibold mb-2">Provide Due Date of Deduction</h3>
-                  <p className="text-[var(--text-secondary)] text-sm">Enter the date on which TDS was required to be deducted. This is typically the date of payment to the payee or the transaction date when the tax obligation arose.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">Enter the date on which TDS was required to be deducted. This is typically the date of payment to the payee or the transaction date when the tax obligation arose.</p>
                 </div>
               </div>
 
@@ -351,7 +351,7 @@ const TdsInterestCalculator = () => {
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
                 <div>
                   <h3 className="text-[var(--color-brand)] font-semibold mb-2">Provide Actual Deduction Date</h3>
-                  <p className="text-[var(--text-secondary)] text-sm">Enter the date on which you actually deducted the TDS. If TDS was deducted on time, this will be the same as the due date.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">Enter the date on which you actually deducted the TDS. If TDS was deducted on time, this will be the same as the due date.</p>
                 </div>
               </div>
             </div>
@@ -361,7 +361,7 @@ const TdsInterestCalculator = () => {
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">4</div>
                 <div>
                   <h3 className="text-[var(--color-brand)] font-semibold mb-2">Provide Actual Date of TDS Deposit</h3>
-                  <p className="text-[var(--text-secondary)] text-sm">Input the date when the TDS amount was actually deposited to the government (through challan payment).</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">Input the date when the TDS amount was actually deposited to the government (through challan payment).</p>
                 </div>
               </div>
 
@@ -369,7 +369,7 @@ const TdsInterestCalculator = () => {
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">5</div>
                 <div>
                   <h3 className="text-[var(--color-brand)] font-semibold mb-2">Specify Property TDS</h3>
-                  <p className="text-[var(--text-secondary)] text-sm">If the TDS in question is for the purchase of immovable property (Section 194IA), check the box. The calculator will apply the 30-day due date rule.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">If the TDS in question is for the purchase of immovable property (Section 194IA), check the box. The calculator will apply the 30-day due date rule.</p>
                 </div>
               </div>
 
@@ -377,7 +377,7 @@ const TdsInterestCalculator = () => {
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">6</div>
                 <div>
                   <h3 className="text-[var(--color-brand)] font-semibold mb-2">Calculate Interest</h3>
-                  <p className="text-[var(--text-secondary)] text-sm">The tool will instantly display the interest amount for late deduction and late payment, as well as the total interest payable.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">The tool will instantly display the interest amount for late deduction and late payment, as well as the total interest payable.</p>
                 </div>
               </div>
             </div>

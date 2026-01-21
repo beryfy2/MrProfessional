@@ -46,14 +46,14 @@ const FssaiLicenseChecker = () => {
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
                 FSSAI License Checker
               </h1>
-              <p className="text-lg mb-4 text-[var(--text-secondary)]">
+              <p className="text-[23px] mb-4 text-[var(--text-secondary)]">
                 Verify FSSAI license status online. Enter your 14-digit FSSAI license number to check validity, business details, and compliance status instantly.
               </p>
               <div className="flex items-center space-x-4 flex-wrap gap-y-2">
-                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Instant Verification</span>
-                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Official Compliance</span>
-                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Food Safety Check</span>
-                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-sm">Business Validation</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-[19px]">Instant Verification</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-[19px]">Official Compliance</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-[19px]">Food Safety Check</span>
+                <span className="bg-[var(--bg-secondary)] text-[var(--color-brand)] border border-[var(--color-brand)] px-3 py-1 rounded text-[19px]">Business Validation</span>
               </div>
               <div className="flex items-center mt-4">
                 <a href="#google-reviews" className="flex items-center text-[var(--text-primary)] hover:text-[var(--color-brand)] transition-colors">
@@ -66,29 +66,29 @@ const FssaiLicenseChecker = () => {
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
               <div className="expert-consultation-form bg-[var(--bg-secondary)] border-2 border-[var(--color-brand)] rounded-lg p-3 w-full max-w-xs shadow-2xl">
-                <h3 className="text-[var(--color-brand)] font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+                <h3 className="text-[var(--color-brand)] font-semibold text-center text-[19px] mb-2">Get Expert Consultation</h3>
                 <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-[var(--color-brand)] text-white text-xs py-1.5 rounded font-medium hover:bg-[var(--color-brand-hover)] transition-colors"
+                    className="w-full bg-[var(--color-brand)] text-white text-[17px] py-1.5 rounded font-medium hover:bg-[var(--color-brand-hover)] transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
@@ -117,7 +117,7 @@ const FssaiLicenseChecker = () => {
                   value={licenseNumber}
                   onChange={(e) => setLicenseNumber(e.target.value.replace(/\D/g, '').slice(0, 14))}
                   placeholder="Enter 14-digit FSSAI License Number"
-                  className="flex-1 border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                  className="flex-1 border border-[var(--border-color)] rounded-lg p-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                   maxLength="14"
                   required
                 />
@@ -139,7 +139,7 @@ const FssaiLicenseChecker = () => {
                   </div>
                 ) : (
                   <div className="bg-[var(--bg-main)] rounded-lg p-6 border border-[var(--color-brand)]">
-                    <h3 className="text-[var(--color-brand)] font-bold text-lg mb-4 text-center">License Information</h3>
+                    <h3 className="text-[var(--color-brand)] font-bold text-[23px] mb-4 text-center">License Information</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between items-center p-3 bg-[var(--bg-secondary)] rounded border border-[var(--border-color)]">
                         <span className="font-medium text-[var(--text-primary)]">Status:</span>
@@ -165,7 +165,7 @@ const FssaiLicenseChecker = () => {
                       </div>
                     </div>
                     <div className="mt-4 p-3 bg-[var(--bg-secondary)] rounded text-center border border-[var(--color-brand)]/20">
-                      <p className="text-[var(--color-brand)] text-sm">
+                      <p className="text-[var(--color-brand)] text-[19px]">
                         <strong>Note:</strong> This is a demonstration. For official verification, please visit the 
                         <a href="https://foscos.fssai.gov.in/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-brand-hover)] underline ml-1">
                           official FSSAI portal
@@ -195,28 +195,28 @@ const FssaiLicenseChecker = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Registration Details</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Contains complete information about the food business registration and licensing details.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">License Type</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Indicates whether it's a Basic registration, State license, or Central license.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Validity Period</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Shows the validity period of the license and renewal requirements.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Business Location</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Provides the registered location and operational address of the food business.
                 </p>
               </div>
@@ -242,7 +242,7 @@ const FssaiLicenseChecker = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">First Digit (1st)</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Indicates the status of the license – whether it is registered or licensed.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Indicates the status of the license – whether it is registered or licensed.</p>
                   </div>
                 </div>
 
@@ -250,7 +250,7 @@ const FssaiLicenseChecker = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2-3</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Next Two Digits (2nd & 3rd)</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Represent the state code, showing where the food business is registered.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Represent the state code, showing where the food business is registered.</p>
                   </div>
                 </div>
 
@@ -258,7 +258,7 @@ const FssaiLicenseChecker = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">4-5</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Next Two Digits (4th & 5th)</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Indicate the year of registration.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Indicate the year of registration.</p>
                   </div>
                 </div>
               </div>
@@ -268,17 +268,17 @@ const FssaiLicenseChecker = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">6-8</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Next Three Digits (6th to 8th)</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Represent the quantity of enrolling master (how many registrations have been done).</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Represent the quantity of enrolling master (how many registrations have been done).</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                <div className="h-8 min-w-[44px] px-2 flex items-center justify-center rounded-full bg-[var(--color-brand)] text-white text-xs whitespace-nowrap font-bold">9-14
+                <div className="h-8 min-w-[44px] px-2 flex items-center justify-center rounded-full bg-[var(--color-brand)] text-white text-[17px] whitespace-nowrap font-bold">9-14
 </div>
 
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Next Six Digits (9th to 14th)</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">A unique license number of the food business operator.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">A unique license number of the food business operator.</p>
                   </div>
                 </div>
               </div>
@@ -303,21 +303,21 @@ const FssaiLicenseChecker = () => {
             <div className="space-y-4">
               <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Packaging Display</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   All food packaging, labels, and containers must prominently display the 14-digit FSSAI license number.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Display at Food Premises</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   The license number must be clearly visible at the location of manufacturers, restaurants, cloud kitchens, and food stalls.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Use in Menus & Advertisements</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Food establishments are required to include their license number on all promotional materials, including menus, brochures, and ads.
                 </p>
               </div>
@@ -326,21 +326,21 @@ const FssaiLicenseChecker = () => {
             <div className="space-y-4">
               <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Verify Validity</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   In order to avoid fines, businesses should make sure their FSSAI license is current and renewed on schedule.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">One License per Location</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   A single FSSAI license number must be obtained for each branch or unit of a food business.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-main)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Consumer Right to Verify</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   To ensure authenticity, customers can use the official FSSAI portal to check the license number online.
                 </p>
               </div>
@@ -364,31 +364,31 @@ const FssaiLicenseChecker = () => {
               <div className="text-center">
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
                 <h3 className="text-[var(--color-brand)] font-semibold mb-2">Go to FSSAI Website</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Visit the official FSSAI website and open the License/Registration Search page.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Visit the official FSSAI website and open the License/Registration Search page.</p>
               </div>
 
               <div className="text-center">
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
                 <h3 className="text-[var(--color-brand)] font-semibold mb-2">Locate Search Option</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Find the License/Registration Search option on the portal.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Find the License/Registration Search option on the portal.</p>
               </div>
 
               <div className="text-center">
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
                 <h3 className="text-[var(--color-brand)] font-semibold mb-2">Enter License Number</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Enter the 14-digit license number in the search field.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Enter the 14-digit license number in the search field.</p>
               </div>
 
               <div className="text-center">
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl mx-auto mb-4">4</div>
                 <h3 className="text-[var(--color-brand)] font-semibold mb-2">Submit Information</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Click the search button to submit the license number.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Click the search button to submit the license number.</p>
               </div>
 
               <div className="text-center">
                 <div className="bg-[var(--color-brand)] text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl mx-auto mb-4">5</div>
                 <h3 className="text-[var(--color-brand)] font-semibold mb-2">View License Details</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Review the license status, validity, and business information.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Review the license status, validity, and business information.</p>
               </div>
             </div>
 
@@ -420,21 +420,21 @@ const FssaiLicenseChecker = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <div className="bg-[var(--bg-main)] p-6 rounded-lg text-center border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Validity Period</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   License validity ranges from 1 to 5 years depending on the registration type selected.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-main)] p-6 rounded-lg text-center border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Renewal Timeline</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Applications must be submitted at least 30 days before expiration date.
                 </p>
               </div>
 
               <div className="bg-[var(--bg-main)] p-6 rounded-lg text-center border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Renewal Process</h3>
-                <p className="text-[var(--text-secondary)] text-sm">
+                <p className="text-[var(--text-secondary)] text-[19px]">
                   Submit application, documents, and fees through the FoSCoS portal online.
                 </p>
               </div>
@@ -597,3 +597,4 @@ const FssaiLicenseChecker = () => {
 };
 
 export default FssaiLicenseChecker;
+

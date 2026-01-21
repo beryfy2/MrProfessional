@@ -12,7 +12,7 @@ library.add(fas, far, fab);
 const NavProfile = ({ hidden = false, transparent = false }) => {
   return (
     <div
-      className="w-full text-(--text-primary) text-sm px-6 flex items-center justify-between"
+      className="w-full text-(--text-primary) text-[19px] px-6 flex items-center justify-between"
       style={{
         background: transparent ? "transparent" : "var(--bg-secondary)",
         height: "56px",
@@ -35,18 +35,10 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
         </span>
       </div>
 
-      {/* Search + PDF button */}
-      <div className="flex items-end-safe">
-        <a href="../../public/Mr_Professional.pdf" target="_blank" rel="noopener noreferrer">
-          <button className="flex items-center gap-2 bg-(--color-brand) hover:bg-(--color-brand-hover) text-white font-semibold px-3 py-1 rounded-xl shadow-md transition cursor-pointer">
-            <FontAwesomeIcon icon={["fas", "arrow-down"]} style={{ color: "#ffffff" }} />
-            <span className="hidden sm:inline-block">Company Profile</span>
-          </button>
-        </a>
-      </div>
+    
 
       {/* Socials media */}
-      <div className="hidden md:flex items-center gap-4 text-lg">
+      <div className="hidden md:flex items-center gap-4 text-[23px]">
         <a
           href="https://wa.me/+918800932090"
           target="_blank"
@@ -112,3 +104,4 @@ const NavProfile = ({ hidden = false, transparent = false }) => {
 };
 
 export default NavProfile;
+

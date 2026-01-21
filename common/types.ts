@@ -78,6 +78,7 @@ export type Employee = {
   degree?: string;
   institution?: string;
   graduationYear?: string;
+  isAdvisor?: boolean;
 };
 
 export type Enquiry = {

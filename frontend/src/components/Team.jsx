@@ -115,3 +115,4 @@ entrepreneurs and strengthening the Indian startup ecosystem.
 };
 
 export default Team;
+

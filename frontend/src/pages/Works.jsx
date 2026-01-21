@@ -5,6 +5,7 @@ import indiaMap from "../assets/images/india-political-map.png";
 import "../style/work.css";
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
+import FloatingContactButtons from "../components/FloatingContactButtons";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 const IMG_BASE = API_BASE.replace("/api", "");
@@ -126,6 +127,8 @@ export default function Works() {
 
       {/* ================= FOOTER ================= */}
       <Footer />
+      <FloatingContactButtons />
     </>
   );
 }
+

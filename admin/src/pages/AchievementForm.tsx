@@ -8,7 +8,7 @@ export default function AchievementForm() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [link, setLink] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>("");
@@ -18,7 +18,7 @@ export default function AchievementForm() {
     if (id) {
       fetchAchievementById(id).then((item) => {
         setTitle(item.title);
-        setContent(item.content);
+        setLink(item.link || "");
         if (item.date) setDate(new Date(item.date).toISOString().split('T')[0]);
         if (item.photo) setPreview(`http://localhost:5000${item.photo}`);
       });
@@ -35,7 +35,7 @@ export default function AchievementForm() {
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !content || (!id && !photo)) {
+    if (!title || !link || (!id && !photo)) {
       alert("Please fill in all required fields");
       return;
     }
@@ -44,7 +44,7 @@ export default function AchievementForm() {
     try {
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("content", content);
+      formData.append("link", link);
       formData.append("date", date);
       if (photo) formData.append("photo", photo);
 
@@ -120,13 +120,13 @@ export default function AchievementForm() {
           </div>
 
           <div className="form-group full-width">
-            <label>Content</label>
-            <textarea
-              className="input textarea"
-              rows={6}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Share the details of this achievement..."
+            <label>Link</label>
+            <input
+              type="url"
+              className="input"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              placeholder="https://example.com/achievement-detail"
               required
             />
           </div>
@@ -188,3 +188,4 @@ export default function AchievementForm() {
     </div>
   );
 }
+

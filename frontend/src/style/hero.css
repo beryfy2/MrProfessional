@@ -152,18 +152,24 @@
   height: 54px;
   width: 54px;
   border-radius: 50%;
+
   display: flex;
-  align-items: left;
-  justify-content: left;
+  align-items: center;     /* ✅ CENTER */
+  justify-content: center; /* ✅ CENTER */
+
   color: #fff;
-  font-size: 20px;
+  font-size: 22px;         /* ✅ better icon size */
+
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+
 .float-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
+
 
 .float-btn.call {
   background: var(--color-brand);
@@ -251,4 +257,15 @@
 .hero-btn.secondary {
   font-size: 8px;
 }
+.float-btn {
+    height: 48px;
+    width: 48px;
+    font-size: 20px;
+  }
+
+  .floating-actions {
+    right: 12px;
+    bottom: 12px;
+    gap: 10px;
+  }
 }

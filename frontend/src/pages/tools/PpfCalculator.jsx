@@ -64,43 +64,43 @@ const PpfCalculator = () => {
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 PPF Calculator
               </h1>
-              <p className="text-lg mb-4 text-[var(--text-secondary)]">
+              <p className="text-[23px] mb-4 text-[var(--text-secondary)]">
                 Use our advanced PPF calculator with the latest interest rate of 7.1% to estimate returns on your Public Provident Fund investment. Plan your long-term tax-free savings effectively.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Tax-Free Returns</span>
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Section 80C Benefits</span>
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Long-Term Wealth</span>
-                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-sm">Govt. Backed</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Tax-Free Returns</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Section 80C Benefits</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Long-Term Wealth</span>
+                <span className="bg-[var(--color-brand)] text-white px-3 py-1 rounded text-[19px]">Govt. Backed</span>
               </div>
             </div>
             
             {/* Right Side - 40% */}
             <div className="lg:col-span-2 flex justify-end">
               <div className="expert-consultation-form bg-[var(--bg-main)] border-2 border-[var(--color-brand)] rounded-lg p-3 w-full max-w-xs shadow-2xl">
-                <h3 className="text-[var(--color-brand)] font-semibold text-center text-sm mb-2">Get Expert Consultation</h3>
+                <h3 className="text-[var(--color-brand)] font-semibold text-center text-[19px] mb-2">Get Expert Consultation</h3>
                 <form className="space-y-2" onSubmit={(e) => { e.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); }}>
                   <input
                     type="text"
                     placeholder="Full Name *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="email"
                     placeholder="Email *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <input
                     type="tel"
                     placeholder="Mobile *"
-                    className="w-full px-2 py-1 text-xs rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
+                    className="w-full px-2 py-1 text-[17px] rounded border border-[var(--border-color)] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]"
                     required
                   />
                   <button
                     type="submit"
-                    className="w-full bg-[var(--color-brand)] text-white text-xs py-1.5 rounded font-medium hover:opacity-90 transition-colors"
+                    className="w-full bg-[var(--color-brand)] text-white text-[17px] py-1.5 rounded font-medium hover:opacity-90 transition-colors"
                   >
                     REQUEST A CALLBACK
                   </button>
@@ -122,7 +122,7 @@ const PpfCalculator = () => {
                 <div className="space-y-6">
                   {/* Yearly Investment */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       Yearly Investment (₹)
                     </label>
                     <input
@@ -131,7 +131,7 @@ const PpfCalculator = () => {
                       max={maxInvestment}
                       value={yearlyInvestment}
                       onChange={(e) => setYearlyInvestment(Number(e.target.value))}
-                      className="w-full border border-[var(--border-color)] rounded-lg p-3 mb-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                      className="w-full border border-[var(--border-color)] rounded-lg p-3 mb-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                     />
                     <input
                       type="range"
@@ -142,7 +142,7 @@ const PpfCalculator = () => {
                       onChange={(e) => setYearlyInvestment(Number(e.target.value))}
                       className="w-full accent-[var(--color-brand)]"
                     />
-                    <div className="flex justify-between text-sm text-[var(--text-secondary)] mt-2">
+                    <div className="flex justify-between text-[19px] text-[var(--text-secondary)] mt-2">
                       <span>₹{minInvestment.toLocaleString('en-IN')}</span>
                       <span>₹{maxInvestment.toLocaleString('en-IN')}</span>
                     </div>
@@ -150,7 +150,7 @@ const PpfCalculator = () => {
 
                   {/* Time Period */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       Time Period
                     </label>
                     <div className="flex gap-3 items-center mb-3">
@@ -160,9 +160,9 @@ const PpfCalculator = () => {
                         max={maxYears}
                         value={timePeriod}
                         onChange={(e) => setTimePeriod(Number(e.target.value))}
-                        className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                        className="w-full border border-[var(--border-color)] rounded-lg p-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                       />
-                      <span className="text-lg text-[var(--text-secondary)]">Years</span>
+                      <span className="text-[23px] text-[var(--text-secondary)]">Years</span>
                     </div>
                     <input
                       type="range"
@@ -172,7 +172,7 @@ const PpfCalculator = () => {
                       onChange={(e) => setTimePeriod(Number(e.target.value))}
                       className="w-full accent-[var(--color-brand)]"
                     />
-                    <div className="flex justify-between text-sm text-[var(--text-secondary)] mt-2">
+                    <div className="flex justify-between text-[19px] text-[var(--text-secondary)] mt-2">
                       <span>{minYears} Years</span>
                       <span>{maxYears} Years</span>
                     </div>
@@ -180,7 +180,7 @@ const PpfCalculator = () => {
 
                   {/* Interest Rate */}
                   <div>
-                    <label className="block text-lg font-semibold text-[var(--text-primary)] mb-3">
+                    <label className="block text-[23px] font-semibold text-[var(--text-primary)] mb-3">
                       Rate of Interest
                     </label>
                     <div className="flex gap-3 items-center mb-3">
@@ -189,11 +189,11 @@ const PpfCalculator = () => {
                         step="0.1"
                         value={interestRate}
                         onChange={(e) => setInterestRate(Number(e.target.value))}
-                        className="w-full border border-[var(--border-color)] rounded-lg p-3 text-lg bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+                        className="w-full border border-[var(--border-color)] rounded-lg p-3 text-[23px] bg-[var(--bg-main)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
                       />
-                      <span className="text-lg text-[var(--text-secondary)]">%</span>
+                      <span className="text-[23px] text-[var(--text-secondary)]">%</span>
                     </div>
-                    <p className="text-sm text-[var(--text-secondary)]">Current PPF interest rate is 7.1% (as of April 2025)</p>
+                    <p className="text-[19px] text-[var(--text-secondary)]">Current PPF interest rate is 7.1% (as of April 2025)</p>
                   </div>
                 </div>
               </div>
@@ -201,7 +201,7 @@ const PpfCalculator = () => {
               {/* Right Side - Results */}
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-sm text-[var(--text-secondary)] mb-2">Maturity Value</div>
+                  <div className="text-[19px] text-[var(--text-secondary)] mb-2">Maturity Value</div>
                   <div className="text-4xl md:text-5xl font-bold text-[var(--color-brand)] mb-6">
                     {formatINR(maturityValue || 0)}
                   </div>
@@ -210,22 +210,22 @@ const PpfCalculator = () => {
                 <div className="grid grid-cols-1 gap-4">
                   <div className="flex justify-between items-center p-4 bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
                     <span className="font-medium text-[var(--text-primary)]">Total Investment</span>
-                    <span className="font-bold text-lg text-[var(--color-brand)]">{formatINR(totalInvestment || 0)}</span>
+                    <span className="font-bold text-[23px] text-[var(--color-brand)]">{formatINR(totalInvestment || 0)}</span>
                   </div>
 
                   <div className="flex justify-between items-center p-4 bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
                     <span className="font-medium text-[var(--text-primary)]">Total Interest</span>
-                    <span className="font-bold text-lg text-[var(--color-brand)]">{formatINR(totalInterest || 0)}</span>
+                    <span className="font-bold text-[23px] text-[var(--color-brand)]">{formatINR(totalInterest || 0)}</span>
                   </div>
 
                   <div className="flex justify-between items-center p-4 bg-[var(--bg-main)] rounded-lg border border-[var(--border-color)]">
                     <span className="font-medium text-[var(--text-primary)]">Maturity Value</span>
-                    <span className="font-bold text-lg text-[var(--color-brand)]">{formatINR(maturityValue || 0)}</span>
+                    <span className="font-bold text-[23px] text-[var(--color-brand)]">{formatINR(maturityValue || 0)}</span>
                   </div>
                 </div>
 
                 <div className="bg-[var(--bg-main)] p-4 rounded-lg text-center border border-[var(--border-color)]">
-                  <p className="text-[var(--text-secondary)] text-sm">
+                  <p className="text-[var(--text-secondary)] text-[19px]">
                     Did you know? PPF investments are eligible for tax deduction under Section 80C up to ₹1.5 lakh per year.
                   </p>
                 </div>
@@ -253,15 +253,15 @@ const PpfCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg text-center border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Guaranteed Returns</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Offers a government-backed interest rate that is typically higher than regular savings accounts.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Offers a government-backed interest rate that is typically higher than regular savings accounts.</p>
               </div>
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg text-center border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Tax Benefits</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Investments up to ₹1.5 lakh per year qualify for tax deduction under Section 80C of Income Tax Act.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Investments up to ₹1.5 lakh per year qualify for tax deduction under Section 80C of Income Tax Act.</p>
               </div>
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg text-center border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Protection from Creditors</h3>
-                <p className="text-[var(--text-secondary)] text-sm">PPF accounts have immunity from attachment under court orders or debt recovery proceedings.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">PPF accounts have immunity from attachment under court orders or debt recovery proceedings.</p>
               </div>
             </div>
           </div>
@@ -332,7 +332,7 @@ const PpfCalculator = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Enter Yearly Investment Amount</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Use the slider or enter a value directly to specify your annual contribution to PPF. The minimum investment allowed is ₹500, and the maximum is ₹1,50,000 per financial year.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Use the slider or enter a value directly to specify your annual contribution to PPF. The minimum investment allowed is ₹500, and the maximum is ₹1,50,000 per financial year.</p>
                   </div>
                 </div>
 
@@ -340,7 +340,7 @@ const PpfCalculator = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Select Investment Period</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Choose the duration for which you plan to invest in PPF. The minimum lock-in period is 15 years, but you can extend it beyond the initial term in blocks of 5 years.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Choose the duration for which you plan to invest in PPF. The minimum lock-in period is 15 years, but you can extend it beyond the initial term in blocks of 5 years.</p>
                   </div>
                 </div>
 
@@ -348,7 +348,7 @@ const PpfCalculator = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">View Current Interest Rate</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">The calculator displays the current PPF interest rate set by the government (7.1% as of April 2025). This rate is fixed for your calculation but may change in reality over your investment period.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">The calculator displays the current PPF interest rate set by the government (7.1% as of April 2025). This rate is fixed for your calculation but may change in reality over your investment period.</p>
                   </div>
                 </div>
 
@@ -356,14 +356,14 @@ const PpfCalculator = () => {
                   <div className="bg-[var(--color-brand)] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
                   <div>
                     <h3 className="text-[var(--color-brand)] font-semibold mb-2">Analyze the Results</h3>
-                    <p className="text-[var(--text-secondary)] text-sm">Once you input the required information, the calculator will instantly display your total investment, interest earned, and maturity value.</p>
+                    <p className="text-[var(--text-secondary)] text-[19px]">Once you input the required information, the calculator will instantly display your total investment, interest earned, and maturity value.</p>
                   </div>
                 </div>
               </div>
 
               <div className="bg-[var(--bg-secondary)] p-6 rounded-lg border border-[var(--border-color)]">
                 <h3 className="text-[var(--color-brand)] font-semibold mb-4">Pro Tip:</h3>
-                <p className="text-[var(--text-secondary)] text-sm">Try different investment amounts and time periods to see how they affect your returns. This can help you optimize your investment strategy according to your financial goals.</p>
+                <p className="text-[var(--text-secondary)] text-[19px]">Try different investment amounts and time periods to see how they affect your returns. This can help you optimize your investment strategy according to your financial goals.</p>
               </div>
             </div>
           </div>
@@ -390,8 +390,8 @@ const PpfCalculator = () => {
 
             <div className="bg-[var(--bg-main)] p-6 rounded-lg text-center max-w-md mx-auto border border-[var(--border-color)]">
               <div className="text-2xl font-mono text-[var(--color-brand)] mb-4">F = P × [(1 + i)^n - 1] / i</div>
-              <p className="text-sm text-[var(--text-secondary)]">Where:</p>
-              <ul className="text-sm text-[var(--text-secondary)] space-y-1">
+              <p className="text-[19px] text-[var(--text-secondary)]">Where:</p>
+              <ul className="text-[19px] text-[var(--text-secondary)] space-y-1">
                 <li><strong className="text-[var(--color-brand)]">F</strong> = Maturity Value of PPF</li>
                 <li><strong className="text-[var(--color-brand)]">P</strong> = Annual Installment/Investment</li>
                 <li><strong className="text-[var(--color-brand)]">i</strong> = Rate of Interest (in decimal)</li>
@@ -402,7 +402,7 @@ const PpfCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-[var(--color-brand)] font-semibold mb-3">Important Points About PPF Interest Calculation</h3>
-                <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
+                <ul className="space-y-2 text-[19px] text-[var(--text-secondary)]">
                   <li>• Interest Compounding: PPF interest is compounded annually</li>
                   <li>• Balance Consideration: Interest is calculated on the lowest balance between the 5th day and the last day of each month</li>
                   <li>• Deposit Timing: For maximum interest, it's advisable to deposit on or before the 5th of each month</li>
@@ -411,7 +411,7 @@ const PpfCalculator = () => {
               </div>
               <div className="bg-[var(--bg-main)] p-4 rounded-lg border border-[var(--border-color)]">
                 <h4 className="text-[var(--color-brand)] font-semibold mb-2">Pro Tips to Maximize Returns</h4>
-                <ul className="space-y-1 text-sm text-[var(--text-secondary)]">
+                <ul className="space-y-1 text-[19px] text-[var(--text-secondary)]">
                   <li>• Timing Your Deposits: Make deposits before the 5th of the month</li>
                   <li>• Consistency is Key: Regular annual investments maintain account activity</li>
                   <li>• Maximize Your Contribution: Invest up to ₹1,50,000 annually</li>
@@ -446,7 +446,7 @@ const PpfCalculator = () => {
                   <li>• HUFs (Hindu Undivided Families)</li>
                   <li>• NRIs are not eligible to open a new PPF account</li>
                 </ul>
-                <p className="text-sm text-[var(--text-secondary)] mt-2 opacity-75">Note: An individual can have only one PPF account in their name, except for an additional account operated as a guardian of a minor.</p>
+                <p className="text-[19px] text-[var(--text-secondary)] mt-2 opacity-75">Note: An individual can have only one PPF account in their name, except for an additional account operated as a guardian of a minor.</p>
               </div>
 
               <div>
@@ -465,27 +465,27 @@ const PpfCalculator = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
                   <h4 className="text-[var(--color-brand)] font-semibold mb-2">Lock-in Period</h4>
-                  <p className="text-[var(--text-secondary)] text-sm">PPF has a mandatory lock-in period of 15 years. After maturity, you can extend the account in blocks of 5 years.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">PPF has a mandatory lock-in period of 15 years. After maturity, you can extend the account in blocks of 5 years.</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
                   <h4 className="text-[var(--color-brand)] font-semibold mb-2">Loan Facility</h4>
-                  <p className="text-[var(--text-secondary)] text-sm">You can avail a loan against your PPF account from the 3rd financial year up to the 6th year. The loan amount is limited to 25% of the balance.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">You can avail a loan against your PPF account from the 3rd financial year up to the 6th year. The loan amount is limited to 25% of the balance.</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
                   <h4 className="text-[var(--color-brand)] font-semibold mb-2">Partial Withdrawal</h4>
-                  <p className="text-[var(--text-secondary)] text-sm">Partial withdrawals are allowed from the 7th financial year. The maximum withdrawal amount is 50% of the balance at the end of the 4th preceding year.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">Partial withdrawals are allowed from the 7th financial year. The maximum withdrawal amount is 50% of the balance at the end of the 4th preceding year.</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
                   <h4 className="text-[var(--color-brand)] font-semibold mb-2">Tax Benefits</h4>
-                  <p className="text-[var(--text-secondary)] text-sm">Investments in PPF qualify for tax deduction under Section 80C up to ₹1.5 lakh per annum. Both interest and maturity amount are tax-free.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">Investments in PPF qualify for tax deduction under Section 80C up to ₹1.5 lakh per annum. Both interest and maturity amount are tax-free.</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
                   <h4 className="text-[var(--color-brand)] font-semibold mb-2">Protection from Creditors</h4>
-                  <p className="text-[var(--text-secondary)] text-sm">The funds in your PPF account cannot be attached under any court order in respect of any debt or liability.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">The funds in your PPF account cannot be attached under any court order in respect of any debt or liability.</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
                   <h4 className="text-[var(--color-brand)] font-semibold mb-2">Nomination Facility</h4>
-                  <p className="text-[var(--text-secondary)] text-sm">You can nominate one or more individuals to receive the funds in case of your demise. The nomination can be changed at any time.</p>
+                  <p className="text-[var(--text-secondary)] text-[19px]">You can nominate one or more individuals to receive the funds in case of your demise. The nomination can be changed at any time.</p>
                 </div>
               </div>
             </div>
